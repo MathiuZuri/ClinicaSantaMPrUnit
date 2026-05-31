@@ -1,0 +1,34 @@
+﻿# Build
+bin/
+obj/
+
+# Rider / VS
+.idea/
+.vs/
+
+# Test temporary files
+TestResults/
+
+# Logs
+*.log
+
+# Sonar
+.sonarqube/
+.scannerwork/
+
+# Docker temp
+docker-data/
+
+# Publish
+publish/
+
+# User files
+*.user
+*.suo
+
+infra/sonarqube/
+**/sonarqube/
+*.jar
+infra/
+data/
+*.cfs

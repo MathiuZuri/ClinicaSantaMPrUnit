@@ -1,0 +1,177 @@
+﻿name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # =========================
+      # CHECKOUT
+      # =========================
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # =========================
+      # .NET 9
+      # =========================
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # =========================
+      # JAVA 17 (SONAR)
+      # =========================
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # =========================
+      # SONAR CACHE
+      # =========================
+      - name: Cache Sonar packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      # =========================
+      # INSTALL SONAR SCANNER
+      # =========================
+      - name: Install SonarScanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      # =========================
+      # INSTALL REPORT GENERATOR
+      # =========================
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      # =========================
+      # RESTORE
+      # =========================
+      - name: Restore dependencies
+        run: dotnet restore Clinica.sln
+
+      # =========================
+      # SONAR BEGIN
+      # =========================
+      - name: Sonar Begin
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: >
+          dotnet sonarscanner begin
+          /k:"MathiuZuri_ClinicaSantaMPrUnit"
+          /o:"clinicaobssm"
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          /d:sonar.host.url="https://sonarcloud.io"
+          /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml"
+
+      # =========================
+      # BUILD
+      # =========================
+      - name: Build solution
+        run: dotnet build Clinica.sln --configuration Release --no-restore
+
+      # =========================
+      # UNIT TESTS
+      # =========================
+      - name: Run Unit Tests
+        run: >
+          dotnet test
+          Clinica.API.Tests/Clinica.API.Tests.csproj
+          --configuration Release
+          --no-build
+          --collect:"XPlat Code Coverage"
+          --results-directory ./TestResults/Unit
+
+      # =========================
+      # INTEGRATION TESTS
+      # =========================
+      - name: Run Integration Tests
+        run: >
+          dotnet test
+          Clinica.API.IntegrationTests/Clinica.API.IntegrationTests.csproj
+          --configuration Release
+          --no-build
+          --collect:"XPlat Code Coverage"
+          --results-directory ./TestResults/Integration
+
+      # =========================
+      # GENERATE COVERAGE REPORT
+      # =========================
+      - name: Generate Coverage Report
+        run: >
+          reportgenerator
+          "-reports:**/coverage.cobertura.xml"
+          "-targetdir:CoverageReport"
+          "-reporttypes:Html"
+
+      # =========================
+      # UPLOAD COVERAGE ARTIFACT
+      # =========================
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html-report
+          path: CoverageReport
+          retention-days: 7
+          
+
+      # =========================
+      # UPLOAD TEST RESULTS
+      # =========================
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
+          retention-days: 7
+
+      # =========================
+      # SNYK SECURITY SCAN
+      # =========================
+      - name: Install Snyk
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk Security Scan
+        run: snyk test --file=Clinica.sln --severity-threshold=high
+
+      # =========================
+      # SONAR END
+      # =========================
+      - name: Sonar End
+        if: always()
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        
+      - name: Pipeline Summary
+        run: |
+          echo "## Clinica Santa Monica CI Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Completed Stages" >> $GITHUB_STEP_SUMMARY
+          echo "- Restore" >> $GITHUB_STEP_SUMMARY
+          echo "- Build" >> $GITHUB_STEP_SUMMARY
+          echo "- Unit Tests" >> $GITHUB_STEP_SUMMARY
+          echo "- Integration Tests" >> $GITHUB_STEP_SUMMARY
+          echo "- Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "- SonarCloud Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "- Snyk Security Scan" >> $GITHUB_STEP_SUMMARY

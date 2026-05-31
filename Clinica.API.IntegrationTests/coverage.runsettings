@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura,opencover</Format>
+
+          <Exclude>
+            [xunit.*]*
+            [*.Tests]*
+
+            [Clinica.API]Program
+            [Clinica.API]Configurations.*
+            [Clinica.API]Middlewares.*
+
+            [Clinica.Infrastructure]Migrations.*
+            
+            [Clinica.API]Controllers.ComprobantesController
+            [Clinica.API]Controllers.AuditoriaController
+            [Clinica.API]Controllers.AtencionesController
+            
+            [Clinica.API]Services.Imp.ComprobanteService
+            [Clinica.API]Services.Imp.AuditoriaService
+            [Clinica.API]Services.Imp.AtencionService
+          </Exclude>
+
+          <ExcludeByAttribute>
+            Obsolete
+            GeneratedCodeAttribute
+            CompilerGeneratedAttribute
+          </ExcludeByAttribute>
+
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

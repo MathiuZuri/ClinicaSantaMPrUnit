@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.Domain", "Clinica.Domain\Clinica.Domain.csproj", "{7BE14034-4AFC-427D-85AC-E105A5B59BD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.Infrastructure", "Clinica.Infrastructure\Clinica.Infrastructure.csproj", "{704DF00C-B6B1-4D2A-8D0D-4245FD52AC81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.API", "Clinica.API\Clinica.API.csproj", "{D0877029-0883-4697-95CE-1E11263DAA09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.WASM", "Clinica.WASM\Clinica.WASM.csproj", "{92F44722-C15F-4271-AC68-831A6DCE0C7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.API.Tests", "Clinica.API.Tests\Clinica.API.Tests.csproj", "{6976BE2A-46DC-41C8-B1E7-56A81F43D99C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.API.IntegrationTests", "Clinica.API.IntegrationTests\Clinica.API.IntegrationTests.csproj", "{4A32E86E-F99D-40C6-84A6-2C632352D79D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.E2ETests", "Clinica.E2ETests\Clinica.E2ETests.csproj", "{71A1ACF8-3330-4C98-B1B3-E86515676266}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BE14034-4AFC-427D-85AC-E105A5B59BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE14034-4AFC-427D-85AC-E105A5B59BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE14034-4AFC-427D-85AC-E105A5B59BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE14034-4AFC-427D-85AC-E105A5B59BD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{704DF00C-B6B1-4D2A-8D0D-4245FD52AC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704DF00C-B6B1-4D2A-8D0D-4245FD52AC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704DF00C-B6B1-4D2A-8D0D-4245FD52AC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704DF00C-B6B1-4D2A-8D0D-4245FD52AC81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0877029-0883-4697-95CE-1E11263DAA09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0877029-0883-4697-95CE-1E11263DAA09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0877029-0883-4697-95CE-1E11263DAA09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0877029-0883-4697-95CE-1E11263DAA09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92F44722-C15F-4271-AC68-831A6DCE0C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F44722-C15F-4271-AC68-831A6DCE0C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92F44722-C15F-4271-AC68-831A6DCE0C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92F44722-C15F-4271-AC68-831A6DCE0C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6976BE2A-46DC-41C8-B1E7-56A81F43D99C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6976BE2A-46DC-41C8-B1E7-56A81F43D99C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6976BE2A-46DC-41C8-B1E7-56A81F43D99C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6976BE2A-46DC-41C8-B1E7-56A81F43D99C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

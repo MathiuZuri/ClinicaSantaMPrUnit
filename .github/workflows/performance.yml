@@ -1,0 +1,15 @@
+﻿name: Performance
+
+on:
+  workflow_dispatch:
+
+jobs:
+  k6-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Placeholder
+        run: echo "k6 performance tests coming soon"

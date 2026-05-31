@@ -1,0 +1,40 @@
+﻿version: '3.9'
+
+services:
+  evolution-postgres:
+    image: postgres:15-alpine
+    container_name: evolution_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: evolution
+      POSTGRES_USER: evolution
+      POSTGRES_PASSWORD: evolution123
+    volumes:
+      - evolution_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  evolution-redis:
+    image: redis:7-alpine
+    container_name: evolution_redis
+    restart: always
+    ports:
+      - "6380:6379"
+
+  evolution-api:
+    container_name: evolution_api
+    image: atendai/evolution-api:latest
+    restart: always
+    depends_on:
+      - evolution-postgres
+      - evolution-redis
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - evolution_instances:/evolution/instances
+
+volumes:
+  evolution_instances:
+  evolution_postgres_data:
