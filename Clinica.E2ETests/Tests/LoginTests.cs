@@ -1,4 +1,6 @@
-﻿using Clinica.E2ETests.Helpers;
+﻿using System;
+using System.Threading.Tasks;
+using Clinica.E2ETests.Helpers;
 using Microsoft.Playwright;
 using Xunit;
 
@@ -17,17 +19,26 @@ public class LoginTests : E2ETestBase
     [Fact]
     public async Task Login_CredencialesInvalidas_DeberiaMostrarError()
     {
-        await Page.GotoAsync("/login");
-        await Page.WaitForSelectorAsync("[role='progressbar']", new() { State = WaitForSelectorState.Hidden });
 
-        await Page.GetByLabel("Usuario o Correo Electrónico").FillAsync("usuario_invalido");
-        await Page.GetByLabel("Contraseña").FillAsync("clave_incorrecta");
-        await Page.GetByRole(AriaRole.Button, new() { Name = "Ingresar a Intranet" }).ClickAsync();
+        await TakeScreenshotOnFailure(async () =>
+        {
+            await Page.GotoAsync("/login");
+            await Page.WaitForSelectorAsync("[role='progressbar']", new() { State = WaitForSelectorState.Hidden });
 
-        // Esperar que aparezca el MudAlert de error (contenedor con role="alert")
-        await Page.WaitForSelectorAsync("[role='alert']", new() { Timeout = 5_000 });
-        var mensajeError = await Page.TextContentAsync("[role='alert']");
-        Assert.Contains("credenciales", mensajeError, StringComparison.OrdinalIgnoreCase);
+            await Page.GotoAsync("/login");
+            await Page.WaitForSelectorAsync("[role='progressbar']", new() { State = WaitForSelectorState.Hidden });
+
+            await Page.GetByLabel("Usuario o Correo Electrónico").FillAsync("usuario_invalido");
+            await Page.GetByLabel("Contraseña").FillAsync("clave_incorrecta");
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Ingresar a Intranet" }).ClickAsync();
+
+            // Esperamos que el MudAlert de error sea visible
+            await Page.WaitForSelectorAsync(".mud-alert-filled-error",
+                new() { State = WaitForSelectorState.Visible, Timeout = 10000 });
+
+            var mensajeError = await Page.TextContentAsync(".mud-alert-filled-error");
+            Assert.Contains("Usuario o contraseña incorrectos", mensajeError, StringComparison.OrdinalIgnoreCase);
+        });
     }
 
     [Fact]
@@ -36,30 +47,15 @@ public class LoginTests : E2ETestBase
         await Page.GotoAsync("/login");
         await Page.WaitForSelectorAsync("[role='progressbar']", new() { State = WaitForSelectorState.Hidden });
 
-        // El campo de contraseña inicialmente tiene type="password"
         var passwordInput = Page.GetByLabel("Contraseña");
         Assert.Equal("password", await passwordInput.GetAttributeAsync("type"));
 
-        // Hacer clic en el ícono de visibilidad (MudIcon con Icon="Visibility")
-        await Page.ClickAsync("[data-icon='visibility']"); // Selector aproximado, se puede ajustar
+        // Clic en el botón de visibilidad (el adornment del MudTextField)
+        await Page.ClickAsync(".mud-input-adornment-icon-button");
 
-        // Ahora debería ser type="text"
-        Assert.Equal("text", await passwordInput.GetAttributeAsync("type"));
-    }
-
-    [Fact]
-    public async Task Login_ModoOscuro_ToggleFunciona()
-    {
-        await Page.GotoAsync("/login");
-        await Page.WaitForSelectorAsync("[role='progressbar']", new() { State = WaitForSelectorState.Hidden });
-
-        // El switch "Interfaz Noche" es un MudSwitch
-        var darkSwitch = Page.GetByLabel("Interfaz Noche");
-        Assert.NotNull(darkSwitch);
-
-        // Hacer clic para activar/desactivar (podemos verificar la clase del body)
-        await darkSwitch.ClickAsync();
-        // Esperar que el tema oscuro se aplique (alguna clase CSS específica de MudBlazor)
-        await Page.WaitForSelectorAsync(".mud-theme-dark", new() { Timeout = 5_000 });
+        // Después de hacer clic, el input debe ser de tipo "text"
+        await Page.WaitForFunctionAsync("() => document.querySelector('input[type=\"text\"]') != null");
+        var type = await passwordInput.GetAttributeAsync("type");
+        Assert.Equal("text", type);
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XiStl8+QHZwubPpR1uSi6Dv6GYL6Sx3FJ38wkVs3xjM=",
+  "Hash": "nBTlJ8c/PMwHf/mCujfiUUAeKTpUfVlKxX1wEAMddss=",
   "Source": "Clinica.WASM",
   "BasePath": "/",
   "Mode": "Root",
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "fq246u8ut0",
-      "Integrity": "1+R8rs7q0HMO0xrf4a2OzguIqvhR9/bjyerhQ4ks0Ew=",
+      "Fingerprint": "hu9xvvep0l",
+      "Integrity": "59RYGFosTTDTlbTktLcyAhtGxT9jRSe5ZHoh2Mxer7U=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\blazor.boot.json"
@@ -136,8 +136,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "8yqa101ym9",
-      "Integrity": "ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo=",
+      "Fingerprint": "pgy07ocs2w",
+      "Integrity": "eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.Domain\\bin\\Debug\\net9.0\\Clinica.Domain.pdb"
@@ -157,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "b2zt05ajrv",
-      "Integrity": "PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g=",
+      "Fingerprint": "36iais9eie",
+      "Integrity": "e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\webcil\\Clinica.Domain.wasm"
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "2shj02eu90",
-      "Integrity": "PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU=",
+      "Fingerprint": "g6uc9poqxn",
+      "Integrity": "OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\Clinica.WASM.pdb"
@@ -199,8 +199,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "jcvh3j9g6p",
-      "Integrity": "DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs=",
+      "Fingerprint": "t2aaci8qs8",
+      "Integrity": "e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\webcil\\Clinica.WASM.wasm"
@@ -5435,7 +5435,7 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Net.WebClient.wasm"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\4t6pkie2fp-fq246u8ut0.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\4t6pkie2fp-hu9xvvep0l.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
@@ -5449,8 +5449,8 @@
       "RelatedAsset": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "7qcoo0zw3x",
-      "Integrity": "b57G9adESS8p+An0HDajjSwl45Q+QuKDupxlXdcsjzU=",
+      "Fingerprint": "7v0ikidety",
+      "Integrity": "Hb8SgTBidAXgHw0uoxFgwuXP0EElUx6bGPg8EO57cPU=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -5687,7 +5687,7 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Net.Http.Json.wasm"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\633zfifc0g-3a83lizbyy.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\633zfifc0g-ssnxmvwp0b.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
@@ -5701,8 +5701,8 @@
       "RelatedAsset": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\service-worker\\service-worker-assets.js.build",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "m57tn69jp5",
-      "Integrity": "hpeaTv36CNeeTy8D+k0qH6Vu5Nb8FbRKoeX1VQX/CnI=",
+      "Fingerprint": "l9izprx8nq",
+      "Integrity": "OVzLTuMD+fEmeNQIxy77RE1KXlcMAarP1LAcMuzW/P4=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\service-worker\\service-worker-assets.js.build"
@@ -7703,12 +7703,12 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Diagnostics.TraceSource.wasm"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-b2zt05ajrv.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-36iais9eie.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/Clinica.Domain#[.{fingerprint=b2zt05ajrv}]!.wasm.gz",
+      "RelativePath": "_framework/Clinica.Domain#[.{fingerprint=36iais9eie}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7717,8 +7717,8 @@
       "RelatedAsset": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "iq2fika71h",
-      "Integrity": "ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4=",
+      "Fingerprint": "qxfxwirn19",
+      "Integrity": "7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.wasm"
@@ -7808,12 +7808,12 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\icudt_no_CJK.dat"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-8yqa101ym9.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-pgy07ocs2w.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/Clinica.Domain#[.{fingerprint=8yqa101ym9}]!.pdb.gz",
+      "RelativePath": "_framework/Clinica.Domain#[.{fingerprint=pgy07ocs2w}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7822,8 +7822,8 @@
       "RelatedAsset": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "etgl8qxgv1",
-      "Integrity": "Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0=",
+      "Fingerprint": "acku7b0smp",
+      "Integrity": "ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.pdb"
@@ -8270,7 +8270,7 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\mlttivexun-q8ib4wutwc.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\mlttivexun-k1k7ewgo7z.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
@@ -9005,12 +9005,12 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Diagnostics.Contracts.wasm"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-jcvh3j9g6p.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-t2aaci8qs8.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/Clinica.WASM#[.{fingerprint=jcvh3j9g6p}]!.wasm.gz",
+      "RelativePath": "_framework/Clinica.WASM#[.{fingerprint=t2aaci8qs8}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -9019,8 +9019,8 @@
       "RelatedAsset": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "tegammbqve",
-      "Integrity": "a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0=",
+      "Fingerprint": "bcrg6qapdy",
+      "Integrity": "lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.wasm"
@@ -10244,12 +10244,12 @@
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-2shj02eu90.gz",
+      "Identity": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-g6uc9poqxn.gz",
       "SourceId": "Clinica.WASM",
       "SourceType": "Computed",
       "ContentRoot": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/Clinica.WASM#[.{fingerprint=2shj02eu90}]!.pdb.gz",
+      "RelativePath": "_framework/Clinica.WASM#[.{fingerprint=g6uc9poqxn}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -10258,8 +10258,8 @@
       "RelatedAsset": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "qo97cxjrut",
-      "Integrity": "NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ=",
+      "Fingerprint": "mf1d541za4",
+      "Integrity": "fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.pdb"
@@ -10489,8 +10489,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "BlazorServiceWorker",
       "AssetTraitValue": "ServiceWorkerManifest",
-      "Fingerprint": "3a83lizbyy",
-      "Integrity": "q/lhs1D48/V1qri5hlZqUmFy3waHSkJjGqFu94CinC8=",
+      "Fingerprint": "ssnxmvwp0b",
+      "Integrity": "vOgXaCrgRS8RtWEe7YB+ccUD0zrzZbnDC97IaA9e26w=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\service-worker\\service-worker-assets.js.build"
@@ -10510,8 +10510,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "BlazorServiceWorker",
       "AssetTraitValue": "ServiceWorkerJs",
-      "Fingerprint": "q8ib4wutwc",
-      "Integrity": "GlVU/TuYwpYxKEW3ggeP6VeM4kBY97RUaoZELo9Ae0o=",
+      "Fingerprint": "k1k7ewgo7z",
+      "Integrity": "OK9a3Zjq9W1zelOQcaZrIfPFw/GeJndqXY7WdXWeHPQ=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "wwwroot\\service-worker.js"
@@ -12067,11 +12067,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"1+R8rs7q0HMO0xrf4a2OzguIqvhR9/bjyerhQ4ks0Ew=\""
+          "Value": "\"59RYGFosTTDTlbTktLcyAhtGxT9jRSe5ZHoh2Mxer7U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 19:38:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12081,18 +12081,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-1+R8rs7q0HMO0xrf4a2OzguIqvhR9/bjyerhQ4ks0Ew="
+          "Value": "sha256-59RYGFosTTDTlbTktLcyAhtGxT9jRSe5ZHoh2Mxer7U="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\4t6pkie2fp-fq246u8ut0.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\4t6pkie2fp-hu9xvvep0l.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000075346594"
+          "Quality": "0.000075340918"
         }
       ],
       "ResponseHeaders": [
@@ -12102,15 +12102,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13271"
+          "Value": "13272"
         },
         {
           "Name": "ETag",
-          "Value": "\"b57G9adESS8p+An0HDajjSwl45Q+QuKDupxlXdcsjzU=\""
+          "Value": "\"Hb8SgTBidAXgHw0uoxFgwuXP0EElUx6bGPg8EO57cPU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 03:33:17 GMT"
+          "Value": "Sun, 31 May 2026 19:15:40 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12130,19 +12130,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"1+R8rs7q0HMO0xrf4a2OzguIqvhR9/bjyerhQ4ks0Ew=\""
+          "Value": "W/\"59RYGFosTTDTlbTktLcyAhtGxT9jRSe5ZHoh2Mxer7U=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-1+R8rs7q0HMO0xrf4a2OzguIqvhR9/bjyerhQ4ks0Ew="
+          "Value": "sha256-59RYGFosTTDTlbTktLcyAhtGxT9jRSe5ZHoh2Mxer7U="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\4t6pkie2fp-fq246u8ut0.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\4t6pkie2fp-hu9xvvep0l.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -12151,7 +12151,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13271"
+          "Value": "13272"
         },
         {
           "Name": "Content-Type",
@@ -12159,11 +12159,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"b57G9adESS8p+An0HDajjSwl45Q+QuKDupxlXdcsjzU=\""
+          "Value": "\"Hb8SgTBidAXgHw0uoxFgwuXP0EElUx6bGPg8EO57cPU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 03:33:17 GMT"
+          "Value": "Sun, 31 May 2026 19:15:40 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12181,7 +12181,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-b57G9adESS8p+An0HDajjSwl45Q+QuKDupxlXdcsjzU="
+          "Value": "sha256-Hb8SgTBidAXgHw0uoxFgwuXP0EElUx6bGPg8EO57cPU="
         }
       ]
     },
@@ -12323,168 +12323,7 @@
       ]
     },
     {
-      "Route": "_framework/Clinica.Domain.8yqa101ym9.pdb",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "64868"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "8yqa101ym9"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Clinica.Domain.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Clinica.Domain.8yqa101ym9.pdb",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-8yqa101ym9.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000036197785"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "27625"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "8yqa101ym9"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Clinica.Domain.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Clinica.Domain.8yqa101ym9.pdb.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-8yqa101ym9.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "27625"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "8yqa101ym9"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Clinica.Domain.pdb.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Clinica.Domain.b2zt05ajrv.wasm",
+      "Route": "_framework/Clinica.Domain.36iais9eie.wasm",
       "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.wasm",
       "Selectors": [],
       "ResponseHeaders": [
@@ -12502,11 +12341,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g=\""
+          "Value": "\"e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:39 GMT"
+          "Value": "Sun, 31 May 2026 04:35:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12516,7 +12355,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b2zt05ajrv"
+          "Value": "36iais9eie"
         },
         {
           "Name": "label",
@@ -12524,18 +12363,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g="
+          "Value": "sha256-e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI="
         }
       ]
     },
     {
-      "Route": "_framework/Clinica.Domain.b2zt05ajrv.wasm",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-b2zt05ajrv.gz",
+      "Route": "_framework/Clinica.Domain.36iais9eie.wasm",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-36iais9eie.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000020684234"
+          "Quality": "0.000020682096"
         }
       ],
       "ResponseHeaders": [
@@ -12545,15 +12384,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "48345"
+          "Value": "48350"
         },
         {
           "Name": "ETag",
-          "Value": "\"ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4=\""
+          "Value": "\"7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12573,13 +12412,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g=\""
+          "Value": "W/\"e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b2zt05ajrv"
+          "Value": "36iais9eie"
         },
         {
           "Name": "label",
@@ -12587,13 +12426,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g="
+          "Value": "sha256-e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI="
         }
       ]
     },
     {
-      "Route": "_framework/Clinica.Domain.b2zt05ajrv.wasm.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-b2zt05ajrv.gz",
+      "Route": "_framework/Clinica.Domain.36iais9eie.wasm.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-36iais9eie.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -12602,7 +12441,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "48345"
+          "Value": "48350"
         },
         {
           "Name": "Content-Type",
@@ -12610,11 +12449,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4=\""
+          "Value": "\"7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12632,7 +12471,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b2zt05ajrv"
+          "Value": "36iais9eie"
         },
         {
           "Name": "label",
@@ -12640,7 +12479,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4="
+          "Value": "sha256-7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg="
         }
       ]
     },
@@ -12655,7 +12494,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "64868"
+          "Value": "64864"
         },
         {
           "Name": "Content-Type",
@@ -12663,11 +12502,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo=\""
+          "Value": "\"eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:36 GMT"
+          "Value": "Sun, 31 May 2026 04:35:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12677,13 +12516,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo="
+          "Value": "sha256-eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.Domain.pdb",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-8yqa101ym9.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-pgy07ocs2w.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -12702,11 +12541,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0=\""
+          "Value": "\"ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12726,19 +12565,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo=\""
+          "Value": "W/\"eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ECiRhp8USw/09IGC3f9kBr9OHTjapRuRHGSuvThQYLo="
+          "Value": "sha256-eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.Domain.pdb.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-8yqa101ym9.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-pgy07ocs2w.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -12755,11 +12594,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0=\""
+          "Value": "\"ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12777,7 +12616,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Ygipj2VwA2w0aoEFRKD+FPqT3kmvlcrQfcga6tKy4s0="
+          "Value": "sha256-ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Clinica.Domain.pgy07ocs2w.pdb",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.Domain.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "64864"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 31 May 2026 04:35:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pgy07ocs2w"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Clinica.Domain.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Clinica.Domain.pgy07ocs2w.pdb",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-pgy07ocs2w.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000036197785"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "27625"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pgy07ocs2w"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Clinica.Domain.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eTWZ5JfjGQxOLuCNDEpoefSLQJwmKTN/KF3wM6rzSik="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Clinica.Domain.pgy07ocs2w.pdb.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\jmbujblpru-pgy07ocs2w.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "27625"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pgy07ocs2w"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Clinica.Domain.pdb.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ejU3HM2uPU5rwtlh5Zm3UJtkm6xbeVLR3ZeAxI90hw8="
         }
       ]
     },
@@ -12800,11 +12800,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g=\""
+          "Value": "\"e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:39 GMT"
+          "Value": "Sun, 31 May 2026 04:35:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12814,18 +12814,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g="
+          "Value": "sha256-e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.Domain.wasm",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-b2zt05ajrv.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-36iais9eie.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000020684234"
+          "Quality": "0.000020682096"
         }
       ],
       "ResponseHeaders": [
@@ -12835,15 +12835,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "48345"
+          "Value": "48350"
         },
         {
           "Name": "ETag",
-          "Value": "\"ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4=\""
+          "Value": "\"7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12863,19 +12863,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g=\""
+          "Value": "W/\"e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-PRVJMwG9f5PNSs7p7yT8MbMYYW33+YWvX3VtQx2/t1g="
+          "Value": "sha256-e8xXvOFp9KtyQl1WiD98WOfdgl8G8RbcbabQOSsjgQI="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.Domain.wasm.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-b2zt05ajrv.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\j645kjr9fh-36iais9eie.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -12884,7 +12884,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "48345"
+          "Value": "48350"
         },
         {
           "Name": "Content-Type",
@@ -12892,11 +12892,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4=\""
+          "Value": "\"7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12914,12 +12914,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZsLzOFIwa0KBCDFsbwPMD9XIlJeO4d85q2yhaILXwQ4="
+          "Value": "sha256-7uaecDSvonYIe6WvwC7Jrvi+VvXscSZaMKd6FMXoOAg="
         }
       ]
     },
     {
-      "Route": "_framework/Clinica.WASM.2shj02eu90.pdb",
+      "Route": "_framework/Clinica.WASM.g6uc9poqxn.pdb",
       "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -12929,7 +12929,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "448136"
+          "Value": "448132"
         },
         {
           "Name": "Content-Type",
@@ -12937,11 +12937,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU=\""
+          "Value": "\"OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:39 GMT"
+          "Value": "Sun, 31 May 2026 04:35:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12951,7 +12951,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "2shj02eu90"
+          "Value": "g6uc9poqxn"
         },
         {
           "Name": "label",
@@ -12959,18 +12959,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU="
+          "Value": "sha256-OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84="
         }
       ]
     },
     {
-      "Route": "_framework/Clinica.WASM.2shj02eu90.pdb",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-2shj02eu90.gz",
+      "Route": "_framework/Clinica.WASM.g6uc9poqxn.pdb",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-g6uc9poqxn.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000002829631"
+          "Quality": "0.000002829607"
         }
       ],
       "ResponseHeaders": [
@@ -12980,15 +12980,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "353402"
+          "Value": "353405"
         },
         {
           "Name": "ETag",
-          "Value": "\"NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ=\""
+          "Value": "\"fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13008,13 +13008,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU=\""
+          "Value": "W/\"OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "2shj02eu90"
+          "Value": "g6uc9poqxn"
         },
         {
           "Name": "label",
@@ -13022,13 +13022,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU="
+          "Value": "sha256-OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84="
         }
       ]
     },
     {
-      "Route": "_framework/Clinica.WASM.2shj02eu90.pdb.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-2shj02eu90.gz",
+      "Route": "_framework/Clinica.WASM.g6uc9poqxn.pdb.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-g6uc9poqxn.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -13037,7 +13037,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "353402"
+          "Value": "353405"
         },
         {
           "Name": "Content-Type",
@@ -13045,11 +13045,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ=\""
+          "Value": "\"fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13067,7 +13067,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "2shj02eu90"
+          "Value": "g6uc9poqxn"
         },
         {
           "Name": "label",
@@ -13075,168 +13075,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Clinica.WASM.jcvh3j9g6p.wasm",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "757013"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:39 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jcvh3j9g6p"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Clinica.WASM.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Clinica.WASM.jcvh3j9g6p.wasm",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-jcvh3j9g6p.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000004565084"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "219053"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jcvh3j9g6p"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Clinica.WASM.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Clinica.WASM.jcvh3j9g6p.wasm.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-jcvh3j9g6p.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "219053"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jcvh3j9g6p"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Clinica.WASM.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0="
+          "Value": "sha256-fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0="
         }
       ]
     },
@@ -13251,7 +13090,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "448136"
+          "Value": "448132"
         },
         {
           "Name": "Content-Type",
@@ -13259,11 +13098,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU=\""
+          "Value": "\"OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:39 GMT"
+          "Value": "Sun, 31 May 2026 04:35:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13273,18 +13112,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU="
+          "Value": "sha256-OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.WASM.pdb",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-2shj02eu90.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-g6uc9poqxn.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000002829631"
+          "Quality": "0.000002829607"
         }
       ],
       "ResponseHeaders": [
@@ -13294,15 +13133,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "353402"
+          "Value": "353405"
         },
         {
           "Name": "ETag",
-          "Value": "\"NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ=\""
+          "Value": "\"fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13322,19 +13161,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU=\""
+          "Value": "W/\"OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-PncVRpZxyt3rQykfoTpdwp8AHIGMio1HyizLyMyzhOU="
+          "Value": "sha256-OC/thvO1rNSwshpOY0rKHApfNXrpEUbjRY1yoqhDC84="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.WASM.pdb.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-2shj02eu90.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\z0kspfv6x8-g6uc9poqxn.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -13343,7 +13182,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "353402"
+          "Value": "353405"
         },
         {
           "Name": "Content-Type",
@@ -13351,11 +13190,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ=\""
+          "Value": "\"fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13373,7 +13212,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-NjPHgMfJ8mO5QqG6pZQzJ3T4MVBQQ1ecsYeP1jTtlWQ="
+          "Value": "sha256-fjLwcFNKln/0g/KuxWl2mFifBQ6OLOpCNPGTT5+z2I0="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Clinica.WASM.t2aaci8qs8.wasm",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Clinica.WASM.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "757013"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 31 May 2026 04:35:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t2aaci8qs8"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Clinica.WASM.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Clinica.WASM.t2aaci8qs8.wasm",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-t2aaci8qs8.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000004564834"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "219065"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t2aaci8qs8"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Clinica.WASM.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Clinica.WASM.t2aaci8qs8.wasm.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-t2aaci8qs8.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "219065"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t2aaci8qs8"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Clinica.WASM.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA="
         }
       ]
     },
@@ -13396,11 +13396,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs=\""
+          "Value": "\"e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:39 GMT"
+          "Value": "Sun, 31 May 2026 04:35:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13410,18 +13410,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs="
+          "Value": "sha256-e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.WASM.wasm",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-jcvh3j9g6p.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-t2aaci8qs8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000004565084"
+          "Quality": "0.000004564834"
         }
       ],
       "ResponseHeaders": [
@@ -13431,15 +13431,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "219053"
+          "Value": "219065"
         },
         {
           "Name": "ETag",
-          "Value": "\"a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0=\""
+          "Value": "\"lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13459,19 +13459,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs=\""
+          "Value": "W/\"e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-DajGHZzx4Pm3iOi9jIMVQxgc0us4H88wRvlEEN82jDs="
+          "Value": "sha256-e5q+eDvonSrCOmzOHlF8fNwKPZ/3852vI92wjhCCG/g="
         }
       ]
     },
     {
       "Route": "_framework/Clinica.WASM.wasm.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-jcvh3j9g6p.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\q2psv0ztsx-t2aaci8qs8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -13480,7 +13480,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "219053"
+          "Value": "219065"
         },
         {
           "Name": "Content-Type",
@@ -13488,11 +13488,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0=\""
+          "Value": "\"lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13510,7 +13510,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-a3DbpT2DTaWo0axOtPlF8+T05n28We/QrH0aDtioNV0="
+          "Value": "sha256-lcPFV52TWwufFfcU6QPYvDwvCWFqNrmvqPEeHGUogyA="
         }
       ]
     },
@@ -91756,12 +91756,12 @@
     },
     {
       "Route": "service-worker-assets.js",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\633zfifc0g-3a83lizbyy.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\633zfifc0g-ssnxmvwp0b.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000074343915"
+          "Quality": "0.000074327338"
         }
       ],
       "ResponseHeaders": [
@@ -91771,15 +91771,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13450"
+          "Value": "13453"
         },
         {
           "Name": "ETag",
-          "Value": "\"hpeaTv36CNeeTy8D+k0qH6Vu5Nb8FbRKoeX1VQX/CnI=\""
+          "Value": "\"OVzLTuMD+fEmeNQIxy77RE1KXlcMAarP1LAcMuzW/P4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -91799,13 +91799,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"q/lhs1D48/V1qri5hlZqUmFy3waHSkJjGqFu94CinC8=\""
+          "Value": "W/\"vOgXaCrgRS8RtWEe7YB+ccUD0zrzZbnDC97IaA9e26w=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-q/lhs1D48/V1qri5hlZqUmFy3waHSkJjGqFu94CinC8="
+          "Value": "sha256-vOgXaCrgRS8RtWEe7YB+ccUD0zrzZbnDC97IaA9e26w="
         }
       ]
     },
@@ -91828,11 +91828,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"q/lhs1D48/V1qri5hlZqUmFy3waHSkJjGqFu94CinC8=\""
+          "Value": "\"vOgXaCrgRS8RtWEe7YB+ccUD0zrzZbnDC97IaA9e26w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -91842,13 +91842,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-q/lhs1D48/V1qri5hlZqUmFy3waHSkJjGqFu94CinC8="
+          "Value": "sha256-vOgXaCrgRS8RtWEe7YB+ccUD0zrzZbnDC97IaA9e26w="
         }
       ]
     },
     {
       "Route": "service-worker-assets.js.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\633zfifc0g-3a83lizbyy.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\633zfifc0g-ssnxmvwp0b.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -91857,7 +91857,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13450"
+          "Value": "13453"
         },
         {
           "Name": "Content-Type",
@@ -91865,11 +91865,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"hpeaTv36CNeeTy8D+k0qH6Vu5Nb8FbRKoeX1VQX/CnI=\""
+          "Value": "\"OVzLTuMD+fEmeNQIxy77RE1KXlcMAarP1LAcMuzW/P4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -91887,13 +91887,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hpeaTv36CNeeTy8D+k0qH6Vu5Nb8FbRKoeX1VQX/CnI="
+          "Value": "sha256-OVzLTuMD+fEmeNQIxy77RE1KXlcMAarP1LAcMuzW/P4="
         }
       ]
     },
     {
       "Route": "service-worker.js",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\mlttivexun-q8ib4wutwc.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\mlttivexun-k1k7ewgo7z.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -91916,7 +91916,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -91936,13 +91936,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"GlVU/TuYwpYxKEW3ggeP6VeM4kBY97RUaoZELo9Ae0o=\""
+          "Value": "W/\"OK9a3Zjq9W1zelOQcaZrIfPFw/GeJndqXY7WdXWeHPQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-GlVU/TuYwpYxKEW3ggeP6VeM4kBY97RUaoZELo9Ae0o="
+          "Value": "sha256-OK9a3Zjq9W1zelOQcaZrIfPFw/GeJndqXY7WdXWeHPQ="
         }
       ]
     },
@@ -91965,7 +91965,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GlVU/TuYwpYxKEW3ggeP6VeM4kBY97RUaoZELo9Ae0o=\""
+          "Value": "\"OK9a3Zjq9W1zelOQcaZrIfPFw/GeJndqXY7WdXWeHPQ=\""
         },
         {
           "Name": "Last-Modified",
@@ -91979,13 +91979,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-GlVU/TuYwpYxKEW3ggeP6VeM4kBY97RUaoZELo9Ae0o="
+          "Value": "sha256-OK9a3Zjq9W1zelOQcaZrIfPFw/GeJndqXY7WdXWeHPQ="
         }
       ]
     },
     {
       "Route": "service-worker.js.gz",
-      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\mlttivexun-q8ib4wutwc.gz",
+      "AssetFile": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.WASM\\obj\\Debug\\net9.0\\compressed\\mlttivexun-k1k7ewgo7z.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -92006,7 +92006,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 31 May 2026 04:08:40 GMT"
+          "Value": "Sun, 31 May 2026 04:35:44 GMT"
         },
         {
           "Name": "Cache-Control",
