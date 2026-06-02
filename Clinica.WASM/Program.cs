@@ -19,18 +19,18 @@ builder.Services.AddScoped<AuthHeaderHandler>();
 builder.Services.AddScoped<ApiErrorService>();
 builder.Services.AddScoped<AuthRedirectService>();
 
-// ===========================================================
+// ===========================
 // SELECCIÓN DINÁMICA DE ENTORNO DE API (LOCALHOST VS AZURE)
-// ===========================================================
+// ===========================
 #if DEBUG
     string apiBaseUrl = "https://localhost:7241/";
 #else
     string apiBaseUrl = "https://api-clinica-sm-e6bhegcbdreba4bt.westus2-01.azurewebsites.net/";
 #endif
 
-// ==========================================================
+// ====================
 // INYECCIÓN DE SERVICIOS API CLIENTES HTTP
-// ==========================================================
+// ====================
 builder.Services.AddHttpClient<PacienteApiService>(client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl);
