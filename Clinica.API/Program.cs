@@ -35,6 +35,8 @@ builder.Services.Configure<ApiBehaviorOptions>(
 );
 
 builder.Services.AddEndpointsApiExplorer();
+
+// Funcionalidad Para poder leer las xml de los controlers los caules serviran para la documentacion
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
