@@ -35,7 +35,21 @@ builder.Services.Configure<ApiBehaviorOptions>(
 );
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
+    {
+        Title = "Clínica Santa Mónica API",
+        Version = "v1",
+        Description = "API del sistema de gestión clínica SIGEC."
+    });
+
+    // Incluir los comentarios XML de tus controladores
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+        c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<JwtHelper>();
