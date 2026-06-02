@@ -19,9 +19,9 @@ builder.Services.AddScoped<AuthHeaderHandler>();
 builder.Services.AddScoped<ApiErrorService>();
 builder.Services.AddScoped<AuthRedirectService>();
 
-// ===========================================================
+// ===========================
 // SELECCIÓN DINÁMICA DE ENTORNO DE API (LOCALHOST VS AZURE)
-// ===========================================================
+// ===========================
 #if DEBUG
     string apiBaseUrl = "https://localhost:7241/";
 #else
