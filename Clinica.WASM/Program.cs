@@ -28,9 +28,9 @@ builder.Services.AddScoped<AuthRedirectService>();
     string apiBaseUrl = "https://api-clinica-sm-e6bhegcbdreba4bt.westus2-01.azurewebsites.net/";
 #endif
 
-// ==========================================================
+// ====================
 // INYECCIÓN DE SERVICIOS API CLIENTES HTTP
-// ==========================================================
+// ====================
 builder.Services.AddHttpClient<PacienteApiService>(client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl);
