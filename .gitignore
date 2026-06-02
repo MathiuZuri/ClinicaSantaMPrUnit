@@ -19,7 +19,6 @@
 # ===============================================
 # Test results (dotnet test, VSTest)
 # ===============================================
-**/TestResults/
 *.trx
 *.coverage
 *.coveragexml
@@ -40,7 +39,6 @@
 .sonarqube/
 .scannerwork/
 **/sonarqube/
-**/CoverageReport/
 
 # ===============================================
 # Logs
