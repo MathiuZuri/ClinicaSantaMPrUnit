@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Clinica.WASM.props" />
-</Project>

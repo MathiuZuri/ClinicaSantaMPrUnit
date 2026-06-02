@@ -1,0 +1,1 @@
+sonacube pesa mucho para git XD, crear la carpeta sonarqube, dentro crear data, logs, extentions, plugins y poner el cnes ahi
