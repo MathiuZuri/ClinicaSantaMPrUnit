@@ -64,9 +64,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore Clinica.sln
       
-      # =========================
+      # ==========================
       # SONAR BEGIN (CON EXCLUSIONES)
-      # =========================
+      # ==========================
       - name: Sonar Begin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
