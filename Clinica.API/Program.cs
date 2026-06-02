@@ -159,7 +159,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
                 "https://localhost:7299",
                 "http://localhost:5091",
-                "api-clinica-sm-e6bhegcbdreba4bt.westus2-01.azurewebsites.net" // Reemplaza con tu URL real de Azure Static Web Apps cuando se cree
+                "https://salmon-bush-08c1e7510.7.azurestaticapps.net" // Reemplaza con tu URL real de Azure Static Web Apps cuando se cree
             )
             .AllowAnyHeader()
             .AllowAnyMethod();
