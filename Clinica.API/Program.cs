@@ -21,7 +21,7 @@ using Clinica.API.Services.Background;
 var builder = WebApplication.CreateBuilder(args);
 
 // ==========================================================
-// CONFIGURACIÓN GENERAL
+// CONFIGURACIÓN GENERAL - Para Program.cs
 // ==========================================================
 builder.Services.AddScoped<AuditoriaAutomaticaFilter>();
 
