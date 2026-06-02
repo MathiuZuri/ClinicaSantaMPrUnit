@@ -63,9 +63,9 @@ jobs:
       # =========================
       - name: Restore dependencies
         run: dotnet restore Clinica.sln
-
+      
       # =========================
-      # APERTURA DE ESCANEO SONARCLOUD
+      # SONAR BEGIN (CON EXCLUSIONES)
       # =========================
       - name: Sonar Begin
         env:
@@ -77,6 +77,8 @@ jobs:
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml"
+          /d:sonar.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/bin/**,**/obj/**,**/Migrations/**,**/k6/**,**/infra/sonarqube/**,**/CoverageReport/**"
+          /d:sonar.test.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**"
 
       # =========================
       # COMPILACIÓN GENERAL

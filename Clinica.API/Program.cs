@@ -199,6 +199,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => 
     {
+        //https://localhost:7241/swagger/index.html
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clinica API v1");
     });
 }
