@@ -1,34 +1,72 @@
-﻿# Build
-bin/
-obj/
-
-# Rider / VS
-.idea/
-.vs/
-
-# Test temporary files
-TestResults/
-
-# Logs
-*.log
-
-# Sonar
-.sonarqube/
-.scannerwork/
-
-# Docker temp
-docker-data/
-
-# Publish
-publish/
-
-# User files
+﻿# ===============================================
+# .NET Build artifacts
+# ===============================================
+**/bin/
+**/obj/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
 
-infra/sonarqube/
+# ===============================================
+# Rider / Visual Studio
+# ===============================================
+.idea/
+.vs/
+*.sln.iml
+
+# ===============================================
+# Test results (dotnet test, VSTest)
+# ===============================================
+**/TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# ===============================================
+# Playwright E2E tests
+# ===============================================
+**/videos/
+**/screenshots/
+**/allure-results/
+**/allure-report/
+**/playwright-report/
+**/playwright/.cache/
+
+# ===============================================
+# SonarQube / SonarScanner
+# ===============================================
+.sonarqube/
+.scannerwork/
 **/sonarqube/
-*.jar
-infra/
-data/
-*.cfs
+**/CoverageReport/
+
+# ===============================================
+# Logs
+# ===============================================
+*.log
+
+# ===============================================
+# Docker temporary data
+# ===============================================
+docker-data/
+
+# ===============================================
+# Publish output
+# ===============================================
+publish/
+
+# ===============================================
+# Infrastructure (opcional, solo si no versionas)
+# Si necesitas conservar docker-compose.yml,
+# comenta la línea `infra/` y excluye solo los datos de SonarQube
+# ===============================================
+# infra/   ← Descomentar si realmente quieres ignorar toda la carpeta infra
+# Si prefieres mantener docker-compose.yml pero ignorar el resto:
+infra/sonarqube/data
+infra/sonarqube/extensions
+infra/sonarqube/logs
+infra/**/*.jar
+infra/**/*.cfs
+infra/**/data/
