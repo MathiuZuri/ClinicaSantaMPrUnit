@@ -1,3 +1,4 @@
+"# Avance de pantallas - Carlos" 
 # 🏥 Sistema de Gestión - Clínica Santa Mónica
 
 Este es el ecosistema digital para la administración de la Clínica Santa Mónica, construido con una arquitectura desacoplada de alto rendimiento.
