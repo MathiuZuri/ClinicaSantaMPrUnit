@@ -1,4 +1,4 @@
-﻿# language: es
+# language: es
 Característica: Autenticación de Usuarios (Login)
 Como usuario administrativo del sistema SIGEC
 Quiero ingresar mis credenciales de acceso a la intranet

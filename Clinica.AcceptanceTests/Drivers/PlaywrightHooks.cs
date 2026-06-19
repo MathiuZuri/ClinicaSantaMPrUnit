@@ -1,4 +1,4 @@
-﻿using Microsoft.Playwright;
+using Microsoft.Playwright;
 using Reqnroll;
 using Reqnroll.BoDi;
 

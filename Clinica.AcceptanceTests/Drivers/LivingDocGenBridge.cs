@@ -1,4 +1,4 @@
-﻿using LivingDocGen.Reqnroll.Integration.Bootstrap;
+using LivingDocGen.Reqnroll.Integration.Bootstrap;
 using Reqnroll;
 
 namespace Clinica.AcceptanceTests.Drivers;

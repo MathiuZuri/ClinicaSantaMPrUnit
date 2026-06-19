@@ -1,4 +1,4 @@
-﻿using Microsoft.Playwright;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using Reqnroll; // Asegúrate de tener este using activo
 

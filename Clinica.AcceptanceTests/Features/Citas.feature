@@ -1,4 +1,4 @@
-﻿# language: es
+# language: es
 Característica: Gestión de Citas Médicas
     Como usuario administrativo del sistema SIGEC
     Quiero programar, reprogramar y cancelar citas obstétricas
