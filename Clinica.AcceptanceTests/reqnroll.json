@@ -1,0 +1,8 @@
+﻿{
+  "$schema": "https://schemas.reqnroll.net/reqnroll-config-latest.json",
+  "formatters": {
+    "html": {
+      "outputFilePath": "F:\\proyectC#\\pruebasUnit\\ClinicaObstPrUnit\\Clinica.AcceptanceTests\\TestResults\\LivingDocNativo.html"
+    }
+  }
+}
