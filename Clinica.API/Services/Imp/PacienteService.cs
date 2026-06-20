@@ -3,6 +3,7 @@ using Clinica.Domain.Entities;
 using Clinica.Domain.Interfaces;
 using Clinica.API.Helpers;
 using Clinica.Domain.Enums;
+using Microsoft.EntityFrameworkCore; // Necesario para FirstOrDefaultAsync
 
 namespace Clinica.API.Services.Imp;
 
@@ -41,6 +42,16 @@ public class PacienteService : IPacienteService
             Celular = x.Celular,
             Correo = x.Correo,
             Direccion = x.Direccion,
+            
+            // Filiacion
+            LugarNacimiento = x.LugarNacimiento,
+            GradoInstruccion = x.GradoInstruccion,
+            Ocupacion = x.Ocupacion,
+            Religion = x.Religion,
+            EstadoCivil = x.EstadoCivil,
+            NombrePareja = x.NombrePareja,
+            CelularPareja = x.CelularPareja,
+
             Estado = x.Estado,
             FechaRegistro = x.FechaRegistro,
             CodigoHistorial = x.HistorialClinico?.CodigoHistorial
@@ -83,14 +94,27 @@ public class PacienteService : IPacienteService
             Celular = dto.Celular,
             Correo = dto.Correo,
             Direccion = dto.Direccion,
+            
+            // Filiación
+            LugarNacimiento = dto.LugarNacimiento,
+            GradoInstruccion = dto.GradoInstruccion,
+            Ocupacion = dto.Ocupacion,
+            Religion = dto.Religion,
+            EstadoCivil = dto.EstadoCivil,
+            NombrePareja = dto.NombrePareja,
+            CelularPareja = dto.CelularPareja,
+
             UsuarioId = usuarioId,
             FechaRegistro = DateTime.UtcNow
         };
 
+        // LLAMADA AL NUEVO GENERADOR CORRELATIVO
+        var codigoHistorial = await GenerarCodigoHistorialAsync();
+
         var historial = new HistorialClinico
         {
             Id = Guid.NewGuid(),
-            CodigoHistorial = GenerarCodigoHistorial(dto.DNI),
+            CodigoHistorial = codigoHistorial, // Asignación del nuevo código "FIL-yyyy-####"
             PacienteId = paciente.Id,
             FechaApertura = DateTime.UtcNow
         };
@@ -144,6 +168,16 @@ public class PacienteService : IPacienteService
             Celular = paciente.Celular,
             Correo = paciente.Correo,
             Direccion = paciente.Direccion,
+            
+            // Filiacion
+            LugarNacimiento = paciente.LugarNacimiento,
+            GradoInstruccion = paciente.GradoInstruccion,
+            Ocupacion = paciente.Ocupacion,
+            Religion = paciente.Religion,
+            EstadoCivil = paciente.EstadoCivil,
+            NombrePareja = paciente.NombrePareja,
+            CelularPareja = paciente.CelularPareja,
+
             Estado = paciente.Estado,
             FechaRegistro = paciente.FechaRegistro,
             CodigoHistorial = paciente.HistorialClinico?.CodigoHistorial
@@ -168,10 +202,37 @@ public class PacienteService : IPacienteService
     {
         return $"PCT-{DateTime.UtcNow:yyyy}-{Guid.NewGuid().ToString("N")[..5].ToUpper()}-{dni}";
     }
-
-    private static string GenerarCodigoHistorial(string dni)
+    
+    // NUEVA LÓGICA: GENERADOR CORRELATIVO "FIL-año-0001"
+    private async Task<string> GenerarCodigoHistorialAsync()
     {
-        return $"{Guid.NewGuid().ToString("N")[..5].ToUpper()}-{DateTime.UtcNow:yyyy}-{dni}";
+        var anioActual = DateTime.UtcNow.Year.ToString(); // "2026"
+        var prefijo = $"FIL-{anioActual}-";
+
+        // 1. Usamos GetAllAsync() que sí existe en tu repositorio
+        var historiales = await _historialRepository.GetAllAsync();
+
+        // 2. Filtramos con LINQ estándar (usamos FirstOrDefault normal, sin "Async")
+        var ultimoHistorial = historiales
+            .Where(h => !string.IsNullOrEmpty(h.CodigoHistorial) && h.CodigoHistorial.StartsWith(prefijo))
+            .OrderByDescending(h => h.CodigoHistorial)
+            .FirstOrDefault();
+
+        if (ultimoHistorial == null)
+        {
+            return $"{prefijo}0001"; // El primero del año
+        }
+
+        // Dividimos "FIL-2026-0005" y extraemos "0005"
+        var partes = ultimoHistorial.CodigoHistorial.Split('-');
+        if (partes.Length == 3 && int.TryParse(partes[2], out int ultimoCorrelativo))
+        {
+            int nuevoCorrelativo = ultimoCorrelativo + 1;
+            return $"{prefijo}{nuevoCorrelativo:D4}"; // Aplica formato de 4 ceros (0006)
+        }
+
+        // Si ocurre un error de parseo (datos antiguos con otro formato), reinicia
+        return $"{prefijo}0001";
     }
 
     private static string GenerarCodigoDetalle(string codigoServicio, string dni)

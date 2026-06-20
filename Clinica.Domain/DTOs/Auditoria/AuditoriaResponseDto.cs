@@ -29,4 +29,6 @@ public class AuditoriaResponseDto
     public NivelAuditoria Nivel { get; set; }
 
     public DateTime FechaHora { get; set; }
+    
+    public bool EsConsulta { get; set; } // ✅ nuevo campo
 }

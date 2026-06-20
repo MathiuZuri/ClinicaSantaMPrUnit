@@ -1,17 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Clinica.Domain.DTOs.Atenciones.Modulos;
 
 namespace Clinica.Domain.DTOs.Atenciones;
 
 public class CerrarAtencionDto
 {
-    [StringLength(1000, ErrorMessage = "El diagnóstico no debe superar los 1000 caracteres.")]
-    public string? DiagnosticoResumen { get; set; }
-
-    [StringLength(1000, ErrorMessage = "Las indicaciones no deben superar los 1000 caracteres.")]
-    public string? Indicaciones { get; set; }
-
-    [StringLength(1000, ErrorMessage = "El tratamiento no debe superar los 1000 caracteres.")]
-    public string? Tratamiento { get; set; }
+    [Required(ErrorMessage = "La impresión diagnóstica es obligatoria para cerrar la atención.")]
+    public ImpresionDiagnosticaDto ImpresionDiagnostica { get; set; } = new();
 
     [StringLength(1000, ErrorMessage = "Las observaciones finales no deben superar los 1000 caracteres.")]
     public string? ObservacionesFinales { get; set; }

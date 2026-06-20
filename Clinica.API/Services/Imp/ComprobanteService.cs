@@ -8,37 +8,47 @@ namespace Clinica.API.Services.Imp;
 
 public class ComprobanteService : IComprobanteService
 {
-    private const decimal TasaIgv = 18m;
+    private decimal TasaIgvActiva => (decimal)TasaImpuesto.IGV_18;
 
     private readonly IComprobanteRepository _comprobanteRepository;
     private readonly IPagoRepository _pagoRepository;
+    private readonly IAtencionRepository _atencionRepository;
     private readonly IUsuarioActualService _usuarioActualService;
     private readonly IComprobantePdfService _comprobantePdfService;
+    private readonly ICitaRepository _citaRepository;
+    private readonly IPacienteRepository _pacienteRepository;
 
     public ComprobanteService(
         IComprobanteRepository comprobanteRepository,
         IPagoRepository pagoRepository,
+        IAtencionRepository atencionRepository,
         IUsuarioActualService usuarioActualService,
-        IComprobantePdfService comprobantePdfService)
+        IComprobantePdfService comprobantePdfService,
+        ICitaRepository citaRepository,
+        IPacienteRepository pacienteRepository)
     {
         _comprobanteRepository = comprobanteRepository;
         _pagoRepository = pagoRepository;
+        _atencionRepository = atencionRepository;
         _usuarioActualService = usuarioActualService;
         _comprobantePdfService = comprobantePdfService;
+        _citaRepository = citaRepository;
+        _pacienteRepository = pacienteRepository;
     }
 
     // ==========================================================
-    // PREVIEW BOLETA DE PAGO
+    // 1. BOLETA DE PAGO (Preview, Emisión, PDF)
     // ==========================================================
-
-    public async Task<ComprobantePagoPreviewDto> PreviewBoletaPagoAsync(Guid pagoId, decimal tasaImpuesto = TasaIgv)
+    public async Task<ComprobantePagoPreviewDto> PreviewBoletaPagoAsync(Guid pagoId, decimal? tasaImpuesto = null)
     {
         if (pagoId == Guid.Empty)
             throw new InvalidOperationException("El identificador del pago es obligatorio.");
+        
+        var tasaFinal = tasaImpuesto ?? TasaIgvActiva; 
 
         var pago = await ObtenerPagoConDetallePorIdAsync(pagoId);
 
-        var subtotal = CalcularSubtotalDesdeTotal(pago.MontoPagado, tasaImpuesto);
+        var subtotal = CalcularSubtotalDesdeTotal(pago.MontoPagado, tasaFinal);
         var impuesto = pago.MontoPagado - subtotal;
 
         return new ComprobantePagoPreviewDto
@@ -61,7 +71,7 @@ public class ComprobanteService : IComprobanteService
 
             MontoPagado = pago.MontoPagado,
             Subtotal = subtotal,
-            TasaImpuesto = tasaImpuesto,
+            TasaImpuesto = tasaFinal,
             MontoImpuesto = impuesto,
             Total = pago.MontoPagado,
 
@@ -82,17 +92,13 @@ public class ComprobanteService : IComprobanteService
                     Cantidad = 1,
                     PrecioUnitarioFinal = pago.MontoPagado,
                     Subtotal = subtotal,
-                    TasaImpuesto = tasaImpuesto,
+                    TasaImpuesto = tasaFinal,
                     MontoImpuesto = impuesto,
                     Total = pago.MontoPagado
                 }
             }
         };
     }
-
-    // ==========================================================
-    // EMITIR BOLETA DE PAGO
-    // ==========================================================
 
     public async Task<Guid> EmitirBoletaPagoAsync(EmitirComprobantePagoDto dto)
     {
@@ -117,7 +123,7 @@ public class ComprobanteService : IComprobanteService
         var ultimoNumero = await _comprobanteRepository.ObtenerUltimoNumeroPorSerieAsync(serie);
         var numero = ultimoNumero + 1;
 
-        var subtotal = CalcularSubtotalDesdeTotal(pago.MontoPagado, TasaIgv);
+        var subtotal = CalcularSubtotalDesdeTotal(pago.MontoPagado, TasaIgvActiva);
         var impuesto = pago.MontoPagado - subtotal;
 
         var comprobante = new Comprobante
@@ -143,7 +149,7 @@ public class ComprobanteService : IComprobanteService
             DireccionPaciente = pago.Paciente?.Direccion,
 
             Subtotal = subtotal,
-            TasaImpuesto = TasaIgv,
+            TasaImpuesto = TasaIgvActiva,
             MontoImpuesto = impuesto,
             Total = pago.MontoPagado,
 
@@ -161,13 +167,13 @@ public class ComprobanteService : IComprobanteService
                 Paciente = pago.Paciente == null ? "" : $"{pago.Paciente.Nombres} {pago.Paciente.Apellidos}",
                 DniPaciente = pago.Paciente?.DNI ?? "",
                 Servicio = pago.ServicioClinico?.Nombre ?? "Servicio clínico",
-                pago.MontoTotal,
-                pago.MontoPagado,
-                pago.SaldoPendiente,
+                MontoTotal = pago.MontoTotal,
+                MontoPagado = pago.MontoPagado,
+                SaldoPendiente = pago.SaldoPendiente,
                 MetodoPago = pago.MetodoPago.ToString(),
                 EstadoPago = pago.Estado.ToString(),
                 FechaPago = pago.FechaPago,
-                TasaImpuesto = TasaIgv,
+                TasaImpuesto = TasaIgvActiva,
                 Subtotal = subtotal,
                 MontoImpuesto = impuesto,
                 Total = pago.MontoPagado
@@ -185,7 +191,7 @@ public class ComprobanteService : IComprobanteService
 
             PrecioUnitarioFinal = pago.MontoPagado,
             Subtotal = subtotal,
-            TasaImpuesto = TasaIgv,
+            TasaImpuesto = TasaIgvActiva,
             MontoImpuesto = impuesto,
             Total = pago.MontoPagado
         });
@@ -195,10 +201,6 @@ public class ComprobanteService : IComprobanteService
 
         return comprobante.Id;
     }
-
-    // ==========================================================
-    // PDF
-    // ==========================================================
 
     public async Task<DocumentoGeneradoDto> GenerarPdfBoletaPagoAsync(Guid comprobanteId)
     {
@@ -224,7 +226,119 @@ public class ComprobanteService : IComprobanteService
             Archivo = archivo
         };
     }
-    
+
+    // ==========================================================
+    // 2. CONSTANCIA DE CITA (Preview, Emisión, PDF)
+    // ==========================================================
+    public async Task<ComprobanteCitaPreviewDto> PreviewConstanciaCitaAsync(Guid citaId)
+    {
+        if (citaId == Guid.Empty)
+            throw new InvalidOperationException("El identificador de la cita es obligatorio.");
+
+        var cita = await _citaRepository.ObtenerPorIdConRelacionesAsync(citaId)
+            ?? throw new KeyNotFoundException("Cita no encontrada.");
+
+        return new ComprobanteCitaPreviewDto
+        {
+            ComprobanteId = Guid.Empty,
+            CodigoComprobante = "PREVIEW",
+
+            CitaId = cita.Id,
+            CodigoCita = cita.CodigoCita,
+
+            PacienteId = cita.PacienteId,
+            Paciente = $"{cita.Paciente.Nombres} {cita.Paciente.Apellidos}",
+            DniPaciente = cita.Paciente.DNI,
+            DireccionPaciente = cita.Paciente.Direccion,
+
+            DoctorId = cita.DoctorId,
+            Doctor = $"{cita.Doctor.Nombres} {cita.Doctor.Apellidos}",
+            Especialidad = cita.Doctor.Especialidad,
+
+            ServicioClinicoId = cita.ServicioClinicoId,
+            Servicio = cita.ServicioClinico.Nombre,
+
+            FechaCita = cita.Fecha,
+            HoraInicio = cita.HoraInicio,
+            HoraFin = cita.HoraFin,
+
+            EstadoCita = cita.Estado.ToString(),
+            Motivo = cita.Motivo,
+
+            FechaEmision = DateTime.UtcNow,
+            Observacion = "Vista previa"
+        };
+    }
+
+    public async Task<Guid> EmitirConstanciaCitaAsync(EmitirComprobanteCitaDto dto)
+    {
+        if (dto.CitaId == Guid.Empty)
+            throw new InvalidOperationException("El identificador de la cita es obligatorio.");
+
+        var cita = await _citaRepository.ObtenerPorIdConRelacionesAsync(dto.CitaId)
+            ?? throw new KeyNotFoundException("Cita no encontrada.");
+
+        var usuarioId = _usuarioActualService.ObtenerUsuarioId();
+
+        var serie = ObtenerSerie(TipoComprobante.ConstanciaCita);
+        var ultimoNumero = await _comprobanteRepository.ObtenerUltimoNumeroPorSerieAsync(serie);
+        var numero = ultimoNumero + 1;
+
+        var comprobante = new Comprobante
+        {
+            Id = Guid.NewGuid(),
+            CodigoComprobante = $"{serie}-{numero:000000}",
+            Serie = serie,
+            Numero = numero,
+
+            TipoComprobante = TipoComprobante.ConstanciaCita,
+            Estado = EstadoComprobante.Emitido,
+            FormatoImpresion = dto.FormatoImpresion,
+
+            PacienteId = cita.PacienteId,
+            CitaId = cita.Id,
+            HistorialClinicoId = cita.Paciente.HistorialClinico?.Id,
+
+            TipoDocumentoPaciente = TipoDocumentoComprobante.DNI,
+            NumeroDocumentoPaciente = cita.Paciente.DNI,
+            NombrePaciente = $"{cita.Paciente.Nombres} {cita.Paciente.Apellidos}",
+            DireccionPaciente = cita.Paciente.Direccion,
+
+            Subtotal = 0,
+            TasaImpuesto = 0,
+            MontoImpuesto = 0,
+            Total = 0,
+
+            FechaEmision = DateTime.UtcNow,
+            UsuarioEmisionId = usuarioId,
+
+            Observacion = dto.Observacion?.Trim(),
+
+            DatosSnapshotJson = JsonSerializer.Serialize(new
+            {
+                Tipo = "Constancia de cita",
+                CitaId = cita.Id,
+                CodigoCita = cita.CodigoCita,
+                PacienteId = cita.PacienteId,
+                Paciente = $"{cita.Paciente.Nombres} {cita.Paciente.Apellidos}",
+                DniPaciente = cita.Paciente.DNI,
+                DoctorId = cita.DoctorId,
+                Doctor = $"{cita.Doctor.Nombres} {cita.Doctor.Apellidos}",
+                Servicio = cita.ServicioClinico.Nombre,
+                Fecha = cita.Fecha,
+                HoraInicio = cita.HoraInicio,
+                HoraFin = cita.HoraFin,
+                Motivo = cita.Motivo,
+                EstadoCita = cita.Estado.ToString()
+            })
+        };
+
+        await _comprobanteRepository.AddAsync(comprobante);
+        await _comprobanteRepository.SaveChangesAsync();
+
+        return comprobante.Id;
+    }
+
     public async Task<DocumentoGeneradoDto> GenerarPdfConstanciaCitaAsync(Guid comprobanteId)
     {
         if (comprobanteId == Guid.Empty)
@@ -250,6 +364,110 @@ public class ComprobanteService : IComprobanteService
         };
     }
 
+    // ==========================================================
+    // 3. RESUMEN DE ATENCIÓN (Preview, Emisión, PDF)
+    // ==========================================================
+    public async Task<ComprobanteAtencionPreviewDto> PreviewResumenAtencionAsync(Guid atencionId)
+    {
+        if (atencionId == Guid.Empty)
+            throw new InvalidOperationException("El identificador de la atención es obligatorio.");
+
+        var atencion = await _atencionRepository.ObtenerDetalleCompletoAsync(atencionId)
+            ?? throw new KeyNotFoundException("Atención no encontrada.");
+
+        return MapearAtencionPreview(atencion, "PREVIEW");
+    }
+
+    public async Task<Guid> EmitirResumenAtencionAsync(EmitirComprobanteAtencionDto dto)
+    {
+        if (dto.AtencionId == Guid.Empty)
+            throw new InvalidOperationException("El identificador de la atención es obligatorio.");
+
+        var atencion = await _atencionRepository.ObtenerDetalleCompletoAsync(dto.AtencionId)
+            ?? throw new KeyNotFoundException("Atención no encontrada.");
+
+        var usuarioId = _usuarioActualService.ObtenerUsuarioId();
+
+        var serie = ObtenerSerie(TipoComprobante.ResumenAtencion);
+        var ultimoNumero = await _comprobanteRepository.ObtenerUltimoNumeroPorSerieAsync(serie);
+        var numero = ultimoNumero + 1;
+
+        var costoFinal = atencion.Pagos?.Sum(p => p.MontoTotal) ?? 0;
+        var montoPagado = atencion.Pagos?.Sum(p => p.MontoPagado) ?? 0;
+        var saldoPendiente = atencion.Pagos?.Sum(p => p.SaldoPendiente) ?? 0;
+        var subtotal = CalcularSubtotalDesdeTotal(costoFinal, TasaIgvActiva);
+        var impuesto = costoFinal - subtotal;
+
+        var comprobante = new Comprobante
+        {
+            Id = Guid.NewGuid(),
+            CodigoComprobante = $"{serie}-{numero:000000}",
+            Serie = serie,
+            Numero = numero,
+
+            TipoComprobante = TipoComprobante.ResumenAtencion,
+            Estado = EstadoComprobante.Emitido,
+            FormatoImpresion = dto.FormatoImpresion,
+
+            PacienteId = atencion.PacienteId,
+            AtencionId = atencion.Id,
+            HistorialClinicoId = atencion.HistorialClinicoId,
+
+            TipoDocumentoPaciente = TipoDocumentoComprobante.DNI,
+            NumeroDocumentoPaciente = atencion.Paciente.DNI,
+            NombrePaciente = $"{atencion.Paciente.Nombres} {atencion.Paciente.Apellidos}",
+            DireccionPaciente = atencion.Paciente.Direccion,
+
+            Subtotal = subtotal,
+            TasaImpuesto = TasaIgvActiva,
+            MontoImpuesto = impuesto,
+            Total = costoFinal,
+
+            FechaEmision = DateTime.UtcNow,
+            UsuarioEmisionId = usuarioId,
+
+            Observacion = dto.Observacion?.Trim(),
+
+            DatosSnapshotJson = JsonSerializer.Serialize(new
+            {
+                Tipo = "Resumen de atención",
+                AtencionId = atencion.Id,
+                CodigoAtencion = atencion.CodigoAtencion,
+                PacienteId = atencion.PacienteId,
+                Paciente = $"{atencion.Paciente.Nombres} {atencion.Paciente.Apellidos}",
+                Doctor = $"{atencion.Doctor.Nombres} {atencion.Doctor.Apellidos}",
+                Servicio = atencion.ServicioClinico.Nombre,
+                // ✅ Volvemos a leer de los módulos independientes
+                MotivoConsulta = atencion.Anamnesis?.MotivoConsulta,
+                DiagnosticoPrincipal = atencion.ImpresionDiagnostica?.DiagnosticoPrincipal,
+                FechaInicio = atencion.FechaInicio,
+                FechaCierre = atencion.FechaCierre,
+                CostoFinal = costoFinal,
+                MontoPagado = montoPagado,
+                SaldoPendiente = saldoPendiente
+            })
+        };
+
+        comprobante.Detalles.Add(new ComprobanteDetalle
+        {
+            Id = Guid.NewGuid(),
+            ComprobanteId = comprobante.Id,
+            CodigoServicio = atencion.ServicioClinico.CodigoServicio,
+            Descripcion = atencion.ServicioClinico.Nombre,
+            Cantidad = 1,
+            PrecioUnitarioFinal = costoFinal,
+            Subtotal = subtotal,
+            TasaImpuesto = TasaIgvActiva,
+            MontoImpuesto = impuesto,
+            Total = costoFinal
+        });
+
+        await _comprobanteRepository.AddAsync(comprobante);
+        await _comprobanteRepository.SaveChangesAsync();
+
+        return comprobante.Id;
+    }
+
     public async Task<DocumentoGeneradoDto> GenerarPdfResumenAtencionAsync(Guid comprobanteId)
     {
         if (comprobanteId == Guid.Empty)
@@ -264,6 +482,11 @@ public class ComprobanteService : IComprobanteService
         if (comprobante.Estado == EstadoComprobante.Anulado)
             throw new InvalidOperationException("No se puede generar PDF de un comprobante anulado.");
 
+        if (comprobante.AtencionId.HasValue)
+        {
+            comprobante.Atencion = await _atencionRepository.ObtenerDetalleCompletoAsync(comprobante.AtencionId.Value);
+        }
+
         var preview = MapearAtencionPreview(comprobante);
         var archivo = _comprobantePdfService.GenerarResumenAtencionPdf(preview);
 
@@ -273,6 +496,146 @@ public class ComprobanteService : IComprobanteService
             ContentType = "application/pdf",
             Archivo = archivo
         };
+    }
+
+    // ==========================================================
+    // 4. ESTADO DE CUENTA DEL PACIENTE (Preview, Emisión, PDF)
+    // ==========================================================
+    public async Task<ComprobanteEstadoCuentaPreviewDto> PreviewEstadoCuentaPacienteAsync(Guid pacienteId)
+    {
+        if (pacienteId == Guid.Empty)
+            throw new InvalidOperationException("El identificador del paciente es obligatorio.");
+
+        var paciente = await _pacienteRepository.GetByIdAsync(pacienteId)
+            ?? throw new KeyNotFoundException("Paciente no encontrado.");
+
+        var pagos = await _pagoRepository.ObtenerPorPacienteAsync(pacienteId);
+
+        var pagosValidos = pagos
+            .Where(x => x.Estado != EstadoPago.Anulado && x.Estado != EstadoPago.Eliminado)
+            .OrderByDescending(x => x.FechaPago)
+            .ToList();
+
+        var totalFacturado = pagosValidos.Sum(x => x.MontoTotal);
+        var totalPagado = pagosValidos.Sum(x => x.MontoPagado);
+        var totalPendiente = Math.Max(totalFacturado - totalPagado, 0);
+
+        return new ComprobanteEstadoCuentaPreviewDto
+        {
+            ComprobanteId = Guid.Empty,
+            CodigoComprobante = "PREVIEW",
+
+            PacienteId = paciente.Id,
+            Paciente = $"{paciente.Nombres} {paciente.Apellidos}",
+            DniPaciente = paciente.DNI,
+            DireccionPaciente = paciente.Direccion,
+
+            TotalFacturado = totalFacturado,
+            TotalPagado = totalPagado,
+            TotalPendiente = totalPendiente,
+
+            FechaEmision = DateTime.UtcNow,
+
+            Detalles = pagosValidos.Select(x => new DetalleEstadoCuentaComprobanteDto
+            {
+                PagoId = x.Id,
+                CodigoPago = x.CodigoPago,
+                Servicio = x.ServicioClinico?.Nombre ?? "",
+                FechaPago = x.FechaPago,
+                MontoTotal = x.MontoTotal,
+                MontoPagado = x.MontoPagado,
+                SaldoPendiente = x.SaldoPendiente,
+                EstadoPago = x.Estado.ToString()
+            }).ToList()
+        };
+    }
+
+    public async Task<Guid> EmitirEstadoCuentaPacienteAsync(EmitirComprobanteEstadoCuentaDto dto)
+    {
+        if (dto.PacienteId == Guid.Empty)
+            throw new InvalidOperationException("El identificador del paciente es obligatorio.");
+
+        var paciente = await _pacienteRepository.GetByIdAsync(dto.PacienteId)
+            ?? throw new KeyNotFoundException("Paciente no encontrado.");
+
+        var pagos = await _pagoRepository.ObtenerPorPacienteAsync(dto.PacienteId);
+        var pagosValidos = pagos
+            .Where(x => x.Estado != EstadoPago.Anulado && x.Estado != EstadoPago.Eliminado)
+            .OrderByDescending(x => x.FechaPago)
+            .ToList();
+
+        var totalFacturado = pagosValidos.Sum(x => x.MontoTotal);
+        var totalPagado = pagosValidos.Sum(x => x.MontoPagado);
+        var totalPendiente = Math.Max(totalFacturado - totalPagado, 0);
+
+        var usuarioId = _usuarioActualService.ObtenerUsuarioId();
+        var serie = ObtenerSerie(TipoComprobante.EstadoCuenta);
+        var ultimoNumero = await _comprobanteRepository.ObtenerUltimoNumeroPorSerieAsync(serie);
+        var numero = ultimoNumero + 1;
+
+        var comprobante = new Comprobante
+        {
+            Id = Guid.NewGuid(),
+            CodigoComprobante = $"{serie}-{numero:000000}",
+            Serie = serie,
+            Numero = numero,
+
+            TipoComprobante = TipoComprobante.EstadoCuenta,
+            Estado = EstadoComprobante.Emitido,
+            FormatoImpresion = dto.FormatoImpresion,
+
+            PacienteId = paciente.Id,
+            HistorialClinicoId = paciente.HistorialClinico?.Id,
+
+            TipoDocumentoPaciente = TipoDocumentoComprobante.DNI,
+            NumeroDocumentoPaciente = paciente.DNI,
+            NombrePaciente = $"{paciente.Nombres} {paciente.Apellidos}",
+            DireccionPaciente = paciente.Direccion,
+
+            Subtotal = totalFacturado,
+            TasaImpuesto = 0,
+            MontoImpuesto = 0,
+            Total = totalFacturado,
+
+            FechaEmision = DateTime.UtcNow,
+            UsuarioEmisionId = usuarioId,
+
+            Observacion = dto.Observacion?.Trim(),
+
+            DatosSnapshotJson = JsonSerializer.Serialize(new
+            {
+                Tipo = "Estado de cuenta",
+                PacienteId = paciente.Id,
+                Paciente = $"{paciente.Nombres} {paciente.Apellidos}",
+                DniPaciente = paciente.DNI,
+                TotalFacturado = totalFacturado,
+                TotalPagado = totalPagado,
+                TotalPendiente = totalPendiente,
+                FechaEmision = DateTime.UtcNow
+            })
+        };
+
+        foreach (var pago in pagosValidos)
+        {
+            comprobante.Detalles.Add(new ComprobanteDetalle
+            {
+                Id = Guid.NewGuid(),
+                ComprobanteId = comprobante.Id,
+                CodigoServicio = pago.ServicioClinico?.CodigoServicio ?? "",
+                Descripcion = $"{pago.ServicioClinico?.Nombre ?? "Servicio"} - {pago.CodigoPago}",
+                Cantidad = 1,
+                PrecioUnitarioFinal = pago.MontoTotal,
+                Subtotal = pago.MontoTotal,
+                TasaImpuesto = 0,
+                MontoImpuesto = 0,
+                Total = pago.MontoTotal
+            });
+        }
+
+        await _comprobanteRepository.AddAsync(comprobante);
+        await _comprobanteRepository.SaveChangesAsync();
+
+        return comprobante.Id;
     }
 
     public async Task<DocumentoGeneradoDto> GenerarPdfEstadoCuentaPacienteAsync(Guid comprobanteId)
@@ -301,9 +664,8 @@ public class ComprobanteService : IComprobanteService
     }
 
     // ==========================================================
-    // CONSULTAS
+    // 5. CONSULTAS Y ANULACIÓN
     // ==========================================================
-
     public async Task<ComprobanteDto> ObtenerPorIdAsync(Guid id)
     {
         if (id == Guid.Empty)
@@ -342,10 +704,6 @@ public class ComprobanteService : IComprobanteService
         return comprobantes.Select(MapearComprobante).ToList();
     }
 
-    // ==========================================================
-    // ANULACIÓN
-    // ==========================================================
-
     public async Task AnularComprobanteAsync(Guid comprobanteId, string motivo)
     {
         if (comprobanteId == Guid.Empty)
@@ -370,42 +728,11 @@ public class ComprobanteService : IComprobanteService
     }
 
     // ==========================================================
-    // MÉTODOS TEMPORALES PARA SIGUIENTES DOCUMENTOS
+    // 6. MÉTODOS PRIVADOS (Helpers)
     // ==========================================================
-
-    public Task<ComprobanteCitaPreviewDto> PreviewConstanciaCitaAsync(Guid citaId)
-    {
-        throw new NotImplementedException("La vista previa de constancia de cita se implementará en la siguiente fase.");
-    }
-
-    public Task<Guid> EmitirConstanciaCitaAsync(EmitirComprobanteCitaDto dto)
-    {
-        throw new NotImplementedException("La emisión de constancia de cita se implementará en la siguiente fase.");
-    }
-
-    public Task<ComprobanteAtencionPreviewDto> PreviewResumenAtencionAsync(Guid atencionId)
-    {
-        throw new NotImplementedException("La vista previa de resumen de atención se implementará en la siguiente fase.");
-    }
-
-    public Task<Guid> EmitirResumenAtencionAsync(EmitirComprobanteAtencionDto dto)
-    {
-        throw new NotImplementedException("La emisión de resumen de atención se implementará en la siguiente fase.");
-    }
-
-    public Task<ComprobanteEstadoCuentaPreviewDto> PreviewEstadoCuentaPacienteAsync(Guid pacienteId)
-    {
-        throw new NotImplementedException("El estado de cuenta del paciente se implementará en la siguiente fase.");
-    }
-
-    // ==========================================================
-    // MÉTODOS PRIVADOS
-    // ==========================================================
-
     private async Task<Pago> ObtenerPagoConDetallePorIdAsync(Guid pagoId)
     {
         var pagos = await _pagoRepository.ObtenerTodosConDetalleAsync();
-
         return pagos.FirstOrDefault(x => x.Id == pagoId)
                ?? throw new KeyNotFoundException("Pago no encontrado.");
     }
@@ -426,6 +753,54 @@ public class ComprobanteService : IComprobanteService
     private static decimal CalcularSubtotalDesdeTotal(decimal total, decimal tasaImpuesto)
     {
         return Math.Round(total / (1 + tasaImpuesto / 100), 2);
+    }
+
+    // --- Mapeadores de Preview ---
+
+    private static ComprobanteAtencionPreviewDto MapearAtencionPreview(Atencion atencion, string codigoComprobante)
+    {
+        var costoFinal = atencion.Pagos?.Sum(p => p.MontoTotal) ?? 0;
+        var montoPagado = atencion.Pagos?.Sum(p => p.MontoPagado) ?? 0;
+        var saldoPendiente = atencion.Pagos?.Sum(p => p.SaldoPendiente) ?? 0;
+
+        return new ComprobanteAtencionPreviewDto
+        {
+            ComprobanteId = Guid.Empty,
+            CodigoComprobante = codigoComprobante,
+
+            AtencionId = atencion.Id,
+            CodigoAtencion = atencion.CodigoAtencion ?? "",
+
+            PacienteId = atencion.PacienteId,
+            Paciente = $"{atencion.Paciente.Nombres} {atencion.Paciente.Apellidos}",
+            DniPaciente = atencion.Paciente.DNI,
+            DireccionPaciente = atencion.Paciente.Direccion,
+
+            DoctorId = atencion.DoctorId,
+            Doctor = atencion.Doctor == null ? "" : $"{atencion.Doctor.Nombres} {atencion.Doctor.Apellidos}",
+            Especialidad = atencion.Doctor?.Especialidad ?? "",
+
+            ServicioClinicoId = atencion.ServicioClinicoId,
+            Servicio = atencion.ServicioClinico?.Nombre ?? "Servicio clínico",
+
+            FechaInicio = atencion.FechaInicio,
+            FechaCierre = atencion.FechaCierre,
+
+            // ✅ Actualizado a la lectura de los módulos separados
+            MotivoConsulta = atencion.Anamnesis?.MotivoConsulta ?? "",
+            DiagnosticoResumen = atencion.ImpresionDiagnostica?.DiagnosticoPrincipal,
+            Indicaciones = atencion.ImpresionDiagnostica?.IndicacionesReceta,
+            Tratamiento = atencion.ImpresionDiagnostica?.DiagnosticosSecundarios,
+            Observaciones = atencion.ImpresionDiagnostica?.DiagnosticosSecundarios,
+
+            EstadoAtencion = atencion.Estado.ToString(),
+
+            CostoFinal = costoFinal,
+            MontoPagado = montoPagado,
+            SaldoPendiente = saldoPendiente,
+
+            FechaEmision = DateTime.UtcNow
+        };
     }
 
     private static ComprobantePagoPreviewDto MapearPagoPreview(Comprobante comprobante)
@@ -478,71 +853,9 @@ public class ComprobanteService : IComprobanteService
         };
     }
 
-    private static ComprobanteDto MapearComprobante(Comprobante x)
-    {
-        return new ComprobanteDto
-        {
-            Id = x.Id,
-            CodigoComprobante = x.CodigoComprobante,
-            Serie = x.Serie,
-            Numero = x.Numero,
-
-            TipoComprobante = x.TipoComprobante.ToString(),
-            Estado = x.Estado.ToString(),
-            FormatoImpresion = x.FormatoImpresion.ToString(),
-
-            PacienteId = x.PacienteId,
-            Paciente = x.NombrePaciente,
-
-            TipoDocumentoPaciente = x.TipoDocumentoPaciente.ToString(),
-            NumeroDocumentoPaciente = x.NumeroDocumentoPaciente,
-            DireccionPaciente = x.DireccionPaciente,
-
-            PagoId = x.PagoId,
-            CitaId = x.CitaId,
-            AtencionId = x.AtencionId,
-            HistorialClinicoId = x.HistorialClinicoId,
-
-            Subtotal = x.Subtotal,
-            TasaImpuesto = x.TasaImpuesto,
-            MontoImpuesto = x.MontoImpuesto,
-            Total = x.Total,
-
-            FechaEmision = x.FechaEmision,
-
-            UsuarioEmisionId = x.UsuarioEmisionId,
-            UsuarioEmision = x.UsuarioEmision == null
-                ? null
-                : $"{x.UsuarioEmision.Nombres} {x.UsuarioEmision.Apellidos}",
-
-            FechaAnulacion = x.FechaAnulacion,
-            UsuarioAnulacionId = x.UsuarioAnulacionId,
-            UsuarioAnulacion = x.UsuarioAnulacion == null
-                ? null
-                : $"{x.UsuarioAnulacion.Nombres} {x.UsuarioAnulacion.Apellidos}",
-
-            Observacion = x.Observacion,
-            MotivoAnulacion = x.MotivoAnulacion,
-
-            Detalles = x.Detalles.Select(d => new ComprobanteDetalleDto
-            {
-                Id = d.Id,
-                CodigoServicio = d.CodigoServicio,
-                Descripcion = d.Descripcion,
-                Cantidad = d.Cantidad,
-                PrecioUnitarioFinal = d.PrecioUnitarioFinal,
-                Subtotal = d.Subtotal,
-                TasaImpuesto = d.TasaImpuesto,
-                MontoImpuesto = d.MontoImpuesto,
-                Total = d.Total
-            }).ToList()
-        };
-    }
-    
     private static ComprobanteCitaPreviewDto MapearCitaPreview(Comprobante comprobante)
     {
         var cita = comprobante.Cita;
-
         return new ComprobanteCitaPreviewDto
         {
             ComprobanteId = comprobante.Id,
@@ -578,6 +891,9 @@ public class ComprobanteService : IComprobanteService
     private static ComprobanteAtencionPreviewDto MapearAtencionPreview(Comprobante comprobante)
     {
         var atencion = comprobante.Atencion;
+        var costoFinal = atencion?.Pagos?.Sum(p => p.MontoTotal) ?? 0;
+        var montoPagado = atencion?.Pagos?.Sum(p => p.MontoPagado) ?? 0;
+        var saldoPendiente = atencion?.Pagos?.Sum(p => p.SaldoPendiente) ?? 0;
 
         return new ComprobanteAtencionPreviewDto
         {
@@ -602,17 +918,18 @@ public class ComprobanteService : IComprobanteService
             FechaInicio = atencion?.FechaInicio ?? comprobante.FechaEmision,
             FechaCierre = atencion?.FechaCierre,
 
-            MotivoConsulta = atencion?.MotivoConsulta ?? "",
-            DiagnosticoResumen = atencion?.DiagnosticoResumen,
-            Indicaciones = atencion?.Indicaciones,
-            Tratamiento = atencion?.Tratamiento,
-            Observaciones = atencion?.Observaciones,
+            // ✅ Actualizado a la lectura de los módulos separados
+            MotivoConsulta = atencion?.Anamnesis?.MotivoConsulta ?? "",
+            DiagnosticoResumen = atencion?.ImpresionDiagnostica?.DiagnosticoPrincipal,
+            Indicaciones = atencion?.ImpresionDiagnostica?.IndicacionesReceta,
+            Tratamiento = atencion?.ImpresionDiagnostica?.DiagnosticosSecundarios,
+            Observaciones = atencion?.ImpresionDiagnostica?.DiagnosticosSecundarios,
 
             EstadoAtencion = atencion?.Estado.ToString() ?? "",
 
-            CostoFinal = atencion?.CostoFinal ?? 0,
-            MontoPagado = atencion?.MontoPagado ?? 0,
-            SaldoPendiente = atencion?.SaldoPendiente ?? 0,
+            CostoFinal = costoFinal,
+            MontoPagado = montoPagado,
+            SaldoPendiente = saldoPendiente,
 
             FechaEmision = comprobante.FechaEmision
         };
@@ -637,6 +954,63 @@ public class ComprobanteService : IComprobanteService
             FechaEmision = comprobante.FechaEmision,
 
             Detalles = new List<DetalleEstadoCuentaComprobanteDto>()
+        };
+    }
+
+    private static ComprobanteDto MapearComprobante(Comprobante x)
+    {
+        return new ComprobanteDto
+        {
+            Id = x.Id,
+            CodigoComprobante = x.CodigoComprobante,
+            Serie = x.Serie,
+            Numero = x.Numero,
+
+            TipoComprobante = x.TipoComprobante.ToString(),
+            Estado = x.Estado.ToString(),
+            FormatoImpresion = x.FormatoImpresion.ToString(),
+
+            PacienteId = x.PacienteId,
+            Paciente = x.NombrePaciente,
+
+            TipoDocumentoPaciente = x.TipoDocumentoPaciente.ToString(),
+            NumeroDocumentoPaciente = x.NumeroDocumentoPaciente,
+            DireccionPaciente = x.DireccionPaciente,
+
+            PagoId = x.PagoId,
+            CitaId = x.CitaId,
+            AtencionId = x.AtencionId,
+            HistorialClinicoId = x.HistorialClinicoId,
+
+            Subtotal = x.Subtotal,
+            TasaImpuesto = x.TasaImpuesto,
+            MontoImpuesto = x.MontoImpuesto,
+            Total = x.Total,
+
+            FechaEmision = x.FechaEmision,
+
+            UsuarioEmisionId = x.UsuarioEmisionId,
+            UsuarioEmision = x.UsuarioEmision == null ? null : $"{x.UsuarioEmision.Nombres} {x.UsuarioEmision.Apellidos}",
+
+            FechaAnulacion = x.FechaAnulacion,
+            UsuarioAnulacionId = x.UsuarioAnulacionId,
+            UsuarioAnulacion = x.UsuarioAnulacion == null ? null : $"{x.UsuarioAnulacion.Nombres} {x.UsuarioAnulacion.Apellidos}",
+
+            Observacion = x.Observacion,
+            MotivoAnulacion = x.MotivoAnulacion,
+
+            Detalles = x.Detalles.Select(d => new ComprobanteDetalleDto
+            {
+                Id = d.Id,
+                CodigoServicio = d.CodigoServicio,
+                Descripcion = d.Descripcion,
+                Cantidad = d.Cantidad,
+                PrecioUnitarioFinal = d.PrecioUnitarioFinal,
+                Subtotal = d.Subtotal,
+                TasaImpuesto = d.TasaImpuesto,
+                MontoImpuesto = d.MontoImpuesto,
+                Total = d.Total
+            }).ToList()
         };
     }
 }

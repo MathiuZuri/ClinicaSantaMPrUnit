@@ -12,9 +12,12 @@ public class AtencionConfiguration : IEntityTypeConfiguration<Atencion>
 
         builder.HasKey(x => x.Id);
 
+        // ==========================================
+        // PROPIEDADES BASE
+        // ==========================================
         builder.Property(x => x.CodigoAtencion)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(30);
 
         builder.HasIndex(x => x.CodigoAtencion)
             .IsUnique();
@@ -22,76 +25,73 @@ public class AtencionConfiguration : IEntityTypeConfiguration<Atencion>
         builder.Property(x => x.FechaInicio)
             .IsRequired();
 
-        builder.Property(x => x.MotivoConsulta)
-            .IsRequired()
-            .HasMaxLength(250);
-
-        builder.Property(x => x.Observaciones)
-            .HasColumnType("text");
-
-        builder.Property(x => x.DiagnosticoResumen)
-            .HasColumnType("text");
-
-        builder.Property(x => x.Indicaciones)
-            .HasColumnType("text");
-
-        builder.Property(x => x.Tratamiento)
-            .HasColumnType("text");
-
         builder.Property(x => x.Estado)
-            .HasConversion<string>()
+            .HasConversion<string>() // Asume que EstadoAtencion es un Enum
             .IsRequired()
             .HasMaxLength(30);
 
-        builder.Property(x => x.CostoFinal)
-            .HasPrecision(10, 2)
-            .IsRequired();
-
-        builder.Property(x => x.MontoPagado)
-            .HasPrecision(10, 2)
-            .IsRequired();
-
-        builder.Property(x => x.SaldoPendiente)
-            .HasPrecision(10, 2)
-            .IsRequired();
-
-        builder.HasIndex(x => x.PacienteId);
-        builder.HasIndex(x => x.DoctorId);
-        builder.HasIndex(x => x.CitaId);
-
+        // ==========================================
+        // RELACIONES CORE (Finanzas y Citas)
+        // ==========================================
         builder.HasOne(x => x.Paciente)
-            .WithMany(x => x.Atenciones)
+            .WithMany(p => p.Atenciones)
             .HasForeignKey(x => x.PacienteId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.Doctor)
-            .WithMany(x => x.Atenciones)
+            .WithMany(d => d.Atenciones)
             .HasForeignKey(x => x.DoctorId)
             .OnDelete(DeleteBehavior.Restrict);
-
+            
         builder.HasOne(x => x.ServicioClinico)
-            .WithMany(x => x.Atenciones)
+            .WithMany(s => s.Atenciones)
             .HasForeignKey(x => x.ServicioClinicoId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.Cita)
-            .WithOne(x => x.Atencion)
+            .WithOne(c => c.Atencion)
             .HasForeignKey<Atencion>(x => x.CitaId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasOne(x => x.HistorialClinico)
-            .WithMany()
-            .HasForeignKey(x => x.HistorialClinicoId)
+        builder.HasMany(x => x.Pagos)
+            .WithOne(p => p.Atencion)
+            .HasForeignKey(p => p.AtencionId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(x => x.UsuarioRegistro)
-            .WithMany()
-            .HasForeignKey(x => x.UsuarioRegistroId)
-            .OnDelete(DeleteBehavior.SetNull);
+        builder.HasMany(x => x.Comprobantes)
+            .WithOne(c => c.Atencion)
+            .HasForeignKey(c => c.AtencionId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(x => x.Pagos)
-            .WithOne(x => x.Atencion)
-            .HasForeignKey(x => x.AtencionId)
-            .OnDelete(DeleteBehavior.SetNull);
+        // ========================================================
+        // RELACIONES MODULARES (Independientes)
+        // ========================================================
+        
+        // Módulos 1 a 1
+        builder.HasOne(a => a.Anamnesis)
+            .WithOne(an => an.Atencion)
+            .HasForeignKey<Anamnesis>(an => an.AtencionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(a => a.ImpresionDiagnostica)
+            .WithOne(id => id.Atencion)
+            .HasForeignKey<ImpresionDiagnostica>(id => id.AtencionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Módulos 1 a N (Permite registrar múltiples durante una evolución)
+        builder.HasMany(a => a.ExamenesFisicos)
+            .WithOne(ef => ef.Atencion)
+            .HasForeignKey(ef => ef.AtencionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(a => a.TactosVaginales)
+            .WithOne(tv => tv.Atencion)
+            .HasForeignKey(tv => tv.AtencionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(a => a.Ecografias)
+            .WithOne(eco => eco.Atencion)
+            .HasForeignKey(eco => eco.AtencionId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

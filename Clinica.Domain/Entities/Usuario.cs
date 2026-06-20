@@ -19,6 +19,8 @@ public class Usuario
 
     public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
     public DateTime? UltimoAcceso { get; set; }
+    
+    public bool DebeCambiarContrasena { get; set; } = false;
 
     public ICollection<UsuarioRol> UsuarioRoles { get; set; } = new List<UsuarioRol>();
     public ICollection<Auditoria> Auditorias { get; set; } = new List<Auditoria>();

@@ -1,20 +1,14 @@
-﻿using Clinica.API.Services;
-using Microsoft.AspNetCore.Mvc;
-using Clinica.API.Authorization;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Clinica.API.Authorization;
 using Clinica.API.Models;
+using Clinica.API.Services;
+using Clinica.Domain.DTOs.Auditoria;
+using Clinica.Domain.DTOs.Comunes;
+using Clinica.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Clinica.API.Controllers;
 
-/// <summary>
-/// Controlador para acceder al registro de auditoría del sistema.
-/// </summary>
-/// <remarks>
-/// **Nota de Arquitectura:** La auditoría es un pilar fundamental en sistemas clínicos para garantizar la trazabilidad y el cumplimiento normativo. 
-/// Cada acción relevante en el sistema (creación, modificación, eliminación lógica, login) queda registrada automáticamente mediante el filtro <see cref="AuditoriaAutomaticaFilter"/>.
-/// Este controlador permite consultar dichos registros para fines de supervisión, auditoría interna o investigación.
-/// </remarks>
 [ApiController]
 [Route("api/[controller]")]
 [Tags("Auditoría del Sistema")]
@@ -28,48 +22,48 @@ public class AuditoriaController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todos los registros de auditoría del sistema.
+    /// Obtiene todos los registros de auditoría con paginación y filtros opcionales.
     /// </summary>
     /// <remarks>
-    /// **Propósito:**
-    /// Este endpoint permite a los administradores y auditores revisar la totalidad de las acciones registradas en el sistema.
-    /// La información obtenida incluye el usuario que realizó la acción, el tipo de acción (consulta, creación, edición, etc.), la entidad afectada, el valor anterior y el nuevo valor, la IP y el User-Agent, entre otros datos.
-    /// 
-    /// **Nota de rendimiento:** Dado que el volumen de registros puede ser muy grande, se recomienda aplicar filtros por fecha o usuario en futuras versiones para optimizar las consultas.
+    /// **Uso:** Permite consultar el historial completo de auditoría del sistema.
+    /// Se puede filtrar por tipo de acción (Creación, Edición, etc.) o solo consultas.
+    /// Útil para supervisión y cumplimiento normativo.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AuditoriaVer"/>.
     /// </remarks>
-    /// <returns>Lista de todos los registros de auditoría.</returns>
-    /// <response code="200">Lista de auditorías obtenida correctamente.</response>
-    /// <response code="401">No autorizado. Token JWT inválido o ausente.</response>
-    /// <response code="403">Acceso denegado. El usuario no tiene el permiso requerido.</response>
     [Authorize(Policy = PermisosPolicies.AuditoriaVer)]
     [HttpGet]
+    [ProducesResponseType(typeof(ApiResponse<PaginacionResponseDto<AuditoriaResponseDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(
+        [FromQuery] PaginacionRequestDto request,
+        [FromQuery] TipoAccionAuditoria? tipoAccion = null,
+        [FromQuery] bool? soloConsultas = null)
     {
-        return Ok(await _auditoriaService.ObtenerTodosAsync());
+        var resultado = await _auditoriaService.ObtenerTodosPaginadosAsync(request, tipoAccion, soloConsultas);
+        return Ok(ApiResponse<object>.Ok(resultado, "Registros de auditoría obtenidos correctamente."));
     }
 
     /// <summary>
-    /// Obtiene todos los registros de auditoría asociados a un usuario específico.
+    /// Obtiene los registros de auditoría de un usuario específico con paginación y filtros.
     /// </summary>
     /// <remarks>
-    /// **Casos de uso:**
-    /// - Revisar el historial de acciones de un operador o médico en particular.
-    /// - Investigar un incidente de seguridad o error operativo relacionado con un usuario específico.
-    /// - Extraer reportes de actividad individual para cumplir con requerimientos de auditoría externa.
+    /// **Uso:** Permite filtrar los registros de auditoría por un usuario determinado.
+    /// Útil para investigar la actividad de un usuario específico.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AuditoriaVer"/>.
     /// </remarks>
-    /// <param name="usuarioId">Identificador único del usuario (formato GUID).</param>
-    /// <returns>Lista de registros de auditoría filtrados por el usuario.</returns>
-    /// <response code="200">Registros de auditoría del usuario obtenidos correctamente.</response>
-    /// <response code="401">No autorizado. Token JWT inválido o ausente.</response>
-    /// <response code="403">Acceso denegado. El usuario no tiene el permiso requerido.</response>
     [Authorize(Policy = PermisosPolicies.AuditoriaVer)]
     [HttpGet("usuario/{usuarioId:guid}")]
+    [ProducesResponseType(typeof(ApiResponse<PaginacionResponseDto<AuditoriaResponseDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> GetByUsuario(Guid usuarioId)
+    public async Task<IActionResult> GetByUsuario(
+        Guid usuarioId,
+        [FromQuery] PaginacionRequestDto request,
+        [FromQuery] TipoAccionAuditoria? tipoAccion = null,
+        [FromQuery] bool? soloConsultas = null)
     {
-        return Ok(await _auditoriaService.ObtenerPorUsuarioAsync(usuarioId));
+        var resultado = await _auditoriaService.ObtenerPorUsuarioPaginadosAsync(usuarioId, request, tipoAccion, soloConsultas);
+        return Ok(ApiResponse<object>.Ok(resultado, "Registros de auditoría del usuario obtenidos correctamente."));
     }
 }

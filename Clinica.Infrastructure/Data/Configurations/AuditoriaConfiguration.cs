@@ -49,6 +49,9 @@ public class AuditoriaConfiguration : IEntityTypeConfiguration<Auditoria>
 
         builder.Property(x => x.FechaHora)
             .IsRequired();
+        
+        builder.Property(x => x.EsConsulta)
+            .IsRequired();
 
         builder.HasIndex(x => x.UsuarioId);
         builder.HasIndex(x => x.FechaHora);

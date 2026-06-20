@@ -5,20 +5,13 @@ using Clinica.API.Services;
 using Clinica.Domain.DTOs.Pagos;
 using Clinica.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinica.API.Controllers;
 
 /// <summary>
-/// Controlador para la gestión de pagos y transacciones financieras del sistema.
+/// Controlador para la gestión de pagos y transacciones financieras.
 /// </summary>
-/// <remarks>
-/// **Módulo de Pagos:** Permite registrar, consultar y modificar el estado de los pagos asociados a pacientes, citas y atenciones médicas.
-/// 
-/// **Nota de Arquitectura:** Los pagos son el núcleo del sistema financiero. Cada pago queda vinculado a una atención o cita, y su estado puede ser gestionado.
-/// La eliminación física de pagos no está permitida; solo se puede cambiar su estado a "Anulado" o "Eliminado".
-/// </remarks>
 [ApiController]
 [Route("api/[controller]")]
 [Tags("Gestión de Pagos")]
@@ -32,24 +25,12 @@ public class PagosController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todos los pagos asociados a un paciente específico.
+    /// Obtiene todos los pagos asociados a un paciente.
     /// </summary>
     /// <remarks>
-    /// **Propósito:**
-    /// Permite consultar el historial completo de pagos de un paciente.
-    /// Útil para la ficha del paciente, el área de caja o para auditoría financiera.
-    /// 
-    /// **Datos incluidos:**
-    /// - Código de pago único.
-    /// - Servicio clínico asociado.
-    /// - Montos (total, pagado, saldo pendiente, adelanto).
-    /// - Método de pago y estado actual.
+    /// **Uso:** Consulta el historial financiero de un paciente.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.PagoVer"/>.
     /// </remarks>
-    /// <param name="pacienteId">Identificador único del paciente (GUID).</param>
-    /// <returns>Lista de objetos <see cref="PagoResponseDto"/> con los datos de cada pago.</returns>
-    /// <response code="200">Pagos del paciente obtenidos correctamente.</response>
-    /// <response code="401">No autorizado.</response>
-    /// <response code="403">Acceso denegado.</response>
     [Authorize(Policy = PermisosPolicies.PagoVer)]
     [HttpGet("paciente/{pacienteId:guid}")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<PagoResponseDto>>), StatusCodes.Status200OK)]
@@ -62,18 +43,12 @@ public class PagosController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todos los pagos asociados a una cita específica.
+    /// Obtiene todos los pagos asociados a una cita.
     /// </summary>
     /// <remarks>
-    /// **Propósito:**
-    /// Permite consultar los pagos realizados en el contexto de una cita (ej: reserva, adelanto, pago completo).
-    /// Útil para verificar el estado financiero de una cita.
+    /// **Uso:** Consulta los pagos realizados en el contexto de una cita.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.PagoVer"/>.
     /// </remarks>
-    /// <param name="citaId">Identificador único de la cita (GUID).</param>
-    /// <returns>Lista de objetos <see cref="PagoResponseDto"/> con los datos de cada pago.</returns>
-    /// <response code="200">Pagos de la cita obtenidos correctamente.</response>
-    /// <response code="401">No autorizado.</response>
-    /// <response code="403">Acceso denegado.</response>
     [Authorize(Policy = PermisosPolicies.PagoVer)]
     [HttpGet("cita/{citaId:guid}")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<PagoResponseDto>>), StatusCodes.Status200OK)]
@@ -86,18 +61,12 @@ public class PagosController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene todos los pagos asociados a una atención médica específica.
+    /// Obtiene todos los pagos asociados a una atención médica.
     /// </summary>
     /// <remarks>
-    /// **Propósito:**
-    /// Permite consultar los pagos realizados en el contexto de una atención médica.
-    /// Útil para el seguimiento financiero de una consulta o procedimiento.
+    /// **Uso:** Consulta los pagos realizados en el contexto de una atención.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.PagoVer"/>.
     /// </remarks>
-    /// <param name="atencionId">Identificador único de la atención (GUID).</param>
-    /// <returns>Lista de objetos <see cref="PagoResponseDto"/> con los datos de cada pago.</returns>
-    /// <response code="200">Pagos de la atención obtenidos correctamente.</response>
-    /// <response code="401">No autorizado.</response>
-    /// <response code="403">Acceso denegado.</response>
     [Authorize(Policy = PermisosPolicies.PagoVer)]
     [HttpGet("atencion/{atencionId:guid}")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<PagoResponseDto>>), StatusCodes.Status200OK)]
@@ -110,29 +79,14 @@ public class PagosController : ControllerBase
     }
 
     /// <summary>
-    /// Registra un nuevo pago en el sistema.
+    /// Registra un nuevo pago.
     /// </summary>
     /// <remarks>
-    /// **Proceso de negocio:**
-    /// 1. Valida que el paciente y el servicio existan.
-    /// 2. Valida que el monto pagado no sea mayor al monto total.
-    /// 3. Valida que el monto de adelanto no sea mayor al monto total.
-    /// 4. Calcula el saldo pendiente.
-    /// 5. Crea el pago con estado "Pagado" (si saldo = 0) o "Parcial" (si saldo > 0).
-    /// 6. Actualiza el monto pagado y saldo pendiente de la atención asociada (si existe).
-    /// 7. Registra un detalle en el historial clínico del paciente.
-    /// 
-    /// **Nota de auditoría:** Esta acción queda registrada automáticamente como crítica.
+    /// **Uso:** Crea un pago asociado a un paciente y servicio, calculando el saldo pendiente.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.PagoRegistrar"/>.
     /// </remarks>
-    /// <param name="dto">Objeto <see cref="RegistrarPagoDto"/> con los datos del pago.</param>
-    /// <returns>Objeto con el ID del pago creado.</returns>
-    /// <response code="200">Pago registrado correctamente.</response>
-    /// <response code="400">Datos inválidos (monto pagado > total, etc.).</response>
-    /// <response code="401">No autorizado.</response>
-    /// <response code="403">Permisos insuficientes.</response>
-    /// <response code="404">Paciente o servicio no encontrado.</response>
-    [Auditoria("Pagos", "Pago", TipoAccionAuditoria.Creacion, NivelAuditoria.Critico)]
     [Authorize(Policy = PermisosPolicies.PagoRegistrar)]
+    [Auditoria("Pagos", "Pago", TipoAccionAuditoria.Creacion, NivelAuditoria.Critico)]
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -149,21 +103,11 @@ public class PagosController : ControllerBase
     /// Cambia el estado de un pago existente.
     /// </summary>
     /// <remarks>
-    /// **Propósito:**
-    /// Permite modificar el estado de un pago (ej: de "Pendiente" a "Pagado", o de "Pagado" a "Anulado").
-    /// 
-    /// **Nota de Arquitectura:** Esta acción es una "eliminación lógica" cuando se usa el estado "Eliminado".
-    /// No se puede eliminar un pago con saldo pendiente.
+    /// **Uso:** Modifica el estado de un pago (por ejemplo, a "Anulado" o "Eliminado").
+    /// **Permiso requerido:** <see cref="PermisosPolicies.PagoRegistrar"/>.
     /// </remarks>
-    /// <param name="id">Identificador único del pago (GUID).</param>
-    /// <param name="dto">Objeto <see cref="CambiarEstadoPagoDto"/> con el nuevo estado.</param>
-    /// <response code="200">Estado del pago actualizado correctamente.</response>
-    /// <response code="400">El pago ya está eliminado o tiene saldo pendiente.</response>
-    /// <response code="401">No autorizado.</response>
-    /// <response code="403">Permisos insuficientes.</response>
-    /// <response code="404">Pago no encontrado.</response>
-    [Auditoria("Pagos", "Pago", TipoAccionAuditoria.Edicion, NivelAuditoria.Critico)]
     [Authorize(Policy = PermisosPolicies.PagoRegistrar)]
+    [Auditoria("Pagos", "Pago", TipoAccionAuditoria.Edicion, NivelAuditoria.Critico)]
     [HttpPut("{id:guid}/estado")]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]

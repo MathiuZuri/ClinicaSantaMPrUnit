@@ -1,4 +1,5 @@
-﻿using Clinica.Domain.DTOs.Finanzas;
+﻿using Clinica.Domain.DTOs.Comunes;
+using Clinica.Domain.DTOs.Finanzas;
 using Clinica.Domain.Entities;
 using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;
@@ -24,6 +25,60 @@ public class FinanzasService : IFinanzasService
         _usuarioActualService = usuarioActualService;
     }
 
+    
+    private static PaginacionResponseDto<T> Paginar<T>(IEnumerable<T> source, PaginacionRequestDto request)
+    {
+        var total = source.Count();
+        var datos = source
+            .Skip((request.Pagina - 1) * request.CantidadPorPagina)
+            .Take(request.CantidadPorPagina)
+            .ToList();
+
+        return new PaginacionResponseDto<T>
+        {
+            Pagina = request.Pagina,
+            CantidadPorPagina = request.CantidadPorPagina,
+            TotalRegistros = total,
+            Datos = datos
+        };
+    }
+    // Nuevo método con paginación
+    public async Task<PaginacionResponseDto<PagoFinanzasDto>> ObtenerPagosPendientesPaginadosAsync(PaginacionRequestDto request)
+    {
+        var pagos = await ObtenerPagosValidosAsync();
+        var pendientes = pagos
+            .Where(x => x.Estado == EstadoPago.Pendiente || x.SaldoPendiente > 0)
+            .OrderByDescending(x => x.FechaPago)
+            .Select(MapearPagoFinanzas);
+
+        return Paginar(pendientes, request);
+    }
+    
+    public async Task<EstadoPagoAtencionDto> ObtenerEstadoPagoAtencionDetalladoAsync(Guid atencionId)
+    {
+        if (atencionId == Guid.Empty)
+            throw new InvalidOperationException("El identificador de la atención es obligatorio.");
+
+        var pagos = await ObtenerPagosValidosAsync();
+        var pagosAtencion = pagos
+            .Where(x => x.AtencionId == atencionId)
+            .ToList();
+
+        if (!pagosAtencion.Any())
+            throw new KeyNotFoundException("No se encontraron pagos asociados a la atención.");
+
+        var estado = pagosAtencion
+            .GroupBy(x => x.AtencionId!.Value)
+            .Select(MapearEstadoPagoAtencion)
+            .First();
+
+        // Agregar el tipo del último pago
+        var ultimoPago = pagosAtencion.OrderByDescending(x => x.FechaPago).First();
+        estado.TipoUltimoPago = ultimoPago.SaldoPendiente == 0 ? "Completo" : "Parcial";
+
+        return estado;
+    }
+    
     // ==========================================================
     // AJUSTES FINANCIEROS / JUSTIFICACIONES
     // ==========================================================

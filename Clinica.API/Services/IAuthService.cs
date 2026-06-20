@@ -5,4 +5,6 @@ namespace Clinica.API.Services;
 public interface IAuthService
 {
     Task<RespuestaInicioSesionDto> IniciarSesionAsync(IniciarSesionDto dto);
+    
+    Task CambiarContrasenaAsync(CambiarContrasenaDto dto); // Nueva firma
 }

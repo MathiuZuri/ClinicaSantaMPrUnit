@@ -3,15 +3,11 @@ using Clinica.API.Models;
 using Clinica.API.Services;
 using Clinica.Domain.DTOs.Auth;
 using Clinica.Domain.Enums;
-using Microsoft.AspNetCore.Authorization; // <-- Asegúrate de tener este using para el AllowAnonymous
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinica.API.Controllers;
 
-/// <summary>
-/// Controlador de autenticación y gestión de sesiones de usuario.
-/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 [Tags("Autenticación y Seguridad")]
@@ -28,21 +24,11 @@ public class AuthController : ControllerBase
     /// Inicia sesión de un usuario en el sistema.
     /// </summary>
     /// <remarks>
-    /// **Proceso de autenticación:**
-    /// - Valida las credenciales contra la base de datos.
-    /// - Si son correctas, genera un token JWT válido por el tiempo configurado (120 minutos por defecto).
-    /// - El token incluye los roles y permisos del usuario para la autorización posterior.
-    /// 
-    /// **Posibles errores:**
-    /// - Si el usuario no existe o la contraseña es incorrecta → se lanza una excepción genérica.
-    /// - Si la cuenta está inactiva → se indica que el usuario debe contactar al administrador.
+    /// **Uso:** Permite a un usuario autenticarse utilizando su correo o nombre de usuario y contraseña.
+    /// Retorna un token JWT que debe ser incluido en las siguientes peticiones.
+    /// **Permiso:** Público (no requiere autenticación previa).
     /// </remarks>
-    /// <param name="dto">Credenciales de acceso (usuario/correo y contraseña).</param>
-    /// <returns>Objeto con el token JWT, datos del usuario y listas de roles y permisos.</returns>
-    /// <response code="200">Inicio de sesión exitoso. Retorna el token y datos del usuario.</response>
-    /// <response code="400">Las credenciales proporcionadas son inválidas.</response>
-    /// <response code="403">La cuenta del usuario está inactiva o bloqueada.</response>
-    [AllowAnonymous] // <--- ¡ESTO ES CLAVE! Permite entrar aquí sin tener un JWT previo
+    [AllowAnonymous]
     [Auditoria("Seguridad", "Usuario", TipoAccionAuditoria.Login, NivelAuditoria.Critico)]
     [HttpPost("login")]
     [ProducesResponseType(typeof(ApiResponse<RespuestaInicioSesionDto>), StatusCodes.Status200OK)]
@@ -51,10 +37,26 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] IniciarSesionDto dto)
     {
         var respuesta = await _authService.IniciarSesionAsync(dto);
+        return Ok(ApiResponse<object>.Ok(respuesta, "Inicio de sesión correcto."));
+    }
 
-        return Ok(ApiResponse<object>.Ok(
-            respuesta,
-            "Inicio de sesión correcto."
-        ));
+    /// <summary>
+    /// Cambia la contraseña del usuario autenticado.
+    /// </summary>
+    /// <remarks>
+    /// **Uso:** Permite al usuario cambiar su propia contraseña. Requiere la contraseña actual para validación.
+    /// **Requisito:** Usuario autenticado (cualquier rol).
+    /// </remarks>
+    [Authorize]
+    [Auditoria("Seguridad", "Usuario", TipoAccionAuditoria.Edicion, NivelAuditoria.Critico)]
+    [HttpPost("cambiar-contrasena")]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> CambiarContrasena([FromBody] CambiarContrasenaDto dto)
+    {
+        // El servicio obtiene el ID del usuario desde el token JWT
+        await _authService.CambiarContrasenaAsync(dto);
+        return Ok(ApiResponse<object>.Ok(null, "Contraseña actualizada correctamente."));
     }
 }

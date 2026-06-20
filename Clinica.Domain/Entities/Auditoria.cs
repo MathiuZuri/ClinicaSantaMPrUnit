@@ -29,4 +29,5 @@ public class Auditoria
     public NivelAuditoria Nivel { get; set; } = NivelAuditoria.Normal;
 
     public DateTime FechaHora { get; set; } = DateTime.UtcNow;
+    public bool EsConsulta { get; set; }
 }

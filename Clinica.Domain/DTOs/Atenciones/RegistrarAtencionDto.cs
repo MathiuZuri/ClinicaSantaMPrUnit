@@ -1,40 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Clinica.Domain.Validations;
+using Clinica.Domain.DTOs.Atenciones.Modulos;
 
 namespace Clinica.Domain.DTOs.Atenciones;
 
 public class RegistrarAtencionDto
 {
-    [NotEmptyGuid(ErrorMessage = "El paciente es obligatorio.")]
+    [Required(ErrorMessage = "El paciente es obligatorio.")]
     public Guid PacienteId { get; set; }
 
-    [NotEmptyGuid(ErrorMessage = "El doctor es obligatorio.")]
+    [Required(ErrorMessage = "El doctor es obligatorio.")]
     public Guid DoctorId { get; set; }
 
-    [NotEmptyGuid(ErrorMessage = "El servicio clínico es obligatorio.")]
+    [Required(ErrorMessage = "El servicio clínico es obligatorio.")]
     public Guid ServicioClinicoId { get; set; }
 
     public Guid? CitaId { get; set; }
 
-    [NotEmptyGuid(ErrorMessage = "El historial clínico es obligatorio.")]
-    public Guid HistorialClinicoId { get; set; }
+    public Guid? HistorialClinicoId { get; set; }
 
-    [Required(ErrorMessage = "El motivo de consulta es obligatorio.")]
-    [StringLength(500, MinimumLength = 3, ErrorMessage = "El motivo de consulta debe tener entre 3 y 500 caracteres.")]
-    public string MotivoConsulta { get; set; } = string.Empty;
-
-    [StringLength(1000, ErrorMessage = "Las observaciones no deben superar los 1000 caracteres.")]
-    public string? Observaciones { get; set; }
-
-    [StringLength(1000, ErrorMessage = "El diagnóstico no debe superar los 1000 caracteres.")]
-    public string? DiagnosticoResumen { get; set; }
-
-    [StringLength(1000, ErrorMessage = "Las indicaciones no deben superar los 1000 caracteres.")]
-    public string? Indicaciones { get; set; }
-
-    [StringLength(1000, ErrorMessage = "El tratamiento no debe superar los 1000 caracteres.")]
-    public string? Tratamiento { get; set; }
-
-    [Range(0, 999999.99, ErrorMessage = "El costo final no puede ser negativo.")]
+    [Required(ErrorMessage = "El costo final es obligatorio.")]
+    [Range(0.01, double.MaxValue, ErrorMessage = "El costo final debe ser mayor a 0.")]
     public decimal CostoFinal { get; set; }
+
+    public AnamnesisDto? Anamnesis { get; set; }
+    public List<ExamenFisicoDto>? ExamenesFisicos { get; set; }
+    public List<TactoVaginalDto>? TactosVaginales { get; set; }
+    public List<EcografiaObstetricaDto>? Ecografias { get; set; }
+    public ImpresionDiagnosticaDto? ImpresionDiagnostica { get; set; }
 }

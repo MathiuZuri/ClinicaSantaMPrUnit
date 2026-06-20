@@ -85,6 +85,12 @@ public class AuditoriaAutomaticaFilter : IAsyncActionFilter
             Controlador = endpoint?.ControllerName
         });
 
+        // ✅ Indicador de consulta
+        var esConsulta = metodo == "GET";
+
+        // ✅ IP real (maneja proxies)
+        var ipReal = ObtenerIpReal(http);
+
         var auditoria = new Auditoria
         {
             Id = Guid.NewGuid(),
@@ -97,17 +103,29 @@ public class AuditoriaAutomaticaFilter : IAsyncActionFilter
             Descripcion = GenerarDescripcion(http.Request.Method, endpoint, fueExitoso, statusCode),
             ValorAnterior = valorAnterior,
             ValorNuevo = valorNuevo,
-            IpAddress = http.Connection.RemoteIpAddress?.ToString(),
+            IpAddress = ipReal,
             UserAgent = http.Request.Headers.UserAgent.ToString(),
             FueExitoso = fueExitoso,
             DetalleError = ejecutado.Exception?.Message,
-            FechaHora = DateTime.UtcNow
+            FechaHora = DateTime.UtcNow,
+            EsConsulta = esConsulta,
         };
 
         _context.Auditorias.Add(auditoria);
         await _context.SaveChangesAsync();
     }
 
+    // ✅ Método para obtener IP real
+    private string? ObtenerIpReal(HttpContext httpContext)
+    {
+        var forwardedFor = httpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+        if (!string.IsNullOrEmpty(forwardedFor))
+            return forwardedFor.Split(',').First().Trim();
+
+        return httpContext.Connection.RemoteIpAddress?.ToString();
+    }
+
+    // ---------- El resto de métodos privados se mantienen igual ----------
     private static TipoAccionAuditoria DetectarTipoAccion(string metodo)
     {
         return metodo.ToUpper() switch

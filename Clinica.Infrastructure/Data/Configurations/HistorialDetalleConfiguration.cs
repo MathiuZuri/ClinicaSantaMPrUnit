@@ -44,13 +44,15 @@ public class HistorialDetalleConfiguration : IEntityTypeConfiguration<HistorialD
             .HasForeignKey(x => x.HistorialClinicoId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        // Si Cita y Pago también te marcan error, puedes dejar su WithMany() vacío igual que con Atencion
         builder.HasOne(x => x.Cita)
-            .WithMany(x => x.HistorialDetalles)
+            .WithMany(x => x.HistorialDetalles) 
             .HasForeignKey(x => x.CitaId)
             .OnDelete(DeleteBehavior.SetNull);
 
+        // CORRECCIÓN AQUÍ: WithMany() vacío para Atencion
         builder.HasOne(x => x.Atencion)
-            .WithMany(x => x.HistorialDetalles)
+            .WithMany() 
             .HasForeignKey(x => x.AtencionId)
             .OnDelete(DeleteBehavior.SetNull);
 

@@ -1,4 +1,5 @@
-﻿using Clinica.Domain.DTOs.Finanzas;
+﻿using Clinica.Domain.DTOs.Comunes;
+using Clinica.Domain.DTOs.Finanzas;
 
 namespace Clinica.Domain.Interfaces;
 
@@ -27,4 +28,7 @@ public interface IFinanzasService
     Task<IEnumerable<AjusteFinancieroDto>> ObtenerAjustesFinancierosAsync();
     Task<IEnumerable<AjusteFinancieroDto>> ObtenerAjustesPorAtencionAsync(Guid atencionId);
     Task<IEnumerable<AjusteFinancieroDto>> ObtenerAjustesPorPagoAsync(Guid pagoId);
+    
+    Task<PaginacionResponseDto<PagoFinanzasDto>> ObtenerPagosPendientesPaginadosAsync(PaginacionRequestDto request);
+    Task<EstadoPagoAtencionDto> ObtenerEstadoPagoAtencionDetalladoAsync(Guid atencionId);
 }

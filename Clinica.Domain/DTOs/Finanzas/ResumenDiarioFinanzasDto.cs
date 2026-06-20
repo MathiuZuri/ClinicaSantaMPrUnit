@@ -14,4 +14,8 @@ public class ResumenDiarioFinanzasDto
     public int PagosPendientes { get; set; }
 
     public List<PagoFinanzasDto> Pagos { get; set; } = new();
+    
+    public int PagosIndividualesCompletados { get; set; }
+    public int PagosIndividualesParciales { get; set; }
+    public int PagosIndividualesPendientes { get; set; }
 }

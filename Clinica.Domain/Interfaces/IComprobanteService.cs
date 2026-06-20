@@ -8,7 +8,8 @@ public interface IComprobanteService
     // PREVIEWS
     // ==========================================================
 
-    Task<ComprobantePagoPreviewDto> PreviewBoletaPagoAsync(Guid pagoId, decimal tasaImpuesto = 18m);
+    // ✅ CORRECCIÓN: Ahora acepta un decimal? (nulable) para que el servicio pueda usar el Enum por defecto
+    Task<ComprobantePagoPreviewDto> PreviewBoletaPagoAsync(Guid pagoId, decimal? tasaImpuesto = null);
 
     Task<ComprobanteCitaPreviewDto> PreviewConstanciaCitaAsync(Guid citaId);
 
@@ -25,6 +26,9 @@ public interface IComprobanteService
     Task<Guid> EmitirConstanciaCitaAsync(EmitirComprobanteCitaDto dto);
 
     Task<Guid> EmitirResumenAtencionAsync(EmitirComprobanteAtencionDto dto);
+
+    // ✅ MOVIDO: Agregado en su bloque correspondiente para mantener el orden
+    Task<Guid> EmitirEstadoCuentaPacienteAsync(EmitirComprobanteEstadoCuentaDto dto);
 
     // ==========================================================
     // PDF

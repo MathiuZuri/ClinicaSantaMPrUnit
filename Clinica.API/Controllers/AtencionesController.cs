@@ -11,16 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Clinica.API.Controllers;
 
 /// <summary>
-/// Gestión de atenciones médicas, consultas y procedimientos del sistema clínico.
+/// Controlador para la gestión del ciclo de vida de las atenciones médicas (Core).
 /// </summary>
-/// <remarks>
-/// **Nota de Arquitectura:** Por normativas de salud y auditoría clínica, las atenciones 
-/// no poseen métodos de eliminación (ni física ni lógica). El ciclo de vida de un registro 
-/// médico finaliza mediante el cambio de estado a "Cerrada" o "Anulada".
-/// </remarks>
 [ApiController]
 [Route("api/[controller]")]
-[Tags("Atenciones Médicas")]
+[Tags("Atenciones Médicas (Core)")]
 public class AtencionesController : ControllerBase
 {
     private readonly IAtencionService _atencionService;
@@ -31,115 +26,98 @@ public class AtencionesController : ControllerBase
     }
 
     /// <summary>
-    /// Obtiene el historial de atenciones de un paciente.
+    /// Obtiene la lista de todas las atenciones registradas en el sistema.
     /// </summary>
     /// <remarks>
-    /// Recupera el registro histórico de todas las interacciones clínicas de un paciente.
-    /// 
-    /// **Datos incluidos en la respuesta:**
-    /// - Datos del doctor asignado.
-    /// - Servicio clínico brindado.
-    /// - Costos y saldos pendientes.
-    /// - Fechas de registro y cierre.
+    /// **Uso:** Permite consultar el historial completo de atenciones. Útil para administración y reportes.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AtencionVer"/>.
     /// </remarks>
-    /// <param name="pacienteId">Identificador único del paciente (formato GUID).</param>
-    /// <returns>Lista de atenciones asociadas al paciente.</returns>
-    /// <response code="200">Búsqueda exitosa. Retorna la lista de atenciones (puede estar vacía).</response>
-    /// <response code="401">Autenticación requerida. Falta el token JWT o ha expirado.</response>
-    /// <response code="403">Acceso denegado. El usuario no tiene el permiso requerido.</response>
+    [Authorize(Policy = PermisosPolicies.AtencionVer)]
+    [HttpGet]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<AtencionResponseDto>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> ObtenerTodas()
+    {
+        var atenciones = await _atencionService.ObtenerTodasAsync();
+        return Ok(ApiResponse<object>.Ok(atenciones, "Atenciones obtenidas correctamente."));
+    }
+
+    /// <summary>
+    /// Obtiene el historial de atenciones de un paciente específico.
+    /// </summary>
+    /// <remarks>
+    /// **Uso:** Permite consultar todas las atenciones de un paciente para ver su historial médico.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AtencionVer"/>.
+    /// </remarks>
     [Authorize(Policy = PermisosPolicies.AtencionVer)]
     [HttpGet("paciente/{pacienteId:guid}")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<AtencionResponseDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> GetByPaciente(Guid pacienteId)
+    public async Task<IActionResult> ObtenerPorPaciente(Guid pacienteId)
     {
         var atenciones = await _atencionService.ObtenerPorPacienteAsync(pacienteId);
         return Ok(ApiResponse<object>.Ok(atenciones, "Atenciones del paciente obtenidas correctamente."));
     }
 
     /// <summary>
-    /// Obtiene la atención médica derivada de una cita específica.
+    /// Obtiene los detalles completos de una atención (Core + Todos sus módulos clínicos).
     /// </summary>
     /// <remarks>
-    /// **Casos de uso:**
-    /// Útil cuando el usuario ingresa desde la agenda de citas y necesita ver los detalles clínicos y financieros generados a partir de esa reserva.
+    /// **Uso:** Permite obtener toda la información clínica de una atención específica, incluyendo anamnesis, exámenes, diagnósticos, etc.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AtencionVer"/>.
     /// </remarks>
-    /// <param name="citaId">Identificador único de la cita base (formato GUID).</param>
-    /// <returns>Objeto con el detalle completo de la atención.</returns>
-    /// <response code="200">Atención encontrada y devuelta con éxito.</response>
-    /// <response code="401">Autenticación requerida. Falta el token JWT o ha expirado.</response>
-    /// <response code="403">Acceso denegado. El usuario no tiene el permiso requerido.</response>
-    /// <response code="404">No existe ninguna atención médica generada para esta cita.</response>
     [Authorize(Policy = PermisosPolicies.AtencionVer)]
-    [HttpGet("cita/{citaId:guid}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(ApiResponse<AtencionResponseDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetByCita(Guid citaId)
+    public async Task<IActionResult> ObtenerPorId(Guid id)
     {
-        var atencion = await _atencionService.ObtenerPorCitaAsync(citaId);
-
-        if (atencion == null)
-            throw new KeyNotFoundException("Atención no encontrada.");
-
-        return Ok(ApiResponse<object>.Ok(atencion, "Atención obtenida correctamente."));
+        var atencion = await _atencionService.ObtenerPorIdAsync(id);
+        
+        if (atencion == null) 
+            return NotFound(ApiResponse<object>.Error("Atención no encontrada.", 404));
+        
+        return Ok(ApiResponse<object>.Ok(atencion, "Detalle de atención obtenido correctamente."));
     }
 
     /// <summary>
-    /// Registra el inicio de una nueva atención médica.
+    /// Registra una nueva atención médica (Apertura).
     /// </summary>
     /// <remarks>
-    /// **Proceso de negocio:**
-    /// Este endpoint se ejecuta en admisión/triaje o cuando el doctor recibe al paciente. 
-    /// Transforma una cita programada en una atención activa en la clínica.
-    /// 
-    /// **Requisitos:**
-    /// - El costo final no puede ser negativo.
-    /// - Los IDs de paciente, doctor y servicio deben existir en la base de datos.
+    /// **Uso:** Crea una nueva atención asociada a un paciente, doctor y servicio. Además, genera el pago correspondiente y registra en el historial.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AtencionRegistrar"/>.
     /// </remarks>
-    /// <param name="dto">Estructura JSON con los parámetros de la nueva atención.</param>
-    /// <returns>El ID (GUID) generado para la nueva atención.</returns>
-    /// <response code="200">Atención generada e insertada en la base de datos correctamente.</response>
-    /// <response code="400">Error de validación (ej. costo negativo o campos obligatorios vacíos).</response>
-    /// <response code="401">Autenticación requerida.</response>
-    /// <response code="403">Permisos insuficientes para registrar atenciones.</response>
-    /// <response code="404">No se encontró el paciente, doctor o servicio indicado.</response>
-    [Auditoria("Atenciones", "Atencion", TipoAccionAuditoria.Creacion, NivelAuditoria.Critico)]
     [Authorize(Policy = PermisosPolicies.AtencionRegistrar)]
+    [Auditoria("Atenciones", "Atencion", TipoAccionAuditoria.Creacion, NivelAuditoria.Importante)]
     [HttpPost]
-    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Registrar([FromBody] RegistrarAtencionDto dto)
     {
-        var id = await _atencionService.RegistrarAsync(dto);
-        return Ok(ApiResponse<object>.Ok(new { id }, "Atención registrada correctamente."));
+        var id = await _atencionService.RegistrarAtencionAsync(dto);
+        
+        return CreatedAtAction(
+            nameof(ObtenerPorId), 
+            new { id }, 
+            ApiResponse<object>.Ok(new { Id = id }, "Atención registrada y aperturada correctamente.", 201)
+        );
     }
 
     /// <summary>
-    /// Finaliza y cierra una atención médica en curso. (Reemplaza la eliminación física/lógica).
+    /// Cierra una atención médica abierta.
     /// </summary>
     /// <remarks>
-    /// **Acciones internas del sistema:**
-    /// 1. Cambia el estado interno a "Cerrada", blindando el registro contra modificaciones para cumplir normativas de auditoría médica.
-    /// 2. Guarda el diagnóstico definitivo.
-    /// 3. Adjunta el tratamiento e indicaciones médicas a la historia clínica.
-    /// 
-    /// *Nota: Una vez cerrada, la atención pasa a estado de solo lectura clínica. Si ocurrió un error grave en la digitación, se debe usar un proceso de anulación, no de eliminación.*
+    /// **Uso:** Finaliza una atención, registrando el diagnóstico final y las indicaciones. Una vez cerrada, no se pueden modificar sus módulos clínicos.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AtencionCerrar"/>.
     /// </remarks>
-    /// <param name="id">ID de la atención activa que se va a finalizar.</param>
-    /// <param name="dto">JSON con el diagnóstico y tratamiento emitido por el doctor.</param>
-    /// <response code="200">Atención finalizada con éxito.</response>
-    /// <response code="400">Datos médicos de cierre incompletos o inválidos.</response>
-    /// <response code="401">Autenticación requerida.</response>
-    /// <response code="403">Permisos insuficientes para cerrar atenciones médicas.</response>
-    /// <response code="404">La atención solicitada no existe.</response>
-    [Auditoria("Atenciones", "Atencion", TipoAccionAuditoria.Edicion, NivelAuditoria.Critico)]
     [Authorize(Policy = PermisosPolicies.AtencionCerrar)]
+    [Auditoria("Atenciones", "Atencion", TipoAccionAuditoria.Edicion, NivelAuditoria.Importante)]
     [HttpPut("{id:guid}/cerrar")]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -148,7 +126,36 @@ public class AtencionesController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Cerrar(Guid id, [FromBody] CerrarAtencionDto dto)
     {
-        await _atencionService.CerrarAsync(id, dto);
-        return Ok(ApiResponse<object>.Ok(new { id }, "Atención cerrada correctamente."));
+        await _atencionService.CerrarAtencionAsync(id, dto);
+        return Ok(ApiResponse<object>.Ok(new { Id = id }, "Atención cerrada y diagnóstico guardado exitosamente."));
     }
+
+    /// <summary>
+    /// Anula (eliminación lógica) una atención médica.
+    /// </summary>
+    /// <remarks>
+    /// **Uso:** Permite anular una atención que fue creada por error o que no se completó. La atención queda como "Anulada" y no se puede reactivar.
+    /// **Permiso requerido:** <see cref="PermisosPolicies.AtencionCerrar"/> (o se puede crear uno específico como AtencionAnular).
+    /// </remarks>
+    [Authorize(Policy = PermisosPolicies.AtencionCerrar)]
+    [Auditoria("Atenciones", "Atencion", TipoAccionAuditoria.Eliminacion, NivelAuditoria.Critico)]
+    [HttpPut("{id:guid}/anular")]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Anular(Guid id, [FromBody] AnularAtencionRequest request)
+    {
+        await _atencionService.AnularAtencionAsync(id, request.Motivo);
+        return Ok(ApiResponse<object>.Ok(new { Id = id }, "Atención anulada correctamente."));
+    }
+}
+
+/// <summary>
+/// Clase auxiliar para recibir el motivo de anulación.
+/// </summary>
+public class AnularAtencionRequest
+{
+    public string Motivo { get; set; } = string.Empty;
 }
