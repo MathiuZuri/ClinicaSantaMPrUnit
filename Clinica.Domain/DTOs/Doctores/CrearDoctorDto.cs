@@ -17,7 +17,7 @@ public class CrearDoctorDto
     public string Apellidos { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "La especialidad es obligatoria.")]
-    [StringLength(100, MinimumLength = 3, ErrorMessage = "La especialidad debe tener entre 3 y 100 caracteres.")]
+    [StringLength(120, MinimumLength = 3, ErrorMessage = "La especialidad debe tener entre 3 y 120 caracteres.")]
     public string Especialidad { get; set; } = string.Empty;
 
     [RegularExpression(@"^\d{9}$", ErrorMessage = "El celular debe tener exactamente 9 dígitos.")]

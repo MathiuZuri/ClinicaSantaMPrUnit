@@ -87,7 +87,8 @@ public class UsuarioService : IUsuarioService
             UserName = dto.UserName,
             Correo = dto.Correo,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-            FechaRegistro = DateTime.UtcNow
+            FechaRegistro = DateTime.UtcNow,
+            DebeCambiarContrasena = true
         };
 
         await _usuarioRepository.AddAsync(usuario);

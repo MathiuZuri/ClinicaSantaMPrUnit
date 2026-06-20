@@ -11,6 +11,6 @@ public class ActualizarContactoPacienteDto
     [StringLength(150, ErrorMessage = "El correo no debe superar los 150 caracteres.")]
     public string? Correo { get; set; }
 
-    [StringLength(200, ErrorMessage = "La dirección no debe superar los 200 caracteres.")]
+    [StringLength(250, ErrorMessage = "La dirección no debe superar los 250 caracteres.")]
     public string? Direccion { get; set; }
 }

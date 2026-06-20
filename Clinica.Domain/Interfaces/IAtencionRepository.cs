@@ -6,4 +6,6 @@ public interface IAtencionRepository : IGenericRepository<Atencion>
 {
     Task<IEnumerable<Atencion>> ObtenerPorPacienteAsync(Guid pacienteId);
     Task<Atencion?> ObtenerPorCitaAsync(Guid citaId);
+
+    Task<Atencion?> ObtenerDetalleCompletoAsync(Guid id);
 }

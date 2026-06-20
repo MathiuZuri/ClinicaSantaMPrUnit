@@ -1,9 +1,19 @@
-﻿using Clinica.Domain.DTOs.Auditoria;
-
-namespace Clinica.API.Services;
+﻿using Clinica.Domain.DTOs.Comunes;
+using Clinica.Domain.DTOs.Auditoria;
+using Clinica.Domain.Enums;
 
 public interface IAuditoriaService
 {
-    Task<IEnumerable<AuditoriaResponseDto>> ObtenerTodosAsync();
-    Task<IEnumerable<AuditoriaResponseDto>> ObtenerPorUsuarioAsync(Guid usuarioId);
+    Task<PaginacionResponseDto<AuditoriaResponseDto>> ObtenerTodosPaginadosAsync(
+        PaginacionRequestDto request,
+        TipoAccionAuditoria? tipoAccion = null,
+        bool? soloConsultas = null
+    );
+
+    Task<PaginacionResponseDto<AuditoriaResponseDto>> ObtenerPorUsuarioPaginadosAsync(
+        Guid usuarioId,
+        PaginacionRequestDto request,
+        TipoAccionAuditoria? tipoAccion = null,
+        bool? soloConsultas = null
+    );
 }

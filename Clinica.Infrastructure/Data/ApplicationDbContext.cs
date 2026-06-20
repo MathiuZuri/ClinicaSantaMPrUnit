@@ -50,6 +50,16 @@ public class ApplicationDbContext : DbContext
     public DbSet<Comprobante> Comprobantes => Set<Comprobante>();
     public DbSet<ComprobanteDetalle> ComprobanteDetalles => Set<ComprobanteDetalle>();
 
+    // ==========================================================
+    // MÓDULOS OBSTÉTRICOS (NUEVO)
+    // ==========================================================
+    
+    public DbSet<Anamnesis> Anamnesis => Set<Anamnesis>();
+    public DbSet<ExamenFisico> ExamenesFisicos => Set<ExamenFisico>();
+    public DbSet<TactoVaginal> TactosVaginales => Set<TactoVaginal>();
+    public DbSet<EcografiaObstetrica> EcografiasObstetricas => Set<EcografiaObstetrica>();
+    public DbSet<ImpresionDiagnostica> ImpresionesDiagnosticas => Set<ImpresionDiagnostica>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

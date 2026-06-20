@@ -8,5 +8,6 @@ public enum EstadoCita
     Cancelada = 4,
     Atendida = 5,
     NoAsistio = 6,
-    Eliminada = 7
+    Eliminada = 7,
+    EnProgreso = 8 
 }

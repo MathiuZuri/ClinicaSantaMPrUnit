@@ -42,8 +42,9 @@ public class AjusteFinancieroConfiguration : IEntityTypeConfiguration<AjusteFina
             .HasForeignKey(x => x.PagoId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        // CORRECCIÓN AQUÍ: WithMany() vacío para Atencion
         builder.HasOne(x => x.Atencion)
-            .WithMany(x => x.AjustesFinancieros)
+            .WithMany() 
             .HasForeignKey(x => x.AtencionId)
             .OnDelete(DeleteBehavior.SetNull);
 

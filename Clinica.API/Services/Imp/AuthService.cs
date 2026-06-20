@@ -1,6 +1,6 @@
 ﻿using Clinica.API.Helpers;
 using Clinica.Domain.DTOs.Auth;
-using Clinica.Domain.Enums;         
+using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;
 
 namespace Clinica.API.Services.Imp;
@@ -8,11 +8,16 @@ namespace Clinica.API.Services.Imp;
 public class AuthService : IAuthService
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUsuarioActualService _usuarioActualService;
     private readonly JwtHelper _jwtHelper;
 
-    public AuthService(IUsuarioRepository usuarioRepository, JwtHelper jwtHelper)
+    public AuthService(
+        IUsuarioRepository usuarioRepository,
+        IUsuarioActualService usuarioActualService,
+        JwtHelper jwtHelper)
     {
         _usuarioRepository = usuarioRepository;
+        _usuarioActualService = usuarioActualService;
         _jwtHelper = jwtHelper;
     }
 
@@ -55,7 +60,28 @@ public class AuthService : IAuthService
             Correo = usuario.Correo,
             Token = token,
             Roles = roles,
-            Permisos = permisos
+            Permisos = permisos,
+            DebeCambiarContrasena = usuario.DebeCambiarContrasena || usuario.UltimoAcceso == null
         };
+    }
+    
+    public async Task CambiarContrasenaAsync(CambiarContrasenaDto dto)
+    {
+        var usuarioId = _usuarioActualService.ObtenerUsuarioId();
+        var usuario = await _usuarioRepository.GetByIdAsync(usuarioId);
+        if (usuario == null)
+            throw new KeyNotFoundException("Usuario no encontrado.");
+
+        // Verificar contraseña actual
+        if (!BCrypt.Net.BCrypt.Verify(dto.ContrasenaActual, usuario.PasswordHash))
+            throw new InvalidOperationException("La contraseña actual es incorrecta.");
+
+        // Hashear nueva contraseña
+        usuario.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.ContrasenaNueva);
+        usuario.DebeCambiarContrasena = false;
+        usuario.UltimoAcceso = DateTime.UtcNow;
+
+        _usuarioRepository.Update(usuario);
+        await _usuarioRepository.SaveChangesAsync();
     }
 }

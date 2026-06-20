@@ -6,17 +6,26 @@ using Clinica.API.Helpers;
 using Clinica.API.Middlewares;
 using Clinica.API.Services;
 using Clinica.API.Services.Imp;
+// --- NUEVOS USINGS DE MÓDULOS OBSTÉTRICOS ---
+using Clinica.API.Services.Imp.ATENCIONES;
 using Clinica.Domain.Interfaces;
+using Clinica.Domain.Interfaces.ATENCIONES;
+// --------------------------------------------
 using Clinica.Infrastructure.Data;
 using Clinica.Infrastructure.Data.Seeds;
 using Clinica.Infrastructure.Documents.Comprobantes.Services;
 using Clinica.Infrastructure.Repositories;
+// --- NUEVOS USINGS DE REPOSITORIOS OBSTÉTRICOS ---
+using Clinica.Infrastructure.Repositories.ATENCIONES;
+// -------------------------------------------------
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using QuestPDF.Infrastructure;
 using Clinica.API.Services.Background;
+using Clinica.Domain.PDFsDto.Interfacespdf;
+using Clinica.Infrastructure.Documents.Comprobantes.Pdfservicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -121,6 +130,14 @@ builder.Services.AddScoped<IHistorialClinicoRepository, HistorialClinicoReposito
 builder.Services.AddScoped<IHistorialDetalleRepository, HistorialDetalleRepository>();
 builder.Services.AddScoped<IAtencionRepository, AtencionRepository>();
 
+// --- NUEVOS REPOSITORIOS OBSTÉTRICOS ---
+builder.Services.AddScoped<IAnamnesisRepository, AnamnesisRepository>();
+builder.Services.AddScoped<IExamenFisicoRepository, ExamenFisicoRepository>();
+builder.Services.AddScoped<ITactoVaginalRepository, TactoVaginalRepository>();
+builder.Services.AddScoped<IEcografiaObstetricaRepository, EcografiaObstetricaRepository>();
+builder.Services.AddScoped<IImpresionDiagnosticaRepository, ImpresionDiagnosticaRepository>();
+// ---------------------------------------
+
 builder.Services.AddScoped<IPagoRepository, PagoRepository>();
 builder.Services.AddScoped<IAjusteFinancieroRepository, AjusteFinancieroRepository>();
 
@@ -144,6 +161,21 @@ builder.Services.AddScoped<ICitaService, CitaService>();
 builder.Services.AddScoped<IServicioClinicoService, ServicioClinicoService>();
 builder.Services.AddScoped<IHistorialClinicoService, HistorialClinicoService>();
 builder.Services.AddScoped<IAtencionService, AtencionService>();
+
+// --- NUEVOS SERVICIOS OBSTÉTRICOS ---
+builder.Services.AddScoped<IAnamnesisService, AnamnesisService>();
+builder.Services.AddScoped<IExamenFisicoService, ExamenFisicoService>();
+builder.Services.AddScoped<ITactoVaginalService, TactoVaginalService>();
+builder.Services.AddScoped<IEcografiaObstetricaService, EcografiaObstetricaService>();
+builder.Services.AddScoped<IImpresionDiagnosticaService, ImpresionDiagnosticaService>();
+
+// Servicios de PDF
+builder.Services.AddScoped<IHistoriaClinicaPdfService, HistoriaClinicaPdfService>();
+builder.Services.AddScoped<IResumenPartoPdfService, ResumenPartoPdfService>();
+builder.Services.AddScoped<IReporteFinancieroPdfService, ReporteFinancieroPdfService>();
+builder.Services.AddScoped<ICertificadoTrabajoPdfService, CertificadoTrabajoPdfService>();
+
+// ------------------------------------
 
 builder.Services.AddScoped<IPagoService, PagoService>();
 builder.Services.AddScoped<IFinanzasService, FinanzasService>();

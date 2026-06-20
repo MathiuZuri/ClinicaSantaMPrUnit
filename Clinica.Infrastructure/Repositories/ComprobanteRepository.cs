@@ -20,10 +20,10 @@ public class ComprobanteRepository : GenericRepository<Comprobante>, IComprobant
         return await Context.Comprobantes
             .AsNoTracking()
             .Include(x => x.Paciente)
+                .ThenInclude(p => p.HistorialClinico) // CORRECCIÓN AQUÍ
             .Include(x => x.Pago)
             .Include(x => x.Cita)
             .Include(x => x.Atencion)
-            .Include(x => x.HistorialClinico)
             .Include(x => x.UsuarioEmision)
             .Include(x => x.UsuarioAnulacion)
             .Include(x => x.Detalles)
@@ -39,16 +39,16 @@ public class ComprobanteRepository : GenericRepository<Comprobante>, IComprobant
     {
         return await Context.Comprobantes
             .Include(x => x.Paciente)
+                .ThenInclude(p => p.HistorialClinico) // CORRECCIÓN AQUÍ
             .Include(x => x.Pago)
             .Include(x => x.Cita)
-            .ThenInclude(x => x!.Doctor)
+                .ThenInclude(x => x!.Doctor)
             .Include(x => x.Cita)
-            .ThenInclude(x => x!.ServicioClinico)
+                .ThenInclude(x => x!.ServicioClinico)
             .Include(x => x.Atencion)
-            .ThenInclude(x => x!.Doctor)
+                .ThenInclude(x => x!.Doctor)
             .Include(x => x.Atencion)
-            .ThenInclude(x => x!.ServicioClinico)
-            .Include(x => x.HistorialClinico)
+                .ThenInclude(x => x!.ServicioClinico)
             .Include(x => x.UsuarioEmision)
             .Include(x => x.UsuarioAnulacion)
             .Include(x => x.Detalles)

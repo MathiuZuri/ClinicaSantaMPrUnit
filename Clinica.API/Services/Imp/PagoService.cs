@@ -99,7 +99,7 @@ public class PagoService : IPagoService
             SaldoPendiente = saldo,
             MontoAdelanto = dto.MontoAdelanto,
             MetodoPago = dto.MetodoPago,
-            Estado = saldo == 0 ? EstadoPago.Pagado : EstadoPago.Parcial,
+            Estado = saldo == 0 ? EstadoPago.Pagado : (dto.MontoPagado > 0 ? EstadoPago.Parcial : EstadoPago.Pendiente),
             Observacion = dto.Observacion,
             FechaPago = DateTime.UtcNow,
             UsuarioRegistroId = usuarioId
@@ -107,17 +107,7 @@ public class PagoService : IPagoService
 
         await _pagoRepository.AddAsync(pago);
 
-        if (dto.AtencionId.HasValue)
-        {
-            var atencion = await _atencionRepository.GetByIdAsync(dto.AtencionId.Value);
-            if (atencion != null)
-            {
-                atencion.MontoPagado += dto.MontoPagado;
-                atencion.SaldoPendiente = atencion.CostoFinal - atencion.MontoPagado;
-
-                _atencionRepository.Update(atencion);
-            }
-        }
+        // Ya no actualizamos la atención aquí, la dejamos tal cual
 
         var historial = await _historialRepository.ObtenerPorPacienteAsync(dto.PacienteId);
 
@@ -131,7 +121,7 @@ public class PagoService : IPagoService
                 PagoId = pago.Id,
                 TipoMovimiento = TipoMovimientoHistorial.PagoRegistrado,
                 Titulo = "Pago registrado",
-                Descripcion = $"Se registró pago de S/ {dto.MontoPagado}.",
+                Descripcion = $"Se registró pago de S/ {dto.MontoPagado} por {servicio.Nombre}. Método: {dto.MetodoPago}.",
                 FechaRegistro = DateTime.UtcNow,
                 UsuarioId = usuarioId
             });

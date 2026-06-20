@@ -28,4 +28,10 @@
         <ProjectReference Include="..\Clinica.Infrastructure\Clinica.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Program.cs">
+        <DependentUpon>appsettings.Development.json</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

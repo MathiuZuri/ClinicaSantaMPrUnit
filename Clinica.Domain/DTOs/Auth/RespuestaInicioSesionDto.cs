@@ -9,4 +9,5 @@ public class RespuestaInicioSesionDto
     public string Token { get; set; } = string.Empty;
     public List<string> Roles { get; set; } = new();
     public List<string> Permisos { get; set; } = new();
+    public bool DebeCambiarContrasena { get; set; }
 }

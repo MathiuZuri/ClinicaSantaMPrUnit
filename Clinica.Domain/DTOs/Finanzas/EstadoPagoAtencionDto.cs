@@ -26,4 +26,8 @@ public class EstadoPagoAtencionDto
     public int CantidadPagos { get; set; }
 
     public List<PagoFinanzasDto> Pagos { get; set; } = new();
+    
+    public decimal DeudaTotal => SaldoReal;
+    
+    public string TipoUltimoPago { get; set; } = string.Empty;
 }

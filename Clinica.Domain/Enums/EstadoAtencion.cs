@@ -1,6 +1,4 @@
-﻿namespace Clinica.Domain.Enums;
-
-public enum EstadoAtencion
+﻿public enum EstadoAtencion
 {
     Abierta = 1,
     Cerrada = 2,

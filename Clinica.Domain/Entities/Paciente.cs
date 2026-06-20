@@ -19,6 +19,16 @@ public class Paciente
     public string? Correo { get; set; }
     public string? Direccion { get; set; }
 
+    // --- NUEVOS DATOS: MÓDULO DE FILIACIÓN ---
+    public string? LugarNacimiento { get; set; }
+    public string? GradoInstruccion { get; set; }
+    public string? Ocupacion { get; set; }
+    public string? Religion { get; set; }
+    public string? EstadoCivil { get; set; }
+    public string? NombrePareja { get; set; }
+    public string? CelularPareja { get; set; }
+    // -----------------------------------------
+
     public EstadoPaciente Estado { get; set; } = EstadoPaciente.Activo;
 
     public Guid UsuarioId { get; set; }

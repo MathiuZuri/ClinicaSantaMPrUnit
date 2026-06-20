@@ -59,26 +59,26 @@ public class PagoRepository : GenericRepository<Pago>, IPagoRepository
     // ==========================================================
 
     public async Task<IEnumerable<Pago>> ObtenerTodosConDetalleAsync()
-{
-    return await Context.Pagos
-        .Include(x => x.Paciente)
-        .Include(x => x.ServicioClinico)
-        .Include(x => x.Cita)
-        .Include(x => x.Atencion)
-            .ThenInclude(x => x.HistorialClinico)
-        .Include(x => x.UsuarioRegistro)
-        .OrderByDescending(x => x.FechaPago)
-        .ToListAsync();
-}
+    {
+        return await Context.Pagos
+            .Include(x => x.Paciente)
+                .ThenInclude(p => p.HistorialClinico) // CORRECCIÓN AQUÍ: El historial viene del Paciente
+            .Include(x => x.ServicioClinico)
+            .Include(x => x.Cita)
+            .Include(x => x.Atencion)
+            .Include(x => x.UsuarioRegistro)
+            .OrderByDescending(x => x.FechaPago)
+            .ToListAsync();
+    }
 
     public async Task<Pago?> ObtenerPorCodigoConDetalleAsync(string codigoPago)
     {
         return await Context.Pagos
             .Include(x => x.Paciente)
+                .ThenInclude(p => p.HistorialClinico) // CORRECCIÓN AQUÍ: El historial viene del Paciente
             .Include(x => x.ServicioClinico)
             .Include(x => x.Cita)
             .Include(x => x.Atencion)
-                .ThenInclude(x => x.HistorialClinico)
             .Include(x => x.UsuarioRegistro)
             .FirstOrDefaultAsync(x => x.CodigoPago == codigoPago);
     }

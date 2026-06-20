@@ -21,7 +21,7 @@ public class PacienteConfiguration : IEntityTypeConfiguration<Paciente>
 
         builder.Property(x => x.DNI)
             .IsRequired()
-            .HasMaxLength(8);
+            .HasMaxLength(11);
 
         builder.HasIndex(x => x.DNI)
             .IsUnique();
@@ -46,6 +46,15 @@ public class PacienteConfiguration : IEntityTypeConfiguration<Paciente>
 
         builder.Property(x => x.Direccion)
             .HasMaxLength(250);
+
+        // --- Configuración de Filiación ---
+        builder.Property(x => x.LugarNacimiento).HasMaxLength(150);
+        builder.Property(x => x.GradoInstruccion).HasMaxLength(100);
+        builder.Property(x => x.Ocupacion).HasMaxLength(150);
+        builder.Property(x => x.Religion).HasMaxLength(50);
+        builder.Property(x => x.EstadoCivil).HasMaxLength(50);
+        builder.Property(x => x.NombrePareja).HasMaxLength(150);
+        builder.Property(x => x.CelularPareja).HasMaxLength(15);
 
         builder.Property(x => x.Estado)
             .HasConversion<string>()

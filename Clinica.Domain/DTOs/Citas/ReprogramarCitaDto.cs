@@ -10,10 +10,13 @@ public class ReprogramarCitaDto
 
     public Guid? HorarioDoctorId { get; set; }
 
+    [Required(ErrorMessage = "La nueva fecha es obligatoria.")]
     public DateOnly NuevaFecha { get; set; }
 
+    [Required(ErrorMessage = "La nueva hora de inicio es obligatoria.")]
     public TimeOnly NuevaHoraInicio { get; set; }
 
+    [Required(ErrorMessage = "La nueva hora de fin es obligatoria.")]
     public TimeOnly NuevaHoraFin { get; set; }
 
     [StringLength(500, ErrorMessage = "El motivo de reprogramación no debe superar los 500 caracteres.")]
