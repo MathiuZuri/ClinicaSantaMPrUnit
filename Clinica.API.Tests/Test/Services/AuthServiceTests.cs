@@ -4,6 +4,7 @@ using Clinica.API.Services;
 using Clinica.API.Services.Imp;
 using Clinica.Domain.DTOs.Auth;
 using Clinica.Domain.Entities;
+using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
@@ -15,12 +16,14 @@ namespace Clinica.API.Tests.Test.Services;
 public class AuthServiceTests
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUsuarioActualService _usuarioActualService;
     private readonly JwtHelper _jwtHelper;
     private readonly IAuthService _service;
 
     public AuthServiceTests()
     {
         _usuarioRepository = Substitute.For<IUsuarioRepository>();
+        _usuarioActualService = Substitute.For<IUsuarioActualService>();
 
         var configData = new Dictionary<string, string?>
         {
@@ -35,7 +38,7 @@ public class AuthServiceTests
             .Build();
 
         _jwtHelper = new JwtHelper(configuration);
-        _service = new AuthService(_usuarioRepository, _jwtHelper);
+        _service = new AuthService(_usuarioRepository, _usuarioActualService, _jwtHelper);
     }
 
     [Fact]
@@ -263,5 +266,104 @@ public class AuthServiceTests
         });
 
         return usuario;
+    }
+    
+    [Fact]
+    public async Task IniciarSesionAsync_UsuarioNoActivo_LanzaExcepcion()
+    {
+        var dto = new IniciarSesionDto
+        {
+            UsuarioOCorreo = "kevin@correo.com",
+            Password = "Password123!"
+        };
+
+        var usuario = CrearUsuarioEntidad();
+        usuario.Estado = EstadoUsuario.Inactivo; // fuerza estado no activo
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.UsuarioOCorreo).Returns(usuario);
+
+        Func<Task> act = async () => await _service.IniciarSesionAsync(dto);
+
+        await act.Should()
+            .ThrowAsync<InvalidOperationException>()
+            .WithMessage("Tu cuenta no está activa. Contacta al administrador.");
+    }
+
+    [Fact]
+    public async Task IniciarSesionAsync_CuandoDebeCambiarContrasena_RetornaFlagTrue()
+    {
+        var dto = new IniciarSesionDto
+        {
+            UsuarioOCorreo = "kevin@correo.com",
+            Password = "Password123!"
+        };
+
+        var usuario = CrearUsuarioEntidad();
+        usuario.DebeCambiarContrasena = true; // obligado a cambiar
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.UsuarioOCorreo).Returns(usuario);
+
+        var resultado = await _service.IniciarSesionAsync(dto);
+        resultado.DebeCambiarContrasena.Should().BeTrue();
+    }
+    
+    [Fact]
+    public async Task CambiarContrasenaAsync_UsuarioNoEncontrado_LanzaKeyNotFound()
+    {
+        var dto = new CambiarContrasenaDto
+        {
+            ContrasenaActual = "OldPass123!",
+            ContrasenaNueva = "NewPass123!"
+        };
+        var usuarioId = Guid.NewGuid();
+        _usuarioActualService.ObtenerUsuarioId().Returns(usuarioId);
+        _usuarioRepository.GetByIdAsync(usuarioId).Returns((Usuario?)null);
+
+        Func<Task> act = async () => await _service.CambiarContrasenaAsync(dto);
+
+        await act.Should().ThrowAsync<KeyNotFoundException>()
+            .WithMessage("Usuario no encontrado.");
+    }
+
+    [Fact]
+    public async Task CambiarContrasenaAsync_ContrasenaActualIncorrecta_LanzaInvalidOperation()
+    {
+        var dto = new CambiarContrasenaDto
+        {
+            ContrasenaActual = "WrongPass",
+            ContrasenaNueva = "NewPass123!"
+        };
+        var usuario = CrearUsuarioEntidad(); // password hash es "Password123!"
+        var usuarioId = usuario.Id;
+        _usuarioActualService.ObtenerUsuarioId().Returns(usuarioId);
+        _usuarioRepository.GetByIdAsync(usuarioId).Returns(usuario);
+
+        Func<Task> act = async () => await _service.CambiarContrasenaAsync(dto);
+
+        await act.Should().ThrowAsync<InvalidOperationException>()
+            .WithMessage("La contraseña actual es incorrecta.");
+    }
+
+    [Fact]
+    public async Task CambiarContrasenaAsync_ContrasenaCorrecta_ActualizaYGuarda()
+    {
+        var dto = new CambiarContrasenaDto
+        {
+            ContrasenaActual = "Password123!",
+            ContrasenaNueva = "NewPass123!"
+        };
+        var usuario = CrearUsuarioEntidad();
+        usuario.DebeCambiarContrasena = true; // inicialmente true
+        var usuarioId = usuario.Id;
+        _usuarioActualService.ObtenerUsuarioId().Returns(usuarioId);
+        _usuarioRepository.GetByIdAsync(usuarioId).Returns(usuario);
+
+        await _service.CambiarContrasenaAsync(dto);
+
+        // La nueva contraseña debe ser diferente del hash original
+        BCrypt.Net.BCrypt.Verify("Password123!", usuario.PasswordHash).Should().BeFalse();
+        BCrypt.Net.BCrypt.Verify("NewPass123!", usuario.PasswordHash).Should().BeTrue();
+        usuario.DebeCambiarContrasena.Should().BeFalse();
+        usuario.UltimoAcceso.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
+        _usuarioRepository.Received().Update(usuario);
+        await _usuarioRepository.Received().SaveChangesAsync();
     }
 }

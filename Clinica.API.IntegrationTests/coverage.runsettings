@@ -16,13 +16,6 @@
 
             [Clinica.Infrastructure]Migrations.*
             
-            [Clinica.API]Controllers.ComprobantesController
-            [Clinica.API]Controllers.AuditoriaController
-            [Clinica.API]Controllers.AtencionesController
-            
-            [Clinica.API]Services.Imp.ComprobanteService
-            [Clinica.API]Services.Imp.AuditoriaService
-            [Clinica.API]Services.Imp.AtencionService
           </Exclude>
 
           <ExcludeByAttribute>

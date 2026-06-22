@@ -24,23 +24,25 @@ public class PagosControllerTests
     [Fact]
     public async Task GetByPaciente_DebeRetornarOkConApiResponse()
     {
-        // Arrange
         var pacienteId = Guid.NewGuid();
         var pagos = new List<PagoResponseDto> { CrearResponseDto(pacienteId: pacienteId) };
 
         _pagoService.ObtenerPorPacienteAsync(pacienteId).Returns(pagos);
 
-        // Act
         var resultado = await _controller.GetByPaciente(pacienteId);
 
-        // Assert
         var okResult = resultado.Should().BeOfType<OkObjectResult>().Subject;
-        var response = okResult.Value.Should().BeOfType<ApiResponse<object>>().Subject;
+        var response = okResult.Value!;
 
-        response.Exitoso.Should().BeTrue();
-        response.Codigo.Should().Be(200);
-        response.Mensaje.Should().Be("Pagos del paciente obtenidos correctamente.");
-        response.Data.Should().BeAssignableTo<IEnumerable<PagoResponseDto>>();
+        var exitoso = response.GetType().GetProperty("Exitoso")!.GetValue(response);
+        exitoso.Should().Be(true);
+
+        var mensaje = response.GetType().GetProperty("Mensaje")!.GetValue(response);
+        mensaje.Should().Be("Pagos del paciente obtenidos correctamente.");
+
+        var data = response.GetType().GetProperty("Data")!.GetValue(response);
+        data.Should().BeAssignableTo<IEnumerable<PagoResponseDto>>();
+        (data as IEnumerable<PagoResponseDto>)!.Should().HaveCount(1);
     }
 
     [Fact]

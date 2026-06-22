@@ -7,20 +7,7 @@
           <Format>cobertura</Format>
 
           <Exclude>
-            [Clinica.Infrastructure]*,
-            
-            [Clinica.API]Clinica.API.Controllers.ComprobantesController,
-            [Clinica.API]Clinica.API.Controllers.AuditoriaController,
-            [Clinica.API]Clinica.API.Controllers.AtencionesController,
-            [Clinica.API]Clinica.API.Filters.AuditoriaAttribute,
-            [Clinica.API]Clinica.API.Filters.AuditoriaAutomaticaFilter,
-            [Clinica.API]Clinica.API.Services.Imp.ComprobanteService,
-            [Clinica.API]Clinica.API.Services.Imp.AuditoriaService,
-            [Clinica.API]Clinica.API.Services.Imp.AtencionService,
-
-            [Clinica.Domain]*Auditoria*,
-            [Clinica.Domain]*Comprobante*,
-            [Clinica.Domain]*Atencion*
+            [Clinica.Infrastructure]*
           </Exclude>
 
           <ExcludeByAttribute>

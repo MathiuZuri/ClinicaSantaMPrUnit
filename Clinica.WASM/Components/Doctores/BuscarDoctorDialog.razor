@@ -1,0 +1,66 @@
+﻿@using EstadoDoctor = Clinica.WASM.DTOs.Doctores.EstadoDoctor
+@using Clinica.Domain.Enums
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">Búsqueda avanzada de doctores</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="NombreFiltro" Label="Nombre" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="EspecialidadFiltro" Label="Especialidad" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudSelect T="EstadoDoctor?" @bind-Value="EstadoFiltro" Label="Estado" Variant="Variant.Outlined" Clearable="true">
+                    <MudSelectItem T="EstadoDoctor?" Value="@((EstadoDoctor?)null)">Todos</MudSelectItem>
+                    <MudSelectItem T="EstadoDoctor?" Value="EstadoDoctor.Activo">Activo</MudSelectItem>
+                    <MudSelectItem T="EstadoDoctor?" Value="EstadoDoctor.Inactivo">Inactivo</MudSelectItem>
+                    <MudSelectItem T="EstadoDoctor?" Value="EstadoDoctor.ContratoVencido">Contrato Vencido</MudSelectItem>
+                    <MudSelectItem T="EstadoDoctor?" Value="EstadoDoctor.Suspendido">Suspendido</MudSelectItem>
+                    <MudSelectItem T="EstadoDoctor?" Value="EstadoDoctor.Eliminado">Eliminado</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="BuscarAsync" Class="rounded-lg">
+                    Buscar
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+
+        @if (Resultado?.Datos != null && Resultado.Datos.Any())
+        {
+            <MudTable Items="Resultado.Datos" Hover="true" Striped="true" Elevation="0" Class="mt-4">
+                <HeaderContent>
+                    <MudTh>Código</MudTh>
+                    <MudTh>Nombre</MudTh>
+                    <MudTh>Especialidad</MudTh>
+                    <MudTh>Estado</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>@context.CodigoDoctor</MudTd>
+                    <MudTd>@context.NombreCompleto</MudTd>
+                    <MudTd>@context.Especialidad</MudTd>
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                                 Color="@(context.Estado == EstadoDoctor.Activo ? Color.Success : Color.Warning)">
+                            @context.Estado
+                        </MudChip>
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new[] { 5, 10, 20 }" RowsPerPageString="Doctores por página" />
+                </PagerContent>
+            </MudTable>
+        }
+        else if (!string.IsNullOrEmpty(MensajeVacio))
+        {
+            <MudAlert Severity="Severity.Info" Class="mt-4">@MensajeVacio</MudAlert>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cerrar" Color="Color.Primary">Cerrar</MudButton>
+    </DialogActions>
+</MudDialog>

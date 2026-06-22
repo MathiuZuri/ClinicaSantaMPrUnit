@@ -1,4 +1,4 @@
-namespace Clinica.Domain.Entities;
+namespace Clinica.Domain.Entities.ATENCIONES;
 
 public class TactoVaginal
 {

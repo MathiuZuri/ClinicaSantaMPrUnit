@@ -1,4 +1,5 @@
 ﻿using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Clinica.Domain.Interfaces;
 using Clinica.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -56,5 +57,17 @@ public class AtencionRepository : GenericRepository<Atencion>, IAtencionReposito
             .Include(x => x.Ecografias)
             .Include(x => x.ImpresionDiagnostica)
             .FirstOrDefaultAsync(x => x.Id == id);
+    }
+    
+    public async Task<IEnumerable<Atencion>> ObtenerTodasConRelacionesAsync()
+    {
+        return await Context.Atenciones
+            .Include(a => a.Paciente)
+            .Include(a => a.Doctor)
+            .ThenInclude(d => d.Usuario)
+            .Include(a => a.ServicioClinico)
+            .Include(a => a.Pagos)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

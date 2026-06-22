@@ -31,4 +31,21 @@ public class AuthApiService
 
         return await response.Content.ReadFromJsonAsync<ApiResponse<RespuestaInicioSesionDto>>();
     }
+    
+    public async Task<(bool Exitoso, string Mensaje)> CambiarContrasenaAsync(CambiarContrasenaDto dto)
+    {
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync($"{ApiEndpoints.Auth}/cambiar-contrasena", dto);
+            if (response.IsSuccessStatusCode)
+                return (true, "Contraseña actualizada correctamente.");
+
+            var error = await response.Content.ReadFromJsonAsync<ApiResponse<object>>();
+            return (false, error?.Mensaje ?? "Error al cambiar la contraseña.");
+        }
+        catch (Exception ex)
+        {
+            return (false, $"Error de conexión: {ex.Message}");
+        }
+    }
 }

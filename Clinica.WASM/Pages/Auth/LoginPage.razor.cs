@@ -46,7 +46,14 @@ public partial class LoginPage : ComponentBase
                     respuesta.Data.Permisos
                 );
 
-                NavigationManager.NavigateTo(AppRoutes.Dashboard, replace: true);
+                if (respuesta.Data.DebeCambiarContrasena)
+                {
+                    NavigationManager.NavigateTo("/cambiar-contrasena", replace: true);
+                }
+                else
+                {
+                    NavigationManager.NavigateTo(AppRoutes.Dashboard, replace: true);
+                }
                 return;
             }
 

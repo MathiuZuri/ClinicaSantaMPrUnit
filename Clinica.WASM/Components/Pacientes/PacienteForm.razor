@@ -91,6 +91,65 @@
                               AdornmentIcon="@Icons.Material.Filled.Map"
                               AdornmentColor="Color.Primary" />
             </MudItem>
+
+            @* Datos de Filiación (Panel Expandible) *@
+            <MudItem xs="12">
+                <MudExpansionPanels Class="mt-2">
+                    <MudExpansionPanel Text="Datos de Filiación (opcional)">
+                        <MudGrid>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudTextField @bind-Value="Model.LugarNacimiento"
+                                              Label="Lugar de Nacimiento"
+                                              Variant="Variant.Outlined"
+                                              Disabled="@IsProcessing" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudTextField @bind-Value="Model.GradoInstruccion"
+                                              Label="Grado de Instrucción"
+                                              Variant="Variant.Outlined"
+                                              Disabled="@IsProcessing" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudTextField @bind-Value="Model.Ocupacion"
+                                              Label="Ocupación"
+                                              Variant="Variant.Outlined"
+                                              Disabled="@IsProcessing" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudTextField @bind-Value="Model.Religion"
+                                              Label="Religión"
+                                              Variant="Variant.Outlined"
+                                              Disabled="@IsProcessing" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudSelect T="string" 
+                                           @bind-Value="Model.EstadoCivil"
+                                           Label="Estado Civil"
+                                           Variant="Variant.Outlined"
+                                           Disabled="@IsProcessing">
+                                    <MudSelectItem Value="@("Soltera")">Soltera</MudSelectItem>
+                                    <MudSelectItem Value="@("Casada")">Casada</MudSelectItem>
+                                    <MudSelectItem Value="@("Conviviente")">Conviviente</MudSelectItem>
+                                    <MudSelectItem Value="@("Divorciada")">Divorciada</MudSelectItem>
+                                    <MudSelectItem Value="@("Viuda")">Viuda</MudSelectItem>
+                                </MudSelect>
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudTextField @bind-Value="Model.NombrePareja"
+                                              Label="Nombre de la Pareja"
+                                              Variant="Variant.Outlined"
+                                              Disabled="@IsProcessing" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudTextField @bind-Value="Model.CelularPareja"
+                                              Label="Celular de la Pareja"
+                                              Variant="Variant.Outlined"
+                                              Disabled="@IsProcessing" />
+                            </MudItem>
+                        </MudGrid>
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            </MudItem>
         </MudGrid>
     </div>
 

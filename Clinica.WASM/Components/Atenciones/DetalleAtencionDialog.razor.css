@@ -1,0 +1,51 @@
+﻿.luxury-dialog {
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.12);
+    box-shadow: var(--mud-elevation-24) !important;
+}
+.border-top-divider { border-top: 1px solid var(--mud-palette-divider); }
+.uppercase-lbl { text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.7rem !important; }
+
+.border-admin-box {
+    border: 1px solid var(--mud-palette-divider);
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.3) !important;
+}
+
+/* Matriz de estados financieros */
+.financial-badge {
+    font-family: 'Consolas', monospace;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 6px;
+}
+.badge-total { background-color: rgba(var(--mud-palette-primary-rgb), 0.08); color: var(--mud-palette-primary); border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.2); }
+.badge-paid { background-color: rgba(var(--mud-palette-success-rgb), 0.08); color: var(--mud-palette-success); border: 1px solid rgba(var(--mud-palette-success-rgb), 0.2); }
+.badge-debt { background-color: rgba(var(--mud-palette-error-rgb), 0.08); color: var(--mud-palette-error); border: 1px solid rgba(var(--mud-palette-error-rgb), 0.2); }
+
+/* Configuración de paneles de expansión */
+::deep .mud-expansion-panel-header { font-weight: 700 !important; }
+.panel-contrast {
+    background-color: var(--mud-palette-surface) !important;
+    border: 1px solid var(--mud-palette-divider) !important;
+    margin-bottom: 4px !important;
+    border-radius: 8px !important;
+}
+
+.generic-container { background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.5); border: 1px solid var(--mud-palette-divider); font-size: 0.85rem; }
+.font-sm-dialog { font-size: 0.85rem; }
+.text-danger-box { background-color: rgba(var(--mud-palette-error-rgb), 0.05); border: 1px solid rgba(var(--mud-palette-error-rgb), 0.15); color: var(--mud-palette-error); font-size: 0.85rem; font-weight: 700; }
+.diagnostic-main-box { background-color: rgba(var(--mud-palette-primary-rgb), 0.03); border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.1); }
+.recipe-box { background-color: rgba(var(--mud-palette-tertiary-rgb), 0.03); border: 1px solid rgba(var(--mud-palette-tertiary-rgb), 0.1); }
+.text-muted-dialog { color: var(--mud-palette-text-secondary); }
+
+/* Estilización de mini tablas nativas dentro de los paneles colapsables */
+.table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.clinical-mini-table { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 0.85rem; text-align: left; }
+.clinical-mini-table th { padding: 8px; background: rgba(var(--mud-palette-drawer-background-rgb), 0.6); font-weight: 700; border-bottom: 2px solid var(--mud-palette-divider); }
+.clinical-mini-table td { padding: 8px; border-bottom: 1px solid var(--mud-palette-divider); }
+
+.text-truncate-dialog { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+
+@media (max-width: 600px) {
+    .text-truncate-dialog { white-space: normal !important; overflow: visible !important; }
+}

@@ -28,7 +28,7 @@ public class PacienteService : IPacienteService
 
     public async Task<IEnumerable<PacienteResponseDto>> ObtenerTodosAsync()
     {
-        var pacientes = await _pacienteRepository.GetAllAsync();
+        var pacientes = await _pacienteRepository.ObtenerTodosConHistorialAsync();
 
         return pacientes.Select(x => new PacienteResponseDto
         {
@@ -54,7 +54,8 @@ public class PacienteService : IPacienteService
 
             Estado = x.Estado,
             FechaRegistro = x.FechaRegistro,
-            CodigoHistorial = x.HistorialClinico?.CodigoHistorial
+            CodigoHistorial = x.HistorialClinico?.CodigoHistorial,
+            HistorialClinicoId = x.HistorialClinico?.Id ?? Guid.Empty
         });
     }
 
@@ -180,7 +181,8 @@ public class PacienteService : IPacienteService
 
             Estado = paciente.Estado,
             FechaRegistro = paciente.FechaRegistro,
-            CodigoHistorial = paciente.HistorialClinico?.CodigoHistorial
+            CodigoHistorial = paciente.HistorialClinico?.CodigoHistorial,
+            HistorialClinicoId = paciente.HistorialClinico?.Id ?? Guid.Empty
         };
     }
     

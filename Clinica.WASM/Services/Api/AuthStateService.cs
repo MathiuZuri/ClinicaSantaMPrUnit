@@ -1,4 +1,6 @@
-﻿namespace Clinica.WASM.Services.Auth;
+﻿using Clinica.WASM.Services.Auth;
+
+namespace Clinica.WASM.Services.Api;
 
 public class AuthStateService
 {

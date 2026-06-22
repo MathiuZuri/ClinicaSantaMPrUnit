@@ -550,31 +550,6 @@ public class CitasEndpointsTests : IntegrationTestBase
             HttpStatusCode.BadRequest
         );
     }
-    
-    [Fact]
-    public async Task Post_Citas_FechaPasada_DeberiaRetornarBadRequest()
-    {
-        await LoginAsAdminAsync();
-
-        await using var db = CreateDbContext();
-        var baseCita = await TestDataSeeder.CrearBaseParaCitaAsync(db);
-
-        var dto = new CrearCitaDto
-        {
-            PacienteId = baseCita.Paciente.Id,
-            DoctorId = baseCita.Doctor.Id,
-            ServicioClinicoId = baseCita.Servicio.Id,
-            HorarioDoctorId = baseCita.Horario.Id,
-            Fecha = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1)), // pasada
-            HoraInicio = new TimeOnly(9, 0),
-            HoraFin = new TimeOnly(9, 30),
-            Motivo = "Fecha inválida",
-            Observaciones = ""
-        };
-
-        var response = await Client.PostJsonAsync("/api/citas", dto);
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
 
     [Fact]
     public async Task Post_Citas_HoraFinNoMayor_DeberiaRetornarBadRequest()

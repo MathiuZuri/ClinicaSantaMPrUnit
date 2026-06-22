@@ -1,7 +1,9 @@
 ﻿using System.Net;
 using Clinica.API.IntegrationTests.Fixtures;
 using Clinica.API.IntegrationTests.Helpers;
+using Clinica.Domain.DTOs.Comunes;
 using Clinica.Domain.DTOs.Doctores;
+using Clinica.Domain.DTOs.Usuarios;
 using Clinica.Domain.Enums;
 using FluentAssertions;
 
@@ -620,5 +622,183 @@ public class DoctoresEndpointsTests : IntegrationTestBase
         var response = await Client.PutJsonAsync($"/api/doctores/{doctor.Id}", dto);
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+    
+    [Fact]
+    public async Task Post_Contratar_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Test",
+            Apellidos = "Test",
+            Especialidad = "Test",
+            UserName = "test",
+            CorreoUsuario = "test@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = DateTime.UtcNow
+        };
+        var response = await Client.PostJsonAsync("/api/doctores/contratar", dto);
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task Get_BuscarDoctores_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var response = await Client.GetAsync("/api/doctores/buscar?pagina=1&cantidadPorPagina=5");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+    
+    [Fact]
+    public async Task Post_Contratar_Valido_DeberiaCrearDoctorYUsuario()
+    {
+        // Arrange
+        await LoginAsAdminAsync();
+
+        var dto = new ContratarDoctorDto
+        {
+            CMP = $"CMP{Random.Shared.Next(100000, 999999)}",
+            Nombres = "Carlos",
+            Apellidos = "Mamani Flores",
+            Especialidad = "Ginecología",
+            Celular = "987654321",
+            Correo = $"carlos.mamani.{Guid.NewGuid():N}@test.com",
+            FechaInicioContrato = DateTime.UtcNow,
+            UserName = $"carlos_{Guid.NewGuid():N}"[..20],
+            CorreoUsuario = $"carlos.usuario.{Guid.NewGuid():N}@test.com",
+            Password = "Password123!"
+        };
+
+        // Act
+        var postResponse = await Client.PostJsonAsync("/api/doctores/contratar", dto);
+
+        // Assert
+        postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
+        await JsonTestHelper.AssertSuccessAsync(postResponse);
+
+        var data = await JsonTestHelper.ReadDataAsync(postResponse);
+        data.TryGetProperty("id", out var idProperty)
+            .Should().BeTrue("la respuesta debe devolver el id del doctor");
+
+        var doctorId = idProperty.GetGuid();
+
+        // Verificar que el doctor existe
+        var getResponse = await Client.GetAsync($"/api/doctores/{doctorId}");
+        getResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var doctor = await getResponse.ReadDataAsJsonAsync<DoctorResponseDto>();
+        doctor.Should().NotBeNull();
+        doctor!.CMP.Should().Be(dto.CMP);
+        doctor.Nombres.Should().Be(dto.Nombres);
+        doctor.Apellidos.Should().Be(dto.Apellidos);
+        doctor.Especialidad.Should().Be(dto.Especialidad);
+
+        // Verificar que el usuario fue creado (podemos consultar la lista de usuarios)
+        var usuariosResponse = await Client.GetAsync("/api/usuarios");
+        var usuarios = await usuariosResponse.ReadDataAsJsonAsync<List<UsuarioResponseDto>>();
+        usuarios.Should().Contain(u => u.UserName == dto.UserName && u.Correo == dto.CorreoUsuario);
+    }
+    
+    [Fact]
+    public async Task Post_Contratar_CmpDuplicado_DeberiaRetornarBadRequest()
+    {
+        await LoginAsAdminAsync();
+
+        var cmp = $"CMP{Random.Shared.Next(100000, 999999)}";
+        await using (var db = CreateDbContext())
+        {
+            await TestDataSeeder.CrearDoctorAsync(db, cmp: cmp);
+        }
+
+        var dto = new ContratarDoctorDto
+        {
+            CMP = cmp,
+            Nombres = "Otro",
+            Apellidos = "Doctor",
+            Especialidad = "Pediatría",
+            UserName = $"otro_{Guid.NewGuid():N}"[..20],
+            CorreoUsuario = $"otro.{Guid.NewGuid():N}@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = DateTime.UtcNow
+        };
+
+        var response = await Client.PostJsonAsync("/api/doctores/contratar", dto);
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Post_Contratar_UserNameExistente_DeberiaRetornarBadRequest()
+    {
+        await LoginAsAdminAsync();
+
+        // Usar el nombre de usuario de admin que ya existe
+        var dto = new ContratarDoctorDto
+        {
+            CMP = $"CMP{Random.Shared.Next(100000, 999999)}",
+            Nombres = "Test",
+            Apellidos = "User",
+            Especialidad = "Test",
+            UserName = "admin", // ya existe
+            CorreoUsuario = $"nuevo.{Guid.NewGuid():N}@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = DateTime.UtcNow
+        };
+
+        var response = await Client.PostJsonAsync("/api/doctores/contratar", dto);
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+    
+    [Fact]
+    public async Task Get_BuscarDoctores_SinFiltros_DeberiaRetornarPaginado()
+    {
+        await LoginAsAdminAsync();
+
+        var response = await Client.GetAsync("/api/doctores/buscar?pagina=1&cantidadPorPagina=5");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        await JsonTestHelper.AssertSuccessAsync(response);
+
+        var paginado = await response.ReadDataAsJsonAsync<PaginacionResponseDto<DoctorResponseDto>>();
+        paginado.Should().NotBeNull();
+        paginado!.Pagina.Should().Be(1);
+        paginado.CantidadPorPagina.Should().Be(5);
+        paginado.Datos.Should().NotBeNull();
+    }
+
+    [Fact]
+    public async Task Get_BuscarDoctores_PorNombre_DeberiaFiltrar()
+    {
+        await LoginAsAdminAsync();
+
+        // Crear un doctor con nombre específico
+        await using var db = CreateDbContext();
+        var doctor = await TestDataSeeder.CrearDoctorAsync(db,
+            cmp: $"CMP{Random.Shared.Next(100000, 999999)}",
+            nombres: "Zulema",
+            apellidos: "Unica",
+            especialidad: "Obstetricia");
+
+        var response = await Client.GetAsync($"/api/doctores/buscar?nombre=Zulema&pagina=1&cantidadPorPagina=10");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var paginado = await response.ReadDataAsJsonAsync<PaginacionResponseDto<DoctorResponseDto>>();
+        paginado.Should().NotBeNull();
+        paginado!.Datos.Should().Contain(d => d.Id == doctor.Id);
+    }
+
+    [Fact]
+    public async Task Get_BuscarDoctores_PorEstado_DeberiaFiltrarSoloActivos()
+    {
+        await LoginAsAdminAsync();
+
+        var response = await Client.GetAsync($"/api/doctores/buscar?estado={(int)EstadoDoctor.Activo}&pagina=1&cantidadPorPagina=10");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var paginado = await response.ReadDataAsJsonAsync<PaginacionResponseDto<DoctorResponseDto>>();
+        paginado.Should().NotBeNull();
+        paginado!.Datos.Should().OnlyContain(d => d.Estado == EstadoDoctor.Activo);
+    }
+    
     
 }

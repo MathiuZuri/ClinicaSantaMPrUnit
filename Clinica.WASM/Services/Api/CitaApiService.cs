@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Clinica.WASM.Constants;
 using Clinica.WASM.DTOs.Citas;
 using Clinica.WASM.DTOs.Common;

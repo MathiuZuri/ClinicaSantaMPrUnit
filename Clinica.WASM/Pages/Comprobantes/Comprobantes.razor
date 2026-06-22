@@ -1,0 +1,181 @@
+﻿@page "/comprobantes"
+@using Clinica.WASM.DTOs.Comprobantes
+@using Clinica.Domain.Enums
+@using Clinica.WASM.Components.Comprobantes
+@inject ComprobanteApiService ComprobanteService
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject AuthStateService AuthState
+
+<PageTitle>Gestión de Comprobantes | SIGEC</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-8 page-fade-in">
+    <div class="d-flex flex-column flex-sm-row justify-space-between align-start align-sm-center gap-4 mb-6">
+        <div class="d-flex align-center gap-3">
+            <MudIcon Icon="@Icons.Material.Filled.RequestPage" Color="Color.Primary" Size="Size.Large" Class="receipt-icon-bounce" />
+            <div>
+                <MudText Typo="Typo.h4" Color="Color.Info" Class="fw-800">
+                    Gestión de Comprobantes
+                </MudText>
+                <MudText Typo="Typo.body2" Color="Color.Info">
+                    Administración, emisión y control de documentos tributarios y estados de cuenta.
+                </MudText>
+            </div>
+        </div>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add"
+                   Class="rounded-lg shadow-md px-5 py-2 hover-scale w-100 w-sm-auto"
+                   OnClick="AbrirDialogoEmision">
+            Nuevo Comprobante
+        </MudButton>
+    </div>
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Class="mb-4 rounded-lg shadow-sm" Dense="true">
+            @ErrorMessage
+        </MudAlert>
+    }
+
+    <MudCard Elevation="4" Class="rounded-xl overflow-hidden luxury-tabs-container">
+        <MudTabs Elevation="0" Outlined="false" ApplyEffectsToContainer="true" PanelClass="pa-4" Centered="false">
+            <MudTabPanel Text="Boletas de Pago" Icon="@Icons.Material.Filled.Receipt" Class="tab-panel-animate">
+                <ComprobantesTable Tipo="TipoComprobante.BoletaPago"
+                                   Comprobantes="@TodosComprobantes"
+                                   IsLoading="@IsLoading"
+                                   OnDetalle="VerDetalle"
+                                   OnPdf="DescargarPdf"
+                                   OnAnular="AnularComprobante" />
+            </MudTabPanel>
+            <MudTabPanel Text="Constancias" Icon="@Icons.Material.Filled.AssignmentTurnedIn" Class="tab-panel-animate">
+                <ComprobantesTable Tipo="TipoComprobante.ConstanciaCita"
+                                   Comprobantes="@TodosComprobantes"
+                                   IsLoading="@IsLoading"
+                                   OnDetalle="VerDetalle"
+                                   OnPdf="DescargarPdf"
+                                   OnAnular="AnularComprobante" />
+            </MudTabPanel>
+            <MudTabPanel Text="Resúmenes de Atención" Icon="@Icons.Material.Filled.Description" Class="tab-panel-animate">
+                <ComprobantesTable Tipo="TipoComprobante.ResumenAtencion"
+                                   Comprobantes="@TodosComprobantes"
+                                   IsLoading="@IsLoading"
+                                   OnDetalle="VerDetalle"
+                                   OnPdf="DescargarPdf"
+                                   OnAnular="AnularComprobante" />
+            </MudTabPanel>
+            <MudTabPanel Text="Estados de Cuenta" Icon="@Icons.Material.Filled.AccountBalance" Class="tab-panel-animate">
+                <ComprobantesTable Tipo="TipoComprobante.EstadoCuenta"
+                                   Comprobantes="@TodosComprobantes"
+                                   IsLoading="@IsLoading"
+                                   OnDetalle="VerDetalle"
+                                   OnPdf="DescargarPdf"
+                                   OnAnular="AnularComprobante" />
+            </MudTabPanel>
+        </MudTabs>
+    </MudCard>
+</MudContainer>
+
+@code {
+    // La lógica permanece exactamente igual a tu archivo original
+    private bool IsLoading;
+    private string? ErrorMessage;
+    private List<ComprobanteDto> TodosComprobantes = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var tieneSesion = await AuthState.EstaAutenticadoAsync();
+        if (!tieneSesion)
+        {
+            ErrorMessage = "Debes iniciar sesión para ver los comprobantes.";
+            return;
+        }
+        await CargarTodos();
+    }
+
+    private async Task CargarTodos()
+    {
+        IsLoading = true;
+        ErrorMessage = null;
+        try
+        {
+            TodosComprobantes = await ComprobanteService.ObtenerTodosAsync();
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            ErrorMessage = "No tienes permisos para ver comprobantes o tu sesión ha expirado.";
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Error al cargar comprobantes: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task AbrirDialogoEmision()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<EmitirComprobanteDialog>("Emitir Comprobante", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Comprobante emitido correctamente", Severity.Success);
+            await CargarTodos();
+        }
+    }
+
+    private async Task VerDetalle(ComprobanteDto comprobante)
+    {
+        var parameters = new DialogParameters { ["Comprobante"] = comprobante };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Small, FullWidth = true };
+        await DialogService.ShowAsync<DetalleComprobanteDialog>("Detalle del Comprobante", parameters, options);
+    }
+
+    private async Task DescargarPdf(ComprobanteDto comprobante)
+    {
+        byte[]? pdfBytes = null;
+        try
+        {
+            IsLoading = true;
+            pdfBytes = comprobante.TipoComprobante switch
+            {
+                nameof(TipoComprobante.BoletaPago) => await ComprobanteService.GenerarPdfBoletaPagoAsync(comprobante.Id),
+                nameof(TipoComprobante.ConstanciaCita) => await ComprobanteService.GenerarPdfConstanciaCitaAsync(comprobante.Id),
+                nameof(TipoComprobante.ResumenAtencion) => await ComprobanteService.GenerarPdfResumenAtencionAsync(comprobante.Id),
+                nameof(TipoComprobante.EstadoCuenta) => await ComprobanteService.GenerarPdfEstadoCuentaAsync(comprobante.Id),
+                _ => null
+            };
+            if (pdfBytes != null)
+            {
+                var base64 = Convert.ToBase64String(pdfBytes);
+                await JSRuntime.InvokeVoidAsync("saveAsFile", $"{comprobante.CodigoComprobante}.pdf", base64);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error al descargar PDF: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task AnularComprobante(ComprobanteDto comprobante)
+    {
+        var parameters = new DialogParameters { ["ComprobanteId"] = comprobante.Id };
+        var options = new DialogOptions { MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<AnularComprobanteDialog>("Anular Comprobante", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Comprobante anulado correctamente", Severity.Success);
+            await CargarTodos();
+        }
+    }
+}

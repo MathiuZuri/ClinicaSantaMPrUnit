@@ -1,4 +1,5 @@
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

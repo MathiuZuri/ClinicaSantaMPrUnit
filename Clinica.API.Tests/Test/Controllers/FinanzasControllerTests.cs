@@ -325,4 +325,17 @@ public class FinanzasControllerTests
         var response = ok.Value.Should().BeOfType<ApiResponse<object>>().Subject;
         response.Mensaje.Should().Be("Ajustes financieros del pago obtenidos correctamente.");
     }
+    
+    [Fact]
+    public void ObtenerTasaIGV_DebeRetornarTasaCorrecta()
+    {
+        // El método es sincrónico, no lleva await
+        var result = _controller.ObtenerTasaIgv();
+
+        var ok = result.Should().BeOfType<OkObjectResult>().Subject;
+        var apiResponse = ok.Value.Should().BeOfType<ApiResponse<object>>().Subject;
+        apiResponse.Exitoso.Should().BeTrue();
+        apiResponse.Mensaje.Should().Be("Tasa de IGV actual.");
+        apiResponse.Data.Should().Be(18m);
+    }
 }

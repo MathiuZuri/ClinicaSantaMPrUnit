@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Clinica.WASM.Constants;
+using Clinica.WASM.DTOs.Auditoria;
 using Clinica.WASM.DTOs.Common;
 using Clinica.WASM.DTOs.Doctores;
 
@@ -52,5 +53,27 @@ public class DoctorApiService
 
         var mensaje = await _apiErrorService.ObtenerMensajeErrorAsync(response);
         return (false, mensaje);
+    }
+    
+    public async Task<(bool Exitoso, string Mensaje)> ContratarAsync(ContratarDoctorDto dto)
+    {
+        var response = await _httpClient.PostAsJsonAsync($"{ApiEndpoints.Doctores}/contratar", dto);
+        if (response.IsSuccessStatusCode)
+            return (true, "Médico contratado y usuario creado exitosamente.");
+
+        var mensaje = await _apiErrorService.ObtenerMensajeErrorAsync(response);
+        return (false, mensaje);
+    }
+
+    public async Task<PaginacionResponseDto<DoctorResponseDto>> BuscarAsync(
+        string? nombre, string? especialidad, EstadoDoctor? estado, PaginacionRequestDto request)
+    {
+        var url = $"{ApiEndpoints.Doctores}/buscar?pagina={request.Pagina}&cantidadPorPagina={request.CantidadPorPagina}";
+        if (!string.IsNullOrWhiteSpace(nombre)) url += $"&nombre={Uri.EscapeDataString(nombre)}";
+        if (!string.IsNullOrWhiteSpace(especialidad)) url += $"&especialidad={Uri.EscapeDataString(especialidad)}";
+        if (estado.HasValue) url += $"&estado={estado.Value}";
+
+        var response = await _httpClient.GetFromJsonAsync<ApiResponse<PaginacionResponseDto<DoctorResponseDto>>>(url);
+        return response?.Data ?? new();
     }
 }

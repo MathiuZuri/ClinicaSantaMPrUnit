@@ -1,5 +1,6 @@
 using Clinica.Domain.DTOs.Atenciones.Modulos;
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Clinica.Domain.Interfaces.ATENCIONES;
 
 namespace Clinica.API.Services.Imp.ATENCIONES;

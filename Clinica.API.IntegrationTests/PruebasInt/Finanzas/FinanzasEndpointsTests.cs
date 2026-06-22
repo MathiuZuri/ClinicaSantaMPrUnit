@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Clinica.API.IntegrationTests.Fixtures;
 using Clinica.API.IntegrationTests.Helpers;
+using Clinica.Domain.DTOs.Comunes;
 using Clinica.Domain.DTOs.Finanzas;
 using Clinica.Domain.Enums;
 using FluentAssertions;
@@ -338,9 +339,7 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             pacienteId: baseData.Paciente.Id,
             doctorId: baseData.Doctor.Id,
             servicioClinicoId: baseData.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 100,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         await TestDataSeeder.CrearPagoAsync(
@@ -395,9 +394,7 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             pacienteId: baseData.Paciente.Id,
             doctorId: baseData.Doctor.Id,
             servicioClinicoId: baseData.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 200,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         await TestDataSeeder.CrearPagoAsync(
@@ -439,9 +436,7 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             pacienteId: baseData.Paciente.Id,
             doctorId: baseData.Doctor.Id,
             servicioClinicoId: baseData.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 150,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         await TestDataSeeder.CrearPagoAsync(
@@ -482,9 +477,7 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             pacienteId: baseData.Paciente.Id,
             doctorId: baseData.Doctor.Id,
             servicioClinicoId: baseData.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 100,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         await TestDataSeeder.CrearPagoAsync(
@@ -570,9 +563,7 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             pacienteId: baseData.Paciente.Id,
             doctorId: baseData.Doctor.Id,
             servicioClinicoId: baseData.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 100,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         var fecha = DateTime.UtcNow.Date.AddHours(9);
@@ -838,9 +829,7 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             pacienteId: baseData.Paciente.Id,
             doctorId: baseData.Doctor.Id,
             servicioClinicoId: baseData.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 100,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         var pago = await TestDataSeeder.CrearPagoAsync(
@@ -873,4 +862,165 @@ public class FinanzasEndpointsTests : IntegrationTestBase
             x.Id == ajuste.Id &&
             x.AtencionId == atencion.Id);
     }
+    
+    [Fact]
+    public async Task Get_PagosPendientes_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var response = await Client.GetAsync("/api/finanzas/pagos-pendientes");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task Get_LibroDiario_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var response = await Client.GetAsync("/api/finanzas/libro-diario?fecha=2026-06-20");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task Post_AjustesFinancieros_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var dto = new RegistrarAjusteFinancieroDto
+        {
+            PagoId = Guid.NewGuid(),
+            TipoAjuste = TipoAjusteFinanciero.Descuento,
+            MontoAjuste = 10,
+            Motivo = "Motivo"
+        };
+        var response = await Client.PostJsonAsync("/api/finanzas/ajustes-financieros", dto);
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task Get_PagosPendientesPaginado_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var response = await Client.GetAsync("/api/finanzas/pagos-pendientes-paginado?pagina=1&cantidadPorPagina=5");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task Get_EstadoPagoAtencionDetallado_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var response = await Client.GetAsync($"/api/finanzas/atencion/{Guid.NewGuid()}/estado-pago-detallado");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task Get_TasaIgv_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+        var response = await Client.GetAsync("/api/finanzas/tasa-igv");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+    
+    [Fact]
+    public async Task Get_PagosPendientesPaginado_DeberiaRetornarPaginaCorrecta()
+    {
+        await LoginAsAdminAsync();
+
+        await using var db = CreateDbContext();
+        var baseData = await TestDataSeeder.CrearBasePacienteDoctorServicioAsync(db);
+
+        // Crear varios pagos pendientes
+        for (int i = 0; i < 5; i++)
+        {
+            await TestDataSeeder.CrearPagoAsync(db,
+                pacienteId: baseData.Paciente.Id,
+                servicioClinicoId: baseData.Servicio.Id,
+                montoTotal: 100,
+                montoPagado: 50,
+                estado: EstadoPago.Parcial);
+        }
+
+        var response = await Client.GetAsync("/api/finanzas/pagos-pendientes-paginado?pagina=1&cantidadPorPagina=2");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var paginado = await response.ReadDataAsJsonAsync<PaginacionResponseDto<PagoFinanzasDto>>();
+        paginado.Should().NotBeNull();
+        paginado!.Datos.Should().HaveCount(2);
+        paginado.TotalRegistros.Should().BeGreaterThanOrEqualTo(5);
+        paginado.TotalPaginas.Should().BeGreaterThanOrEqualTo(3);
+    }
+    
+    [Fact]
+    public async Task Get_EstadoPagoAtencionDetallado_DeberiaRetornarTipoUltimoPago()
+    {
+        await LoginAsAdminAsync();
+
+        await using var db = CreateDbContext();
+        var baseData = await TestDataSeeder.CrearBasePacienteDoctorServicioAsync(db);
+        var historial = await TestDataSeeder.CrearHistorialClinicoAsync(db, baseData.Paciente.Id);
+        var atencion = await TestDataSeeder.CrearAtencionAsync(db,
+            pacienteId: baseData.Paciente.Id,
+            doctorId: baseData.Doctor.Id,
+            servicioClinicoId: baseData.Servicio.Id,
+            historialClinicoId: historial.Id);
+
+        await TestDataSeeder.CrearPagoAsync(db,
+            pacienteId: baseData.Paciente.Id,
+            servicioClinicoId: baseData.Servicio.Id,
+            atencionId: atencion.Id,
+            montoTotal: 100,
+            montoPagado: 60,
+            estado: EstadoPago.Parcial);
+
+        var response = await Client.GetAsync($"/api/finanzas/atencion/{atencion.Id}/estado-pago-detallado");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var estado = await response.ReadDataAsJsonAsync<EstadoPagoAtencionDto>();
+        estado.Should().NotBeNull();
+        estado!.TipoUltimoPago.Should().Be("Parcial"); // Saldo > 0
+        estado.DeudaTotal.Should().Be(estado.SaldoReal);
+    }
+    
+    [Fact]
+    public async Task Get_TasaIgv_ConAdmin_DeberiaRetornarOk()
+    {
+        await LoginAsAdminAsync();
+        var response = await Client.GetAsync("/api/finanzas/tasa-igv");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        await JsonTestHelper.AssertSuccessAsync(response);
+        var data = await JsonTestHelper.ReadDataAsync(response);
+        // 'data' ya es el valor decimal (18), no un objeto con propiedad "data"
+        data.GetDecimal().Should().Be(18m);
+    }
+    
+    [Fact]
+    public async Task Post_AjustesFinancieros_MotivoVacio_DeberiaRetornarBadRequest()
+    {
+        await LoginAsAdminAsync();
+        await using var db = CreateDbContext();
+        var baseData = await TestDataSeeder.CrearBasePacienteDoctorServicioAsync(db);
+        var pago = await TestDataSeeder.CrearPagoAsync(db,
+            pacienteId: baseData.Paciente.Id,
+            servicioClinicoId: baseData.Servicio.Id,
+            montoTotal: 100,
+            montoPagado: 100,
+            estado: EstadoPago.Pagado);
+
+        var dto = new RegistrarAjusteFinancieroDto
+        {
+            PagoId = pago.Id,
+            TipoAjuste = TipoAjusteFinanciero.Descuento,
+            MontoAjuste = 10,
+            Motivo = "   ",
+            Observacion = null
+        };
+
+        var response = await Client.PostJsonAsync("/api/finanzas/ajustes-financieros", dto);
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+    
+    [Fact]
+    public async Task Get_ResumenAnual_AnioInvalido_DeberiaRetornarBadRequest()
+    {
+        await LoginAsAdminAsync();
+        var response = await Client.GetAsync("/api/finanzas/resumen-anual?anio=1999");
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+    
+    
 }

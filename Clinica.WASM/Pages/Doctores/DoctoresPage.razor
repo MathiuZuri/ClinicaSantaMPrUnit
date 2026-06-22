@@ -15,6 +15,25 @@
                            Class="text-none px-5 rounded-lg shadow-sm">
                     Nuevo doctor
                 </MudButton>
+                <RequirePermission Permission="@Permisos.DoctorCrear">
+                    <MudButton Variant="Variant.Outlined"
+                               Color="Color.Tertiary"
+                               StartIcon="@Icons.Material.Filled.Badge"
+                               OnClick="AbrirDialogoContratar"
+                               Class="text-none px-5 rounded-lg shadow-sm mr-2">
+                        Contratar médico
+                    </MudButton>
+                </RequirePermission>
+
+                <RequirePermission Permission="@Permisos.DoctorVer">
+                    <MudButton Variant="Variant.Outlined"
+                               Color="Color.Secondary"
+                               StartIcon="@Icons.Material.Filled.Search"
+                               OnClick="AbrirDialogoBusqueda"
+                               Class="text-none px-5 rounded-lg shadow-sm">
+                        Búsqueda avanzada
+                    </MudButton>
+                </RequirePermission>
             </RequirePermission>
         </ActionContent>
     </PageHeader>

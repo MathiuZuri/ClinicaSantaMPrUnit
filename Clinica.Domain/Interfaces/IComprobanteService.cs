@@ -59,4 +59,6 @@ public interface IComprobanteService
     // ==========================================================
 
     Task AnularComprobanteAsync(Guid comprobanteId, string motivo);
+    
+    Task<IEnumerable<ComprobanteDto>> ObtenerTodosAsync();
 }

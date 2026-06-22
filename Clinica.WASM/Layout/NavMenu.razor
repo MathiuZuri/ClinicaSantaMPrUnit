@@ -94,6 +94,18 @@
         }
     </div>
 
+    @* ─── Auditoría ─── *@
+    @if (PuedeVerAuditoria)
+    {
+        <div class="nav-section-layer">
+            <span class="nav-group-tag-gold">Auditoría</span>
+
+            <MudNavLink Href="/auditoria" Icon="@Icons.Material.Filled.History" Class="nav-item-link-luxury">
+                Registro de Auditoría
+            </MudNavLink>
+        </div>
+    }
+
     @* ─── Seguridad ─── *@
     @if (PuedeVerRoles || PuedeVerPermisos)
     {

@@ -1,0 +1,48 @@
+﻿@using Clinica.WASM.DTOs.Atenciones
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="px-6 pb-4">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.ReportProblem" Color="Color.Error" />
+            <MudText Typo="Typo.h6" Class="fw-800" Color="Color.Error">Anular Atención Médica</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined" Class="mb-4 rounded-lg border-dashed">
+            Atención: Esta acción es una eliminación lógica crítica. El estado clínico del paciente pasará a <b>Anulado</b> de forma permanente.
+        </MudAlert>
+        <EditForm Model="@MotivoModel" OnValidSubmit="AnularAsync">
+            <DataAnnotationsValidator />
+            <MudTextField @bind-Value="MotivoModel.Motivo"
+                          Label="Motivo justificado de anulación"
+                          Variant="Variant.Outlined"
+                          Lines="3"
+                          Required="true"
+                          For="@(() => MotivoModel.Motivo)"
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Gavel"
+                          AdornmentColor="Color.Error"
+                          Class="rounded-lg" />
+            
+            <div class="d-flex justify-end align-center mt-5">
+                <MudButton OnClick="Cancelar" Variant="Variant.Text" Color="Color.Default" Class="mr-2 rounded-lg">Cancelar</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error" Class="rounded-lg shadow-sm" Disabled="@IsLoading">
+                    @if (IsLoading) { 
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" /> 
+                        <span>Procesando...</span> 
+                    }
+                    else { 
+                        <span>Anular Atención</span> 
+                    }
+                </MudButton>
+            </div>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+<style>
+    .luxury-dialog {
+        border: 1px solid rgba(var(--mud-palette-error-rgb), 0.15);
+        box-shadow: var(--mud-elevation-24) !important;
+    }
+</style>

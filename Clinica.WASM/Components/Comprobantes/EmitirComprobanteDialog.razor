@@ -1,0 +1,212 @@
+﻿@using Clinica.WASM.DTOs.Atenciones
+@using Clinica.Domain.Enums
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="d-none">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.PostAdd" Color="Color.Primary" />
+            <MudText Typo="Typo.h6" Class="fw-800">Emisión Asistida de Comprobantes</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <div class="d-flex align-center justify-center gap-2 mb-5">
+            <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="@(CurrentStep == EmissionStep.Input ? Variant.Filled : Variant.Outlined)">1. Datos</MudChip>
+            <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" Color="Color.Info" />
+            <MudChip T="string" Size="Size.Small" Color="@(CurrentStep == EmissionStep.Preview ? Color.Success : Color.Default)" Variant="@(CurrentStep == EmissionStep.Preview ? Variant.Filled : Variant.Outlined)">2. Confirmación</MudChip>
+        </div>
+
+        @if (CurrentStep == EmissionStep.Input)
+        {
+            <MudGrid Spacing="3">
+                <MudItem xs="12">
+                    <MudSelect T="TipoComprobante"
+                               @bind-Value="TipoSeleccionado"
+                               Label="Tipo de Documento a Emitir"
+                               Variant="Variant.Outlined"
+                               Margin="Margin.Dense"
+                               Adornment="Adornment.Start"
+                               AdornmentIcon="@Icons.Material.Filled.Category"
+                               AdornmentColor="Color.Primary"
+                               Class="rounded-lg">
+                        <MudSelectItem Value="TipoComprobante.BoletaPago">Boleta de Pago</MudSelectItem>
+                        <MudSelectItem Value="TipoComprobante.ConstanciaCita">Constancia de Cita</MudSelectItem>
+                        <MudSelectItem Value="TipoComprobante.ResumenAtencion">Resumen de Atención</MudSelectItem>
+                        <MudSelectItem Value="TipoComprobante.EstadoCuenta">Estado de Cuenta</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+
+                @switch (TipoSeleccionado)
+                {
+                    case TipoComprobante.BoletaPago:
+                        <MudItem xs="12" sm="6">
+                            <MudAutocomplete T="PacienteResponseDto"
+                                             Label="Buscar Paciente"
+                                             @bind-Value="PacienteSeleccionado"
+                                             SearchFunc="BuscarPacientesAsync"
+                                             ToStringFunc="@(p => p == null ? "" : $"{p.Nombres ?? "S/N"} {p.Apellidos ?? ""} - {p.DNI ?? "S/DNI"}")"
+                                             Variant="Variant.Outlined" Margin="Margin.Dense"
+                                             Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.PersonSearch" AdornmentColor="Color.Primary"
+                                             ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                        </MudItem>
+                        @if (PacienteSeleccionado != null)
+                        {
+                            <MudItem xs="12" sm="6" Class="page-fade-in">
+                                <MudAutocomplete T="PagoResponseDto"
+                                                 Label="Seleccionar Registro de Pago"
+                                                 @bind-Value="PagoSeleccionado"
+                                                 SearchFunc="BuscarPagosAsync"
+                                                 ToStringFunc="@(p => p == null ? "" : $"{p.CodigoPago ?? "S/C"} - {p.ServicioNombre ?? "Servicio"} - S/ {p.MontoTotal:N2}")"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Payments" AdornmentColor="Color.Primary"
+                                                 ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                            </MudItem>
+                        }
+                        break;
+
+                    case TipoComprobante.ConstanciaCita:
+                        <MudItem xs="12" sm="6">
+                            <MudAutocomplete T="PacienteResponseDto"
+                                             Label="Buscar Paciente"
+                                             @bind-Value="PacienteSeleccionado"
+                                             SearchFunc="BuscarPacientesAsync"
+                                             ToStringFunc="@(p => $"{p.Nombres} {p.Apellidos} - {p.DNI}")"
+                                             Variant="Variant.Outlined" Margin="Margin.Dense"
+                                             Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.PersonSearch" AdornmentColor="Color.Primary"
+                                             ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                        </MudItem>
+                        @if (PacienteSeleccionado != null)
+                        {
+                            <MudItem xs="12" sm="6" Class="page-fade-in">
+                                <MudAutocomplete T="CitaResponseDto"
+                                                 Label="Seleccionar Historial de Cita"
+                                                 @bind-Value="CitaSeleccionada"
+                                                 SearchFunc="BuscarCitasAsync"
+                                                 ToStringFunc="@(c => c == null ? "" : $"{c.CodigoCita ?? "S/C"} - {c.Fecha:dd/MM/yy} - {c.ServicioNombre ?? "Servicio"}")"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.CalendarToday" AdornmentColor="Color.Primary"
+                                                 ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                            </MudItem>
+                        }
+                        break;
+
+                    case TipoComprobante.EstadoCuenta:
+                        <MudItem xs="12">
+                            <MudAutocomplete T="PacienteResponseDto"
+                                             Label="Buscar Paciente"
+                                             @bind-Value="PacienteSeleccionado"
+                                             SearchFunc="BuscarPacientesAsync"
+                                             ToStringFunc="@(p => $"{p.Nombres} {p.Apellidos} - {p.DNI}")"
+                                             Variant="Variant.Outlined" Margin="Margin.Dense"
+                                             Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.PersonSearch" AdornmentColor="Color.Primary"
+                                             ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                        </MudItem>
+                        break;
+
+                        case TipoComprobante.ResumenAtencion:
+                        <MudItem xs="12" sm="6">
+                            <MudAutocomplete T="PacienteResponseDto"
+                                             Label="Buscar Paciente"
+                                             @bind-Value="PacienteSeleccionado"
+                                             SearchFunc="BuscarPacientesAsync"
+                                             ToStringFunc="@(p => p == null ? "" : $"{p.Nombres ?? "S/N"} {p.Apellidos ?? ""} - {p.DNI ?? "S/DNI"}")"
+                                             Variant="Variant.Outlined" Margin="Margin.Dense"
+                                             Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.PersonSearch" AdornmentColor="Color.Primary"
+                                             ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                        </MudItem>
+                        @if (PacienteSeleccionado != null)
+                        {
+                            <MudItem xs="12" sm="6" Class="page-fade-in">
+                                <MudAutocomplete T="AtencionResponseDto"
+                                                 Label="Seleccionar Acto Médico / Atención"
+                                                 @bind-Value="AtencionSeleccionada"
+                                                 SearchFunc="BuscarAtencionesAsync"
+                                                 ToStringFunc="@(a => a == null ? "" : $"REF-{a.Id.ToString()[..8].ToUpper()} - {a.FechaInicio:dd/MM/yyyy}")"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MedicalServices" AdornmentColor="Color.Primary"
+                                                 ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg font-monospace" />
+                            </MudItem>
+                        }
+                        break;
+                }
+            </MudGrid>
+
+            <div class="d-flex justify-end align-center mt-5 border-top-divider pt-3">
+                <MudButton OnClick="Cancelar" Variant="Variant.Text" Color="Color.Default" Class="mr-2 rounded-lg">Cancelar</MudButton>
+                <MudButton OnClick="IrAPreview" Variant="Variant.Filled" Color="Color.Primary" Class="rounded-lg shadow-sm" Disabled="@IsLoading">
+                    Vista Previa
+                </MudButton>
+            </div>
+        }
+        else if (CurrentStep == EmissionStep.Preview)
+        {
+            <div class="page-fade-in">
+                @if (PreviewBoleta != null)
+                {
+                    <MudCard Elevation="0" Class="pa-4 border-preview-card preview-boleta rounded-xl mb-4">
+                        <MudText Typo="Typo.subtitle2" Color="Color.Success" Class="fw-bold uppercase-label mb-2">Pre-visualización de Boleta</MudText>
+                        <MudText Typo="Typo.body2"><b>Código Generado:</b> <span class="font-monospace">@PreviewBoleta.CodigoComprobante</span></MudText>
+                        <MudText Typo="Typo.body1" Class="my-1"><b>Titular:</b> @PreviewBoleta.Paciente</MudText>
+                        <MudText Typo="Typo.h6" Color="Color.Success" Class="fw-bold font-monospace mt-2">Total Fiscal: S/ @PreviewBoleta.Total.ToString("N2")</MudText>
+                    </MudCard>
+                }
+                else if (PreviewConstancia != null)
+                {
+                    <MudCard Elevation="0" Class="pa-4 border-preview-card preview-constancia rounded-xl mb-4">
+                        <MudText Typo="Typo.subtitle2" Color="Color.Info" Class="fw-bold uppercase-label mb-2">Pre-visualización de Constancia</MudText>
+                        <MudText Typo="Typo.body2"><b>Código Documento:</b> <span class="font-monospace">@PreviewConstancia.CodigoComprobante</span></MudText>
+                        <MudText Typo="Typo.body1" Class="my-1"><b>Paciente Certificado:</b> @PreviewConstancia.Paciente</MudText>
+                        <MudText Typo="Typo.body2" Class="font-monospace"><b>Fecha de la Cita Médica:</b> @PreviewConstancia.FechaCita.ToString("dd/MM/yyyy")</MudText>
+                    </MudCard>
+                }
+                else if (PreviewAtencion != null)
+                {
+                    <MudCard Elevation="0" Class="pa-4 border-preview-card preview-atencion rounded-xl mb-4">
+                        <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="fw-bold uppercase-label mb-2">Pre-visualización de Resumen de Acto Médico</MudText>
+                        <MudText Typo="Typo.body2"><b>Código Interno:</b> <span class="font-monospace">@PreviewAtencion.CodigoComprobante</span></MudText>
+                        <MudText Typo="Typo.body1" Class="my-1"><b>Paciente:</b> @PreviewAtencion.Paciente</MudText>
+                        <MudText Typo="Typo.body2" Class="fw-500"><b>Especialidad / Servicio:</b> @PreviewAtencion.Servicio</MudText>
+                    </MudCard>
+                }
+                else if (PreviewEstadoCuenta != null)
+                {
+                    <MudCard Elevation="0" Class="pa-4 border-preview-card preview-cuenta rounded-xl mb-4">
+                        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-bold uppercase-label mb-2">Pre-visualización de Estado de Cuenta</MudText>
+                        <MudText Typo="Typo.body2"><b>Ficha Financiera:</b> <span class="font-monospace">@PreviewEstadoCuenta.CodigoComprobante</span></MudText>
+                        <MudText Typo="Typo.body1" Class="my-1"><b>Abonado:</b> @PreviewEstadoCuenta.Paciente</MudText>
+                        <MudText Typo="Typo.h6" Color="Color.Primary" Class="fw-bold font-monospace mt-2">Total Consolidado: S/ @PreviewEstadoCuenta.TotalFacturado.ToString("N2")</MudText>
+                    </MudCard>
+                }
+                
+                <div class="d-flex justify-end align-center border-top-divider pt-3">
+                    <MudButton OnClick="VolverAInput" Variant="Variant.Text" Color="Color.Default" Class="mr-2 rounded-lg">Modificar Parámetros</MudButton>
+                    <MudButton OnClick="EmitirComprobante" Variant="Variant.Filled" Color="Color.Success" Class="rounded-lg shadow-sm px-4" Disabled="@IsLoading">
+                        @if (IsLoading)
+                        {
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                            <span>Procesando Firma...</span>
+                        }
+                        else
+                        {
+                            <span>Emitir y Firmar Documento</span>
+                        }
+                    </MudButton>
+                </div>
+            </div>
+        }
+    </DialogContent>
+</MudDialog>
+
+<style>
+    .border-top-divider {
+        border-top: 1px solid var(--mud-palette-divider);
+    }
+    .border-preview-card {
+        border: 1px solid var(--mud-palette-divider);
+        background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.3) !important;
+    }
+    /* Bordes con el color de identidad correspondiente a cada tipo de comprobante */
+    .preview-boleta { border-left: 5px solid var(--mud-palette-success) !important; }
+    .preview-constancia { border-left: 5px solid var(--mud-palette-info) !important; }
+    .preview-atencion { border-left: 5px solid var(--mud-palette-secondary) !important; }
+    .preview-cuenta { border-left: 5px solid var(--mud-palette-primary) !important; }
+</style>

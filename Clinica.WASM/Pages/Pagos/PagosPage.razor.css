@@ -1,21 +1,66 @@
-﻿.filter-master-card {
+﻿/* Animación suave de entrada de la suite de caja */
+.page-animate-fade {
+    animation: slideUpIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tarjeta de filtros con alto contraste y relieve luxury */
+.filter-luxury-card {
+    background-color: var(--mud-palette-surface) !important;
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.08) !important;
+    box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.06), 0 4px 12px -3px rgba(0, 0, 0, 0.03) !important;
+    border-top: 4px solid var(--mud-palette-tertiary) !important; /* Microborde color Oro */
+}
+
+/* Limpieza del fondo por defecto de los expansion panels */
+.clean-panels {
+    background-color: transparent !important;
+}
+
+::deep .mud-expansion-panel-header {
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.4) !important;
+    border-bottom: 1px solid var(--mud-palette-divider);
+    padding: 12px 20px !important;
+}
+
+.uppercase-label {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.72rem !important;
+    color: var(--mud-palette-text-primary);
+}
+
+/* Microinteracciones en botones de caja */
+.hover-scale-btn {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+}
+.hover-scale-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--mud-elevation-6) !important;
+}
+
+/* Contenedor adaptativo de la tabla de listado */
+.table-container-luxury {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.07) !important;
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.06);
+}
+
+/* Caja de estado de error con contraste de alerta */
+.luxury-error-box {
     background-color: var(--mud-palette-surface);
-    padding: 16px 24px;
-    border-radius: var(--mud-layout-properties-default-border-radius); /* 16px */
-    box-shadow: var(--mud-elevation-1);
-    border: 1px solid var(--mud-palette-divider);
-}
-
-.view-gold-topline {
-    border-top: 4px solid var(--mud-palette-tertiary); /* Microborde superior color Oro */
-}
-
-::deep .clean-select-field .mud-input-outlined-border {
-    border: none !important; /* Quita el recuadro tosco nativo */
+    border-radius: 16px;
+    border: 1px dashed var(--mud-palette-error);
+    box-shadow: var(--mud-elevation-2) !important;
 }
 
 .animate-fade-clean {
-    animation: quickFadeClean 0.3s ease-out;
+    animation: quickFadeClean 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes quickFadeClean {
@@ -23,15 +68,24 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-.error-panel-container {
-    background-color: var(--mud-palette-surface);
-    border-radius: 16px;
-    border: 1px dashed var(--mud-palette-error);
-}
-
+/* Adaptabilidad móvil estricta contra desbordamientos */
 @media (max-width: 768px) {
     .w-100-mobile {
-        width: 100%;
-        margin-top: 8px;
+        width: 100% !important;
+        display: flex;
     }
+    .w-50-mobile {
+        width: 50% !important;
+    }
+    .pt-mobile-0 {
+        padding-top: 0 !important;
+        margin-top: 4px !important;
+    }
+}
+
+.truncate-service-name {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

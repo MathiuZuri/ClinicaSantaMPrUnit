@@ -39,7 +39,7 @@ public class PagosController : ControllerBase
     public async Task<IActionResult> GetByPaciente(Guid pacienteId)
     {
         var pagos = await _pagoService.ObtenerPorPacienteAsync(pacienteId);
-        return Ok(ApiResponse<object>.Ok(pagos, "Pagos del paciente obtenidos correctamente."));
+        return Ok(ApiResponse<IEnumerable<PagoResponseDto>>.Ok(pagos, "Pagos del paciente obtenidos correctamente."));
     }
 
     /// <summary>

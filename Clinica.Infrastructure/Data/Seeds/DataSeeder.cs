@@ -444,29 +444,29 @@ public static class DataSeeder
         await context.Pacientes.AddRangeAsync(pacientes);
         await context.SaveChangesAsync();
 
-        // Crear historial clínico para cada paciente
+        // 1. CORRECCIÓN CRÍTICA: Agregamos .ToList() al final para fijar las entidades en memoria
         var historiales = pacientes.Select(p => new HistorialClinico
         {
             CodigoHistorial = $"FIL-{DateTime.UtcNow:yyyy}-{p.DNI}",
             PacienteId = p.Id,
             FechaApertura = DateTime.UtcNow,
             Estado = EstadoHistorialClinico.Activo
-        });
+        }).ToList(); // ◄── AHORA SÍ ES UNA LISTA REAL
 
         await context.HistorialesClinicos.AddRangeAsync(historiales);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(); // Los IDs reales se escriben sobre la lista 'historiales'
 
-        // Registrar un detalle de apertura en cada historial
+        // 2. CORRECCIÓN: También materializamos los detalles por seguridad
         var detallesApertura = historiales.Select(h => new HistorialDetalle
         {
             CodigoDetalle = $"DET-{Guid.NewGuid().ToString("N")[..5].ToUpper()}",
-            HistorialClinicoId = h.Id,
+            HistorialClinicoId = h.Id, // Ahorá sí leerá los IDs reales guardados arriba
             TipoMovimiento = TipoMovimientoHistorial.AperturaHistorial,
             Titulo = "Apertura de historial",
             Descripcion = "Historial clínico aperturado automáticamente al registrar al paciente.",
             FechaRegistro = DateTime.UtcNow,
             UsuarioId = adminUsuario.Id
-        });
+        }).ToList(); // ◄── Materializado para mantener consistencia
 
         await context.HistorialDetalles.AddRangeAsync(detallesApertura);
         await context.SaveChangesAsync();

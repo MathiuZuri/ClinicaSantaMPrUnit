@@ -1,0 +1,118 @@
+﻿@using Clinica.WASM.DTOs.Comprobantes
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="px-6 pb-4 border-top-divider">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.ReceiptLong" Color="Color.Primary" />
+            <MudText Typo="Typo.h6" Class="fw-800">Comprobante @Comprobante.CodigoComprobante</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <div class="dialog-scroll-box pa-1" style="max-height: 65vh; overflow-y: auto;">
+            <MudGrid Spacing="2">
+                <MudItem xs="6" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Tipo</MudText>
+                    <MudText Typo="Typo.body2" Class="fw-600 mt-1">@Comprobante.TipoComprobante</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Estado</MudText>
+                    <div class="mt-1">
+                        <MudChip T="string" Size="Size.Small" Color="@(Comprobante.Estado == "Emitido" ? Color.Success : Color.Error)" Variant="Variant.Filled" Class="px-3">
+                            @Comprobante.Estado
+                        </MudChip>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Fecha de Emisión</MudText>
+                    <MudText Typo="Typo.body2" Class="font-monospace mt-1">@Comprobante.FechaEmision.ToString("dd/MM/yyyy HH:mm")</MudText>
+                </MudItem>
+
+                <MudItem xs="12"><MudDivider Light="true" /></MudItem>
+
+                <MudItem xs="12" sm="8">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Paciente</MudText>
+                    <MudText Typo="Typo.body1" Class="fw-500 mt-1">@Comprobante.Paciente</MudText>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Nro. Documento</MudText>
+                    <MudText Typo="Typo.body1" Class="font-monospace mt-1">@Comprobante.NumeroDocumentoPaciente</MudText>
+                </MudItem>
+
+                @if (!string.IsNullOrWhiteSpace(Comprobante.Observacion))
+                {
+                    <MudItem xs="12">
+                        <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Observaciones</MudText>
+                        <MudCard Elevation="0" Class="pa-3 mt-1 obs-card rounded-lg">
+                            <MudText Typo="Typo.body2" Class="text-break">@Comprobante.Observacion</MudText>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+
+            @if (Comprobante.Detalles.Any())
+            {
+                <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-bold uppercase-label mt-5 mb-2">
+                    Desglose de Servicios Coberturados
+                </MudText>
+                <MudCard Elevation="0" Class="border-container rounded-lg overflow-hidden">
+                    <MudTable Items="Comprobante.Detalles" Dense="true" Hover="true" Elevation="0" Class="inner-luxury-table">
+                        <HeaderContent>
+                            <MudTh>Servicio / Descripción</MudTh>
+                            <MudTh class="text-center">Cant.</MudTh>
+                            <MudTh class="text-end">Subtotal</MudTh>
+                            <MudTh class="text-end">Total</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Servicio" Class="text-truncate" Style="max-width: 180px;">@context.Descripcion</MudTd>
+                            <MudTd DataLabel="Cant." class="text-center font-monospace">@context.Cantidad</MudTd>
+                            <MudTd DataLabel="Subtotal" class="text-end font-monospace text-nowrap">S/ @context.Subtotal.ToString("N2")</MudTd>
+                            <MudTd DataLabel="Total" class="text-end font-monospace fw-bold text-nowrap">S/ @context.Total.ToString("N2")</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </MudCard>
+
+                <div class="d-flex justify-end align-center mt-4 pa-3 rounded-lg total-banner">
+                    <MudText Typo="Typo.body2" Class="fw-bold mr-3 uppercase-label">Monto Neto Recaudado:</MudText>
+                    <MudText Typo="Typo.h5" Color="Color.Primary" Class="fw-900 font-monospace text-nowrap">
+                        S/ @Comprobante.Total.ToString("N2")
+                    </MudText>
+                </div>
+            }
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cerrar" Color="Color.Primary" Variant="Variant.Filled" Class="px-5 rounded-lg">
+            Cerrar Ventana
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .luxury-dialog {
+        border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.12);
+        box-shadow: var(--mud-elevation-24) !important;
+    }
+    .border-top-divider {
+        border-top: 1px solid var(--mud-palette-divider);
+    }
+    .uppercase-label {
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.72rem !important;
+    }
+    .obs-card {
+        background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.4);
+        border: 1px solid var(--mud-palette-divider);
+    }
+    .border-container {
+        border: 1px solid var(--mud-palette-divider);
+    }
+    .inner-luxury-table ::deep th {
+        background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.5) !important;
+        font-weight: 700 !important;
+    }
+    .total-banner {
+        background-color: rgba(var(--mud-palette-primary-rgb), 0.05);
+        border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.15);
+    }
+</style>

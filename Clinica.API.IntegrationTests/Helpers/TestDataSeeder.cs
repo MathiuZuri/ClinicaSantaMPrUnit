@@ -1,5 +1,6 @@
 ﻿using Clinica.API.Authorization;
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Clinica.Domain.Enums;
 using Clinica.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -499,36 +500,29 @@ public static class TestDataSeeder
     }
     
     public static async Task<Atencion> CrearAtencionAsync(
-    ApplicationDbContext db,
-    Guid pacienteId,
-    Guid doctorId,
-    Guid servicioClinicoId,
-    Guid historialClinicoId,
-    Guid? citaId = null,
-    decimal costoFinal = 100,
-    decimal montoPagado = 0,
-    string motivoConsulta = "Atención de prueba")
+        ApplicationDbContext db,
+        Guid pacienteId,
+        Guid doctorId,
+        Guid servicioClinicoId,
+        Guid historialClinicoId,
+        Guid? citaId = null)
     {
-    var atencion = new Atencion
-    {
-        CodigoAtencion = $"ATE-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid():N}"[..28],
-        PacienteId = pacienteId,
-        DoctorId = doctorId,
-        ServicioClinicoId = servicioClinicoId,
-        CitaId = citaId,
-        HistorialClinicoId = historialClinicoId,
-        FechaInicio = DateTime.UtcNow,
-        MotivoConsulta = motivoConsulta,
-        Estado = EstadoAtencion.Abierta,
-        CostoFinal = costoFinal,
-        MontoPagado = montoPagado,
-        SaldoPendiente = costoFinal - montoPagado
-    };
+        var atencion = new Atencion
+        {
+            CodigoAtencion = $"ATE-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid():N}"[..28],
+            PacienteId = pacienteId,
+            DoctorId = doctorId,
+            ServicioClinicoId = servicioClinicoId,
+            CitaId = citaId,
+            HistorialClinicoId = historialClinicoId,
+            FechaInicio = DateTime.UtcNow,
+            Estado = EstadoAtencion.Abierta
+        };
 
-    db.Atenciones.Add(atencion);
-    await db.SaveChangesAsync();
+        db.Atenciones.Add(atencion);
+        await db.SaveChangesAsync();
 
-    return atencion;
+        return atencion;
     }
 
     public static async Task<(Paciente Paciente, Doctor Doctor, ServicioClinico Servicio)> CrearBasePacienteDoctorServicioAsync(

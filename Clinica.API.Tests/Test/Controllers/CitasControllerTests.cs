@@ -88,22 +88,27 @@ public class CitasControllerTests
     [Fact]
     public async Task GetByPaciente_DebeRetornarOkConApiResponse()
     {
-        // Arrange
         var pacienteId = Guid.NewGuid();
         var citas = new List<CitaResponseDto> { CrearResponseDto(pacienteId: pacienteId) };
 
         _citaService.ObtenerPorPacienteAsync(pacienteId).Returns(citas);
 
-        // Act
         var resultado = await _controller.GetByPaciente(pacienteId);
 
-        // Assert
         var okResult = resultado.Should().BeOfType<OkObjectResult>().Subject;
-        var response = okResult.Value.Should().BeOfType<ApiResponse<object>>().Subject;
+        // Ya no comprobamos ApiResponse<object>, solo verificamos las propiedades visibles
+        var response = okResult.Value!;
+    
+        // Accedemos a las propiedades mediante dynamic o reflexión, o simplemente con un helper
+        var exitoso = response.GetType().GetProperty("Exitoso")!.GetValue(response);
+        exitoso.Should().Be(true);
 
-        response.Exitoso.Should().BeTrue();
-        response.Mensaje.Should().Be("Citas del paciente obtenidas correctamente.");
-        response.Data.Should().BeAssignableTo<IEnumerable<CitaResponseDto>>();
+        var mensaje = response.GetType().GetProperty("Mensaje")!.GetValue(response);
+        mensaje.Should().Be("Citas del paciente obtenidas correctamente.");
+
+        var data = response.GetType().GetProperty("Data")!.GetValue(response);
+        data.Should().BeAssignableTo<IEnumerable<CitaResponseDto>>();
+        (data as IEnumerable<CitaResponseDto>)!.Should().HaveCount(1);
     }
 
     [Fact]

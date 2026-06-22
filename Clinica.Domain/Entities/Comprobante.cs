@@ -1,4 +1,5 @@
-﻿using Clinica.Domain.Enums;
+﻿using Clinica.Domain.Entities.ATENCIONES;
+using Clinica.Domain.Enums;
 
 namespace Clinica.Domain.Entities;
 

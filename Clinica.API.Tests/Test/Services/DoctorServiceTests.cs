@@ -1,5 +1,6 @@
 ﻿using Clinica.API.Services;
 using Clinica.API.Services.Imp;
+using Clinica.Domain.DTOs.Comunes;
 using Clinica.Domain.DTOs.Doctores;
 using Clinica.Domain.Entities;
 using Clinica.Domain.Enums;
@@ -14,14 +15,25 @@ public class DoctorServiceTests
 {
     private readonly IDoctorRepository _doctorRepository;
     private readonly IUsuarioActualService _usuarioActualService;
+    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IRolRepository _rolRepository;
+    private readonly IPermisoRepository _permisoRepository;
     private readonly IDoctorService _service;
 
     public DoctorServiceTests()
     {
         _doctorRepository = Substitute.For<IDoctorRepository>();
         _usuarioActualService = Substitute.For<IUsuarioActualService>();
+        _usuarioRepository = Substitute.For<IUsuarioRepository>();
+        _rolRepository = Substitute.For<IRolRepository>();
+        _permisoRepository = Substitute.For<IPermisoRepository>();
 
-        _service = new DoctorService(_doctorRepository, _usuarioActualService);
+        _service = new DoctorService(
+            _doctorRepository,
+            _usuarioActualService,
+            _usuarioRepository,
+            _rolRepository,
+            _permisoRepository);
     }
 
     [Fact]
@@ -357,5 +369,227 @@ public class DoctorServiceTests
         doctor.FechaFinContrato.Should().BeNull();
         _doctorRepository.Received(1).Update(doctor);
         await _doctorRepository.Received(1).SaveChangesAsync();
+    }
+    
+    [Fact]
+    public async Task ContratarAsync_CmpExistente_LanzaExcepcion()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10)
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns(new Doctor { Id = Guid.NewGuid() });
+
+        Func<Task> act = () => _service.ContratarAsync(dto);
+        await act.Should().ThrowAsync<InvalidOperationException>().WithMessage("*CMP*");
+    }
+
+    [Fact]
+    public async Task ContratarAsync_UserNameExistente_LanzaExcepcion()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10)
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns((Doctor?)null);
+        _usuarioRepository.ObtenerPorUserNameAsync(dto.UserName).Returns(new Usuario { Id = Guid.NewGuid() });
+
+        Func<Task> act = () => _service.ContratarAsync(dto);
+        await act.Should().ThrowAsync<InvalidOperationException>().WithMessage("*nombre de usuario*");
+    }
+
+    [Fact]
+    public async Task ContratarAsync_CorreoExistente_LanzaExcepcion()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10)
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns((Doctor?)null);
+        _usuarioRepository.ObtenerPorUserNameAsync(dto.UserName).Returns((Usuario?)null);
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.CorreoUsuario).Returns(new Usuario { Id = Guid.NewGuid() });
+
+        Func<Task> act = () => _service.ContratarAsync(dto);
+        await act.Should().ThrowAsync<InvalidOperationException>().WithMessage("*correo*");
+    }
+
+    [Fact]
+    public async Task ContratarAsync_RolIdEspecificadoPeroNoExiste_LanzaExcepcion()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10),
+            RolId = Guid.NewGuid()
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns((Doctor?)null);
+        _usuarioRepository.ObtenerPorUserNameAsync(dto.UserName).Returns((Usuario?)null);
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.CorreoUsuario).Returns((Usuario?)null);
+        _rolRepository.GetByIdAsync(dto.RolId.Value).Returns((Rol?)null);
+
+        Func<Task> act = () => _service.ContratarAsync(dto);
+        await act.Should().ThrowAsync<KeyNotFoundException>().WithMessage("*rol*");
+    }
+
+    [Fact]
+    public async Task ContratarAsync_RolDoctorNoExisteEnSistema_LanzaExcepcion()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10)
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns((Doctor?)null);
+        _usuarioRepository.ObtenerPorUserNameAsync(dto.UserName).Returns((Usuario?)null);
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.CorreoUsuario).Returns((Usuario?)null);
+        _rolRepository.ObtenerPorNombreAsync("Doctor").Returns((Rol?)null);
+
+        Func<Task> act = () => _service.ContratarAsync(dto);
+        await act.Should().ThrowAsync<InvalidOperationException>().WithMessage("*Rol 'Doctor' no existe*");
+    }
+
+    [Fact]
+    public async Task ContratarAsync_Exitoso_CreaDoctorYUsuarioYAsignaRol()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10)
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns((Doctor?)null);
+        _usuarioRepository.ObtenerPorUserNameAsync(dto.UserName).Returns((Usuario?)null);
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.CorreoUsuario).Returns((Usuario?)null);
+        var rolDoctor = new Rol { Id = Guid.NewGuid(), Nombre = "Doctor" };
+        _rolRepository.ObtenerPorNombreAsync("Doctor").Returns(rolDoctor);
+        _usuarioRepository.TieneRolAsignadoAsync(Arg.Any<Guid>(), rolDoctor.Id).Returns(false);
+
+        var result = await _service.ContratarAsync(dto);
+
+        result.Should().NotBeEmpty();
+        await _usuarioRepository.Received(1).AddAsync(Arg.Any<Usuario>());
+        await _usuarioRepository.Received(1).AgregarRolAsync(Arg.Is<UsuarioRol>(ur => ur.RolId == rolDoctor.Id));
+        await _doctorRepository.Received(1).AddAsync(Arg.Any<Doctor>());
+        await _doctorRepository.Received(1).SaveChangesAsync();
+    }
+
+    [Fact]
+    public async Task ContratarAsync_ConPermisosAdicionales_AsignaPermisos()
+    {
+        var permisoId = Guid.NewGuid();
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10),
+            PermisosIds = new List<Guid> { permisoId }
+        };
+        _doctorRepository.ObtenerPorCmpAsync(dto.CMP).Returns((Doctor?)null);
+        _usuarioRepository.ObtenerPorUserNameAsync(dto.UserName).Returns((Usuario?)null);
+        _usuarioRepository.ObtenerPorCorreoAsync(dto.CorreoUsuario).Returns((Usuario?)null);
+        var rolDoctor = new Rol { Id = Guid.NewGuid(), Nombre = "Doctor" };
+        _rolRepository.ObtenerPorNombreAsync("Doctor").Returns(rolDoctor);
+        _usuarioRepository.TieneRolAsignadoAsync(Arg.Any<Guid>(), rolDoctor.Id).Returns(false);
+        _permisoRepository.GetByIdAsync(permisoId).Returns(new Permiso { Id = permisoId });
+        _rolRepository.TienePermisoAsignadoAsync(rolDoctor.Id, permisoId).Returns(false);
+
+        await _service.ContratarAsync(dto);
+
+        await _rolRepository.Received(1).AgregarPermisoAsync(Arg.Is<RolPermiso>(rp => rp.PermisoId == permisoId));
+    }
+    
+    [Fact]
+    public async Task BuscarAsync_SinFiltros_RetornaTodosPaginados()
+    {
+        var doctores = new List<Doctor> { CrearDoctorEntidad(), CrearDoctorEntidad() };
+        _doctorRepository.GetAllAsync().Returns(doctores);
+        var request = new PaginacionRequestDto { Pagina = 1, CantidadPorPagina = 10 };
+
+        var resultado = await _service.BuscarAsync(null, null, null, request);
+
+        resultado.TotalRegistros.Should().Be(2);
+        resultado.Datos.Should().HaveCount(2);
+    }
+
+    [Fact]
+    public async Task BuscarAsync_FiltroPorNombre_RetornaCoincidencias()
+    {
+        // Arrange
+        var doctor = new Doctor
+        {
+            Id = Guid.NewGuid(),
+            CodigoDoctor = "DOC-ABC",
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            FechaInicioContrato = new DateTime(2026, 1, 10),
+            Estado = EstadoDoctor.Activo
+        };
+
+        _doctorRepository.GetAllAsync().Returns(new List<Doctor> { doctor });
+        var request = new PaginacionRequestDto { Pagina = 1, CantidadPorPagina = 10 };
+
+        // Act
+        var resultado = await _service.BuscarAsync("luis", null, null, request);
+
+        // Assert
+        resultado.TotalRegistros.Should().Be(1);
+        resultado.Datos[0].Nombres.Should().Be("Luis");
+    }
+
+    [Fact]
+    public async Task BuscarAsync_Paginacion_RespetaCantidad()
+    {
+        var doctores = Enumerable.Range(0, 5).Select(_ => CrearDoctorEntidad()).ToList();
+        _doctorRepository.GetAllAsync().Returns(doctores);
+        var request = new PaginacionRequestDto { Pagina = 1, CantidadPorPagina = 2 };
+
+        var resultado = await _service.BuscarAsync(null, null, null, request);
+        resultado.Datos.Should().HaveCount(2);
+        resultado.TotalRegistros.Should().Be(5);
     }
 }

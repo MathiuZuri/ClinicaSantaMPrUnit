@@ -25,6 +25,14 @@ public partial class FinanzasPage : ComponentBase
     private List<PacienteItemDto> Pacientes { get; set; } = new();
     private Guid PacienteSeleccionadoId;
     private bool CargandoPacientes = true;
+    
+    private int AnioResumenAnual = DateTime.Today.Year;
+    private DateOnly? FechaLibroDiario = DateOnly.FromDateTime(DateTime.Today);
+    private string CodigoPagoBusqueda = string.Empty;
+
+    private ResumenAnualFinanzasDto? ResumenAnual;
+    private List<PagoFinanzasDto>? LibroDiario;
+    private PagoFinanzasDto? PagoEncontrado;
 
     protected override async Task OnInitializedAsync()
     {
@@ -77,5 +85,34 @@ public partial class FinanzasPage : ComponentBase
             Ajustes = await FinanzasApiService.ObtenerAjustesFinancierosAsync();
         }
         catch { Snackbar.Add("Error al cargar ajustes.", Severity.Error); }
+    }
+    
+    private async Task CargarResumenAnualAsync()
+    {
+        try
+        {
+            ResumenAnual = await FinanzasApiService.ObtenerResumenAnualAsync(AnioResumenAnual);
+        }
+        catch { Snackbar.Add("Error al cargar resumen anual.", Severity.Error); }
+    }
+
+    private async Task CargarLibroDiarioAsync()
+    {
+        try
+        {
+            if (FechaLibroDiario.HasValue)
+                LibroDiario = await FinanzasApiService.ObtenerLibroDiarioAsync(FechaLibroDiario.Value);
+        }
+        catch { Snackbar.Add("Error al cargar libro diario.", Severity.Error); }
+    }
+
+    private async Task BuscarPagoPorCodigoAsync()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(CodigoPagoBusqueda)) return;
+            PagoEncontrado = await FinanzasApiService.ObtenerPagoPorCodigoAsync(CodigoPagoBusqueda.Trim());
+        }
+        catch { Snackbar.Add("Error al buscar pago.", Severity.Error); }
     }
 }

@@ -1,0 +1,150 @@
+﻿@using Clinica.Domain.Enums
+@using Clinica.WASM.DTOs.Auditoria
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="px-6 pb-4">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.HistoryToggleOff" Color="Color.Primary" />
+            <MudText Typo="Typo.h6" Class="fw-700">Auditoría del Sistema #@Registro.Id</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Style="max-height: 65vh; overflow-y: auto;" Class="pa-1">
+            <MudGrid Spacing="2">
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Fecha (UTC)</MudText>
+                    <MudText Typo="Typo.body2" Class="font-monospace mt-1">@Registro.FechaHora.ToString("dd/MM/yyyy HH:mm:ss")</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Usuario</MudText>
+                    <MudText Typo="Typo.body2" Class="fw-bold mt-1">@Registro.UsuarioNombre</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Acción / Estado</MudText>
+                    <div class="d-flex align-center gap-1 mt-1">
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="@(Registro.FueExitoso ? Color.Success : Color.Error)">
+                            @Registro.TipoAccion.ToString()
+                        </MudChip>
+                    </div>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Nivel de Alerta</MudText>
+                    <div class="mt-1">
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                 Color="@(Registro.Nivel == NivelAuditoria.Critico ? Color.Error : Registro.Nivel == NivelAuditoria.Importante ? Color.Warning : Color.Default)">
+                            @Registro.Nivel.ToString()
+                        </MudChip>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider Class="my-2" Light="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Módulo / Entidad</MudText>
+                    <MudText Typo="Typo.body2" Class="mt-1 fw-bold">@Registro.Modulo – <span class="font-monospace font-sm">@Registro.EntidadAfectada</span></MudText>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Dirección IP</MudText>
+                    <MudText Typo="Typo.body2" Class="font-monospace mt-1">@Registro.IpAddress</MudText>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Agente de Usuario (Navegador)</MudText>
+                    <MudText Typo="Typo.caption" Class="text-muted text-break d-block mt-1" Style="line-height: 1.2;">@Registro.UserAgent</MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider Class="my-2" Light="true" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-label">Descripción del Suceso</MudText>
+                    <MudCard Elevation="0" Class="pa-3 mt-1 text-container-bg rounded-lg">
+                        <MudText Typo="Typo.body2">@Registro.Descripcion</MudText>
+                    </MudCard>
+                </MudItem>
+
+                @if (!string.IsNullOrWhiteSpace(Registro.ValorAnterior))
+                {
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.caption" Color="Color.Warning" Class="fw-bold uppercase-label">Estado Anterior (Antes del cambio)</MudText>
+                    <div class="code-block-wrapper mt-1">
+                        <pre class="preformatted-code"><code>@Registro.ValorAnterior</code></pre>
+                    </div>
+                </MudItem>
+                }
+                @if (!string.IsNullOrWhiteSpace(Registro.ValorNuevo))
+                {
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.caption" Color="Color.Success" Class="fw-bold uppercase-label">Estado Nuevo (Después del cambio)</MudText>
+                    <div class="code-block-wrapper mt-1">
+                        <pre class="preformatted-code"><code>@Registro.ValorNuevo</code></pre>
+                    </div>
+                </MudItem>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Registro.DetalleError))
+                {
+                <MudItem xs="12">
+                    <MudText Typo="Typo.caption" Color="Color.Error" Class="fw-bold uppercase-label">Traza del Error Interno (Stack Trace)</MudText>
+                    <div class="code-block-wrapper error-wrapper mt-1">
+                        <pre class="preformatted-code error-code"><code>@Registro.DetalleError</code></pre>
+                    </div>
+                </MudItem>
+                }
+            </MudGrid>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cerrar" Color="Color.Primary" Variant="Variant.Filled" Class="px-5 rounded-lg shadow-sm">
+            Cerrar Detalle
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .luxury-dialog {
+        border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.12);
+        box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.16) !important;
+    }
+    .uppercase-label {
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.72rem !important;
+    }
+    .font-sm {
+        font-size: 0.8rem;
+    }
+    .text-container-bg {
+        background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.4);
+        border: 1px solid var(--mud-palette-divider);
+    }
+    .code-block-wrapper {
+        background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.7);
+        border: 1px solid var(--mud-palette-divider);
+        border-radius: 8px;
+        padding: 10px;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+    .error-wrapper {
+        background-color: rgba(var(--mud-palette-error-rgb), 0.04);
+        border: 1px solid rgba(var(--mud-palette-error-rgb), 0.2);
+    }
+    .preformatted-code {
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 0.8rem;
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+        color: var(--mud-palette-text-primary);
+    }
+    .error-code {
+        color: var(--mud-palette-error);
+    }
+    .text-muted {
+        color: var(--mud-palette-text-secondary);
+    }
+</style>

@@ -1,0 +1,388 @@
+﻿@using Clinica.Domain.Enums
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="px-6 pb-6 border-top-divider justify-space-between">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.MedicalServices" Color="Color.Primary" Class="spinning-medical-icon" />
+            <MudText Typo="Typo.h6" Class="fw-800">Registrar Nueva Atención Médica</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="Form">
+            <MudStepper NonLinear="true" @ref="Stepper" Class="luxury-stepper" Loading="@IsLoading">
+                
+                <MudStep Label="Datos administrativos" Icon="@Icons.Material.Filled.Assignment">
+                    <div class="step-container pa-1">
+                        <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-700 uppercase-label mb-3">Asignación del Acto Médico</MudText>
+                        <MudGrid Spacing="2">
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudAutocomplete T="PacienteResponseDto"
+                                                 Label="Buscar Paciente"
+                                                 @bind-Value="PacienteSeleccionado"
+                                                 SearchFunc="BuscarPacientesAsync"
+                                                 ToStringFunc="@(p => p == null ? "" : $"{p.Nombres ?? ""} {p.Apellidos ?? ""} - {p.DNI ?? ""}")"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 AdornmentIcon="@Icons.Material.Filled.PersonSearch" AdornmentColor="Color.Primary"
+                                                 ResetValueOnEmptyText="true" CoerceValue="false" Required="true" Class="rounded-lg" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudAutocomplete T="DoctorResponseDto"
+                                                 Label="Buscar Doctor asignado"
+                                                 @bind-Value="DoctorSeleccionado"
+                                                 SearchFunc="BuscarDoctoresAsync"
+                                                 ToStringFunc="@(d => d == null ? "" : $"{d.Nombres ?? ""} {d.Apellidos ?? ""} - {d.Especialidad ?? ""}")"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 AdornmentIcon="@Icons.Material.Filled.Medication" AdornmentColor="Color.Primary"
+                                                 ResetValueOnEmptyText="true" CoerceValue="false" Required="true" Class="rounded-lg" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudAutocomplete T="ServicioClinicoResponseDto"
+                                                 Label="Servicio Clínico Coberturado"
+                                                 @bind-Value="ServicioSeleccionado"
+                                                 SearchFunc="BuscarServiciosAsync"
+                                                 ToStringFunc="@(s => s?.Nombre ?? "")"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 AdornmentIcon="@Icons.Material.Filled.HealthAndSafety" AdornmentColor="Color.Primary"
+                                                 ResetValueOnEmptyText="true" CoerceValue="false" Required="true" Class="rounded-lg" />
+                            </MudItem>
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudNumericField @bind-Value="Model.CostoFinal"
+                                                 Label="Costo Final del Acto Médico"
+                                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                 Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MonetizationOn" AdornmentColor="Color.Success"
+                                                 Required="true" Class="rounded-lg font-monospace text-success-field" />
+                            </MudItem>
+                        </MudGrid>
+                    </div>
+                </MudStep>
+
+                <MudStep Label="Anamnesis" Icon="@Icons.Material.Filled.HistoryEdu">
+                    <div class="step-container pa-1">
+                        <MudCard Elevation="0" Class="pa-4 border-card rounded-xl">
+                            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-700 uppercase-label mb-3">Ficha de Antecedentes y Motivo</MudText>
+                            <MudGrid Spacing="2">
+                                <MudItem xs="12">
+                                    <MudTextField @bind-Value="Anamnesis.MotivoConsulta"
+                                                  Label="Motivo de consulta detallado *"
+                                                  Variant="Variant.Outlined" Lines="2"
+                                                  Required="true" Class="rounded-lg" />
+                                </MudItem>
+                                
+                                <MudItem xs="6" sm="4" md="2">
+                                    <MudNumericField @bind-Value="Anamnesis.Gestaciones" Label="Gestaciones" Variant="Variant.Outlined" Margin="Margin.Dense" Min="0" Class="rounded-lg font-monospace" />
+                                </MudItem>
+                                <MudItem xs="6" sm="4" md="2">
+                                    <MudNumericField @bind-Value="Anamnesis.PartosATermino" Label="P. Término" Variant="Variant.Outlined" Margin="Margin.Dense" Min="0" Class="rounded-lg font-monospace" />
+                                </MudItem>
+                                <MudItem xs="6" sm="4" md="2">
+                                    <MudNumericField @bind-Value="Anamnesis.PartosPretermino" Label="P. Pretérmino" Variant="Variant.Outlined" Margin="Margin.Dense" Min="0" Class="rounded-lg font-monospace" />
+                                </MudItem>
+                                <MudItem xs="6" sm="4" md="2">
+                                    <MudNumericField @bind-Value="Anamnesis.Abortos" Label="Abortos" Variant="Variant.Outlined" Margin="Margin.Dense" Min="0" Class="rounded-lg font-monospace text-error-field" />
+                                </MudItem>
+                                <MudItem xs="6" sm="4" md="2">
+                                    <MudNumericField @bind-Value="Anamnesis.HijosVivos" Label="Hijos Vivos" Variant="Variant.Outlined" Margin="Margin.Dense" Min="0" Class="rounded-lg font-monospace" />
+                                </MudItem>
+                                <MudItem xs="6" sm="4" md="2">
+                                    <MudTextField @bind-Value="Anamnesis.EdadGestacional" Label="Edad Gestacional (EG)" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: 24.3 sem" Class="rounded-lg" />
+                                </MudItem>
+                                
+                                <MudItem xs="12" sm="6">
+                                    <MudDatePicker @bind-Date="Anamnesis.FechaUltimaRegla" Label="Fecha de Última Regla (FUR)" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentColor="Color.Primary" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6">
+                                    <MudDatePicker @bind-Date="Anamnesis.FechaProbableParto" Label="Fecha Probable de Parto (FPP)" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentColor="Color.Secondary" Class="rounded-lg" />
+                                </MudItem>
+                                
+                                <MudItem xs="12" md="4">
+                                    <MudTextField @bind-Value="Anamnesis.Alergias" Label="Alergias" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentIcon="@Icons.Material.Filled.Warning" AdornmentColor="Color.Error" Class="rounded-lg text-error-field" />
+                                </MudItem>
+                                <MudItem xs="12" md="4">
+                                    <MudTextField @bind-Value="Anamnesis.EnfermedadesCronicas" Label="Enfermedades crónicas" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12" md="4">
+                                    <MudTextField @bind-Value="Anamnesis.CirugiasPrevias" Label="Cirugías previas" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12">
+                                    <MudTextField @bind-Value="Anamnesis.AntecedentesAdicionales" Label="Antecedentes médicos adicionales de relevancia" Variant="Variant.Outlined" Lines="2" Class="rounded-lg" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudCard>
+                    </div>
+                </MudStep>
+
+                <MudStep Label="Exámenes Físicos" Icon="@Icons.Material.Filled.MonitorHeart">
+                    <div class="step-container pa-1">
+                        <div class="d-flex align-center justify-space-between mb-3">
+                            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-700 uppercase-label">Fichas de Monitoreo Físico Actual</MudText>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="AgregarExamenFisico" Color="Color.Primary" Class="rounded-lg hover-btn text-nowrap">
+                                Agregar Ficha
+                            </MudButton>
+                        </div>
+
+                        @if (!ExamenesFisicos.Any())
+                        {
+                            <div class="empty-state-box pa-6 rounded-xl text-center border-dashed">
+                                <MudIcon Icon="@Icons.Material.Filled.Analytics" Color="Color.Info" Size="Size.Large" />
+                                <MudText Typo="Typo.body2" Color="Color.Info" Class="mt-2">No se han anexado exámenes físicos a esta sesión. Use el botón superior para agregar.</MudText>
+                            </div>
+                        }
+
+                        @foreach (var exam in ExamenesFisicos)
+                        {
+                            <MudCard Elevation="4" Class="pa-4 mb-4 rounded-xl clinical-entry-card success-accent-border animate-fade">
+                                <div class="d-flex justify-space-between align-center mb-4 border-bottom-divider pb-2">
+                                    <span class="d-flex align-center gap-2 fw-700 color-clinical font-monospace"><MudIcon Icon="@Icons.Material.Filled.HealthAndSafety" Color="Color.Success"/> EXAMEN FÍSICO N° @(ExamenesFisicos.IndexOf(exam) + 1)</span>
+                                    <MudIconButton Icon="@Icons.Material.Filled.DeleteOutline" Color="Color.Error" Size="Size.Small" OnClick="() => ExamenesFisicos.Remove(exam)" Class="rounded-lg" />
+                                </div>
+                                <MudGrid Spacing="2">
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudDatePicker @bind-Date="exam.FechaHoraExamen" Label="Fecha/Hora de toma" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="exam.Lotep" Label="LOTEP" Color="Color.Primary" Class="fw-600" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="exam.UteroGravido" Label="Útero grávido" Color="Color.Primary" Class="fw-600" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4" md="2">
+                                        <MudNumericField @bind-Value="exam.AlturaUterina" Label="AU (cm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace fw-bold" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4" md="2">
+                                        <MudNumericField @bind-Value="exam.LatidosCardiacosFetales" Label="LCF (lpm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace fw-bold text-success-field" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="12" sm="4">
+                                        <MudTextField @bind-Value="exam.EstadoGeneral" Label="Estado general" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4">
+                                        <MudTextField @bind-Value="exam.EstadoHidratacion" Label="Estado hidratación" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4">
+                                        <MudTextField @bind-Value="exam.EstadoNutricion" Label="Estado nutrición" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="6" sm="4" md="2">
+                                        <MudNumericField @bind-Value="exam.EscalaGlasgow" Label="GCS (Glasgow)" Variant="Variant.Outlined" Margin="Margin.Dense" Max="15" Min="0" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="8" md="5">
+                                        <MudTextField @bind-Value="exam.SituacionPosicionPresentacion" Label="Situación / Posición / Presentación" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: Longitudinal / Izquierda / Cefálico" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="6" md="3">
+                                        <MudTextField @bind-Value="exam.MovimientosFetales" Label="Movimientos fetales" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="6" md="2">
+                                        <MudTextField @bind-Value="exam.TonoUterino" Label="Tono uterino" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudTextField @bind-Value="exam.DinamicaUterina" Label="Dinámica uterina" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="exam.SangradoTv" Label="Sangrado TV" Color="Color.Error" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="exam.PerdidaLiquidoAmniotico" Label="Pérdida LA" Color="Color.Error" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudTextField @bind-Value="exam.ColorLiquidoAmniotico" Label="Color Líquido Amniótico" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+
+                                    <MudItem xs="6" sm="3" md="2" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="exam.TaponMucoso" Label="Tapón mucoso" Color="Color.Primary" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="exam.FlujoVaginal" Label="Flujo vaginal" Color="Color.Warning" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="4" md="3">
+                                        <MudTextField @bind-Value="exam.PunoPercusionLumbar" Label="PPL (Lumbar)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4" md="2">
+                                        <MudTextField @bind-Value="exam.Edemas" Label="Edemas" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4" md="3">
+                                        <MudTextField @bind-Value="exam.ReflejosOsteotendinosos" Label="Reflejos osteotendinosos" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                </MudGrid>
+                            </MudCard>
+                        }
+                    </div>
+                </MudStep>
+
+                <MudStep Label="Tactos Vaginales" Icon="@Icons.Material.Filled.BackHand">
+                    <div class="step-container pa-1">
+                        <div class="d-flex align-center justify-space-between mb-3">
+                            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-700 uppercase-label">Registros de Exploración Vaginal</MudText>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="AgregarTactoVaginal" Color="Color.Primary" Class="rounded-lg hover-btn text-nowrap">
+                                Agregar Tacto
+                            </MudButton>
+                        </div>
+
+                        @if (!TactosVaginales.Any())
+                        {
+                            <div class="empty-state-box pa-6 rounded-xl text-center border-dashed">
+                                <MudIcon Icon="@Icons.Material.Filled.TouchApp" Color="Color.Info" Size="Size.Large" />
+                                <MudText Typo="Typo.body2" Color="Color.Info" Class="mt-2">No se han registrado tactos vaginales en este acto médico.</MudText>
+                            </div>
+                        }
+
+                        @foreach (var tacto in TactosVaginales)
+                        {
+                            <MudCard Elevation="4" Class="pa-4 mb-4 rounded-xl clinical-entry-card info-accent-border animate-fade">
+                                <div class="d-flex justify-space-between align-center mb-4 border-bottom-divider pb-2">
+                                    <span class="d-flex align-center gap-2 fw-700 color-clinical font-monospace"><MudIcon Icon="@Icons.Material.Filled.Adjust" Color="Color.Info"/> EXPLORACIÓN VAGINAL N° @(TactosVaginales.IndexOf(tacto) + 1)</span>
+                                    <MudIconButton Icon="@Icons.Material.Filled.DeleteOutline" Color="Color.Error" Size="Size.Small" OnClick="() => TactosVaginales.Remove(tacto)" Class="rounded-lg" />
+                                </div>
+                                <MudGrid Spacing="2">
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudDatePicker @bind-Date="tacto.FechaHora" Label="Fecha/Hora exploración" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2">
+                                        <MudNumericField @bind-Value="tacto.Dilatacion" Label="Dilatación (cm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace fw-bold color-info-text" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2">
+                                        <MudNumericField @bind-Value="tacto.Borramiento" Label="Borramiento (%)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudTextField @bind-Value="tacto.AlturaPresentacion" Label="Altura presentación (De Lee / Hodge)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="12" sm="4">
+                                        <MudTextField @bind-Value="tacto.MembranasOvulares" Label="Membranas ovulares" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: Integras / Rotas" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="4">
+                                        <MudTextField @bind-Value="tacto.ColorLiquido" Label="Color líquido observable" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="4">
+                                        <MudTextField @bind-Value="tacto.Pelvis" Label="Evaluación Pelvis" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: Ginecoide / Útil" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="12">
+                                        <MudTextField @bind-Value="tacto.VariedadPresentacion" Label="Variedad de la Presentación Fetal" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: Occípito-Izquierda Anterior (OIA)" Class="rounded-lg" />
+                                    </MudItem>
+                                </MudGrid>
+                            </MudCard>
+                        }
+                    </div>
+                </MudStep>
+
+                <MudStep Label="Ecografías" Icon="@Icons.Material.Filled.PersonalVideo">
+                    <div class="step-container pa-1">
+                        <div class="d-flex align-center justify-space-between mb-3">
+                            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-700 uppercase-label">Monitoreo de Biometría Fetal</MudText>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="AgregarEcografia" Color="Color.Primary" Class="rounded-lg hover-btn text-nowrap">
+                                Agregar Informe Eco
+                            </MudButton>
+                        </div>
+
+                        @if (!Ecografias.Any())
+                        {
+                            <div class="empty-state-box pa-6 rounded-xl text-center border-dashed">
+                                <MudIcon Icon="@Icons.Material.Filled.Tv" Color="Color.Info" Size="Size.Large" />
+                                <MudText Typo="Typo.body2" Color="Color.Info" Class="mt-2">No se han anexado ultrasonidos o ecografías en esta sesión.</MudText>
+                            </div>
+                        }
+
+                        @foreach (var eco in Ecografias)
+                        {
+                            <MudCard Elevation="4" Class="pa-4 mb-4 rounded-xl clinical-entry-card warning-accent-border animate-fade">
+                                <div class="d-flex justify-space-between align-center mb-4 border-bottom-divider pb-2">
+                                    <span class="d-flex align-center gap-2 fw-700 color-clinical font-monospace"><MudIcon Icon="@Icons.Material.Filled.Layers" Color="Color.Warning"/> ECOGRAFÍA OBSTÉTRICA N° @(Ecografias.IndexOf(eco) + 1)</span>
+                                    <MudIconButton Icon="@Icons.Material.Filled.DeleteOutline" Color="Color.Error" Size="Size.Small" OnClick="() => Ecografias.Remove(eco)" Class="rounded-lg" />
+                                </div>
+                                <MudGrid Spacing="2">
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudDatePicker @bind-Date="eco.FechaHora" Label="Fecha/Hora del estudio" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="6" sm="3" md="2">
+                                        <MudNumericField @bind-Value="eco.DiametroBiparietal" Label="DBP (mm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2">
+                                        <MudNumericField @bind-Value="eco.CircunferenciaCefalica" Label="CC (mm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2">
+                                        <MudNumericField @bind-Value="eco.CircunferenciaAbdominal" Label="CA (mm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="3" md="2">
+                                        <MudNumericField @bind-Value="eco.LongitudFemur" Label="LF (mm)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="6" sm="4" md="3">
+                                        <MudNumericField @bind-Value="eco.PesoFetalEstimado" Label="Peso Fetal Estimado (g)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace fw-bold text-success-field" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="4" md="2">
+                                        <MudNumericField @bind-Value="eco.IndiceLiquidoAmniotico" Label="ILA (Líquido)" Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg font-monospace" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="4" md="4">
+                                        <MudTextField @bind-Value="eco.PlacentaLocalizacion" Label="Localización de Placenta" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: Fúndica / Anterior" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="6" md="3">
+                                        <MudTextField @bind-Value="eco.PlacentaGranum" Label="Grado Madurez (Granum)" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Ej: Grado II" Class="rounded-lg" />
+                                    </MudItem>
+                                    <MudItem xs="6" sm="6" md="3" Class="d-flex align-center">
+                                        <MudSwitch T="bool" @bind-Checked="eco.CircularCordon" Label="Circular de cordón" Color="Color.Error" Class="fw-600" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="12">
+                                        <MudTextField @bind-Value="eco.Conclusiones" Label="Conclusiones diagnósticas del Ultrasonido" Variant="Variant.Outlined" Lines="2" Class="rounded-lg" />
+                                    </MudItem>
+                                </MudGrid>
+                            </MudCard>
+                        }
+                    </div>
+                </MudStep>
+
+                <MudStep Label="Impresión Diagnóstica" Icon="@Icons.Material.Filled.RateReview">
+                    <div class="step-container pa-1">
+                        <MudCard Elevation="0" Class="pa-4 border-card rounded-xl">
+                            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="fw-700 uppercase-label mb-3">Cierre e Indicaciones Iniciales</MudText>
+                            <MudGrid Spacing="2">
+                                <MudItem xs="12">
+                                    <MudTextField @bind-Value="ImpresionDiagnostica.DiagnosticoPrincipal"
+                                                  Label="Diagnóstico Principal de Ingreso / Apertura *"
+                                                  Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                  AdornmentIcon="@Icons.Material.Filled.Gavel" AdornmentColor="Color.Primary"
+                                                  Required="true" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12">
+                                    <MudTextField @bind-Value="ImpresionDiagnostica.DiagnosticosSecundarios"
+                                                  Label="Diagnósticos Secundarios"
+                                                  Variant="Variant.Outlined" Lines="2" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12">
+                                    <MudTextField @bind-Value="ImpresionDiagnostica.IndicacionesReceta"
+                                                  Label="Plan Terapéutico Preventivo / Indicaciones"
+                                                  Variant="Variant.Outlined" Lines="3" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6">
+                                    <MudDatePicker @bind-Date="ImpresionDiagnostica.FechaProximaCita"
+                                                   Label="Sugerencia Próxima Cita"
+                                                   Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6">
+                                    <MudTextField @bind-Value="ImpresionDiagnostica.MotivoProximaCita"
+                                                  Label="Objetivo de la Próxima Consulta"
+                                                  Variant="Variant.Outlined" Margin="Margin.Dense" Class="rounded-lg" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudCard>
+                    </div>
+                </MudStep>
+            </MudStepper>
+        </MudForm>
+
+        @if (IsLoading)
+        {
+            <div class="loading-overlay-blur d-flex justify-center align-center pa-4 rounded-xl mt-3">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Medium" Indeterminate="true" />
+                <MudText Typo="Typo.body2" Class="ml-3 fw-bold tracking-wide">Sincronizando expedientes médicos en PostgreSQL...</MudText>
+            </div>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancelar" Variant="Variant.Text" Color="Color.Default" Class="px-4 rounded-lg">Cancelar Operación</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="px-5 rounded-lg shadow-md hover-scale-btn" OnClick="RegistrarAsync" Disabled="@IsLoading">
+            Registrar Atención Completa
+        </MudButton>
+    </DialogActions>
+</MudDialog>

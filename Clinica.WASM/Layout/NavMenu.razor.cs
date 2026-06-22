@@ -1,4 +1,5 @@
 ﻿using Clinica.WASM.Constants;
+using Clinica.WASM.Services.Api;
 using Clinica.WASM.Services.Auth;
 using Microsoft.AspNetCore.Components;
 
@@ -23,6 +24,9 @@ public partial class NavMenu : ComponentBase
     protected bool PuedeVerComprobantes { get; set; }
     protected bool PuedeVerUsuarios { get; set; }
 
+    // Auditoría
+    protected bool PuedeVerAuditoria { get; set; }
+
     // Seguridad
     protected bool PuedeVerRoles { get; set; }
     protected bool PuedeVerPermisos { get; set; }
@@ -43,6 +47,9 @@ public partial class NavMenu : ComponentBase
         PuedeVerFinanzas     = await AuthStateService.TienePermisoAsync(Permisos.FinanzasVer);
         PuedeVerComprobantes = await AuthStateService.TienePermisoAsync(Permisos.ComprobanteVer);
         PuedeVerUsuarios     = await AuthStateService.TienePermisoAsync(Permisos.UsuarioVer);
+
+        // Auditoría
+        PuedeVerAuditoria    = await AuthStateService.TienePermisoAsync(Permisos.AuditoriaVer);
 
         // Seguridad
         PuedeVerRoles        = await AuthStateService.TienePermisoAsync(Permisos.RolVer);

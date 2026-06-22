@@ -1,0 +1,96 @@
+﻿@using Clinica.WASM.DTOs.Comprobantes
+@using Clinica.Domain.Enums
+
+@if (IsLoading)
+{
+    <div class="d-flex justify-center align-center pa-10">
+        <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+    </div>
+}
+else if (!ComprobantesFiltrados.Any())
+{
+    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="ma-2 rounded-lg border-dashed text-center">
+        No se encontraron comprobantes registrados de este tipo.
+    </MudAlert>
+}
+else
+{
+    <MudTable Items="ComprobantesFiltrados" Hover="true" Striped="false" Elevation="0" Class="table-contrast">
+        <HeaderContent>
+            <MudTh>Código</MudTh>
+            <MudTh>Paciente</MudTh>
+            <MudTh>Documento</MudTh>
+            <MudTh>Total</MudTh>
+            <MudTh>Fecha</MudTh>
+            <MudTh>Estado</MudTh>
+            <MudTh Class="text-end">Acciones</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Código" Class="font-monospace fw-bold color-code">@context.CodigoComprobante</MudTd>
+            <MudTd DataLabel="Paciente" Class="fw-500 text-truncate" Style="max-width: 200px;">@context.Paciente</MudTd>
+            <MudTd DataLabel="Documento" Class="font-monospace">@context.NumeroDocumentoPaciente</MudTd>
+            <MudTd DataLabel="Total" Class="fw-700 text-nowrap">S/ @context.Total.ToString("N2")</MudTd>
+            <MudTd DataLabel="Fecha" Class="text-nowrap">@context.FechaEmision.ToString("dd/MM/yyyy")</MudTd>
+            <MudTd DataLabel="Estado">
+                <MudChip T="string" Size="Size.Small"
+                         Color="@(context.Estado == "Emitido" ? Color.Success : Color.Error)"
+                         Variant="Variant.Filled" Class="px-3 fw-bold chip-status">
+                    @context.Estado
+                </MudChip>
+            </MudTd>
+            <MudTd Class="text-end text-nowrap">
+                <div class="d-flex justify-end gap-1">
+                    <MudTooltip Text="Ver detalle">
+                        <MudIconButton Icon="@Icons.Material.Filled.Visibility"
+                                       Color="Color.Primary"
+                                       Size="Size.Small"
+                                       Variant="Variant.Outlined" Class="action-btn rounded-lg"
+                                       OnClick="() => OnDetalle.InvokeAsync(context)" />
+                    </MudTooltip>
+                    <MudTooltip Text="Descargar PDF">
+                        <MudIconButton Icon="@Icons.Material.Filled.PictureAsPdf"
+                                       Color="Color.Tertiary"
+                                       Size="Size.Small"
+                                       Variant="Variant.Outlined" Class="action-btn rounded-lg"
+                                       OnClick="() => OnPdf.InvokeAsync(context)" />
+                    </MudTooltip>
+                    @if (context.Estado != "Anulado")
+                    {
+                        <MudTooltip Text="Anular">
+                            <MudIconButton Icon="@Icons.Material.Filled.Cancel"
+                                           Color="Color.Error"
+                                           Size="Size.Small"
+                                           Variant="Variant.Outlined" Class="action-btn rounded-lg"
+                                           OnClick="() => OnAnular.InvokeAsync(context)" />
+                        </MudTooltip>
+                    }
+                </div>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+<style>
+    /* Estilos locales para dar profundidad a las filas de la tabla */
+    .table-contrast ::deep .mud-table-row {
+        transition: background-color 0.2s ease;
+        border-bottom: 1px solid var(--mud-palette-divider) !important;
+    }
+    .table-contrast ::deep .mud-table-row:hover {
+        background-color: rgba(var(--mud-palette-primary-rgb), 0.02) !important;
+    }
+    .color-code {
+        color: var(--mud-palette-primary);
+    }
+    .action-btn {
+        transition: transform 0.15s ease-in-out !important;
+    }
+    .action-btn:hover {
+        transform: scale(1.08);
+        background-color: rgba(var(--mud-palette-action-default-rgb), 0.05) !important;
+    }
+    .chip-status {
+        font-size: 0.75rem !important;
+        letter-spacing: 0.3px;
+    }
+</style>

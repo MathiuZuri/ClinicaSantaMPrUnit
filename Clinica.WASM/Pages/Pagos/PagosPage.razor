@@ -3,23 +3,23 @@
 <PageTitle>Módulo de Caja | Clínica Santa Mónica</PageTitle>
 
 <RequireAuth>
-    @* Encabezado del Módulo Financiero *@
-    <PageHeader Title="Control de Caja y Recaudación"
-                Subtitle="Liquidación de comprobantes, gestión de saldos pendientes y notas de crédito de pacientes del sistema SIGEC.">
-        <ActionContent>
-            <RequirePermission Permission="@Permisos.PagoRegistrar">
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           StartIcon="@Icons.Material.Filled.AddCard"
-                           OnClick="AbrirDialogoRegistro"
-                           Class="text-none px-5 rounded-lg shadow-sm">
-                    Registrar nuevo pago
-                </MudButton>
-            </RequirePermission>
-        </ActionContent>
-    </PageHeader>
+    <div class="page-animate-fade">
+        <PageHeader Title="Control de Caja y Recaudación"
+                    Subtitle="Liquidación de comprobantes, gestión de saldos pendientes y notas de crédito de pacientes del sistema SIGEC.">
+            <ActionContent>
+                <RequirePermission Permission="@Permisos.PagoRegistrar">
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.AddCard"
+                               OnClick="AbrirDialogoRegistro"
+                               Class="text-none px-5 rounded-lg shadow-md hover-scale-btn w-100-mobile">
+                        Registrar nuevo pago
+                    </MudButton>
+                </RequirePermission>
+            </ActionContent>
+        </PageHeader>
+    </div>
 
-    @* Notificaciones de Operación de Caja *@
     <div class="alert-layer-wrapper mt-4">
         @if (!string.IsNullOrWhiteSpace(MensajeExito))
         {
@@ -35,53 +35,124 @@
         }
     </div>
 
-    @* Filtro Avanzado de Selección de Cuenta de Paciente con microborde Dorado (Tertiary) *@
-    <div class="filter-master-card view-gold-topline mb-5 mt-2">
-        <MudGrid Class="align-center">
-            <MudItem xs="12" md="8">
-                <MudSelect T="Guid"
-                           @bind-Value="PacienteSeleccionadoId"
-                           Label="Filtro maestro: Seleccionar paciente"
-                           Variant="Variant.Outlined"
-                           Margin="Margin.None"
-                           Disabled="@EstaCargandoPacientes"
-                           AdornmentIcon="@Icons.Material.Filled.AccountBox"
-                           AdornmentColor="Color.Primary"
-                           Class="clean-select-field"
-                           ToStringFunc="@(id => Pacientes.FirstOrDefault(p => p.Id == id)?.NombreCompleto ?? string.Empty)">
-                    @foreach (var paciente in Pacientes)
-                    {
-                        <MudSelectItem Value="paciente.Id">@paciente.NombreCompleto</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="12" md="4" Class="text-md-end">
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           StartIcon="@Icons.Material.Filled.Search"
-                           Disabled="@(PacienteSeleccionadoId == Guid.Empty)"
-                           OnClick="CargarPagosAsync"
-                           Class="text-none py-3 px-6 rounded-lg shadow-sm w-100-mobile">
-                    Buscar cuentas
-                </MudButton>
-            </MudItem>
-        </MudGrid>
-    </div>
+    <MudCard Elevation="4" Class="rounded-xl overflow-hidden filter-luxury-card mb-6 mt-2 page-animate-fade">
+        <MudExpansionPanels Elevation="0" Class="clean-panels">
+            <MudExpansionPanel IsInitiallyExpanded="true">
+                <TitleContent>
+                    <div class="d-flex align-center gap-2">
+                        <MudIcon Icon="@Icons.Material.Filled.Tune" Color="Color.Primary" Size="Size.Small" />
+                        <MudText Typo="Typo.subtitle2" Class="fw-700 uppercase-label">Filtros de Búsqueda Financiera</MudText>
+                    </div>
+                </TitleContent>
+                <ChildContent>
+                    <MudGrid Spacing="3" Class="pa-1">
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudSelect T="TipoFiltroPago"
+                                       @bind-Value="FiltroActivo"
+                                       Label="Buscar origen por"
+                                       Variant="Variant.Outlined"
+                                       Margin="Margin.Dense"
+                                       AdornmentIcon="@Icons.Material.Filled.FilterList"
+                                       AdornmentColor="Color.Primary"
+                                       Class="rounded-lg">
+                                <MudSelectItem T="TipoFiltroPago" Value="TipoFiltroPago.Paciente">Paciente</MudSelectItem>
+                                <MudSelectItem T="TipoFiltroPago" Value="TipoFiltroPago.Cita">Cita Médica</MudSelectItem>
+                                <MudSelectItem T="TipoFiltroPago" Value="TipoFiltroPago.Atencion">Atención Clínica</MudSelectItem>
+                            </MudSelect>
+                        </MudItem>
+                        
+                        <MudItem xs="12" sm="6" md="8">
+                            @switch (FiltroActivo)
+                            {
+                                case TipoFiltroPago.Paciente:
+                                    <div class="animate-fade-clean">
+                                        <MudAutocomplete T="PacienteItemDto"
+                                                         Label="Seleccionar Paciente de la Ficha"
+                                                         @bind-Value="PacienteSeleccionadoItem"
+                                                         SearchFunc="BuscarPacientesAsync"
+                                                         ToStringFunc="@(p => p?.NombreCompleto ?? "")"
+                                                         Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                         AdornmentIcon="@Icons.Material.Filled.PersonSearch" AdornmentColor="Color.Primary"
+                                                         ResetValueOnEmptyText="true" CoerceValue="false" Class="rounded-lg" />
+                                    </div>
+                                    break;
+                                case TipoFiltroPago.Cita:
+                                    <div class="animate-fade-clean">
+                                        <MudTextField @bind-Value="CitaIdTexto"
+                                                      Label="ID Único de la Cita (GUID)"
+                                                      Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                      AdornmentIcon="@Icons.Material.Filled.CalendarToday" AdornmentColor="Color.Primary"
+                                                      Placeholder="00000000-0000-0000-0000-000000000000" Class="rounded-lg font-monospace" />
+                                    </div>
+                                    break;
+                                case TipoFiltroPago.Atencion:
+                                    <div class="animate-fade-clean">
+                                        <MudTextField @bind-Value="AtencionIdTexto"
+                                                      Label="ID Único de la Atención (GUID)"
+                                                      Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                      AdornmentIcon="@Icons.Material.Filled.MedicalServices" AdornmentColor="Color.Primary"
+                                                      Placeholder="00000000-0000-0000-0000-000000000000" Class="rounded-lg font-monospace" />
+                                    </div>
+                                    break;
+                            }
+                        </MudItem>
+                        
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudSelect T="EstadoPago?"
+                                       @bind-Value="FiltroEstadoPago"
+                                       Label="Filtrar por Estado de Pago"
+                                       Variant="Variant.Outlined"
+                                       Margin="Margin.Dense"
+                                       Clearable="true"
+                                       AdornmentIcon="@Icons.Material.Filled.PriceCheck"
+                                       AdornmentColor="Color.Secondary"
+                                       Class="rounded-lg">
+                                <MudSelectItem T="EstadoPago?" Value="@((EstadoPago?)null)">Todos los registros</MudSelectItem>
+                                <MudSelectItem T="EstadoPago?" Value="EstadoPago.Pendiente">Pendiente</MudSelectItem>
+                                <MudSelectItem T="EstadoPago?" Value="EstadoPago.Parcial">Parcial (Saldo)</MudSelectItem>
+                                <MudSelectItem T="EstadoPago?" Value="EstadoPago.Pagado">Pagado Total</MudSelectItem>
+                                <MudSelectItem T="EstadoPago?" Value="EstadoPago.Anulado">Anulado</MudSelectItem>
+                                <MudSelectItem T="EstadoPago?" Value="EstadoPago.Reembolsado">Reembolsado</MudSelectItem>
+                            </MudSelect>
+                        </MudItem>
+                        
+                        <MudItem xs="12" sm="6" md="8" Class="d-flex align-center justify-end gap-2 mt-sm-2 pt-mobile-0">
+                            <MudButton Variant="Variant.Outlined"
+                                       Color="Color.Default"
+                                       StartIcon="@Icons.Material.Filled.ClearAll"
+                                       OnClick="LimpiarFiltros"
+                                       Class="text-none px-5 rounded-lg w-50-mobile">
+                                Limpiar
+                            </MudButton>
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.Search"
+                                       OnClick="CargarPagosAsync"
+                                       Class="text-none px-6 rounded-lg shadow-sm hover-scale-btn w-50-mobile">
+                                Consultar Caja
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </ChildContent>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </MudCard>
 
-    @* Capa Dinámica de Resultados de Auditoría Financiera *@
     @if (HayErrorCarga)
     {
-        <div class="error-panel-container pa-6 text-center">
+        <div class="error-panel-container pa-8 text-center luxury-error-box page-animate-fade">
             <ErrorState Title="Error al cargar el extracto financiero"
                         Message="@MensajeError"
                         OnRetry="CargarPagosAsync" />
         </div>
     }
-    else
-    {
-        <PagosTable Pagos="Pagos"
-                    IsLoading="EstaCargando"
-                    OnAjustes="AbrirAjustesDelPago" 
-                    OnChangeState="CambiarEstadoPago"/>
+    else    
+    { 
+        <div class="table-container-luxury page-animate-fade">
+            <PagosTable Pagos="PagosFiltrados.ToList()"
+                        IsLoading="EstaCargando"
+                        OnAjustes="AbrirAjustesDelPago"
+                        OnChangeState="CambiarEstadoPago" />
+        </div>
     }
 </RequireAuth>

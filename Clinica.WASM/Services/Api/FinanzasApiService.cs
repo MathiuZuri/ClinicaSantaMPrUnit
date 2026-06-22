@@ -54,4 +54,56 @@ public class FinanzasApiService
         var msg = await _apiErrorService.ObtenerMensajeErrorAsync(response);
         return (false, msg);
     }
+    
+    // ==========================================
+// NUEVOS MÉTODOS (Resumen anual, diario, libro, búsqueda)
+// ==========================================
+    public async Task<ResumenAnualFinanzasDto?> ObtenerResumenAnualAsync(int anio)
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<ResumenAnualFinanzasDto>>($"{ApiEndpoints.FinanzasResumenAnual}?anio={anio}");
+        return respuesta?.Data;
+    }
+
+    public async Task<ResumenDiarioFinanzasDto?> ObtenerResumenDiarioAsync(DateOnly fecha)
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<ResumenDiarioFinanzasDto>>($"{ApiEndpoints.FinanzasResumenDiario}?fecha={fecha:yyyy-MM-dd}");
+        return respuesta?.Data;
+    }
+
+    public async Task<List<PagoFinanzasDto>> ObtenerPagosPendientesAsync()
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<List<PagoFinanzasDto>>>(ApiEndpoints.FinanzasPagosPendientes);
+        return respuesta?.Data ?? new();
+    }
+
+    public async Task<List<PagoFinanzasDto>> ObtenerPagosPagadosAsync()
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<List<PagoFinanzasDto>>>(ApiEndpoints.FinanzasPagosPagados);
+        return respuesta?.Data ?? new();
+    }
+
+    public async Task<List<PagoFinanzasDto>> ObtenerPagosParcialesAsync()
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<List<PagoFinanzasDto>>>(ApiEndpoints.FinanzasPagosParciales);
+        return respuesta?.Data ?? new();
+    }
+
+    public async Task<PagoFinanzasDto?> ObtenerPagoPorCodigoAsync(string codigo)
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<PagoFinanzasDto>>($"{ApiEndpoints.FinanzasPagoCodigo}/{codigo}");
+        return respuesta?.Data;
+    }
+
+    public async Task<List<PagoFinanzasDto>> ObtenerLibroDiarioAsync(DateOnly fecha)
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<List<PagoFinanzasDto>>>($"{ApiEndpoints.FinanzasLibroDiario}?fecha={fecha:yyyy-MM-dd}");
+        return respuesta?.Data ?? new();
+    }
+    
+    public async Task<ResumenMensualFinanzasDto?> ObtenerResumenMensualAsync(int anio, int mes)
+    {
+        var respuesta = await _httpClient.GetFromJsonAsync<ApiResponse<ResumenMensualFinanzasDto>>(
+            $"{ApiEndpoints.FinanzasResumenMensual}?anio={anio}&mes={mes}");
+        return respuesta?.Data;
+    }
 }

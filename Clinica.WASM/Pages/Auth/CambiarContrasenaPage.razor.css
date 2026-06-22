@@ -1,0 +1,151 @@
+﻿/* Contenedor envolvente de pantalla completa con degradado de alto contraste */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: radial-gradient(circle at 10% 20%, rgba(var(--mud-palette-primary-rgb), 0.04) 0%, rgba(var(--mud-palette-background-rgb), 1) 90.2%);
+}
+
+/* Cascarón tridimensional dividido */
+.login-shell {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 900px;
+    min-height: 520px;
+    background-color: var(--mud-palette-surface);
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.08);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 8px 24px -8px rgba(0, 0, 0, 0.05) !important;
+}
+
+@media (min-width: 768px) {
+    .login-shell {
+        grid-template-columns: 1.1fr 1.2fr;
+    }
+}
+
+/* Panel izquierdo: Identidad de marca */
+.login-brand-panel {
+    background-color: var(--mud-palette-primary);
+    background-image: linear-gradient(135deg, var(--mud-palette-primary) 0%, rgba(var(--mud-palette-primary-dark-rgb), 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Microborde decorativo interno */
+.login-brand-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(var(--mud-palette-tertiary-rgb), 0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.brand-sigla {
+    font-weight: 900;
+    color: white;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.icon-pulse-shell {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-brand-panel h1 {
+    font-size: 2.2rem;
+    color: white;
+    line-height: 1.15;
+}
+
+.text-muted-brand {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Contenedor de mensaje legal/seguridad */
+.brand-message-box {
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.text-gold {
+    color: var(--mud-palette-tertiary) !important;
+}
+
+.uppercase-lbl {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.font-sm { font-size: 0.8rem; }
+.font-xs { font-size: 0.75rem; line-height: 1.35; }
+
+/* Panel derecho: Formulario */
+.login-container-card-luxury {
+    background-color: var(--mud-palette-surface);
+}
+
+.color-primary {
+    color: var(--mud-palette-primary);
+}
+
+.login-title-premium {
+    letter-spacing: -0.01em;
+}
+
+.login-subtitle-premium {
+    color: var(--mud-palette-text-secondary);
+    line-height: 1.4;
+}
+
+.bg-input {
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.3);
+}
+
+/* Animaciones e Interacciones */
+.animate-shell {
+    animation: zoomShellIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes zoomShellIn {
+    from { opacity: 0; transform: scale(0.97) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeInAlpha 0.3s ease-out forwards;
+}
+
+@keyframes fadeInAlpha {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hover-scale-btn {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+}
+.hover-scale-btn:hover {
+    transform: translateY(-0.5px);
+    box-shadow: var(--mud-elevation-4) !important;
+}
+
+/* Ajustes estrictos de adaptabilidad móvil para evitar desbordes */
+@media (max-width: 480px) {
+    .login-page {
+        padding: 8px;
+    }
+    .login-container-card-luxury {
+        padding: 24px 16px !important;
+    }
+    .login-title-premium {
+        font-size: 1.75rem !important; /* Colapsa el tamaño del encabezado en teléfonos pequeños */
+    }
+}

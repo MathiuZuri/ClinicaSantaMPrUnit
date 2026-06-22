@@ -1,0 +1,117 @@
+﻿@page "/atenciones"
+@using Clinica.WASM.DTOs.Atenciones
+@using Clinica.Domain.Enums
+
+<PageTitle>Atenciones Médicas | SIGEC</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-8 page-fade-in-animate">
+    <div class="d-flex flex-column flex-sm-row justify-space-between align-start align-sm-center gap-4 mb-6">
+        <div class="d-flex align-center gap-3">
+            <MudIcon Icon="@Icons.Material.Filled.MedicalServices" Color="Color.Primary" Size="Size.Large" Class="medical-icon-pulse" />
+            <div>
+                <MudText Typo="Typo.h4" Color="Color.Info" Class="fw-800">
+                    Atenciones Médicas
+                </MudText>
+                <MudText Typo="Typo.body2" Color="Color.Info">
+                    Apertura, seguimiento y cierre del acto médico obstétrico y consultas de la clínica.
+                </MudText>
+            </div>
+        </div>
+        <MudButton Variant="Variant.Filled" 
+                   Color="Color.Primary" 
+                   StartIcon="@Icons.Material.Filled.Add"
+                   Class="rounded-lg shadow-md px-5 py-2 hover-scale-btn w-100 w-sm-auto"
+                   OnClick="AbrirRegistro">
+            Registrar Atención
+        </MudButton>
+    </div>
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Class="mb-4 rounded-lg shadow-sm" Dense="true">
+            @ErrorMessage
+        </MudAlert>
+    }
+
+    <MudCard Elevation="4" Class="rounded-xl overflow-hidden luxury-filter-card mb-5">
+        <div class="pa-5 d-flex align-center">
+            <MudSelect T="EstadoAtencion?"
+                       Value="@FiltroEstado"
+                       ValueChanged="@OnFiltroEstadoChangedAsync"
+                       Label="Filtrar por estado de atención"
+                       Variant="Variant.Outlined"
+                       Margin="Margin.Dense"
+                       Clearable="true"
+                       AdornmentIcon="@Icons.Material.Filled.MonitorHeart"
+                       Class="w-100 w-sm-auto" Style="min-width:240px;">
+                <MudSelectItem Value="@((EstadoAtencion?)EstadoAtencion.Abierta)">
+                    <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.RadioButtonChecked" Color="Color.Success" Size="Size.Small"/> Abierta</span>
+                </MudSelectItem>
+                <MudSelectItem Value="@((EstadoAtencion?)EstadoAtencion.Cerrada)">
+                    <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.Lock" Color="Color.Info" Size="Size.Small"/> Cerrada</span>
+                </MudSelectItem>
+                <MudSelectItem Value="@((EstadoAtencion?)EstadoAtencion.Anulada)">
+                    <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.RemoveCircle" Color="Color.Error" Size="Size.Small"/> Anulada</span>
+                </MudSelectItem>
+            </MudSelect>
+        </div>
+    </MudCard>
+
+    <MudCard Elevation="4" Class="rounded-xl overflow-hidden luxury-table-card">
+        <MudTable T="AtencionResponseDto"
+                  Hover="true" Striped="false" Elevation="0" Class="luxury-medical-table"
+                  ServerData="CargarDatosTabla" @ref="Tabla">
+            <HeaderContent>
+                <MudTh>Código</MudTh>
+                <MudTh>Paciente</MudTh>
+                <MudTh>Doctor asignado</MudTh>
+                <MudTh>Servicio</MudTh>
+                <MudTh>Fecha Inicio</MudTh>
+                <MudTh>Estado</MudTh>
+                <MudTh>Total</MudTh>
+                <MudTh Class="text-end">Acciones</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Código" Class="font-monospace fw-bold color-clinical-code">@context.CodigoAtencion</MudTd>
+                <MudTd DataLabel="Paciente" Class="fw-500 text-truncate-cell" Style="max-width: 180px;">@context.PacienteNombre</MudTd>
+                <MudTd DataLabel="Doctor" Class="text-truncate-cell text-muted-name" Style="max-width: 180px;">@context.DoctorNombre</MudTd>
+                <MudTd DataLabel="Servicio" Class="text-truncate-cell" Style="max-width: 160px;">@context.ServicioNombre</MudTd>
+                <MudTd DataLabel="Fecha Inicio" Class="text-nowrap font-monospace">@context.FechaInicio.ToString("dd/MM/yyyy HH:mm")</MudTd>
+                <MudTd DataLabel="Estado">
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                             Color="@(ObtenerColorEstado(context.Estado))" Class="px-3 fw-bold font-sm-chip">
+                        @context.Estado
+                    </MudChip>
+                </MudTd>
+                <MudTd DataLabel="Total" Class="fw-700 font-monospace text-nowrap">S/ @context.CostoFinal.ToString("N2")</MudTd>
+                <MudTd Class="text-end text-nowrap">
+                    <div class="d-flex justify-end gap-1">
+                        @if (context.Estado == EstadoAtencion.Abierta)
+                        {
+                            <MudTooltip Text="Cerrar Acto Médico">
+                                <MudIconButton Icon="@Icons.Material.Filled.DoneAll" Color="Color.Success" Size="Size.Small"
+                                               Variant="Variant.Outlined" Class="action-luxury-btn rounded-lg"
+                                               OnClick="() => CerrarAtencion(context)" />
+                            </MudTooltip>
+                            <MudTooltip Text="Anular Registro">
+                                <MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" Size="Size.Small"
+                                               Variant="Variant.Outlined" Class="action-luxury-btn rounded-lg"
+                                               OnClick="() => AnularAtencion(context)" />
+                            </MudTooltip>
+                        }
+                        <MudTooltip Text="Ver Historial Módulos">
+                            <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Primary" Size="Size.Small"
+                                           Variant="Variant.Outlined" Class="action-luxury-btn rounded-lg"
+                                           OnClick="() => VerDetalle(context)" />
+                        </MudTooltip>
+                    </div>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <div class="table-pager-luxury border-top-divider pa-2">
+                    <MudTablePager PageSizeOptions="new[] { 10, 20, 50 }" RowsPerPageString="Atenciones por página:" />
+                </div>
+            </PagerContent>
+        </MudTable>
+    </MudCard>
+</MudContainer>

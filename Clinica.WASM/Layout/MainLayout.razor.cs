@@ -1,4 +1,5 @@
-﻿using Clinica.WASM.Constants;
+﻿using Clinica.WASM.Components.Auth;
+using Clinica.WASM.Constants;
 using Clinica.WASM.Services.Api;
 using Clinica.WASM.Services.Auth;
 using Clinica.WASM.Themes;
@@ -66,5 +67,18 @@ public partial class MainLayout : LayoutComponentBase
             return partes[0][0].ToString().ToUpperInvariant();
 
         return $"{partes[0][0]}{partes[^1][0]}".ToUpperInvariant();
+    }
+    
+    [Inject] private IDialogService DialogService { get; set; } = default!;
+
+    private async Task AbrirCambioContrasena()
+    {
+        var dialog = await DialogService.ShowAsync<CambiarContrasenaDialog>("Cambiar Contraseña");
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            // Opcional: mostrar un snackbar de éxito
+            //Snackbar.Add("Contraseña actualizada correctamente.", Severity.Success);
+        }
     }
 }

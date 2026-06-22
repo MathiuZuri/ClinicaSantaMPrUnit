@@ -1,0 +1,216 @@
+﻿@using Clinica.WASM.DTOs.Atenciones
+@using Clinica.Domain.Enums
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="px-6 pb-4 border-top-divider">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.FolderShared" Color="Color.Primary" />
+            <MudText Typo="Typo.h6" Class="fw-800">Ficha de Atención Clínica @Atencion.CodigoAtencion</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Style="max-height: 68vh; overflow-y: auto;" Class="pa-1">
+            <MudCard Elevation="0" Class="pa-4 rounded-xl border-admin-box mb-4">
+                <MudGrid Spacing="2">
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-lbl">Paciente</MudText>
+                        <MudText Typo="Typo.body1" Class="fw-600 mt-1 text-truncate-dialog">
+                            @(string.IsNullOrWhiteSpace(Atencion.PacienteNombre) ? "No especificado" : Atencion.PacienteNombre)
+                        </MudText>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-lbl">Médico Tratante</MudText>
+                        <MudText Typo="Typo.body1" Class="fw-500 mt-1 text-truncate-dialog">
+                            @(string.IsNullOrWhiteSpace(Atencion.DoctorNombre) ? "No especificado" : Atencion.DoctorNombre)
+                        </MudText>
+                    </MudItem>
+                    <MudItem xs="6" sm="4" md="2">
+                        <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-lbl">Servicio</MudText>
+                        <MudText Typo="Typo.body2" Class="fw-500 mt-1">@Atencion.ServicioNombre</MudText>
+                    </MudItem>
+                    <MudItem xs="6" sm="4" md="2">
+                        <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-lbl">Estado</MudText>
+                        <div class="mt-1">
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                                     Color="@(Atencion.Estado == EstadoAtencion.Abierta ? Color.Success : Atencion.Estado == EstadoAtencion.Cerrada ? Color.Info : Color.Error)">
+                                @Atencion.Estado.ToString()
+                            </MudChip>
+                        </div>
+                    </MudItem>
+                    
+                    <MudItem xs="6" sm="4">
+                        <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-lbl">Apertura Atencion</MudText>
+                        <MudText Typo="Typo.body2" Class="font-monospace mt-1">@Atencion.FechaInicio.ToString("dd/MM/yyyy HH:mm")</MudText>
+                    </MudItem>
+                    @if (Atencion.FechaCierre.HasValue)
+                    {
+                        <MudItem xs="6" sm="4">
+                            <MudText Typo="Typo.caption" Color="Color.Primary" Class="fw-bold uppercase-lbl">Cierre Acto Médico</MudText>
+                            <MudText Typo="Typo.body2" Class="font-monospace mt-1">@Atencion.FechaCierre.Value.ToString("dd/MM/yyyy HH:mm")</MudText>
+                        </MudItem>
+                    }
+                </MudGrid>
+
+                <div class="d-flex flex-wrap gap-2 mt-4 border-top-divider pt-3">
+                    <div class="financial-badge badge-total">Total: S/ @Atencion.CostoFinal.ToString("N2")</div>
+                    <div class="financial-badge badge-paid">Abonado: S/ @Atencion.MontoPagado.ToString("N2")</div>
+                    <div class="financial-badge badge-debt">Saldo: S/ @Atencion.SaldoPendiente.ToString("N2")</div>
+                </div>
+            </MudCard>
+
+            <MudExpansionPanels MultiExpansion="true" Class="luxury-panels">
+                @if (Atencion.Anamnesis != null)
+                {
+                    <MudExpansionPanel Text="Historial Clínico Obstétrico (Anamnesis)" Class="panel-contrast">
+                        <div class="d-flex flex-column gap-2 pa-1">
+                            <MudText Typo="Typo.body2"><b>Motivo de Consulta:</b> @Atencion.Anamnesis.MotivoConsulta</MudText>
+                            <div class="d-flex flex-wrap gap-3 my-1 generic-container pa-2 rounded-lg">
+                                <span><b>Gestas:</b> @Atencion.Anamnesis.Gestaciones</span>
+                                <span><b>Término:</b> @Atencion.Anamnesis.PartosATermino</span>
+                                <span><b>Pretérmino:</b> @Atencion.Anamnesis.PartosPretermino</span>
+                                <span><b>Abortos:</b> @Atencion.Anamnesis.Abortos</span>
+                                <span><b>Vivos:</b> @Atencion.Anamnesis.HijosVivos</span>
+                            </div>
+                            <MudGrid Spacing="1" Class="font-sm-dialog">
+                                @if (Atencion.Anamnesis.FechaUltimaRegla.HasValue)
+                                { <MudItem xs="6" sm="4"><b>FUR:</b> @Atencion.Anamnesis.FechaUltimaRegla.Value.ToShortDateString()</MudItem> }
+                                @if (Atencion.Anamnesis.FechaProbableParto.HasValue)
+                                { <MudItem xs="6" sm="4"><b>FPP:</b> @Atencion.Anamnesis.FechaProbableParto.Value.ToShortDateString()</MudItem> }
+                                @if (!string.IsNullOrEmpty(Atencion.Anamnesis.EdadGestacional))
+                                { <MudItem xs="6" sm="4"><b>Edad Gestacional:</b> @Atencion.Anamnesis.EdadGestacional</MudItem> }
+                            </MudGrid>
+                            
+                            @if (!string.IsNullOrEmpty(Atencion.Anamnesis.Alergias))
+                            { <div class="mt-1 text-danger-box pa-2 rounded-lg"><b>Alergias registradas:</b> @Atencion.Anamnesis.Alergias</div> }
+                            @if (!string.IsNullOrEmpty(Atencion.Anamnesis.EnfermedadesCronicas))
+                            { <MudText Typo="Typo.body2" Class="mt-1"><b>Enfermedades Crónicas:</b> @Atencion.Anamnesis.EnfermedadesCronicas</MudText> }
+                            @if (!string.IsNullOrEmpty(Atencion.Anamnesis.CirugiasPrevias))
+                            { <MudText Typo="Typo.body2"><b>Cirugías Previas:</b> @Atencion.Anamnesis.CirugiasPrevias</MudText> }
+                            @if (!string.IsNullOrEmpty(Atencion.Anamnesis.AntecedentesAdicionales))
+                            { <MudText Typo="Typo.body2" Class="text-muted-dialog"><b>Antecedentes Adicionales:</b> @Atencion.Anamnesis.AntecedentesAdicionales</MudText> }
+                        </div>
+                    </MudExpansionPanel>
+                }
+
+                @if (Atencion.ExamenesFisicos != null && Atencion.ExamenesFisicos.Any())
+                {
+                    <MudExpansionPanel Text="Monitoreo de Exámenes Físicos (Signos Vitales y AU)" Class="panel-contrast">
+                        <div class="table-responsive-box">
+                            <table class="clinical-mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha/Hora</th>
+                                        <th>LOTEP</th>
+                                        <th>Estado General</th>
+                                        <th>Alt. Uterina</th>
+                                        <th>L.C.F. (Fetal)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ex in Atencion.ExamenesFisicos)
+                                    {
+                                        <tr>
+                                            <td class="font-monospace">@ex.FechaHoraExamen?.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@ex.Lotep</td>
+                                            <td>@ex.EstadoGeneral</td>
+                                            <td class="fw-bold">@ex.AlturaUterina</td>
+                                            <td class="color-clinical-code fw-bold">@ex.LatidosCardiacosFetales</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </MudExpansionPanel>
+                }
+
+                @if (Atencion.TactosVaginales != null && Atencion.TactosVaginales.Any())
+                {
+                    <MudExpansionPanel Text="Evolución de Tactos Vaginales" Class="panel-contrast">
+                        <div class="table-responsive-box">
+                            <table class="clinical-mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha/Hora</th>
+                                        <th>Dilatación</th>
+                                        <th>Borramiento (%)</th>
+                                        <th>Altura Presentación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var tv in Atencion.TactosVaginales)
+                                    {
+                                        <tr>
+                                            <td class="font-monospace">@tv.FechaHora?.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td class="fw-bold">@tv.Dilatacion cm</td>
+                                            <td>@tv.Borramiento%</td>
+                                            <td>@tv.AlturaPresentacion</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </MudExpansionPanel>
+                }
+
+                @if (Atencion.Ecografias != null && Atencion.Ecografias.Any())
+                {
+                    <MudExpansionPanel Text="Biometría Fetal (Ecografías)" Class="panel-contrast">
+                        <div class="table-responsive-box">
+                            <table class="clinical-mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha/Hora</th>
+                                        <th>DBP</th>
+                                        <th>C. Cefálica</th>
+                                        <th>C. Abdominal</th>
+                                        <th>L. Fémur</th>
+                                        <th>PFE (Peso)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var eco in Atencion.Ecografias)
+                                    {
+                                        <tr>
+                                            <td class="font-monospace">@eco.FechaHora?.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@eco.DiametroBiparietal</td>
+                                            <td>@eco.CircunferenciaCefalica</td>
+                                            <td>@eco.CircunferenciaAbdominal</td>
+                                            <td>@eco.LongitudFemur</td>
+                                            <td class="fw-bold text-success">@eco.PesoFetalEstimado g</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </MudExpansionPanel>
+                }
+
+                @if (Atencion.ImpresionDiagnostica != null)
+                {
+                    <MudExpansionPanel Text="Resolución de Impresión Diagnóstica y Receta" Class="panel-contrast">
+                        <div class="d-flex flex-column gap-2 pa-1">
+                            <div class="pa-3 rounded-lg diagnostic-main-box">
+                                <MudText Typo="Typo.body2"><b>Diagnóstico Principal Resolutivo:</b></MudText>
+                                <MudText Typo="Typo.body1" Class="fw-bold color-clinical-code mt-1">@Atencion.ImpresionDiagnostica.DiagnosticoPrincipal</MudText>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Atencion.ImpresionDiagnostica.DiagnosticosSecundarios))
+                            { <MudText Typo="Typo.body2" Class="mt-1"><b>Diagnósticos Secundarios:</b> @Atencion.ImpresionDiagnostica.DiagnosticosSecundarios</MudText> }
+                            @if (!string.IsNullOrEmpty(Atencion.ImpresionDiagnostica.IndicacionesReceta))
+                            {
+                                <div class="pa-3 rounded-lg recipe-box mt-2">
+                                    <MudText Typo="Typo.caption" Color="Color.Tertiary" Class="fw-bold uppercase-lbl">Plan de Tratamiento / Receta</MudText>
+                                    <MudText Typo="Typo.body2" Class="mt-1" Style="white-space: pre-wrap;">@Atencion.ImpresionDiagnostica.IndicacionesReceta</MudText>
+                                </div>
+                            }
+                            @if (Atencion.ImpresionDiagnostica.FechaProximaCita.HasValue)
+                            { <MudText Typo="Typo.body2" Class="mt-2 font-monospace color-clinical-code"><b>Agendamiento Automático Control:</b> @Atencion.ImpresionDiagnostica.FechaProximaCita.Value.ToShortDateString()</MudText> }
+                        </div>
+                    </MudExpansionPanel>
+                }
+            </MudExpansionPanels>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cerrar" Color="Color.Primary" Variant="Variant.Filled" Class="px-5 rounded-lg">Cerrar Ficha</MudButton>
+    </DialogActions>
+</MudDialog>

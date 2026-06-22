@@ -1,6 +1,7 @@
 ﻿using Clinica.Domain.DTOs.Atenciones;
 using Clinica.Domain.DTOs.Atenciones.Modulos;
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;
 
@@ -36,7 +37,7 @@ public class AtencionService : IAtencionService
 
     public async Task<IEnumerable<AtencionResponseDto>> ObtenerTodasAsync()
     {
-        var atenciones = await _atencionRepository.GetAllAsync();
+        var atenciones = await _atencionRepository.ObtenerTodasConRelacionesAsync();
         return atenciones.Select(MapearAtencion);
     }
 
@@ -63,13 +64,11 @@ public class AtencionService : IAtencionService
         var servicio = await _servicioRepository.GetByIdAsync(dto.ServicioClinicoId)
             ?? throw new KeyNotFoundException("Servicio no encontrado.");
 
-        // ✅ SOLUCIÓN AL ERROR: Validamos que envíen el Historial y extraemos el Guid
         if (!dto.HistorialClinicoId.HasValue || dto.HistorialClinicoId.Value == Guid.Empty)
             throw new InvalidOperationException("El identificador del historial clínico es obligatorio.");
 
         Guid historialIdReal = dto.HistorialClinicoId.Value;
 
-        // 1. Creación del CORE (Atención base)
         var atencion = new Atencion
         {
             Id = Guid.NewGuid(),
@@ -78,12 +77,12 @@ public class AtencionService : IAtencionService
             DoctorId = dto.DoctorId,
             ServicioClinicoId = dto.ServicioClinicoId,
             CitaId = dto.CitaId,
-            HistorialClinicoId = historialIdReal, // ✅ ERROR CORREGIDO AQUÍ
+            HistorialClinicoId = historialIdReal,
             FechaInicio = DateTime.UtcNow,
             Estado = EstadoAtencion.Abierta
         };
 
-        // 2. Acoplamiento de MÓDULOS INDEPENDIENTES
+        // Anamnesis
         if (dto.Anamnesis != null)
         {
             atencion.Anamnesis = new Anamnesis
@@ -95,8 +94,8 @@ public class AtencionService : IAtencionService
                 Abortos = dto.Anamnesis.Abortos,
                 PartosPretermino = dto.Anamnesis.PartosPretermino,
                 PartosATermino = dto.Anamnesis.PartosATermino,
-                FechaUltimaRegla = dto.Anamnesis.FechaUltimaRegla,
-                FechaProbableParto = dto.Anamnesis.FechaProbableParto,
+                FechaUltimaRegla = ToUtc(dto.Anamnesis.FechaUltimaRegla),
+                FechaProbableParto = ToUtc(dto.Anamnesis.FechaProbableParto),
                 EdadGestacional = dto.Anamnesis.EdadGestacional,
                 Alergias = dto.Anamnesis.Alergias,
                 EnfermedadesCronicas = dto.Anamnesis.EnfermedadesCronicas,
@@ -105,10 +104,11 @@ public class AtencionService : IAtencionService
             };
         }
 
+        // Exámenes Físicos
         atencion.ExamenesFisicos = dto.ExamenesFisicos?.Select(e => new ExamenFisico
         {
             Id = Guid.NewGuid(),
-            FechaHoraExamen = e.FechaHoraExamen,
+            FechaHoraExamen = DateTime.SpecifyKind(e.FechaHoraExamen, DateTimeKind.Utc),
             Lotep = e.Lotep,
             EstadoGeneral = e.EstadoGeneral,
             EstadoHidratacion = e.EstadoHidratacion,
@@ -131,10 +131,11 @@ public class AtencionService : IAtencionService
             ReflejosOsteotendinosos = e.ReflejosOsteotendinosos
         }).ToList() ?? new List<ExamenFisico>();
 
+        // Tactos Vaginales
         atencion.TactosVaginales = dto.TactosVaginales?.Select(t => new TactoVaginal
         {
             Id = Guid.NewGuid(),
-            FechaHora = t.FechaHora,
+            FechaHora = DateTime.SpecifyKind(t.FechaHora, DateTimeKind.Utc),
             Dilatacion = t.Dilatacion,
             Borramiento = t.Borramiento,
             AlturaPresentacion = t.AlturaPresentacion,
@@ -144,10 +145,11 @@ public class AtencionService : IAtencionService
             VariedadPresentacion = t.VariedadPresentacion
         }).ToList() ?? new List<TactoVaginal>();
 
+        // Ecografías
         atencion.Ecografias = dto.Ecografias?.Select(e => new EcografiaObstetrica
         {
             Id = Guid.NewGuid(),
-            FechaHora = e.FechaHora,
+            FechaHora = DateTime.SpecifyKind(e.FechaHora, DateTimeKind.Utc),
             DiametroBiparietal = e.DiametroBiparietal,
             CircunferenciaCefalica = e.CircunferenciaCefalica,
             CircunferenciaAbdominal = e.CircunferenciaAbdominal,
@@ -160,6 +162,7 @@ public class AtencionService : IAtencionService
             Conclusiones = e.Conclusiones
         }).ToList() ?? new List<EcografiaObstetrica>();
 
+        // Impresión Diagnóstica
         if (dto.ImpresionDiagnostica != null)
         {
             atencion.ImpresionDiagnostica = new ImpresionDiagnostica
@@ -168,12 +171,12 @@ public class AtencionService : IAtencionService
                 DiagnosticoPrincipal = dto.ImpresionDiagnostica.DiagnosticoPrincipal,
                 DiagnosticosSecundarios = dto.ImpresionDiagnostica.DiagnosticosSecundarios,
                 IndicacionesReceta = dto.ImpresionDiagnostica.IndicacionesReceta,
-                FechaProximaCita = dto.ImpresionDiagnostica.FechaProximaCita,
+                FechaProximaCita = ToUtc(dto.ImpresionDiagnostica.FechaProximaCita),
                 MotivoProximaCita = dto.ImpresionDiagnostica.MotivoProximaCita
             };
         }
 
-        // 3. Creación del Pago
+        // Pago
         var pago = new Pago
         {
             Id = Guid.NewGuid(),
@@ -189,12 +192,12 @@ public class AtencionService : IAtencionService
             UsuarioRegistroId = usuarioId
         };
 
-        // 4. Registro en el Historial Clínico
+        // Historial
         var detalle = new HistorialDetalle
         {
             Id = Guid.NewGuid(),
             CodigoDetalle = GenerarCodigoDetalle(servicio.CodigoServicio),
-            HistorialClinicoId = historialIdReal, // ✅ ERROR CORREGIDO AQUÍ TAMBIÉN
+            HistorialClinicoId = historialIdReal,
             AtencionId = atencion.Id,
             TipoMovimiento = TipoMovimientoHistorial.AtencionRegistrada,
             Titulo = "Apertura de Consulta Externa",
@@ -203,7 +206,7 @@ public class AtencionService : IAtencionService
             UsuarioId = usuarioId
         };
 
-        // 5. Actualización de Cita
+        // Actualización de cita
         if (dto.CitaId.HasValue)
         {
             var cita = await _citaRepository.GetByIdAsync(dto.CitaId.Value);
@@ -243,7 +246,7 @@ public class AtencionService : IAtencionService
                 DiagnosticoPrincipal = dto.ImpresionDiagnostica.DiagnosticoPrincipal,
                 DiagnosticosSecundarios = dto.ImpresionDiagnostica.DiagnosticosSecundarios,
                 IndicacionesReceta = dto.ImpresionDiagnostica.IndicacionesReceta,
-                FechaProximaCita = dto.ImpresionDiagnostica.FechaProximaCita,
+                FechaProximaCita = ToUtc(dto.ImpresionDiagnostica.FechaProximaCita),
                 MotivoProximaCita = dto.ImpresionDiagnostica.MotivoProximaCita
             };
         }
@@ -252,7 +255,7 @@ public class AtencionService : IAtencionService
             atencion.ImpresionDiagnostica.DiagnosticoPrincipal = dto.ImpresionDiagnostica.DiagnosticoPrincipal;
             atencion.ImpresionDiagnostica.DiagnosticosSecundarios = dto.ImpresionDiagnostica.DiagnosticosSecundarios;
             atencion.ImpresionDiagnostica.IndicacionesReceta = dto.ImpresionDiagnostica.IndicacionesReceta;
-            atencion.ImpresionDiagnostica.FechaProximaCita = dto.ImpresionDiagnostica.FechaProximaCita;
+            atencion.ImpresionDiagnostica.FechaProximaCita = ToUtc(dto.ImpresionDiagnostica.FechaProximaCita);
             atencion.ImpresionDiagnostica.MotivoProximaCita = dto.ImpresionDiagnostica.MotivoProximaCita;
         }
 
@@ -424,4 +427,7 @@ public class AtencionService : IAtencionService
     {
         return $"{Guid.NewGuid().ToString("N")[..5].ToUpper()}-{prefijo}-{DateTime.UtcNow:yyyy}-{dni}";
     }
+    
+    private static DateTime? ToUtc(DateTime? dateTime)
+        => dateTime.HasValue ? DateTime.SpecifyKind(dateTime.Value, DateTimeKind.Utc) : null;
 }

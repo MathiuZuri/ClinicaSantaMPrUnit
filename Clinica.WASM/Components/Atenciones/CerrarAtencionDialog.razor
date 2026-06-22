@@ -1,0 +1,83 @@
+﻿<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="d-none">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.AssignmentTurnedIn" Color="Color.Primary" />
+            <MudText Typo="Typo.h6" Class="fw-800">Cierre de Acto Médico e Impresión Diagnóstica</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <EditForm Model="@Model" OnValidSubmit="CerrarAsync">
+            <DataAnnotationsValidator />
+            <MudContainer Style="max-height: 65vh; overflow-y: auto;" Class="pa-1">
+                <MudGrid Spacing="2">
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="Model.ImpresionDiagnostica.DiagnosticoPrincipal"
+                                      Label="Diagnóstico Principal *"
+                                      Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.LocalHospital" AdornmentColor="Color.Primary"
+                                      For="@(() => Model.ImpresionDiagnostica.DiagnosticoPrincipal)"
+                                      Required="true" Class="rounded-lg" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="Model.ImpresionDiagnostica.DiagnosticosSecundarios"
+                                      Label="Diagnósticos Secundarios o Comorbilidades"
+                                      Variant="Variant.Outlined"
+                                      Lines="2" Class="rounded-lg" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="Model.ImpresionDiagnostica.IndicacionesReceta"
+                                      Label="Indicaciones Clínicas / Receta Médica"
+                                      Variant="Variant.Outlined"
+                                      Lines="3" Class="rounded-lg" />
+                    </MudItem>
+                    
+                    <MudItem xs="12" sm="6">
+                        <MudDatePicker @bind-Date="Model.ImpresionDiagnostica.FechaProximaCita"
+                                       Label="Fecha de Próxima Cita"
+                                       Variant="Variant.Outlined" Margin="Margin.Dense"
+                                       AdornmentIcon="@Icons.Material.Filled.Event" AdornmentColor="Color.Primary"
+                                       Class="rounded-lg" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudTextField @bind-Value="Model.ImpresionDiagnostica.MotivoProximaCita"
+                                      Label="Motivo de Control o Próxima Cita"
+                                      Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Class="rounded-lg" />
+                    </MudItem>
+                    
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="Model.ObservacionesFinales"
+                                      Label="Observaciones Finales Internas"
+                                      Variant="Variant.Outlined"
+                                      Lines="2" Class="rounded-lg" />
+                    </MudItem>
+                </MudGrid>
+            </MudContainer>
+            
+            <div class="d-flex justify-end align-center mt-5 border-top-divider pt-3">
+                <MudButton OnClick="Cancelar" Variant="Variant.Text" Color="Color.Default" Class="mr-2 rounded-lg">Cancelar</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" Class="rounded-lg shadow-sm px-4" Disabled="@IsLoading">
+                    @if (IsLoading)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                        <span>Guardando...</span>
+                    }
+                    else
+                    {
+                        <span>Cerrar Atención</span>
+                    }
+                </MudButton>
+            </div>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+<style>
+    .luxury-dialog {
+        border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.12);
+        box-shadow: var(--mud-elevation-24) !important;
+    }
+    .border-top-divider {
+        border-top: 1px solid var(--mud-palette-divider);
+    }
+</style>

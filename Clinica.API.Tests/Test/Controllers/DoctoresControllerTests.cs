@@ -1,6 +1,7 @@
 ﻿using Clinica.API.Controllers;
 using Clinica.API.Models;
 using Clinica.API.Services;
+using Clinica.Domain.DTOs.Comunes;
 using Clinica.Domain.DTOs.Doctores;
 using Clinica.Domain.Enums;
 using FluentAssertions;
@@ -191,5 +192,41 @@ public class DoctoresControllerTests
             FechaFinContrato = new DateTime(2026, 12, 31),
             Estado = EstadoDoctor.Activo
         };
+    }
+    
+    [Fact]
+    public async Task Contratar_DebeRetornarCreatedAtAction()
+    {
+        var dto = new ContratarDoctorDto
+        {
+            CMP = "12345",
+            Nombres = "Luis",
+            Apellidos = "Mamani",
+            Especialidad = "Ginecología",
+            UserName = "luis.mamani",
+            CorreoUsuario = "luis@test.com",
+            Password = "Password123!",
+            FechaInicioContrato = new DateTime(2026, 1, 10)
+        };
+        var nuevoId = Guid.NewGuid();
+        _doctorService.ContratarAsync(dto).Returns(nuevoId);
+
+        var result = await _controller.Contratar(dto);
+
+        var created = result.Should().BeOfType<CreatedAtActionResult>().Subject;
+        created.ActionName.Should().Be(nameof(DoctoresController.GetById));
+        created.RouteValues!["id"].Should().Be(nuevoId);
+    }
+
+    [Fact]
+    public async Task Buscar_DebeRetornarOk()
+    {
+        var request = new PaginacionRequestDto { Pagina = 1, CantidadPorPagina = 10 };
+        var resultado = new PaginacionResponseDto<DoctorResponseDto>();
+        _doctorService.BuscarAsync(null, null, null, request).Returns(resultado);
+
+        var actionResult = await _controller.Buscar(null, null, null, request);
+
+        actionResult.Should().BeOfType<OkObjectResult>();
     }
 }

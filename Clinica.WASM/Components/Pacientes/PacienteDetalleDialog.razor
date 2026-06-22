@@ -96,6 +96,86 @@
                 </div>
             </MudItem>
         </MudGrid>
+
+        @* Sección de Filiación (si hay datos) *@
+        @if (!string.IsNullOrWhiteSpace(Paciente.LugarNacimiento) ||
+             !string.IsNullOrWhiteSpace(Paciente.GradoInstruccion) ||
+             !string.IsNullOrWhiteSpace(Paciente.Ocupacion) ||
+             !string.IsNullOrWhiteSpace(Paciente.Religion) ||
+             !string.IsNullOrWhiteSpace(Paciente.EstadoCivil) ||
+             !string.IsNullOrWhiteSpace(Paciente.NombrePareja) ||
+             !string.IsNullOrWhiteSpace(Paciente.CelularPareja))
+        {
+            <MudExpansionPanels Class="mt-4">
+                <MudExpansionPanel Text="Filiación y Datos Complementarios">
+                    <MudGrid Class="info-grid-styled">
+                        @if (!string.IsNullOrWhiteSpace(Paciente.LugarNacimiento))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Lugar de Nacimiento</span>
+                                    <span class="info-cell-value">@Paciente.LugarNacimiento</span>
+                                </div>
+                            </MudItem>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Paciente.GradoInstruccion))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Grado de Instrucción</span>
+                                    <span class="info-cell-value">@Paciente.GradoInstruccion</span>
+                                </div>
+                            </MudItem>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Paciente.Ocupacion))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Ocupación</span>
+                                    <span class="info-cell-value">@Paciente.Ocupacion</span>
+                                </div>
+                            </MudItem>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Paciente.Religion))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Religión</span>
+                                    <span class="info-cell-value">@Paciente.Religion</span>
+                                </div>
+                            </MudItem>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Paciente.EstadoCivil))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Estado Civil</span>
+                                    <span class="info-cell-value">@Paciente.EstadoCivil</span>
+                                </div>
+                            </MudItem>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Paciente.NombrePareja))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Nombre de la Pareja</span>
+                                    <span class="info-cell-value">@Paciente.NombrePareja</span>
+                                </div>
+                            </MudItem>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Paciente.CelularPareja))
+                        {
+                            <MudItem xs="12" sm="6" md="4" Class="info-cell">
+                                <div class="info-cell-box">
+                                    <span class="info-cell-label">Celular de la Pareja</span>
+                                    <span class="info-cell-value">@Paciente.CelularPareja</span>
+                                </div>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+        }
     </DialogContent>
 
     <DialogActions>

@@ -2,6 +2,7 @@
 using Clinica.API.Services.Imp;
 using Clinica.Domain.DTOs.Pagos;
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;
 using FluentAssertions;
@@ -242,42 +243,6 @@ public class PagoServiceTests
     }
 
     [Fact]
-    public async Task RegistrarAsync_SiExisteAtencion_DebeActualizarMontos()
-    {
-        // Arrange
-        var usuarioId = Guid.NewGuid();
-        var dto = CrearDtoValido();
-        dto.AtencionId = Guid.NewGuid();
-        dto.MontoPagado = 50m;
-
-        var paciente = CrearPaciente(dto.PacienteId);
-        var servicio = CrearServicio(dto.ServicioClinicoId);
-        var atencion = new Atencion
-        {
-            Id = dto.AtencionId.Value,
-            CostoFinal = 200m,
-            MontoPagado = 30m,
-            SaldoPendiente = 170m
-        };
-
-        _usuarioActualService.ObtenerUsuarioId().Returns(usuarioId);
-        _pacienteRepository.GetByIdAsync(dto.PacienteId).Returns(paciente);
-        _servicioRepository.GetByIdAsync(dto.ServicioClinicoId).Returns(servicio);
-        _atencionRepository.GetByIdAsync(dto.AtencionId.Value).Returns(atencion);
-        _historialRepository.ObtenerPorPacienteAsync(dto.PacienteId).Returns((HistorialClinico?)null);
-
-        // Act
-        await _service.RegistrarAsync(dto);
-
-        // Assert
-        atencion.MontoPagado.Should().Be(80m);
-        atencion.SaldoPendiente.Should().Be(120m);
-
-        _atencionRepository.Received(1).Update(atencion);
-        await _pagoRepository.Received(1).SaveChangesAsync();
-    }
-
-    [Fact]
     public async Task RegistrarAsync_SiExisteHistorial_DebeAgregarDetalle()
     {
         // Arrange
@@ -303,12 +268,14 @@ public class PagoServiceTests
         // Assert
         resultado.Should().NotBeEmpty();
 
+        var descripcionEsperada = $"Se registró pago de S/ {dto.MontoPagado} por {servicio.Nombre}. Método: {dto.MetodoPago}.";
+
         await _detalleRepository.Received(1).AddAsync(Arg.Is<HistorialDetalle>(d =>
             d.HistorialClinicoId == historial.Id &&
             d.PagoId != null &&
             d.TipoMovimiento == TipoMovimientoHistorial.PagoRegistrado &&
             d.Titulo == "Pago registrado" &&
-            d.Descripcion == $"Se registró pago de S/ {dto.MontoPagado}." &&
+            d.Descripcion == descripcionEsperada &&
             d.UsuarioId == usuarioId &&
             !string.IsNullOrWhiteSpace(d.CodigoDetalle)));
     }
@@ -488,4 +455,35 @@ public class PagoServiceTests
         _atencionRepository.DidNotReceive().Update(Arg.Any<Atencion>());
         await _pagoRepository.Received(1).SaveChangesAsync();
     }
+    
+    [Fact]
+    public async Task RegistrarAsync_CuandoMontoPagadoEsCero_DebeCrearPagoEnEstadoPendiente()
+    {
+        // Arrange
+        var usuarioId = Guid.NewGuid();
+        var dto = CrearDtoValido();
+        dto.MontoTotal = 100m;
+        dto.MontoPagado = 0m;        // no se ha pagado nada
+        dto.MontoAdelanto = 0m;
+        dto.AtencionId = null;
+
+        var paciente = CrearPaciente(dto.PacienteId);
+        var servicio = CrearServicio(dto.ServicioClinicoId);
+
+        _usuarioActualService.ObtenerUsuarioId().Returns(usuarioId);
+        _pacienteRepository.GetByIdAsync(dto.PacienteId).Returns(paciente);
+        _servicioRepository.GetByIdAsync(dto.ServicioClinicoId).Returns(servicio);
+        _historialRepository.ObtenerPorPacienteAsync(dto.PacienteId).Returns((HistorialClinico?)null);
+
+        // Act
+        await _service.RegistrarAsync(dto);
+
+        // Assert
+        await _pagoRepository.Received(1).AddAsync(Arg.Is<Pago>(p =>
+            p.SaldoPendiente == 100m &&
+            p.Estado == EstadoPago.Pendiente));
+        await _pagoRepository.Received(1).SaveChangesAsync();
+    }
+    
+    
 }

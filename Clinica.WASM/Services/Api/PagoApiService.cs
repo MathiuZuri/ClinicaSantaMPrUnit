@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Clinica.WASM.Constants;
 using Clinica.WASM.DTOs.Common;
 using Clinica.WASM.DTOs.Pagos;
@@ -40,5 +41,21 @@ public class PagoApiService
 
         var mensaje = await _apiErrorService.ObtenerMensajeErrorAsync(response);
         return (false, mensaje);
+    }
+    
+    public async Task<List<PagoResponseDto>> ObtenerPorCitaAsync(Guid citaId)
+    {
+        var json = await _httpClient.GetStringAsync($"{ApiEndpoints.Pagos}/cita/{citaId}");
+        using var doc = JsonDocument.Parse(json);
+        var data = doc.RootElement.GetProperty("data");
+        return JsonSerializer.Deserialize<List<PagoResponseDto>>(data.GetRawText()) ?? new();
+    }
+
+    public async Task<List<PagoResponseDto>> ObtenerPorAtencionAsync(Guid atencionId)
+    {
+        var json = await _httpClient.GetStringAsync($"{ApiEndpoints.Pagos}/atencion/{atencionId}");
+        using var doc = JsonDocument.Parse(json);
+        var data = doc.RootElement.GetProperty("data");
+        return JsonSerializer.Deserialize<List<PagoResponseDto>>(data.GetRawText()) ?? new();
     }
 }

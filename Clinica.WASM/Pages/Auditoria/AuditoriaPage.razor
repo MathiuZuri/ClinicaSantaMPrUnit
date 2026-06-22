@@ -1,0 +1,123 @@
+﻿@page "/auditoria"
+@using Clinica.WASM.DTOs.Auditoria
+@using Clinica.Domain.Enums
+
+<PageTitle>Auditoría del Sistema | SIGEC</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-8 audit-page-animate">
+    <!-- Cabecera de Módulo con Icono y Subtexto sutil -->
+    <div class="d-flex align-center gap-3 mb-6">
+        <MudIcon Icon="@Icons.Material.Filled.Shield" Color="Color.Primary" Size="Size.Large" Class="audit-icon-pulse" />
+        <div>
+            <MudText Typo="Typo.h4" Color="Color.Info" Class="fw-800">
+                Auditoría del Sistema
+            </MudText>
+            <MudText Typo="Typo.body2" Color="Color.Info">
+                Registro histórico de transacciones, seguridad e integridad de datos del SIGEC.
+            </MudText>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Class="mb-4 rounded-lg shadow-sm" Dense="true">
+            @ErrorMessage
+        </MudAlert>
+    }
+
+    <!-- Tarjeta Principal con Contraste y Sombra Mejorada -->
+    <MudCard Elevation="4" Class="rounded-xl overflow-hidden luxury-card">
+        <!-- Zona de Filtros con Fondo Diferenciado para Alto Contraste -->
+        <div class="filter-zone pa-5 d-flex flex-wrap align-center justify-space-between gap-4">
+            <div class="d-flex flex-wrap gap-4 align-center w-100 w-sm-auto">
+                <MudSelect T="TipoAccionAuditoria?"
+                           @bind-Value="FiltroTipoAccion"
+                           Label="Filtrar por acción"
+                           Variant="Variant.Outlined"
+                           Margin="Margin.Dense"
+                           Clearable="true"
+                           AdornmentIcon="@Icons.Material.Filled.FilterAlt"
+                           Class="flex-grow-1 flex-sm-grow-0" Style="min-width: 220px;">
+                    <MudSelectItem Value="@((TipoAccionAuditoria?)TipoAccionAuditoria.Creacion)">
+                        <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.AddCircle" Color="Color.Success" Size="Size.Small"/> Creación</span>
+                    </MudSelectItem>
+                    <MudSelectItem Value="@((TipoAccionAuditoria?)TipoAccionAuditoria.Edicion)">
+                        <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.Edit" Color="Color.Warning" Size="Size.Small"/> Edición</span>
+                    </MudSelectItem>
+                    <MudSelectItem Value="@((TipoAccionAuditoria?)TipoAccionAuditoria.Eliminacion)">
+                        <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small"/> Eliminación</span>
+                    </MudSelectItem>
+                    <MudSelectItem Value="@((TipoAccionAuditoria?)TipoAccionAuditoria.Login)">
+                        <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.VpnKey" Color="Color.Info" Size="Size.Small"/> Login</span>
+                    </MudSelectItem>
+                    <MudSelectItem Value="@((TipoAccionAuditoria?)TipoAccionAuditoria.Asignacion)">
+                        <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.AssignmentInd" Color="Color.Secondary" Size="Size.Small"/> Asignación</span>
+                    </MudSelectItem>
+                    <MudSelectItem Value="@((TipoAccionAuditoria?)TipoAccionAuditoria.Error)">
+                        <span class="d-flex align-center gap-2"><MudIcon Icon="@Icons.Material.Filled.Error" Color="Color.Dark" Size="Size.Small"/> Error</span>
+                    </MudSelectItem>
+                </MudSelect>
+
+                <MudSwitch T="bool"
+                           Checked="FiltroSoloConsultas"
+                           CheckedChanged="OnSoloConsultasChangedAsync"
+                           Label="Solo consultas de datos"
+                           Color="Color.Primary" 
+                           Class="mt-1" />
+            </div>
+        </div>
+
+        <!-- Tabla con Adaptabilidad Móvil y Estilo Limpio -->
+        <MudTable T="AuditoriaResponseDto"
+                  Hover="true" Striped="false" Elevation="0" Class="luxury-medical-table"
+                  ServerData="CargarDatosTabla"
+                  @ref="Tabla">
+            <HeaderContent>
+                <MudTh>Fecha (UTC)</MudTh>
+                <MudTh>Usuario</MudTh>
+                <MudTh>Acción</MudTh>
+                <MudTh>Módulo</MudTh>
+                <MudTh>Entidad</MudTh>
+                <MudTh>Nivel</MudTh>
+                <MudTh>Resultado</MudTh>
+                <MudTh Class="text-end">Acciones</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Fecha" Class="text-nowrap font-monospace">@context.FechaHora.ToString("dd/MM/yyyy HH:mm:ss")</MudTd>
+                <MudTd DataLabel="Usuario" Class="fw-bold text-truncate" Style="max-width: 150px;">@context.UsuarioNombre</MudTd>
+                <MudTd DataLabel="Acción">
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                             Color="@(ObtenerColorTipoAccion(context.TipoAccion))" Class="px-3">@context.TipoAccion.ToString()</MudChip>
+                </MudTd>
+                <MudTd DataLabel="Módulo" Class="text-truncate" Style="max-width: 140px;">@context.Modulo</MudTd>
+                <MudTd DataLabel="Entidad" Class="text-truncate font-monospace" Style="max-width: 160px;">@context.EntidadAfectada</MudTd>
+                <MudTd DataLabel="Nivel">
+                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                             Color="@(context.Nivel == NivelAuditoria.Critico ? Color.Error : context.Nivel == NivelAuditoria.Importante ? Color.Warning : Color.Default)"
+                             Icon="@(context.Nivel == NivelAuditoria.Critico ? Icons.Material.Filled.Warning : null)">
+                        @context.Nivel.ToString()
+                    </MudChip>
+                </MudTd>
+                <MudTd DataLabel="Resultado">
+                    <div class="d-flex align-center gap-1">
+                        <MudIcon Icon="@(context.FueExitoso ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Cancel)"
+                                 Color="@(context.FueExitoso ? Color.Success : Color.Error)" Size="Size.Small" />
+                        <MudText Typo="Typo.caption" Color="@(context.FueExitoso ? Color.Success : Color.Error)" Class="d-inline d-sm-none fw-bold">
+                            @(context.FueExitoso ? "Exitoso" : "Fallido")
+                        </MudText>
+                    </div>
+                </MudTd>
+                <MudTd Class="text-end">
+                    <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Primary" Size="Size.Small"
+                                   Variant="Variant.Outlined" Class="rounded-lg hover-scale"
+                                   OnClick="() => VerDetalle(context)" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <div class="table-pager-luxury pa-2 border-top-1">
+                    <MudTablePager PageSizeOptions="new[] { 10, 20, 50, 100 }" RowsPerPageString="Registros por página:" />
+                </div>
+            </PagerContent>
+        </MudTable>
+    </MudCard>
+</MudContainer>

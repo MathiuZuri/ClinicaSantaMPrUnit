@@ -5,6 +5,7 @@ namespace Clinica.Domain.DTOs.Pacientes;
 public class PacienteResponseDto
 {
     public Guid Id { get; set; }
+    public Guid HistorialClinicoId { get; set; }
     public string CodigoPaciente { get; set; } = string.Empty;
     public string DNI { get; set; } = string.Empty;
     public string Nombres { get; set; } = string.Empty;

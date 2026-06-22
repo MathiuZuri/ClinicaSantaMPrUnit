@@ -1,0 +1,70 @@
+﻿/* Animación suave de entrada de la página completa */
+.audit-page-animate {
+    animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efecto de pulso controlado para el icono de seguridad */
+.audit-icon-pulse {
+    animation: slowPulse 3s ease-in-out infinite;
+}
+
+@keyframes slowPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.85; }
+}
+
+/* Tarjeta con contraste médico premium y sombras tridimensionales */
+.luxury-card {
+    background-color: var(--mud-palette-surface) !important;
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.08) !important;
+    box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 12px -3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Zona de filtrado diferenciada del cuerpo de la tabla */
+.filter-zone {
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.5) !important;
+    border-bottom: 1px solid var(--mud-palette-divider);
+}
+
+/* Microinteracciones sobre los botones de ver detalle */
+.hover-scale {
+    transition: all 0.2s ease-in-out !important;
+}
+.hover-scale:hover {
+    transform: scale(1.08);
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.05) !important;
+}
+
+/* Ajustes de bordes y filas para la tabla de auditoría */
+.luxury-medical-table ::deep .mud-table-row {
+    transition: background-color 0.15s linear;
+}
+
+.luxury-medical-table ::deep .mud-table-row:hover {
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.02) !important;
+}
+
+.border-top-1 {
+    border-top: 1px solid var(--mud-palette-divider);
+}
+
+/* Adaptabilidad móvil estricta (Responsividad sin desborde) */
+@media (max-width: 960px) {
+    /* Fuerza el ajuste de texto cuando MudTable se transforma en tarjetas móviles verticalizadas */
+    .luxury-medical-table ::deep .mud-table-cell {
+        max-width: none !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+}

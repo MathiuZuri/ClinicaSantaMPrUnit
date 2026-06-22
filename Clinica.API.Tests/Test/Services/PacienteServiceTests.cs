@@ -36,19 +36,16 @@ public class PacienteServiceTests
     [Fact]
     public async Task ObtenerTodosAsync_DebeRetornarDtosMapeados()
     {
-        // Arrange
         var pacientes = new List<Paciente>
         {
             CrearPacienteEntidad(),
             CrearPacienteEntidad()
         };
 
-        _pacienteRepository.GetAllAsync().Returns(pacientes);
+        _pacienteRepository.ObtenerTodosConHistorialAsync().Returns(pacientes);   // ✅ corregido
 
-        // Act
         var resultado = (await _service.ObtenerTodosAsync()).ToList();
 
-        // Assert
         resultado.Should().HaveCount(2);
         resultado[0].Id.Should().Be(pacientes[0].Id);
         resultado[0].CodigoPaciente.Should().Be(pacientes[0].CodigoPaciente);
@@ -338,16 +335,13 @@ public class PacienteServiceTests
     [Fact]
     public async Task ObtenerTodosAsync_CuandoHistorialClinicoEsNull_DebeRetornarCodigoHistorialNull()
     {
-        // Arrange
         var paciente = CrearPacienteEntidad();
         paciente.HistorialClinico = null;
 
-        _pacienteRepository.GetAllAsync().Returns(new List<Paciente> { paciente });
+        _pacienteRepository.ObtenerTodosConHistorialAsync().Returns(new List<Paciente> { paciente });   // ✅ corregido
 
-        // Act
         var resultado = (await _service.ObtenerTodosAsync()).ToList();
 
-        // Assert
         resultado.Should().HaveCount(1);
         resultado[0].CodigoHistorial.Should().BeNull();
     }

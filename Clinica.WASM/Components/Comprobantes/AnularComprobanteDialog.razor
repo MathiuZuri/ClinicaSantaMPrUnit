@@ -1,0 +1,45 @@
+﻿@using Clinica.WASM.DTOs.Comprobantes
+
+<MudDialog Class="luxury-dialog rounded-xl" ActionsClass="px-6 pb-4">
+    <TitleContent>
+        <div class="d-flex align-center gap-2">
+            <MudIcon Icon="@Icons.Material.Filled.CancelPresentation" Color="Color.Error" />
+            <MudText Typo="Typo.h6" Class="fw-800">Solicitud de Anulación</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body2" Color="Color.Info" Class="mb-4 text-break">
+            Esta acción revertirá los estados financieros asociados al comprobante. Especifique el motivo legal.
+        </MudText>
+        <EditForm Model="MotivoModel" OnValidSubmit="AnularAsync">
+            <DataAnnotationsValidator />
+            <MudTextField @bind-Value="MotivoModel.Motivo"
+                          Label="Motivo de anulación"
+                          Variant="Variant.Outlined"
+                          Lines="3"
+                          Required="true"
+                          For="@(() => MotivoModel.Motivo)"
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Report"
+                          AdornmentColor="Color.Error"
+                          Class="rounded-lg" />
+            
+            <div class="d-flex justify-end align-center mt-4">
+                <MudButton OnClick="Cancelar" Variant="Variant.Text" Color="Color.Default" Class="mr-2 rounded-lg">
+                    Cancelar
+                </MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error" Class="rounded-lg shadow-sm" Disabled="@IsLoading">
+                    @if (IsLoading)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                        <span>Anulando...</span>
+                    }
+                    else
+                    {
+                        <span>Confirmar Anulación</span>
+                    }
+                </MudButton>
+            </div>
+        </EditForm>
+    </DialogContent>
+</MudDialog>

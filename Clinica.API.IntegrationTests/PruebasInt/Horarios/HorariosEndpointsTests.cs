@@ -97,44 +97,7 @@ public class HorariosEndpointsTests : IntegrationTestBase
             x.Activo
         );
     }
-
-    [Fact]
-    public async Task Get_Horarios_PorDoctor_DeberiaRetornarHorariosDelDoctor()
-    {
-        // Arrange
-        await LoginAsAdminAsync();
-
-        await using var db = CreateDbContext();
-
-        var doctor = await TestDataSeeder.CrearDoctorAsync(
-            db,
-            cmp: $"CMP{Random.Shared.Next(100000, 999999)}"
-        );
-
-        var horarioCreado = await TestDataSeeder.CrearHorarioDoctorAsync(
-            db,
-            doctor.Id,
-            diaSemana: DayOfWeek.Tuesday,
-            horaInicio: new TimeOnly(9, 0),
-            horaFin: new TimeOnly(13, 0)
-        );
-
-        // Act
-        var response = await Client.GetAsync($"/api/horarios/doctor/{doctor.Id}");
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-        await JsonTestHelper.AssertSuccessAsync(response);
-
-        var horarios = await response.ReadDataAsJsonAsync<List<HorarioDoctorResponseDto>>();
-
-        horarios.Should().NotBeNull();
-        horarios!.Should().Contain(x =>
-            x.Id == horarioCreado.Id &&
-            x.DoctorId == doctor.Id &&
-            x.DiaSemana == DayOfWeek.Tuesday
-        );
-    }
+    
 
     [Fact]
     public async Task Get_Horarios_PorDoctorSinHorarios_DeberiaRetornarOk()

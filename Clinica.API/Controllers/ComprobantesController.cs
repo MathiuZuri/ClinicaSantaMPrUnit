@@ -372,16 +372,29 @@ public class ComprobantesController : ControllerBase
         await _comprobanteService.AnularComprobanteAsync(comprobanteId, request.Motivo);
         return Ok(new { Mensaje = "Comprobante anulado correctamente." });
     }
-}
-
-/// <summary>
-/// Objeto utilizado para solicitar la anulación de un comprobante.
-/// </summary>
-public class AnularComprobanteRequest
-{
+    
     /// <summary>
-    /// Motivo de la anulación del comprobante. (Obligatorio, mínimo 3 caracteres).
+    /// Obtiene todos los comprobantes emitidos.
     /// </summary>
-    /// <example>"Error en el monto registrado"</example>
-    public string Motivo { get; set; } = string.Empty;
+    [HttpGet]
+    [Authorize(Policy = PermisosPolicies.ComprobanteVer)]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<ComprobanteDto>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<ComprobanteDto>>>> ObtenerTodos()
+    {
+        var resultado = await _comprobanteService.ObtenerTodosAsync();
+        return Ok(ApiResponse<IEnumerable<ComprobanteDto>>.Ok(resultado, "Comprobantes obtenidos correctamente."));
+    }
+    
+    /// <summary>
+    /// Objeto utilizado para solicitar la anulación de un comprobante.
+    /// </summary>
+    public class AnularComprobanteRequest
+    {
+        /// <summary>
+        /// Motivo de la anulación del comprobante. (Obligatorio, mínimo 3 caracteres).
+        /// </summary>
+        /// <example>"Error en el monto registrado"</example>
+        public string Motivo { get; set; } = string.Empty;
+    }
 }

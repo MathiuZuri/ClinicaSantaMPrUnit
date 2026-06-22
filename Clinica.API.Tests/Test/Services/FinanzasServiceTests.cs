@@ -493,6 +493,7 @@ public class FinanzasServiceTests
         resultado.Should().HaveCount(1);
         resultado[0].AtencionId.Should().Be(atencionConDeuda);
         resultado[0].TieneDeuda.Should().BeTrue();
+        resultado[0].DeudaTotal.Should().Be(resultado[0].SaldoReal);
     }
 
     [Fact]

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Clinica.Domain.DTOs.Comprobantes;
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;
 
@@ -1012,5 +1013,15 @@ public class ComprobanteService : IComprobanteService
                 Total = d.Total
             }).ToList()
         };
+    }
+    
+    public async Task<IEnumerable<ComprobanteDto>> ObtenerTodosAsync()
+    {
+        // Como actualmente no hay un método en el repositorio para obtener todos,
+        // puedes usar el repositorio de Comprobante y obtener todos con un GetQueryable() o similar.
+        // Asumo que tienes un método en IComprobanteRepository para obtener todos.
+        var comprobantes = await _comprobanteRepository.GetAllAsync(); 
+        // Si no existe, podrías hacer una consulta LINQ usando _comprobanteRepository.GetQueryable()
+        return comprobantes.Select(MapearComprobante).ToList();
     }
 }

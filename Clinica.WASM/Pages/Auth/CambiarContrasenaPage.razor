@@ -1,0 +1,106 @@
+﻿@page "/cambiar-contrasena"
+@layout EmptyLayout
+@using Clinica.WASM.DTOs.Auth
+
+<PageTitle>Seguridad de la Cuenta | Clínica Santa Mónica</PageTitle>
+
+<MudThemeProvider Theme="@Theme" IsDarkMode="@IsDarkMode" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div class="login-page">
+    <div class="login-shell animate-shell shadow-2xl rounded-2xl overflow-hidden">
+        <section class="login-brand-panel d-none d-md-flex flex-column justify-space-between pa-8">
+            <div class="brand-badge-luxury d-flex align-center">
+                <div class="icon-pulse-shell">
+                    <MudIcon Icon="@Icons.Material.Filled.LockReset" Size="Size.Medium" Style="color: white;" />
+                </div>
+                <span class="ml-3 brand-sigla font-monospace">SM</span>
+            </div>
+            
+            <div class="brand-core-text my-auto">
+                <h1 class="fw-900 tracking-tight">Seguridad<br />de la Cuenta</h1>
+                <p class="mt-2 text-muted-brand">Consola de protección de identidad digital del SIGEC.</p>
+            </div>
+            
+            <div class="brand-message-box pa-4 rounded-xl shadow-sm">
+                <div class="d-flex align-center gap-2 mb-2">
+                    <MudIcon Icon="@Icons.Material.Filled.Shield" Color="Color.Tertiary" Size="Size.Small" />
+                    <h2 class="font-sm fw-bold uppercase-lbl text-gold">Contraseña Obligatoria</h2>
+                </div>
+                <p class="font-xs">Por políticas estrictas de seguridad interna, es obligatorio actualizar sus credenciales de acceso inicial antes de poder continuar operando el sistema.</p>
+            </div>
+        </section>
+
+        <div class="login-container-card-luxury pa-8 pa-sm-12 d-flex flex-column justify-center">
+            <div class="d-block d-md-none mb-4 animate-fade-in">
+                <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true" Class="rounded-xl border-dashed" Icon="@Icons.Material.Filled.VerifiedUser">
+                    Actualización de seguridad obligatoria
+                </MudAlert>
+            </div>
+
+            <div class="login-header-group mb-6">
+                <MudText Typo="Typo.h4" Class="login-title-premium fw-900 color-primary">
+                    Nueva contraseña
+                </MudText>
+                <MudText Typo="Typo.body2" Class="login-subtitle-premium mt-1">
+                    Establezca una clave de alta seguridad para proteger su registro de firmas y auditorías.
+                </MudText>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(MensajeError))
+            {
+                <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Dense="true" Class="mb-4 rounded-lg shadow-sm animate-fade-in">
+                    @MensajeError
+                </MudAlert>
+            }
+
+            <EditForm Model="@Model" OnValidSubmit="CambiarAsync">
+                <DataAnnotationsValidator />
+                
+                <div class="d-flex flex-column gap-4">
+                    <MudTextField @bind-Value="Model.ContrasenaActual"
+                                  Label="Contraseña transitoria actual"
+                                  Variant="Variant.Outlined"
+                                  InputType="InputType.Password"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Password"
+                                  AdornmentColor="Color.Primary"
+                                  Required="true"
+                                  For="@(() => Model.ContrasenaActual)"
+                                  Class="rounded-lg bg-input" />
+
+                    <MudTextField @bind-Value="Model.ContrasenaNueva"
+                                  Label="Nueva contraseña de seguridad"
+                                  Variant="Variant.Outlined"
+                                  InputType="InputType.Password"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Lock"
+                                  AdornmentColor="Color.Primary"
+                                  Required="true"
+                                  For="@(() => Model.ContrasenaNueva)"
+                                  HelperText="La clave debe contener un mínimo de 8 caracteres alfanuméricos"
+                                  Class="rounded-lg bg-input" />
+                </div>
+
+                <MudButton ButtonType="ButtonType.Submit"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           FullWidth="true"
+                           Disabled="@EstaProcesando"
+                           Class="mt-6 login-submit-btn-luxury py-3 rounded-lg shadow-md hover-scale-btn">
+                    @if (EstaProcesando)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                        <span>Validando credenciales...</span>
+                    }
+                    else
+                    {
+                        <span>Guardar credenciales seguras</span>
+                    }
+                </MudButton>
+            </EditForm>
+        </div>
+    </div>
+</div>

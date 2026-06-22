@@ -79,7 +79,7 @@ public class CitasController : ControllerBase
     public async Task<IActionResult> GetByPaciente(Guid pacienteId)
     {
         var citas = await _citaService.ObtenerPorPacienteAsync(pacienteId);
-        return Ok(ApiResponse<object>.Ok(citas, "Citas del paciente obtenidas correctamente."));
+        return Ok(ApiResponse<IEnumerable<CitaResponseDto>>.Ok(citas, "Citas del paciente obtenidas correctamente."));
     }
 
     /// <summary>

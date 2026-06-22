@@ -1,0 +1,138 @@
+﻿/* Estilos maestros del diálogo de captura médica */
+.luxury-dialog {
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.12) !important;
+    box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.18) !important;
+}
+
+.border-top-divider {
+    border-top: 1px solid var(--mud-palette-divider);
+}
+
+.uppercase-label {
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 0.72rem !important;
+}
+
+/* Re-estilización del contenedor de pasos MudBlazor */
+.luxury-stepper {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+::deep .mud-stepper-header {
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.5) !important;
+    border: 1px solid var(--mud-palette-divider);
+    border-radius: 12px;
+    padding: 8px !important;
+    margin-bottom: 16px;
+}
+
+::deep .mud-step-button {
+    font-weight: 600 !important;
+}
+
+/* Contenedores de inputs estáticos */
+.border-card {
+    border: 1px solid var(--mud-palette-divider);
+    background-color: rgba(var(--mud-palette-surface-rgb), 0.8) !important;
+}
+
+/* Tarjetas clínicas de entrada dinámica (Exámenes, Tactos, Ecos) */
+.clinical-entry-card {
+    background-color: var(--mud-palette-surface) !important;
+    border: 1px solid var(--mud-palette-divider) !important;
+    box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.06) !important;
+    transition: box-shadow 0.2s ease;
+}
+
+.clinical-entry-card:hover {
+    box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Bordes de color semántico para diferenciar submódulos al instante */
+.success-accent-border { border-left: 4px solid var(--mud-palette-success) !important; }
+.info-accent-border { border-left: 4px solid var(--mud-palette-info) !important; }
+.warning-accent-border { border-left: 4px solid var(--mud-palette-warning) !important; }
+
+.color-clinical {
+    color: var(--mud-palette-text-primary);
+    font-size: 0.82rem;
+    letter-spacing: 0.3px;
+}
+
+/* Ajustes tipográficos específicos de campos médicos */
+.text-success-field ::deep input {
+    color: var(--mud-palette-success) !important;
+    font-weight: 700 !important;
+}
+
+.text-error-field ::deep input {
+    color: var(--mud-palette-error) !important;
+    font-weight: 600 !important;
+}
+
+.color-info-text ::deep input {
+    color: var(--mud-palette-info) !important;
+    font-weight: 700 !important;
+}
+
+/* Zona de estado vacío */
+.empty-state-box {
+    border: 2px dashed var(--mud-palette-divider);
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.3);
+}
+
+/* Micro-animación para inserción suave de tarjetas */
+.animate-fade {
+    animation: cardIn 0.25s ease-out forwards;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: scale(0.98) translateY(4px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Efecto rotatorio sutil en el icono de cabecera */
+.spinning-medical-icon {
+    animation: slowSpin 12s linear infinite;
+}
+
+@keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hover-btn {
+    transition: background-color 0.2s ease !important;
+}
+
+.hover-scale-btn {
+    transition: transform 0.2s ease !important;
+}
+.hover-scale-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Banner de guardado asíncrono */
+.loading-overlay-blur {
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.05);
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.15);
+}
+
+.tracking-wide {
+    letter-spacing: 0.2px;
+}
+
+/* Adaptabilidad para dispositivos móviles estrictos */
+@media (max-width: 600px) {
+    ::deep .mud-stepper-header {
+        display: none !important; /* Esconde la cabecera pesada del Stepper en pantallas pequeñas de celular */
+    }
+    .step-container {
+        padding: 0 !important;
+    }
+    ::deep .mud-grid-item {
+        padding: 4px !important; /* Optimiza el espaciado para que no queden huecos blancos gigantes en teléfonos */
+    }
+}

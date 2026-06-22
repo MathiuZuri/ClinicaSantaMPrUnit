@@ -25,4 +25,11 @@ public class PacienteRepository : GenericRepository<Paciente>, IPacienteReposito
             .ThenInclude(x => x!.Detalles)
             .FirstOrDefaultAsync(x => x.Id == pacienteId);
     }
+    
+    public async Task<IEnumerable<Paciente>> ObtenerTodosConHistorialAsync()
+    {
+        return await Context.Pacientes
+            .Include(x => x.HistorialClinico)
+            .ToListAsync();
+    }
 }

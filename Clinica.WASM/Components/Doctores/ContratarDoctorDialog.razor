@@ -1,0 +1,74 @@
+﻿@using Clinica.WASM.DTOs.Doctores
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6" Color="Color.Primary">Contratar Nuevo Médico</MudText>
+    </TitleContent>
+    <DialogContent>
+        <EditForm Model="@Model" OnValidSubmit="ContratarAsync">
+            <DataAnnotationsValidator />
+            <MudStepper NonLinear="true" @ref="Stepper">
+                <MudStep Label="Datos del doctor">
+                    <MudGrid>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.CMP" Label="CMP" Variant="Variant.Outlined" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.Nombres" Label="Nombres" Variant="Variant.Outlined" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.Apellidos" Label="Apellidos" Variant="Variant.Outlined" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.Especialidad" Label="Especialidad" Variant="Variant.Outlined" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.Celular" Label="Celular" Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.Correo" Label="Correo" Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudDatePicker @bind-DateNullable="Model.FechaInicioContrato" Label="Inicio Contrato" Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudDatePicker @bind-Date="Model.FechaFinContrato" Label="Fin Contrato (opcional)" Variant="Variant.Outlined" />
+                        </MudItem>
+                    </MudGrid>
+                </MudStep>
+                <MudStep Label="Cuenta de usuario">
+                    <MudGrid>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.UserName" Label="Nombre de usuario" Variant="Variant.Outlined" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.CorreoUsuario" Label="Correo electrónico" Variant="Variant.Outlined" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Model.Password" Label="Contraseña" Variant="Variant.Outlined" InputType="InputType.Password" Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudSelect T="Guid?" @bind-Value="Model.RolId" Label="Rol (opcional)" Variant="Variant.Outlined" Clearable="true">
+                                <!-- Opciones de roles se pueden cargar desde un servicio -->
+                            </MudSelect>
+                        </MudItem>
+                    </MudGrid>
+                </MudStep>
+            </MudStepper>
+            @if (IsLoading)
+            {
+                <div class="d-flex justify-center pa-4">
+                    <MudProgressCircular Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ml-3">Contratando médico...</MudText>
+                </div>
+            }
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancelar" Variant="Variant.Text" Color="Color.Default">Cancelar</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ContratarAsync" Disabled="@IsLoading">
+            @if (IsLoading) { <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" /> <span>Contratando...</span> }
+            else { <span>Contratar médico</span> }
+        </MudButton>
+    </DialogActions>
+</MudDialog>

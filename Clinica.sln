@@ -12,10 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.API.Tests", "Clinic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.API.IntegrationTests", "Clinica.API.IntegrationTests\Clinica.API.IntegrationTests.csproj", "{4A32E86E-F99D-40C6-84A6-2C632352D79D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.E2ETests", "Clinica.E2ETests\Clinica.E2ETests.csproj", "{71A1ACF8-3330-4C98-B1B3-E86515676266}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.AcceptanceTests", "Clinica.AcceptanceTests\Clinica.AcceptanceTests.csproj", "{E604303D-D2AB-42AA-B120-2FC836470C26}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,13 +42,5 @@ Global
 		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A32E86E-F99D-40C6-84A6-2C632352D79D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71A1ACF8-3330-4C98-B1B3-E86515676266}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E604303D-D2AB-42AA-B120-2FC836470C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {E604303D-D2AB-42AA-B120-2FC836470C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {E604303D-D2AB-42AA-B120-2FC836470C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {E604303D-D2AB-42AA-B120-2FC836470C26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

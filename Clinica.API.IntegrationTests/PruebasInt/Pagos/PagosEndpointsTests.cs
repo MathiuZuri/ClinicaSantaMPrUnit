@@ -200,7 +200,7 @@ public class PagosEndpointsTests : IntegrationTestBase
         pagoResponse.CitaId.Should().Be(cita.Id);
         pagoResponse.Estado.Should().Be(EstadoPago.Pagado);
     }
-
+    
     [Fact]
     public async Task Get_PagosPorAtencion_ConPago_DeberiaRetornarPagosDeLaAtencion()
     {
@@ -216,14 +216,13 @@ public class PagosEndpointsTests : IntegrationTestBase
             baseCita.Paciente.Id
         );
 
+        // Crear atención sin los parámetros obsoletos
         var atencion = await TestDataSeeder.CrearAtencionAsync(
             db,
             pacienteId: baseCita.Paciente.Id,
             doctorId: baseCita.Doctor.Id,
             servicioClinicoId: baseCita.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 100,
-            montoPagado: 0
+            historialClinicoId: historial.Id
         );
 
         var pago = await TestDataSeeder.CrearPagoAsync(
@@ -561,58 +560,7 @@ public class PagosEndpointsTests : IntegrationTestBase
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
-
-    [Fact]
-    public async Task Post_Pagos_ConAtencionExistente_DeberiaActualizarMontosDeAtencion()
-    {
-        // Arrange
-        await LoginAsAdminAsync();
-
-        await using var db = CreateDbContext();
-
-        var baseCita = await TestDataSeeder.CrearBaseParaCitaAsync(db);
-
-        var historial = await TestDataSeeder.CrearHistorialClinicoAsync(
-            db,
-            baseCita.Paciente.Id
-        );
-
-        var atencion = await TestDataSeeder.CrearAtencionAsync(
-            db,
-            pacienteId: baseCita.Paciente.Id,
-            doctorId: baseCita.Doctor.Id,
-            servicioClinicoId: baseCita.Servicio.Id,
-            historialClinicoId: historial.Id,
-            costoFinal: 100,
-            montoPagado: 0
-        );
-
-        var dto = new RegistrarPagoDto
-        {
-            PacienteId = baseCita.Paciente.Id,
-            ServicioClinicoId = baseCita.Servicio.Id,
-            AtencionId = atencion.Id,
-            MontoTotal = 100,
-            MontoPagado = 60,
-            MontoAdelanto = 0,
-            MetodoPago = MetodoPago.Tarjeta,
-            Observacion = "Pago asociado a atención"
-        };
-
-        // Act
-        var response = await Client.PostJsonAsync("/api/pagos", dto);
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        var atencionActualizada = await db.Atenciones
-            .AsNoTracking()
-            .FirstAsync(x => x.Id == atencion.Id);
-
-        atencionActualizada.MontoPagado.Should().Be(60);
-        atencionActualizada.SaldoPendiente.Should().Be(40);
-    }
-
+    
     [Fact]
     public async Task Post_Pagos_ConHistorialExistente_DeberiaCrearDetalleHistorial()
     {
@@ -713,6 +661,79 @@ public class PagosEndpointsTests : IntegrationTestBase
         var dto = new CambiarEstadoPagoDto { Estado = EstadoPago.Eliminado };
 
         var response = await Client.PutJsonAsync($"/api/pagos/{pago.Id}/estado", dto);
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+    
+    [Fact]
+    public async Task Put_CambiarEstadoPago_SinToken_DeberiaRetornarUnauthorized()
+    {
+        ClearAuthorization();
+
+        var dto = new CambiarEstadoPagoDto { Estado = EstadoPago.Pagado };
+        var response = await Client.PutJsonAsync($"/api/pagos/{Guid.NewGuid()}/estado", dto);
+
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+    
+    [Fact]
+    public async Task Post_Pagos_SinMontoPagado_DeberiaRegistrarPagoPendiente()
+    {
+        await LoginAsAdminAsync();
+
+        await using var db = CreateDbContext();
+
+        var paciente = await TestDataSeeder.CrearPacienteAsync(db, dni: "80123458");
+        var servicio = await db.ServiciosClinicos.FirstAsync();
+
+        var dto = new RegistrarPagoDto
+        {
+            PacienteId = paciente.Id,
+            ServicioClinicoId = servicio.Id,
+            MontoTotal = 100,
+            MontoPagado = 0,          // sin pago → estado Pendiente
+            MontoAdelanto = 0,
+            MetodoPago = MetodoPago.Efectivo,
+            Observacion = "Pago pendiente"
+        };
+
+        var response = await Client.PostJsonAsync("/api/pagos", dto);
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var data = await JsonTestHelper.ReadDataAsync(response);
+        var pagoId = data.GetProperty("id").GetGuid();
+
+        var pago = await db.Pagos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == pagoId);
+
+        pago.Should().NotBeNull();
+        pago!.Estado.Should().Be(EstadoPago.Pendiente);
+        pago.MontoPagado.Should().Be(0);
+        pago.SaldoPendiente.Should().Be(100);
+    }
+    
+    [Fact]
+    public async Task Put_CambiarEstadoPago_PagoEliminado_DeberiaRetornarBadRequest()
+    {
+        // Arrange
+        await LoginAsAdminAsync();
+
+        await using var db = CreateDbContext();
+        var paciente = await TestDataSeeder.CrearPacienteAsync(db, dni: "90123456");
+        var servicio = await db.ServiciosClinicos.FirstAsync();
+        // Crear un pago que ya está eliminado
+        var pago = await TestDataSeeder.CrearPagoAsync(
+            db,
+            pacienteId: paciente.Id,
+            servicioClinicoId: servicio.Id,
+            montoTotal: 100,
+            montoPagado: 100,
+            estado: EstadoPago.Eliminado);
+
+        var dto = new CambiarEstadoPagoDto { Estado = EstadoPago.Pagado };
+
+        // Act
+        var response = await Client.PutJsonAsync($"/api/pagos/{pago.Id}/estado", dto);
+
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 }

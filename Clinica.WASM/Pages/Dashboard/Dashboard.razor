@@ -1,7 +1,7 @@
 ﻿@page "/dashboard"
 @inherits Microsoft.AspNetCore.Components.ComponentBase
 
-<PageTitle>Panel de Control Central </PageTitle>
+<PageTitle>Panel de Control Central</PageTitle>
 
 <div class="dashboard-canvas-layer">
     
@@ -19,6 +19,11 @@
             <MudText Typo="Typo.caption" Class="font-mono fw-bold tracking-wide">SIGEC_NET9_OK</MudText>
         </div>
     </div>
+
+    @if (HuboErrorCarga)
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Class="mb-4 rounded-lg">@MensajeError</MudAlert>
+    }
 
     @* SECCIÓN 2: Rejilla Maestra de Indicadores Clave (KPI Cards con Relieve) *@
     <MudGrid Class="mb-6">
@@ -74,7 +79,7 @@
                     {
                         <span class="kpi-numeric-value">@ContadorAtenciones</span>
                     }
-                    <span class="kpi-text-label">Atenciones Ejecutadas</span>
+                    <span class="kpi-text-label">Atenciones del Mes</span>
                 </div>
             </div>
         </MudItem>
@@ -91,9 +96,86 @@
                     }
                     else
                     {
-                        <span class="kpi-numeric-value text-gold">@BalanceCaja.ToString("C2")</span>
+                        <span class="kpi-numeric-value text-gold">@IngresosMensuales.ToString("C0")</span>
                     }
-                    <span class="kpi-text-label">Balance de Caja Mensual</span>
+                    <span class="kpi-text-label">Ingresos del Mes</span>
+                </div>
+            </div>
+        </MudItem>
+
+        @* Segunda fila de KPIs *@
+        <MudItem xs="12" sm="6" md="3">
+            <div class="kpi-card-luxury accent-warning">
+                <div class="kpi-icon-shell shell-warning">
+                    <MudIcon Icon="@Icons.Material.Filled.MoneyOff" />
+                </div>
+                <div class="kpi-data-stack">
+                    @if (CargandoMetricas)
+                    {
+                        <MudProgressLinear Color="Color.Warning" Indeterminate="true" Class="kpi-loader-bar" />
+                    }
+                    else
+                    {
+                        <span class="kpi-numeric-value text-warning-dark">@ContadorPagosPendientes</span>
+                    }
+                    <span class="kpi-text-label">Pagos Pendientes</span>
+                </div>
+            </div>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <div class="kpi-card-luxury accent-danger">
+                <div class="kpi-icon-shell shell-danger">
+                    <MudIcon Icon="@Icons.Material.Filled.ReportProblem" />
+                </div>
+                <div class="kpi-data-stack">
+                    @if (CargandoMetricas)
+                    {
+                        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="kpi-loader-bar" />
+                    }
+                    else
+                    {
+                        <span class="kpi-numeric-value text-error">@DeudaTotal.ToString("C0")</span>
+                    }
+                    <span class="kpi-text-label">Deuda Total Acumulada</span>
+                </div>
+            </div>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <div class="kpi-card-luxury accent-info">
+                <div class="kpi-icon-shell shell-info">
+                    <MudIcon Icon="@Icons.Material.Filled.PeopleAlt" />
+                </div>
+                <div class="kpi-data-stack">
+                    @if (CargandoMetricas)
+                    {
+                        <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="kpi-loader-bar" />
+                    }
+                    else
+                    {
+                        <span class="kpi-numeric-value text-info-dark">@ContadorDoctoresActivos</span>
+                    }
+                    <span class="kpi-text-label">Doctores Activos</span>
+                </div>
+            </div>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <div class="kpi-card-luxury accent-default">
+                <div class="kpi-icon-shell shell-default">
+                    <MudIcon Icon="@Icons.Material.Filled.MedicalServices" />
+                </div>
+                <div class="kpi-data-stack">
+                    @if (CargandoMetricas)
+                    {
+                        <MudProgressLinear Color="Color.Default" Indeterminate="true" Class="kpi-loader-bar" />
+                    }
+                    else
+                    {
+                        <span class="kpi-numeric-value">@ContadorAtencionesHoy</span>
+                    }
+                    <span class="kpi-text-label">Atenciones Iniciadas Hoy</span>
                 </div>
             </div>
         </MudItem>

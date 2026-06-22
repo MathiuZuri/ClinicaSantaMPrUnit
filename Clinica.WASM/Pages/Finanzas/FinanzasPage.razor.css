@@ -1,9 +1,58 @@
-﻿.luxury-navigation-tabs {
-    background-color: var(--mud-palette-surface);
-    border: 1px solid var(--mud-palette-divider);
-    border-radius: var(--mud-layout-properties-default-border-radius); /* 16px */
-    overflow: hidden;
-    box-shadow: var(--mud-elevation-2);
+﻿/* Animación suave de entrada de la página completa */
+.finance-fade-in {
+    animation: slideUpFinance 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFinance {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animaciones para las transiciones de pestañas y carga de datos */
+.tab-panel-animate {
+    animation: fadeInTab 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dynamic-results-animate {
+    animation: slideUpFinance 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.alert-animation {
+    animation: alertBounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes alertBounce {
+    from { opacity: 0; transform: scale(0.96) translateY(-4px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Estructura tridimensional premium para los contenedores de pestañas MudBlazor */
+.luxury-navigation-tabs {
+    background-color: var(--mud-palette-surface) !important;
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.08) !important;
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.07), 0 4px 16px -4px rgba(0, 0, 0, 0.04) !important;
+}
+
+::deep .mud-tabs-toolbar {
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.6) !important;
+    border-bottom: 1px solid var(--mud-palette-divider);
+}
+
+::deep .mud-tab {
+    font-weight: 700 !important;
+    letter-spacing: 0.2px;
+    font-size: 0.85rem !important;
+    transition: all 0.2s ease-in-out;
+}
+
+::deep .mud-tab-active {
+    color: var(--mud-palette-primary) !important;
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.04);
 }
 
 .tab-canvas-luxury {
@@ -11,68 +60,181 @@
     background-color: var(--mud-palette-surface);
 }
 
+/* Franjas de filtros diferenciadas para alto contraste */
 .query-filter-strip {
-    background-color: var(--mud-palette-background-gray);
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.4) !important;
     padding: 16px 20px;
     border-radius: 12px;
     border: 1px solid var(--mud-palette-divider);
 }
 
 ::deep .clean-select-inside .mud-input-outlined-border {
-    border: none !important; /* Limpia bordes internos select */
+    border: none !important;
+}
+
+.uppercase-lbl {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.72rem !important;
+}
+
+.color-primary {
+    color: var(--mud-palette-primary);
+}
+
+.border-bottom-divider {
+    border-bottom: 1px solid var(--mud-palette-divider);
+}
+
+.border-container {
+    border: 1px solid var(--mud-palette-divider);
 }
 
 /* --- TARJETA LUXURY ESTADO DE CUENTA PACIENTE --- */
 .statement-card-luxury {
     background-color: var(--mud-palette-surface);
     padding: 24px;
-    border-radius: 14px;
-    border: 1px solid var(--mud-palette-divider);
-    box-shadow: var(--mud-elevation-1);
+    border-radius: 16px;
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.08);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04) !important;
 }
-.border-top-tertiary { border-top: 4px solid var(--mud-palette-tertiary); }
+.border-top-tertiary {
+    border-top: 4px solid var(--mud-palette-tertiary) !important;
+}
 
 .statement-patient-name {
     font-weight: 800 !important;
-    letter-spacing: -0.02em;
-    color: var(--mud-palette-text-primary);
+    letter-spacing: -0.01em;
 }
 
 .statement-metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 16px;
-    margin-top: 16px;
 }
 
 .statement-metric-cell {
-    background-color: var(--mud-palette-background-gray);
-    padding: 12px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--mud-palette-divider);
+    padding: 16px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--mud-palette-divider);
 }
+.cell-total { background-color: rgba(var(--mud-palette-primary-rgb), 0.02); border-left: 4px solid var(--mud-palette-primary); }
+.cell-success { background-color: rgba(0, 150, 105, 0.02); border-left: 4px solid #059669; }
+.cell-danger { background-color: rgba(var(--mud-palette-secondary-rgb), 0.02); border-left: 4px solid var(--mud-palette-secondary); }
 
-.s-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--mud-palette-text-secondary); letter-spacing: 0.05em; }
-.s-value { font-size: 1.25rem; font-weight: 700; color: var(--mud-palette-text-primary); margin-top: 2px; }
+.s-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.text-success-label { color: #059669; }
+.text-danger-label { color: var(--mud-palette-secondary); }
+.s-value { font-size: 1.35rem; font-weight: 700; color: var(--mud-palette-text-primary); margin-top: 4px; }
 
 .header-cell-premium-statement {
     font-weight: 700 !important;
     text-transform: uppercase;
     font-size: 0.72rem !important;
     letter-spacing: 0.04em;
-    background-color: var(--mud-palette-background-gray) !important;
+    background-color: rgba(var(--mud-palette-drawer-background-rgb), 0.5) !important;
     color: var(--mud-palette-text-secondary) !important;
     padding: 12px !important;
 }
 
 .text-success-dark { color: #059669; }
 .text-rose-gold { color: var(--mud-palette-secondary); }
+.text-warning-dark { color: #d97706; }
+.text-error-dark { color: var(--mud-palette-error); }
+
+/* --- DASHBOARD KPI ANUAL --- */
+.kpi-card-luxury {
+    display: flex;
+    align-center: center;
+    background-color: var(--mud-palette-surface);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--mud-palette-divider);
+    gap: 14px;
+}
+.accent-primary { border-left: 4px solid var(--mud-palette-primary); }
+.accent-danger { border-left: 4px solid var(--mud-palette-secondary); }
+.accent-success { border-left: 4px solid #059669; }
+.accent-warning { border-left: 4px solid #d97706; }
+
+.kpi-icon-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+}
+.shell-primary { background-color: rgba(var(--mud-palette-primary-rgb), 0.08); color: var(--mud-palette-primary); }
+.shell-danger { background-color: rgba(var(--mud-palette-secondary-rgb), 0.08); color: var(--mud-palette-secondary); }
+.shell-success { background-color: rgba(5, 150, 105, 0.08); color: #059669; }
+.shell-warning { background-color: rgba(217, 119, 6, 0.08); color: #d97706; }
+
+.kpi-text-stack { display: flex; flex-direction: column; justify-content: center; }
+.kpi-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--mud-palette-text-secondary); letter-spacing: 0.3px; }
+.kpi-value { font-size: 1.15rem; font-weight: 700; color: var(--mud-palette-text-primary); margin-top: 2px; }
+
+/* Estilos de expansión colapsable */
+.luxury-panels ::deep .mud-expansion-panel-header { font-weight: 700 !important; }
+.panel-contrast {
+    background-color: transparent !important;
+    border: 1px solid var(--mud-palette-divider) !important;
+    margin-bottom: 6px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+}
+
+.finance-code-badge {
+    color: var(--mud-palette-primary);
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.06);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.1);
+}
+
+.audit-result-card {
+    background-color: var(--mud-palette-surface);
+    border: 1px solid rgba(var(--mud-palette-primary-rgb), 0.08) !important;
+    box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Microinteracciones sobre botones */
+.hover-scale-btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.hover-scale-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--mud-elevation-6) !important;
+}
+
+/* Rediseño responsivo estricto para evitar desbordes */
+.luxury-medical-table ::deep .mud-table-row {
+    border-bottom: 1px solid var(--mud-palette-divider) !important;
+}
+
+@media (max-width: 960px) {
+    .luxury-medical-table ::deep .mud-table-cell {
+        max-width: none !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+}
 
 @media (max-width: 600px) {
     .full-width-mobile {
-        width: 100%;
-        margin-top: 4px;
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        margin-top: 6px;
+    }
+    .tab-canvas-luxury {
+        padding: 16px 12px;
+    }
+    ::deep .pt-mobile-0 {
+        padding-top: 0 !important;
+        margin-top: 4px !important;
     }
 }

@@ -1,4 +1,5 @@
 using Clinica.Domain.Entities;
+using Clinica.Domain.Entities.ATENCIONES;
 
 namespace Clinica.Domain.Interfaces.ATENCIONES;
 

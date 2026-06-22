@@ -14,8 +14,7 @@
                               AdornmentColor="Color.Primary" />
             </MudItem>
             <MudItem xs="12">
-                <MudTextField @bind-Value="Model.Nombre"
-                              @bind-Value="Model.Descripcion"
+                <MudTextField @bind-Value="Model.Descripcion"
                               Label="Descripción y Alcance Operativo"
                               Variant="Variant.Outlined"
                               For="@(() => Model.Descripcion)"
@@ -24,7 +23,7 @@
             </MudItem>
             <MudItem xs="12" Class="d-flex align-center">
                 <MudSwitch T="bool"
-                           @bind-Value="Model.Activo"
+                           @bind-Checked="Model.Activo"
                            Label="Habilitar Rol para Asignación"
                            Color="Color.Primary"
                            Disabled="@IsProcessing"
@@ -58,7 +57,6 @@
         </MudButton>
     </div>
 </EditForm>
-
 @code {
     
     private string? NordicDescripcion { get; set; }

@@ -115,4 +115,23 @@ public class AuthControllerTests
             .ThrowAsync<InvalidOperationException>()
             .WithMessage("Usuario o contraseña incorrectos.");
     }
+    
+    [Fact]
+    public async Task CambiarContrasena_DebeRetornarOk()
+    {
+        var dto = new CambiarContrasenaDto
+        {
+            ContrasenaActual = "Old",
+            ContrasenaNueva = "New"
+        };
+
+        _authService.CambiarContrasenaAsync(dto).Returns(Task.CompletedTask);
+
+        var resultado = await _controller.CambiarContrasena(dto);
+
+        var okResult = resultado.Should().BeOfType<OkObjectResult>().Subject;
+        var response = okResult.Value.Should().BeOfType<ApiResponse<object>>().Subject;
+        response.Mensaje.Should().Be("Contraseña actualizada correctamente.");
+        await _authService.Received(1).CambiarContrasenaAsync(dto);
+    }
 }

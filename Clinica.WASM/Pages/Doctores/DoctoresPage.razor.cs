@@ -171,4 +171,22 @@ public partial class DoctoresPage : ComponentBase
             EstaProcesando = false;
         }
     }
+    
+    private async Task AbrirDialogoContratar()
+    {
+        var dialog = await DialogService.ShowAsync<ContratarDoctorDialog>("Contratar Médico",
+            new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true });
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Médico contratado exitosamente.", Severity.Success);
+            await CargarDoctoresAsync();
+        }
+    }
+
+    private async Task AbrirDialogoBusqueda()
+    {
+        await DialogService.ShowAsync<BuscarDoctorDialog>("Búsqueda Avanzada",
+            new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true });
+    }
 }

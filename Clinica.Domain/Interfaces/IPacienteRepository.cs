@@ -6,4 +6,6 @@ public interface IPacienteRepository : IGenericRepository<Paciente>
 {
     Task<Paciente?> ObtenerPorDniAsync(string dni);
     Task<Paciente?> ObtenerConHistorialAsync(Guid pacienteId);
+    
+    Task<IEnumerable<Paciente>> ObtenerTodosConHistorialAsync();
 }

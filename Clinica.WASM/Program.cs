@@ -91,6 +91,21 @@ builder.Services.AddHttpClient<FinanzasApiService>(client =>
     client.BaseAddress = new Uri(apiBaseUrl);
 }).AddHttpMessageHandler<AuthHeaderHandler>();
 
+builder.Services.AddHttpClient<ComprobanteApiService>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<AuthHeaderHandler>();
+
+builder.Services.AddHttpClient<AuditoriaApiService>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<AuthHeaderHandler>();
+
+builder.Services.AddHttpClient<AtencionApiService>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+}).AddHttpMessageHandler<AuthHeaderHandler>();
+
 builder.Services.AddHttpClient("ClinicaApi", client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl);

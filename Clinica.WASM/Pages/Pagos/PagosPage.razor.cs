@@ -32,6 +32,13 @@ public partial class PagosPage : ComponentBase
     private string MensajeError = string.Empty;
     private string MensajeExito = string.Empty;
 
+    private enum TipoFiltroPago { Paciente, Cita, Atencion }
+    private TipoFiltroPago FiltroActivo = TipoFiltroPago.Paciente;
+    private PacienteItemDto? PacienteSeleccionadoItem;
+    private string CitaIdTexto = string.Empty;
+    private string AtencionIdTexto = string.Empty;
+    private EstadoPago? FiltroEstadoPago;
+    
     protected override async Task OnInitializedAsync()
     {
         await CargarCatalogosAsync();
@@ -90,25 +97,75 @@ public partial class PagosPage : ComponentBase
 
     private async Task CargarPagosAsync()
     {
-        if (PacienteSeleccionadoId == Guid.Empty) return;
-
         EstaCargando = true;
         HayErrorCarga = false;
         MensajeError = string.Empty;
+        Pagos = new();
 
         try
         {
-            Pagos = await PagoApiService.ObtenerPorPacienteAsync(PacienteSeleccionadoId);
+            switch (FiltroActivo)
+            {
+                case TipoFiltroPago.Paciente:
+                    if (PacienteSeleccionadoItem == null)
+                    {
+                        Snackbar.Add("Seleccione un paciente.", Severity.Warning);
+                        return;
+                    }
+                    Pagos = await PagoApiService.ObtenerPorPacienteAsync(PacienteSeleccionadoItem.Id);
+                    break;
+                case TipoFiltroPago.Cita:
+                    if (!Guid.TryParse(CitaIdTexto, out var citaId))
+                    {
+                        Snackbar.Add("Ingrese un ID de cita válido.", Severity.Warning);
+                        return;
+                    }
+                    Pagos = await PagoApiService.ObtenerPorCitaAsync(citaId);
+                    break;
+                case TipoFiltroPago.Atencion:
+                    if (!Guid.TryParse(AtencionIdTexto, out var atencionId))
+                    {
+                        Snackbar.Add("Ingrese un ID de atención válido.", Severity.Warning);
+                        return;
+                    }
+                    Pagos = await PagoApiService.ObtenerPorAtencionAsync(atencionId);
+                    break;
+            }
         }
         catch
         {
             HayErrorCarga = true;
-            MensajeError = "Error al cargar los pagos del paciente.";
+            MensajeError = "Error al cargar los pagos.";
         }
         finally
         {
             EstaCargando = false;
+            StateHasChanged();
         }
+    }
+    
+    private IEnumerable<PagoResponseDto> PagosFiltrados =>
+        Pagos.Where(p => FiltroEstadoPago == null || p.Estado == FiltroEstadoPago);
+
+// Método de búsqueda de pacientes (reemplaza la lógica del catálogo)
+    private async Task<IEnumerable<PacienteItemDto>> BuscarPacientesAsync(string searchText, CancellationToken ct)
+    {
+        if (Pacientes == null || !Pacientes.Any())
+            return Enumerable.Empty<PacienteItemDto>();
+        if (string.IsNullOrWhiteSpace(searchText))
+            return Pacientes.Take(20);
+        var texto = searchText.ToLowerInvariant();
+        return Pacientes.Where(p => p.NombreCompleto.ToLowerInvariant().Contains(texto)).Take(20);
+    }
+    
+    private void LimpiarFiltros()
+    {
+        PacienteSeleccionadoItem = null;
+        CitaIdTexto = string.Empty;
+        AtencionIdTexto = string.Empty;
+        FiltroEstadoPago = null;
+        Pagos = new();
+        StateHasChanged();
     }
 
     private async Task AbrirDialogoRegistro()
