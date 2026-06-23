@@ -79,13 +79,15 @@ jobs:
             /d:sonar.projectBaseDir="$GITHUB_WORKSPACE" \
             /d:sonar.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**,**/*.js,**/node_modules/**,**/*.html,**/*.css,**/bin/**,**/obj/**,**/Migrations/**,**/k6/**,**/infra/sonarqube/**,**/CoverageReport/**" \
             /d:sonar.test.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**"
+            /d:sonar.cs.opencover.reportsPaths="$GITHUB_WORKSPACE/cobertura/Unit/coverage.opencover.xml,$GITHUB_WORKSPACE/cobertura/Integration/coverage.opencover.xml" \
+            /d:sonar.coverage.exclusions="**/Clinica.WASM/**,**/Clinica.Infrastructure/**,**/Clinica.API/Program.cs,**/Clinica.API/Configurations/**,**/Clinica.API/Middlewares/**"
 
       # =========================
       # COMPILACIÓN GENERAL
       # =========================
       - name: Build solution
         run: dotnet build Clinica.sln --configuration Release --no-restore
-
+      
       # =========================
       # EJECUCIÓN DE PRUEBAS UNITARIAS
       # =========================
@@ -95,8 +97,9 @@ jobs:
           Clinica.API.Tests/Clinica.API.Tests.csproj
           --configuration Release
           --no-build
-          --collect:"XPlat Code Coverage"
-          --results-directory ./TestResults/Unit
+          --collect:"XPlat Code Coverage;Format=opencover"
+          --results-directory $GITHUB_WORKSPACE/cobertura/Unit
+          /p:DeterministicReport=true
 
       # =========================
       # EJECUCIÓN DE PRUEBAS DE INTEGRACIÓN
@@ -107,8 +110,9 @@ jobs:
           Clinica.API.IntegrationTests/Clinica.API.IntegrationTests.csproj
           --configuration Release
           --no-build
-          --collect:"XPlat Code Coverage"
-          --results-directory ./TestResults/Integration
+          --collect:"XPlat Code Coverage;Format=opencover"
+          --results-directory $GITHUB_WORKSPACE/cobertura/Integration
+          /p:DeterministicReport=true
 
       # =========================
       # PROCESAMIENTO DE REPORTES DE COBERTURA
