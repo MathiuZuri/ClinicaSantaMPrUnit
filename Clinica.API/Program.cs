@@ -229,15 +229,25 @@ app.UseMiddleware<ExceptionMiddleware>();
 // ─── MITIGACIÓN DE ALERTAS OWASP ZAP (MIDDLEWARE DE CABECERAS DE SEGURIDAD) ───
 app.Use(async (context, next) =>
 {
-    // 1. Solución Anti-Clickjacking
-    context.Response.Headers.Append("X-Frame-Options", "DENY");
+    // Generar un nonce aleatorio (base64 de 16 bytes)
+    var nonce = Convert.ToBase64String(Guid.NewGuid().ToByteArray())
+        .Replace("+", "-").Replace("/", "_").Replace("=", "");
 
-    // 2. Solución X-Content-Type-Options (MIME Sniffing)
+    // Guardar el nonce en el contexto para usarlo en las vistas
+    context.Items["CspNonce"] = nonce;
+
+    // Cabeceras fijas
+    context.Response.Headers.Append("X-Frame-Options", "DENY");
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
 
-    // 3. Configuración base de Content Security Policy (CSP)
-    context.Response.Headers.Append("Content-Security-Policy", 
-        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none';");
+    // CSP con nonce y strict-dynamic
+    context.Response.Headers.Append("Content-Security-Policy",
+        $"default-src 'self'; " +
+        $"script-src 'self' 'nonce-{nonce}' 'strict-dynamic'; " +
+        $"style-src 'self' 'nonce-{nonce}'; " +
+        $"frame-ancestors 'none'; " +
+        $"object-src 'none'; " +
+        $"base-uri 'self';");
 
     await next();
 });

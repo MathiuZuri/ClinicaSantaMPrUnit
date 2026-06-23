@@ -69,7 +69,7 @@ public partial class AuditoriaPage : ComponentBase
         await RecargarTabla();
     }
 
-    protected async void VerDetalle(AuditoriaResponseDto registro)
+    protected async Task VerDetalle(AuditoriaResponseDto registro)
     {
         var parameters = new DialogParameters { ["Registro"] = registro };
         var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true };

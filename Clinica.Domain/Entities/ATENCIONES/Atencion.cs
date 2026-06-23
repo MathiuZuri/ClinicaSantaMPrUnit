@@ -1,4 +1,6 @@
-﻿namespace Clinica.Domain.Entities.ATENCIONES;
+﻿using Clinica.Domain.Enums;
+
+namespace Clinica.Domain.Entities.ATENCIONES;
 
 public class Atencion
 {

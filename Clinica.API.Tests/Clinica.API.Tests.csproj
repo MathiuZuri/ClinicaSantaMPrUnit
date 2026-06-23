@@ -36,4 +36,12 @@
         <ProjectReference Include="..\Clinica.Infrastructure\Clinica.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestResults\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="TestResults\1b34ed34-ea1f-4258-9b41-4efaa922aac3\coverage.cobertura.xml" />
+    </ItemGroup>
+
 </Project>

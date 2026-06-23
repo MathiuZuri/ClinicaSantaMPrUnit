@@ -18,6 +18,7 @@
                 <MudGrid Spacing="2">
                     <MudItem xs="12" sm="6">
                         <MudSelect T="Guid"
+                                   @bind-Value="Model.PacienteId"
                                    Label="Paciente Beneficiario"
                                    Variant="Variant.Outlined"
                                    For="@(() => Model.PacienteId)"
@@ -27,13 +28,14 @@
                                    ToStringFunc="@(id => Pacientes.FirstOrDefault(p => p.Id == id)?.NombreCompleto ?? string.Empty)">
                             @foreach (var paciente in Pacientes)
                             {
-                                <MudSelectItem Value="paciente.Id">@paciente.NombreCompleto</MudSelectItem>
+                                <MudSelectItem Value="@paciente.Id">@paciente.NombreCompleto</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>
 
                     <MudItem xs="12" sm="6">
                         <MudSelect T="Guid"
+                                   @bind-Value="Model.ServicioClinicoId"
                                    Label="Servicio Clínico Destino"
                                    Variant="Variant.Outlined"
                                    For="@(() => Model.ServicioClinicoId)"
@@ -43,7 +45,7 @@
                                    ToStringFunc="@(id => Servicios.FirstOrDefault(s => s.Id == id)?.Nombre ?? string.Empty)">
                             @foreach (var servicio in Servicios)
                             {
-                                <MudSelectItem Value="servicio.Id">@servicio.Nombre</MudSelectItem>
+                                <MudSelectItem Value="@servicio.Id">@servicio.Nombre</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>

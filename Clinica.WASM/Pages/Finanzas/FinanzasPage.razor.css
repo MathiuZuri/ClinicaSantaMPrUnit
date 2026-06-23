@@ -147,7 +147,6 @@
 /* --- DASHBOARD KPI ANUAL --- */
 .kpi-card-luxury {
     display: flex;
-    align-center: center;
     background-color: var(--mud-palette-surface);
     padding: 16px;
     border-radius: 12px;

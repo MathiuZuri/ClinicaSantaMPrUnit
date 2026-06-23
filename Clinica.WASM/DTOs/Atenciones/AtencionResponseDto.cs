@@ -1,4 +1,5 @@
 ﻿using Clinica.Domain.DTOs.Atenciones.Modulos;
+using Clinica.Domain.Enums;
 
 namespace Clinica.WASM.DTOs.Atenciones;
 

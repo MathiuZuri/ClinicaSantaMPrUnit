@@ -1,4 +1,5 @@
 ﻿using Clinica.Domain.Entities.ATENCIONES;
+using Clinica.Domain.Enums;
 using FluentAssertions;
 using Xunit;
 

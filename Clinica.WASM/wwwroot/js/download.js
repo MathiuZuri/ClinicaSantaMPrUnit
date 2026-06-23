@@ -6,7 +6,7 @@
     // Esto reduce el consumo de memoria a la mitad y acelera el procesamiento.
     const byteArray = new Uint8Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
-        byteArray[i] = byteCharacters.charCodeAt(i);
+        byteArray[i] = byteCharacters.codePointAt(i) ?? 0;
     }
 
     // 3. Crear el objeto binario (Blob) con tipo de contenido parametrizado

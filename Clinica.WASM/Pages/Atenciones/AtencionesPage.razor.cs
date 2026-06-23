@@ -1,4 +1,5 @@
-﻿using Clinica.WASM.Services.Api;
+﻿using Clinica.Domain.Enums;
+using Clinica.WASM.Services.Api;
 using Clinica.WASM.DTOs.Atenciones;
 using Clinica.WASM.Components.Atenciones;
 using Microsoft.AspNetCore.Components;
