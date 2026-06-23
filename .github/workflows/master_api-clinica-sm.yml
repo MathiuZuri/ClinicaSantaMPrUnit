@@ -78,10 +78,10 @@ jobs:
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.projectBaseDir="$GITHUB_WORKSPACE" \
             /d:sonar.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**,**/*.js,**/node_modules/**,**/*.html,**/*.css,**/bin/**,**/obj/**,**/Migrations/**,**/k6/**,**/infra/sonarqube/**,**/CoverageReport/**" \
-            /d:sonar.test.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**"
+            /d:sonar.test.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**" \
             /d:sonar.cs.opencover.reportsPaths="$GITHUB_WORKSPACE/cobertura/Unit/coverage.opencover.xml,$GITHUB_WORKSPACE/cobertura/Integration/coverage.opencover.xml" \
             /d:sonar.coverage.exclusions="**/Clinica.WASM/**,**/Clinica.Infrastructure/**,**/Clinica.API/Program.cs,**/Clinica.API/Configurations/**,**/Clinica.API/Middlewares/**"
-
+          
       # =========================
       # COMPILACIÓN GENERAL
       # =========================
