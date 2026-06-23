@@ -77,8 +77,7 @@ jobs:
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.projectBaseDir="$GITHUB_WORKSPACE" \
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml" \
-            /d:sonar.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/bin/**,**/obj/**,**/Migrations/**,**/k6/**,**/infra/sonarqube/**,**/CoverageReport/**" \
+            /d:sonar.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**,**/*.js,**/node_modules/**,**/*.html,**/*.css,**/bin/**,**/obj/**,**/Migrations/**,**/k6/**,**/infra/sonarqube/**,**/CoverageReport/**" \
             /d:sonar.test.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**"
 
       # =========================
