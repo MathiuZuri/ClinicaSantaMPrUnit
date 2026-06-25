@@ -32,7 +32,9 @@ public class ApplicationDbContext : DbContext
     
     // esto es exclusivo de evolution api, no incluir al sistema
     public DbSet<NotificacionCita> NotificacionesCitas => Set<NotificacionCita>();
-
+    public DbSet<Chat> Chats => Set<Chat>();
+    public DbSet<MensajeChat> MensajesChat => Set<MensajeChat>();
+    
     // ==========================================================
     // SERVICIOS, HISTORIAL, ATENCIONES Y FINANZAS
     // ==========================================================

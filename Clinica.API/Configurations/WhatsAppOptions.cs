@@ -18,4 +18,6 @@ public class WhatsAppOptions
     public int CheckIntervalMinutes { get; set; } = 5;
 
     public int MaxIntentos { get; set; } = 3;
+    
+    public string WebhookSecretToken { get; set; } = string.Empty;
 }

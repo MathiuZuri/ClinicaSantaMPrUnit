@@ -81,7 +81,7 @@ jobs:
             /d:sonar.test.exclusions="**/Clinica.API.Tests/**,**/Clinica.API.IntegrationTests/**,**/Clinica.E2ETest/**" \
             /d:sonar.cs.opencover.reportsPaths="$GITHUB_WORKSPACE/cobertura/Unit/coverage.opencover.xml,$GITHUB_WORKSPACE/cobertura/Integration/coverage.opencover.xml" \
             /d:sonar.coverage.exclusions="**/Clinica.WASM/**,**/Clinica.Infrastructure/**,**/Clinica.API/Program.cs,**/Clinica.API/Configurations/**,**/Clinica.API/Middlewares/**"
-          
+      
       # =========================
       # COMPILACIÓN GENERAL
       # =========================

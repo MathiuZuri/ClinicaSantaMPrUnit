@@ -30,6 +30,9 @@ public partial class NavMenu : ComponentBase
     // Seguridad
     protected bool PuedeVerRoles { get; set; }
     protected bool PuedeVerPermisos { get; set; }
+    // Por ahora lo dejamos en true para desarrollo local directo.
+    // A futuro, podrías amarrarlo a: await AuthStateService.TienePermisoAsync
+    protected bool PuedeVerChatLaboratorio { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,5 +57,7 @@ public partial class NavMenu : ComponentBase
         // Seguridad
         PuedeVerRoles        = await AuthStateService.TienePermisoAsync(Permisos.RolVer);
         PuedeVerPermisos     = await AuthStateService.TienePermisoAsync(Permisos.PermisoVer);
+        
+        PuedeVerChatLaboratorio = true;
     }
 }

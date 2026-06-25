@@ -24,6 +24,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using QuestPDF.Infrastructure;
 using Clinica.API.Services.Background;
+using Clinica.API.Services.Imp.WhastAppImp;
+using Clinica.API.Services.Imp.WhatsApp;
 using Clinica.Domain.PDFsDto.Interfacespdf;
 using Clinica.Infrastructure.Documents.Comprobantes.Pdfservicios;
 

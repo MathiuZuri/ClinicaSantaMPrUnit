@@ -2,6 +2,7 @@
 using Clinica.API.Configurations;
 using Clinica.API.Services;
 using Clinica.API.Services.Background;
+using Clinica.API.Services.Imp.WhastAppImp;
 using Clinica.Domain.Entities;
 using Clinica.Domain.Enums;
 using Clinica.Domain.Interfaces;

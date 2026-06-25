@@ -3,6 +3,8 @@ using System.Text;
 using Clinica.API.Configurations;
 using Clinica.API.Services;
 using Clinica.API.Services.Imp;
+using Clinica.API.Services.Imp.WhastAppImp;
+using Clinica.API.Services.Imp.WhatsApp;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

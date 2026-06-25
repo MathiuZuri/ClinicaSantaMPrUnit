@@ -45,6 +45,13 @@
                 Atenciones
             </MudNavLink>
         }
+        
+        @if (PuedeVerChatLaboratorio)
+        {
+            <MudNavLink Href="/panel/santamonica-chat" Icon="@Icons.Custom.Brands.WhatsApp" Class="nav-item-link-luxury">
+                Chat de WhatsApp
+            </MudNavLink>
+        }
     </div>
 
     @* ─── Administración ─── *@

@@ -497,6 +497,40 @@ namespace Clinica.Infrastructure.Migrations
                     b.ToTable("Auditorias", (string)null);
                 });
 
+            modelBuilder.Entity("Clinica.Domain.Entities.Chat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("FechaUltimaInteraccion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("MensajesNoLeidos")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NombreContacto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("PacienteId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TelefonoWhatsApp")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UltimoMensaje")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PacienteId");
+
+                    b.ToTable("Chats");
+                });
+
             modelBuilder.Entity("Clinica.Domain.Entities.Cita", b =>
                 {
                     b.Property<Guid>("Id")
@@ -953,6 +987,36 @@ namespace Clinica.Infrastructure.Migrations
                     b.HasIndex("DoctorId", "DiaSemana", "HoraInicio", "HoraFin", "FechaInicioVigencia");
 
                     b.ToTable("HorariosDoctor", (string)null);
+                });
+
+            modelBuilder.Entity("Clinica.Domain.Entities.MensajeChat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ChatId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("EsMio")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("FechaEnvio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("MessageIdWhatsApp")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.ToTable("MensajesChat");
                 });
 
             modelBuilder.Entity("Clinica.Domain.Entities.NotificacionCita", b =>
@@ -1559,6 +1623,15 @@ namespace Clinica.Infrastructure.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Clinica.Domain.Entities.Chat", b =>
+                {
+                    b.HasOne("Clinica.Domain.Entities.Paciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("PacienteId");
+
+                    b.Navigation("Paciente");
+                });
+
             modelBuilder.Entity("Clinica.Domain.Entities.Cita", b =>
                 {
                     b.HasOne("Clinica.Domain.Entities.Doctor", "Doctor")
@@ -1737,6 +1810,17 @@ namespace Clinica.Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("Clinica.Domain.Entities.MensajeChat", b =>
+                {
+                    b.HasOne("Clinica.Domain.Entities.Chat", "Chat")
+                        .WithMany("Mensajes")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chat");
+                });
+
             modelBuilder.Entity("Clinica.Domain.Entities.NotificacionCita", b =>
                 {
                     b.HasOne("Clinica.Domain.Entities.Cita", "Cita")
@@ -1860,6 +1944,11 @@ namespace Clinica.Infrastructure.Migrations
                     b.Navigation("Pagos");
 
                     b.Navigation("TactosVaginales");
+                });
+
+            modelBuilder.Entity("Clinica.Domain.Entities.Chat", b =>
+                {
+                    b.Navigation("Mensajes");
                 });
 
             modelBuilder.Entity("Clinica.Domain.Entities.Cita", b =>
