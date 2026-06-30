@@ -1,0 +1,1192 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal - Clínica Santa Mónica">
+      
+      
+      
+      
+        <link rel="prev" href="../general/">
+      
+      
+        <link rel="next" href="../infraestructura/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Capa de Dominio (Core) - Sistema de la Clinica Santa Monica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capa-de-dominio-core" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-header__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistema de la Clinica Santa Monica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Capa de Dominio (Core)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../general/" class="md-tabs__link">
+          
+  
+  
+  Arquitectura Hexagonal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../despliegue/" class="md-tabs__link">
+          
+  
+  
+  Manuales de Operación
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-nav__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistema de la Clinica Santa Monica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura Hexagonal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura Hexagonal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Dominio (Core)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Dominio (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entidades-de-dominio-core-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏛️ Entidades de Dominio (Core Entities)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diccionario-de-enumeraciones-enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Diccionario de Enumeraciones (Enums)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modulos-clinicos-de-la-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🩺 Módulos Clínicos de la Atención
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puertos-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Puertos (Interfaces)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Puertos (Interfaces)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-puertos-de-salida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios (Puertos de Salida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infraestructura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Infraestructura (Persistencia)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de API (Presentación)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Frontend (Blazor WASM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Pruebas (Unitarias e Integración)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuales de Operación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manuales de Operación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue en la Nube (Azure & Neon)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entidades-de-dominio-core-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏛️ Entidades de Dominio (Core Entities)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diccionario-de-enumeraciones-enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Diccionario de Enumeraciones (Enums)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modulos-clinicos-de-la-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🩺 Módulos Clínicos de la Atención
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puertos-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Puertos (Interfaces)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Puertos (Interfaces)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-puertos-de-salida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios (Puertos de Salida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="capa-de-dominio-core">🟣 Capa de Dominio (Core)</h1>
+<p>La <strong>Capa de Dominio</strong> constituye el núcleo inmutable del sistema <strong>SIGEC</strong> para la <strong>Clínica Santa Mónica</strong>. Diseñada bajo los principios de <strong>Arquitectura Hexagonal</strong>, esta capa es completamente agnóstica a cualquier framework de infraestructura, persistencia o presentación. Su única responsabilidad es encapsular las <strong>reglas de negocio</strong>, las <strong>entidades del dominio</strong>, los <strong>agregados clínicos</strong> y las <strong>enumeraciones</strong> que rigen el comportamiento del sistema.</p>
+<div class="admonition info">
+<p class="admonition-title">Frontera Arquitectónica</p>
+<ul>
+<li><strong>Dependencias PROHIBIDAS:</strong> Entity Framework, ASP.NET Core, cualquier librería de acceso a datos, JSON serialization, logging específico de infraestructura o sistemas de inyección de dependencias externos.</li>
+<li><strong>Dependencias PERMITIDAS:</strong> Solo librerías estándar de .NET (System, System.Collections.Generic, System.ComponentModel.DataAnnotations para anotaciones de validación) y los proyectos de referencia internos (ninguno, es la capa más interna).</li>
+<li><strong>Comunicación con el exterior:</strong> Se realiza exclusivamente a través de <strong>puertos</strong> (interfaces) definidos en esta misma capa, que serán implementados por las capas superiores (Aplicación e Infraestructura).</li>
+</ul>
+</div>
+<hr />
+<h2 id="entidades-de-dominio-core-entities">🏛️ Entidades de Dominio (Core Entities)</h2>
+<p>Las entidades representan los conceptos fundamentales del negocio. A continuación se resumen las más relevantes, agrupadas por su función dentro del ecosistema.</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Propósito</th>
+<th>Relaciones Principales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Paciente</strong></td>
+<td>Expediente personal de la gestante, con datos de filiación avanzada (lugar de nacimiento, ocupación, pareja, etc.)</td>
+<td>1:1 con <code>HistorialClinico</code>; 1:N con <code>Cita</code>, <code>Atencion</code>, <code>Pago</code>, <code>Comprobante</code></td>
+</tr>
+<tr>
+<td><strong>Doctor</strong></td>
+<td>Médico especialista contratado, con su CMP, especialidad y vigencia de contrato</td>
+<td>1:N con <code>HorarioDoctor</code>, <code>Cita</code>, <code>Atencion</code></td>
+</tr>
+<tr>
+<td><strong>Usuario</strong></td>
+<td>Cuenta de acceso al sistema, con roles y permisos</td>
+<td>1:N con <code>UsuarioRol</code>, <code>Auditoria</code>, comprobantes emitidos/anulados</td>
+</tr>
+<tr>
+<td><strong>Rol / Permiso</strong></td>
+<td>Control de acceso basado en roles (RBAC)</td>
+<td>N:N a través de <code>UsuarioRol</code> y <code>RolPermiso</code></td>
+</tr>
+<tr>
+<td><strong>ServicioClinico</strong></td>
+<td>Servicios médicos ofrecidos (consulta, ecografía, parto, etc.) con costo base y duración</td>
+<td>1:N con <code>Cita</code>, <code>Atencion</code>, <code>Pago</code></td>
+</tr>
+<tr>
+<td><strong>Cita</strong></td>
+<td>Programación de una consulta o procedimiento</td>
+<td>1:1 con <code>Atencion</code> (si se atiende); 1:N con <code>Pago</code>, <code>Comprobante</code></td>
+</tr>
+<tr>
+<td><strong>Atencion</strong></td>
+<td>Acto médico principal, agregador de módulos clínicos y financieros</td>
+<td>1:1 con <code>Anamnesis</code>, <code>ImpresionDiagnostica</code>; 1:N con <code>ExamenFisico</code>, <code>TactoVaginal</code>, <code>EcografiaObstetrica</code>, <code>Pago</code>, <code>Comprobante</code></td>
+</tr>
+<tr>
+<td><strong>Pago</strong></td>
+<td>Transacción financiera que liquida total o parcialmente el costo de una cita/atención</td>
+<td>1:N con <code>Comprobante</code>, <code>AjusteFinanciero</code></td>
+</tr>
+<tr>
+<td><strong>Comprobante</strong></td>
+<td>Documento emitido (boleta, constancia, resumen, estado de cuenta). Inmutable una vez emitido</td>
+<td>1:N con <code>ComprobanteDetalle</code></td>
+</tr>
+<tr>
+<td><strong>HistorialClinico</strong></td>
+<td>Línea de tiempo de eventos del paciente</td>
+<td>1:N con <code>HistorialDetalle</code></td>
+</tr>
+<tr>
+<td><strong>Auditoria</strong></td>
+<td>Registro de acciones significativas del sistema</td>
+<td>N:1 con <code>Usuario</code></td>
+</tr>
+<tr>
+<td><strong>HorarioDoctor</strong></td>
+<td>Franjas horarias de atención por día y vigencia</td>
+<td>N:1 con <code>Doctor</code></td>
+</tr>
+<tr>
+<td><strong>AjusteFinanciero</strong></td>
+<td>Correcciones sobre pagos (descuentos, recargos, etc.)</td>
+<td>N:1 con <code>Pago</code> y <code>Atencion</code> (opcional)</td>
+</tr>
+<tr>
+<td><strong>Chat / MensajeChat</strong></td>
+<td>Comunicación por WhatsApp con pacientes</td>
+<td>N:1 con <code>Paciente</code> (opcional)</td>
+</tr>
+<tr>
+<td><strong>NotificacionCita</strong></td>
+<td>Recordatorios automáticos de citas vía WhatsApp</td>
+<td>N:1 con <code>Cita</code> y <code>Paciente</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="diccionario-de-enumeraciones-enums">📊 Diccionario de Enumeraciones (Enums)</h2>
+<p>El comportamiento del sistema se rige por máquinas de estado definidas como enumeraciones puras. A continuación se listan las más importantes, agrupadas por ámbito.</p>
+<table>
+<thead>
+<tr>
+<th>Enumeración</th>
+<th>Valores</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EstadoAtencion</strong></td>
+<td><code>Abierta</code>, <code>Cerrada</code>, <code>Anulada</code>, <code>Eliminada</code></td>
+<td>Ciclo de vida de la atención médica</td>
+</tr>
+<tr>
+<td><strong>EstadoCita</strong></td>
+<td><code>Pendiente</code>, <code>Confirmada</code>, <code>Reprogramada</code>, <code>Cancelada</code>, <code>Atendida</code>, <code>NoAsistio</code>, <code>EnProgreso</code>, <code>Eliminada</code></td>
+<td>Estado de la agenda y notificaciones</td>
+</tr>
+<tr>
+<td><strong>EstadoPago</strong></td>
+<td><code>Pendiente</code>, <code>Parcial</code>, <code>Pagado</code>, <code>Anulado</code>, <code>Reembolsado</code>, <code>Eliminado</code></td>
+<td>Estado financiero del pago</td>
+</tr>
+<tr>
+<td><strong>EstadoComprobante</strong></td>
+<td><code>Emitido</code>, <code>Anulado</code></td>
+<td>Validez del documento generado</td>
+</tr>
+<tr>
+<td><strong>EstadoDoctor</strong></td>
+<td><code>Activo</code>, <code>Inactivo</code>, <code>ContratoVencido</code>, <code>Suspendido</code>, <code>Eliminado</code></td>
+<td>Situación laboral del médico</td>
+</tr>
+<tr>
+<td><strong>EstadoPaciente</strong></td>
+<td><code>Activo</code>, <code>Inactivo</code>, <code>Fallecido</code>, <code>Bloqueado</code>, <code>Eliminado</code></td>
+<td>Estado del paciente en el sistema</td>
+</tr>
+<tr>
+<td><strong>EstadoUsuario</strong></td>
+<td><code>Activo</code>, <code>Inactivo</code>, <code>Bloqueado</code>, <code>Eliminado</code></td>
+<td>Estado de la cuenta de acceso</td>
+</tr>
+<tr>
+<td><strong>EstadoHistorialClinico</strong></td>
+<td><code>Activo</code>, <code>Cerrado</code>, <code>Archivado</code>, <code>Eliminado</code></td>
+<td>Estado del historial del paciente</td>
+</tr>
+<tr>
+<td><strong>EstadoServicioClinico</strong></td>
+<td><code>Activo</code>, <code>Inactivo</code>, <code>Eliminado</code></td>
+<td>Disponibilidad del servicio</td>
+</tr>
+<tr>
+<td><strong>MetodoPago</strong></td>
+<td><code>Efectivo</code>, <code>Yape</code>, <code>Plin</code>, <code>Transferencia</code>, <code>Tarjeta</code>, <code>Otro</code></td>
+<td>Clasificación para arqueos de caja</td>
+</tr>
+<tr>
+<td><strong>TipoComprobante</strong></td>
+<td><code>BoletaPago</code>, <code>ConstanciaCita</code>, <code>ResumenAtencion</code>, <code>EstadoCuenta</code>, <code>HistoriaClinica</code>, <code>ReporteCajaDiario</code>, <code>ReporteFinancieroMensual</code>, <code>AjusteFinanciero</code></td>
+<td>Tipo de documento emitido</td>
+</tr>
+<tr>
+<td><strong>TipoFormatoImpresion</strong></td>
+<td><code>A4</code>, <code>MediaHoja</code>, <code>Ticket80mm</code></td>
+<td>Formato de impresión</td>
+</tr>
+<tr>
+<td><strong>TipoDocumentoComprobante</strong></td>
+<td><code>DNI</code>, <code>CarnetExtranjeria</code>, <code>RUC</code>, <code>Pasaporte</code>, <code>SinDocumento</code></td>
+<td>Documento de identidad del paciente</td>
+</tr>
+<tr>
+<td><strong>TasaImpuesto</strong></td>
+<td><code>IGV_18</code>, <code>IGV_19</code>, <code>IGV_20</code>, <code>Exonerado</code></td>
+<td>Tasa aplicable al comprobante</td>
+</tr>
+<tr>
+<td><strong>TipoAjusteFinanciero</strong></td>
+<td><code>Descuento</code>, <code>Recargo</code>, <code>Sobrepago</code>, <code>CorreccionMonto</code>, <code>AnulacionPago</code>, <code>Reembolso</code>, <code>PagoMenorAutorizado</code>, <code>PagoMayorAutorizado</code>, <code>ServicioAdicional</code>, <code>IndicacionMedica</code>, <code>ErrorAdministrativoCorregido</code>, <code>Otro</code></td>
+<td>Motivo del ajuste financiero</td>
+</tr>
+<tr>
+<td><strong>NivelAuditoria</strong></td>
+<td><code>Normal</code>, <code>Importante</code>, <code>Critico</code></td>
+<td>Severidad del registro de auditoría</td>
+</tr>
+<tr>
+<td><strong>TipoAccionAuditoria</strong></td>
+<td><code>Consulta</code>, <code>Creacion</code>, <code>Edicion</code>, <code>Eliminacion</code>, <code>Login</code>, <code>Asignacion</code>, <code>Error</code></td>
+<td>Tipo de acción registrada</td>
+</tr>
+<tr>
+<td><strong>TipoMovimientoHistorial</strong></td>
+<td><code>RegistroUsuario</code>, <code>AperturaHistorial</code>, <code>CitaProgramada</code>, <code>CitaReprogramada</code>, <code>CitaCancelada</code>, <code>CitaAtendida</code>, <code>AtencionRegistrada</code>, <code>AtencionCerrada</code>, <code>PagoRegistrado</code>, <code>PagoParcial</code>, <code>PagoCompletado</code>, <code>SeguimientoRegistrado</code>, <code>ObservacionClinica</code>, <code>ActualizacionDatosPaciente</code>, <code>EliminacionLogica</code></td>
+<td>Eventos del historial clínico</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="modulos-clinicos-de-la-atencion">🩺 Módulos Clínicos de la Atención</h2>
+<p>La entidad <code>Atencion</code> actúa como agregador de submódulos clínicos especializados. Cada uno de estos submódulos se encuentra en el namespace <code>Clinica.Domain.Entities.ATENCIONES</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Anamnesis</label><label for="__tabbed_1_2">Examen Físico</label><label for="__tabbed_1_3">Tacto Vaginal</label><label for="__tabbed_1_4">Ecografía Obstétrica</label><label for="__tabbed_1_5">Impresión Diagnóstica</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Almacena el motivo de consulta y la <strong>Fórmula Obstétrica</strong>:
+- <code>MotivoConsulta</code> (string, obligatorio)
+- <code>Gestaciones</code>, <code>HijosVivos</code>, <code>Abortos</code>, <code>PartosPretermino</code>, <code>PartosATermino</code> (int)
+- <code>FechaUltimaRegla</code>, <code>FechaProbableParto</code> (DateTime? )
+- <code>EdadGestacional</code> (string, opcional)
+- <code>Alergias</code>, <code>EnfermedadesCronicas</code>, <code>CirugiasPrevias</code>, <code>AntecedentesAdicionales</code> (string? )</p>
+</div>
+<div class="tabbed-block">
+<p>Registro evolutivo del estado materno-fetal:
+- <code>Lotep</code> (bool), <code>EstadoGeneral</code>, <code>EstadoHidratacion</code>, <code>EstadoNutricion</code> (string? )
+- <code>EscalaGlasgow</code> (int? )
+- <code>UteroGravido</code> (bool), <code>AlturaUterina</code> (int? )
+- <code>SituacionPosicionPresentacion</code>, <code>MovimientosFetales</code>, <code>TonoUterino</code>, <code>DinamicaUterina</code> (string? )
+- <code>LatidosCardiacosFetales</code> (int? )
+- <code>SangradoTv</code>, <code>PerdidaLiquidoAmniotico</code>, <code>TaponMucoso</code>, <code>FlujoVaginal</code> (bool)
+- <code>ColorLiquidoAmniotico</code>, <code>PunoPercusionLumbar</code>, <code>Edemas</code>, <code>ReflejosOsteotendinosos</code> (string? )</p>
+</div>
+<div class="tabbed-block">
+<p>Exploración pélvica para el seguimiento del trabajo de parto:
+- <code>Dilatacion</code> (int? cm)
+- <code>Borramiento</code> (int? %)
+- <code>AlturaPresentacion</code> (string? )
+- <code>MembranasOvulares</code>, <code>ColorLiquido</code>, <code>Pelvis</code>, <code>VariedadPresentacion</code> (string? )</p>
+</div>
+<div class="tabbed-block">
+<p>Biometría fetal y evaluación placentaria:
+- <code>DiametroBiparietal</code>, <code>CircunferenciaCefalica</code>, <code>CircunferenciaAbdominal</code>, <code>LongitudFemur</code> (int? mm)
+- <code>PesoFetalEstimado</code> (int? grs)
+- <code>IndiceLiquidoAmniotico</code> (decimal? )
+- <code>PlacentaLocalizacion</code>, <code>PlacentaGranum</code> (string? )
+- <code>CircularCordon</code> (bool)
+- <code>Conclusiones</code> (string? )</p>
+</div>
+<div class="tabbed-block">
+<p>Diagnóstico y plan de manejo:
+- <code>DiagnosticoPrincipal</code> (string, obligatorio)
+- <code>DiagnosticosSecundarios</code> (string? )
+- <code>IndicacionesReceta</code> (string, obligatorio)
+- <code>FechaProximaCita</code> (DateTime? )
+- <code>MotivoProximaCita</code> (string? )</p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="puertos-interfaces">🔌 Puertos (Interfaces)</h2>
+<p>La capa de dominio declara los <strong>puertos</strong> que serán implementados por las capas superiores. Se dividen en <strong>puertos de salida</strong> (repositorios) y <strong>puertos de entrada</strong> (servicios de aplicación). Todos ellos se encuentran en <code>Clinica.Domain.Interfaces</code>.</p>
+<h3 id="repositorios-puertos-de-salida">Repositorios (Puertos de Salida)</h3>
+<p>Cada repositorio extiende <code>IGenericRepository&lt;T&gt;</code> que proporciona operaciones CRUD básicas (<code>GetAllAsync</code>, <code>GetByIdAsync</code>, <code>AddAsync</code>, <code>Update</code>, <code>Delete</code>, <code>SaveChangesAsync</code>). A continuación se detallan los repositorios con sus métodos adicionales específicos.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Paciente</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>```csharp
+public interface IPacienteRepository : IGenericRepository<Paciente>
+{
+    Task<Paciente?> ObtenerPorDniAsync(string dni);
+    Task<Paciente?> ObtenerConHistorialAsync(Guid pacienteId);
+    Task<IEnumerable\<Paciente>> ObtenerTodosConHistorialAsync();
+}</p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
