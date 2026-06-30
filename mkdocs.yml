@@ -1,0 +1,59 @@
+site_name: Sistema de la Clinica Santa Monica
+site_description: Documentación Técnica de la Arquitectura Hexagonal - Clínica Santa Mónica
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.tabs          # Menú de navegación superior premium
+    - navigation.sections      # Organización por bloques en el menú lateral
+    - navigation.top           # Botón flotante para volver arriba automáticamente
+    - search.suggest           # Buscador con sugerencias predictivas en tiempo real
+    - search.highlight         # Resaltado de palabras encontradas en la búsqueda
+    - content.code.copy        # Botón nativo para copiar bloques de código C#
+  palette:
+    # ☀️ CONFIGURACIÓN MODO CLARO (Azul Clínico / Detalles en Oro)
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+
+    # 🌙 CONFIGURACIÓN MODO OSCURO (Slate Profundo / Detalles en Oro)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+# 🗺️ ESTRUCTURA INTEGRAL DE LA INTRANET DE DOCUMENTACIÓN
+nav:
+  - Inicio: index.md
+  - Arquitectura Hexagonal:
+    - Visión General: arquitectura/general.md
+    - Capa de Dominio (Core): arquitectura/dominio.md
+    - Capa de Infraestructura (Persistencia): arquitectura/infraestructura.md
+    - Capa de API (Presentación): arquitectura/api.md
+    - Capa de Frontend (Blazor WASM): arquitectura/wasm.md
+    - Capa de Pruebas (Unitarias e Integración): arquitectura/pruebas.md
+  - Manuales de Operación:
+    - Despliegue en la Nube (Azure & Neon): arquitectura/despliegue.md
+
+# 🛠️ EXTENSIONES DE MARKDOWN DE ALTO NIVEL PARA INGENIERÍA
+markdown_extensions:
+  - admonition                    # Cajas de notas, advertencias y consejos interactivos
+  - def_list
+  - attr_list
+  - pymdownx.highlight:           # Resaltador de sintaxis premium para C# y SQL
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences          # Soporte avanzado para bloques de código anidados
+  - pymdownx.tabbed:
+      alternate_style: true       # Pestañas de código fluidas (útil para DTOs/Entidades)
