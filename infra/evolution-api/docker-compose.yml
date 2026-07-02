@@ -12,14 +12,14 @@ services:
     volumes:
       - evolution_postgres_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5433:5432" # Puerto mapeado para Santa Monica
 
   evolution-redis:
     image: redis:7-alpine
     container_name: evolution_redis
     restart: always
     ports:
-      - "6380:6379"
+      - "6380:6379" # Puerto mapeado para Santa Monica
 
   evolution-api:
     container_name: evolution_api
@@ -29,9 +29,11 @@ services:
       - evolution-postgres
       - evolution-redis
     ports:
-      - "8080:8080"
+      - "8080:8080" # Tu puerto de salida actual
     env_file:
       - .env
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
     volumes:
       - evolution_instances:/evolution/instances
 

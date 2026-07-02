@@ -3,6 +3,7 @@ using Clinica.API.Authorization;
 using Clinica.API.Configurations;
 using Clinica.API.Filters;
 using Clinica.API.Helpers;
+using Clinica.API.Hubs;
 using Clinica.API.Middlewares;
 using Clinica.API.Services;
 using Clinica.API.Services.Imp;
@@ -185,6 +186,7 @@ builder.Services.AddScoped<IFinanzasService, FinanzasService>();
 builder.Services.AddScoped<IComprobanteService, ComprobanteService>();
 builder.Services.AddScoped<IComprobantePdfService, ComprobantePdfService>();
 
+builder.Services.AddSignalR();
 builder.Services.Configure<WhatsAppOptions>(builder.Configuration.GetSection("WhatsApp"));
 
 builder.Services.AddHttpClient<INotificacionWhatsAppService, EvolutionWhatsAppService>((serviceProvider, client) =>
@@ -278,6 +280,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chathub");
 
 // ==================
 // SEEDER

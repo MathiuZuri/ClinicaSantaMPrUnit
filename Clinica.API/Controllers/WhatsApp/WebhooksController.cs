@@ -86,13 +86,17 @@ public class WebhooksController : ControllerBase
 
         if (string.IsNullOrEmpty(textoMensaje)) return Ok();
 
-        var jidDestinoCompleto = keyData.RemoteJid; 
+        // 🌟 PASO A: Priorizar el JID alternativo (número real) que v2.3.7 resuelve de forma nativa
+        var jidDestinoCompleto = !string.IsNullOrEmpty(keyData.RemoteJidAlt) 
+            ? keyData.RemoteJidAlt 
+            : keyData.RemoteJid; 
+
         bool esMensajeMio = keyData.FromMe;
 
-        // ◄── DETECTOR INTELIGENTE DE AGENDA VÍA RECONEXIÓN (¡Ahora compila perfectamente!)
+        // PASO B: Si sigue siendo un @lid puro sin JidAlt y no es mío, usamos tu servicio de agenda
         if (jidDestinoCompleto.Contains("@lid") && !esMensajeMio)
         {
-            _logger.LogInformation("[SantaMonica Webhook] Detectado @lid entrante. Consultando libreta de contactos del celular...");
+            _logger.LogInformation("[SantaMonica Webhook] Detectado @lid puro sin JidAlt. Consultando libreta del celular...");
         
             var numeroRealDescubierto = await _whatsAppService.BuscarContactoEnAgendaAsync(jidDestinoCompleto);
         
@@ -102,13 +106,16 @@ public class WebhooksController : ControllerBase
             }
         }
 
+        // Evitar procesar mensajes duplicados que reintente la cola de Docker
         var yaExisteMensaje = await _context.MensajesChat.AnyAsync(m => m.MessageIdWhatsApp == keyData.Id);
         if (yaExisteMensaje) return Ok(new { status = "duplicate_ignored" });
 
+        // Buscar si el chat ya existe con el JID desempatado
         var chat = await _context.Chats.FirstOrDefaultAsync(c => c.TelefonoWhatsApp == jidDestinoCompleto);
 
         if (chat == null)
         {
+            // CASO NUEVO: Crear un hilo de conversación independiente
             chat = new Chat
             {
                 TelefonoWhatsApp = jidDestinoCompleto, 
@@ -118,6 +125,7 @@ public class WebhooksController : ControllerBase
                 MensajesNoLeidos = esMensajeMio ? 0 : 1
             };
 
+            // Vinculación automática inteligente con la tabla de Pacientes
             var soloNumeros = new string(jidDestinoCompleto.Split('@')[0].Where(char.IsDigit).ToArray());
             if (soloNumeros.Length >= 9)
             {
@@ -136,14 +144,23 @@ public class WebhooksController : ControllerBase
         }
         else
         {
+            // CASO EXISTENTE: Actualizar estados del chat actual
             chat.UltimoMensaje = textoMensaje;
             chat.FechaUltimaInteraccion = DateTime.UtcNow;
             if (!esMensajeMio) chat.MensajesNoLeidos++;
+
+            // 💡 Actualización dinámica de nombre si antes era genérico y ahora viene el real
+            if (chat.NombreContacto == "Contacto de WhatsApp" && !string.IsNullOrEmpty(payload.Data.PushName))
+            {
+                chat.NombreContacto = payload.Data.PushName;
+            }
+
             _context.Chats.Update(chat);
         }
 
         await _context.SaveChangesAsync();
 
+        // Persistir la burbuja de texto vinculada al ID único del Chat
         var nuevoMensaje = new MensajeChat
         {
             ChatId = chat.Id,
@@ -156,6 +173,7 @@ public class WebhooksController : ControllerBase
         _context.MensajesChat.Add(nuevoMensaje);
         await _context.SaveChangesAsync();
 
+        // Difusión en tiempo real hacia todas las pantallas de Blazor activas vía SignalR
         var payloadSignalR = new
         {
             ChatId = chat.Id,              

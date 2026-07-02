@@ -1,11 +1,11 @@
-# 🌐 Capa de Presentación (Clinica.WASM)
+# 🌐 Capa de Presentación (Clinica.WASM) – SYS Clínica Santa Mónica
 
-La **Capa de Presentación** representa el **puerto de entrada** del usuario final al sistema SIGEC. Implementada como una **Single Page Application (SPA)** en **Blazor WebAssembly**, esta capa proporciona una interfaz de usuario rica, receptiva y con un diseño de alto contraste que refleja la identidad corporativa "Luxury Medical Style" de la Clínica Santa Mónica. La aplicación se comunica exclusivamente con la API a través de servicios HTTP que manejan la autenticación y autorización basada en JWT.
+La **Capa de Presentación** representa el **puerto de entrada** del usuario final al sistema **SYS Clínica Santa Mónica**, el sistema de gestión clínica desarrollado a medida para la Clínica Santa Mónica en Juliaca. Implementada como una **Single Page Application (SPA)** en **Blazor WebAssembly**, esta capa proporciona una interfaz de usuario rica, receptiva y con un diseño de alto contraste que refleja la identidad corporativa **"Luxury Medical Style"** de la clínica. La aplicación se comunica exclusivamente con la API a través de servicios HTTP que manejan la autenticación y autorización basada en JWT, materializando la **propuesta de valor** de atención materna digital, segura y cercana que distingue a la institución en el mercado de Juliaca.
 
 !!! info "Frontera Arquitectónica"
     - **Dependencias PERMITIDAS:** Blazor WebAssembly, MudBlazor (librería de componentes UI), SignalR (comunicación en tiempo real), Microsoft.JSInterop (para interacción con JavaScript), y servicios HTTP.
     - **Dependencias PROHIBIDAS:** Acceso directo a bases de datos, Entity Framework, o cualquier capa de persistencia. Toda la comunicación con el backend se realiza exclusivamente a través de la API RESTful definida en la capa de presentación.
-    - **Comunicación con el exterior:** Se realiza mediante peticiones HTTP a los endpoints de la API (con autenticación JWT) y mediante SignalR para la mensajería en tiempo real (WhatsApp).
+    - **Comunicación con el exterior:** Se realiza mediante peticiones HTTP a los endpoints de la API (con autenticación JWT) y mediante SignalR para la mensajería en tiempo real (WhatsApp), en línea con la **filosofía de innovación con propósito** de la clínica.
 
 ---
 
@@ -23,6 +23,8 @@ La aplicación Blazor WASM sigue una arquitectura **limpia y modular**, organiza
 | **DTOs** | Objetos de transferencia de datos, copias de los DTOs del dominio | `DTOs/` |
 | **Temas** | Configuración de la paleta de colores y estilos de MudBlazor | `Themes/` |
 
+Esta estructura refleja el **compromiso con la calidad y la organización** que la clínica pregona en sus valores, asegurando que el código sea mantenible y escalable para la expansión planificada hacia una clínica general.
+
 ---
 
 ## 📐 Sistema de Layout y Navegación
@@ -30,14 +32,14 @@ La aplicación Blazor WASM sigue una arquitectura **limpia y modular**, organiza
 ### MainLayout (Layout Principal)
 El `MainLayout` es el contenedor visual principal de la aplicación. Integra:
 
-- **AppBar:** Barra superior con el logo, título de la clínica, nombre del usuario autenticado y botón de cierre de sesión.
-- **Drawer:** Menú lateral de navegación con enlaces a los módulos principales del sistema (Dashboard, Pacientes, Citas, Atenciones, Doctores, Horarios, Pagos, Comprobantes, Finanzas, Historial Clínico, Auditoría, Usuarios, Roles, Permisos y Chat).
+- **AppBar:** Barra superior con el logo, título de la clínica, nombre del usuario autenticado y botón de cierre de sesión. Refuerza la **imagen de modernidad y profesionalismo** que la clínica proyecta.
+- **Drawer:** Menú lateral de navegación con enlaces a los módulos principales del sistema (Dashboard, Pacientes, Citas, Atenciones, Doctores, Horarios, Pagos, Comprobantes, Finanzas, Historial Clínico, Auditoría, Usuarios, Roles, Permisos y Chat). Este menú se adapta a los permisos del usuario, reflejando el **control de acceso basado en roles** que garantiza la seguridad de la información clínica.
 - **MainContent:** Área dinámica donde se renderizan las páginas según la ruta actual.
 
-El `NavMenu` en el drawer utiliza el componente `RequirePermission` para ocultar/mostrar opciones según los permisos del usuario autenticado.
+El `NavMenu` en el drawer utiliza el componente `RequirePermission` para ocultar/mostrar opciones según los permisos del usuario autenticado, alineándose con el **compromiso de la clínica con la protección de datos** (Ley N° 29733).
 
 ### EmptyLayout
-Layout minimalista utilizado exclusivamente para las páginas de autenticación (Login y Cambiar Contraseña). Presenta un diseño de dos columnas con una sección de branding a la izquierda y el formulario a la derecha.
+Layout minimalista utilizado exclusivamente para las páginas de autenticación (Login y Cambiar Contraseña). Presenta un diseño de dos columnas con una sección de branding a la izquierda y el formulario a la derecha, comunicando **confianza y formalidad** desde el primer contacto digital.
 
 ### Sistema de Enrutamiento
 La aplicación utiliza el enrutamiento integrado de Blazor con el atributo `@page`. Las rutas principales se definen como constantes en `AppRoutes.cs` para mantener la consistencia:
@@ -80,7 +82,7 @@ La aplicación está construida con componentes reutilizables organizados por m�
 - `CambiarContrasenaDialog`: Diálogo para cambiar la contraseña desde el perfil.
 
 ### Módulo de Atenciones
-- `RegistrarAtencionDialog`: Diálogo multi-step (Stepper) para registrar una nueva atención con todos los submódulos clínicos (Anamnesis, Exámenes Físicos, Tactos Vaginales, Ecografías, Impresión Diagnóstica).
+- `RegistrarAtencionDialog`: Diálogo multi-step (Stepper) para registrar una nueva atención con todos los submódulos clínicos (Anamnesis, Exámenes Físicos, Tactos Vaginales, Ecografías, Impresión Diagnóstica). Este componente refleja el **acompañamiento integral** que la clínica ofrece a las pacientes en cada etapa reproductiva.
 - `CerrarAtencionDialog`: Diálogo para cerrar una atención e ingresar la impresión diagnóstica final.
 - `AnularAtencionDialog`: Diálogo para anular una atención (eliminación lógica).
 - `DetalleAtencionDialog`: Visualización completa de una atención con todos sus módulos clínicos expandibles.
@@ -93,7 +95,7 @@ La aplicación está construida con componentes reutilizables organizados por m�
 - `CitaCancelarDialog`: Diálogo para cancelar una cita con justificación.
 
 ### Módulo de Comprobantes
-- `EmitirComprobanteDialog`: Diálogo multi-step para emitir comprobantes (boletas, constancias, resúmenes, estados de cuenta) con previsualización.
+- `EmitirComprobanteDialog`: Diálogo multi-step para emitir comprobantes (boletas, constancias, resúmenes, estados de cuenta) con previsualización, dando cumplimiento a las obligaciones de **facturación electrónica SUNAT**.
 - `ComprobantesTable`: Tabla de comprobantes con descarga de PDF y anulación.
 - `AnularComprobanteDialog`: Diálogo para anular un comprobante con motivo.
 
@@ -104,7 +106,7 @@ La aplicación está construida con componentes reutilizables organizados por m�
 - `RegistrarAjusteFinancieroDialog`: Diálogo para registrar un nuevo ajuste financiero.
 
 ### Módulo de Chat (WhatsApp)
-- `ListaContactos`: Sidebar con la lista de conversaciones activas y estado de conexión de WhatsApp (QR/Conectado).
+- `ListaContactos`: Sidebar con la lista de conversaciones activas y estado de conexión de WhatsApp (QR/Conectado). Este componente es clave porque **WhatsApp es el canal principal de comunicación** con las pacientes, en línea con la estrategia de inclusión digital de la clínica.
 - `VentanaConversacion`: Área central con el historial de mensajes y campo de entrada.
 - `VincularWhatsAppDialog`: Diálogo que muestra el código QR para vincular un dispositivo.
 
@@ -171,10 +173,81 @@ El flujo de autenticación es el siguiente:
 ### Protección de Rutas
 Las páginas principales utilizan `RequireAuth` y `RequirePermission` para proteger el acceso:
 
-```razor
-@page "/panel/pacientes"
-<RequireAuth>
-    <RequirePermission Permission="@Permisos.PacienteVer">
-        <!-- Contenido de la página -->
-    </RequirePermission>
-</RequireAuth>
+
+## 🎨 Tema y Estilos (ClinicaTheme)
+
+El tema `ClinicaTheme` extiende `MudTheme` y define la identidad visual **"Luxury Medical Style"** con paletas para modo claro y oscuro, alineadas con la **imagen de modernidad y confianza** que la clínica proyecta.
+
+### Paleta Claro (Modo Día)
+
+| Color | Código | Uso |
+|-------|--------|-----|
+| **Primary** | `#2B4CDE` | Azul Clínico Institucional (botones principales, encabezados) |
+| **Secondary** | `#D48A9C` | Rose Gold (acentos, detalles premium) |
+| **Tertiary** | `#E5B324` | Oro/Ámbar (detalles decorativos, notificaciones) |
+| **Background** | `#F4F7FB` | Fondo general con ligera tonalidad azul |
+| **Surface** | `#FFFFFF` | Tarjetas, paneles, elementos elevados |
+| **Divider** | `#CBD5E1` | Líneas de separación |
+
+### Paleta Oscuro (Modo Noche)
+
+| Color | Código | Uso |
+|-------|--------|-----|
+| **Primary** | `#849DFF` | Azul claro para modo oscuro |
+| **Secondary** | `#EBB1C3` | Rose Gold adaptado para fondos oscuros |
+| **Tertiary** | `#FCD34D` | Oro vibrante para modo noche |
+| **Background** | `#090E17` | Fondo profundo Navy/Slate |
+| **Surface** | `#161D2F` | Tarjetas con elevación sobre fondo oscuro |
+
+### Tipografía
+
+- **Fuente principal:** Inter (Google Fonts) como sistema tipográfico moderno y legible.
+- **Tamaños:** Escala tipográfica definida con `H1` (2.25rem), `H2` (1.75rem), `H3` (1.25rem), `Body` (0.875rem).
+- **Pesos:** Uso extensivo de `fw-700`, `fw-800` para enfatizar información clave.
+
+### Sombras
+
+El sistema de sombras utiliza una escala de 0 a 25 con incrementos visuales precisos, proporcionando profundidad tridimensional a tarjetas, diálogos y elementos interactivos.
+
+---
+
+## 🔄 Flujo de Ejecución Típico (Registro de una Atención)
+
+A continuación se describe el flujo completo desde que el usuario inicia el registro de una atención hasta que la información persiste en el backend:
+
+1. **Usuario:** Hace clic en "Registrar Atención" en la página `AtencionesPage`.
+2. **UI:** Se abre `RegistrarAtencionDialog`, un diálogo multi-step que guía al usuario a través de:
+   - **Paso 1:** Datos administrativos (paciente, doctor, servicio, costo).
+   - **Paso 2:** Anamnesis (motivo, fórmula obstétrica, antecedentes).
+   - **Paso 3:** Exámenes físicos (múltiples registros con LOTEP, AU, LCF, etc.).
+   - **Paso 4:** Tactos vaginales (múltiples registros con dilatación, borramiento, etc.).
+   - **Paso 5:** Ecografías (múltiples registros con biometría fetal).
+   - **Paso 6:** Impresión diagnóstica (diagnóstico principal, indicaciones, próxima cita).
+3. **Validación Frontend:** Cada paso valida los campos requeridos usando `DataAnnotationsValidator`.
+4. **Envío:** Al hacer clic en "Registrar Atención", el diálogo construye un `RegistrarAtencionDto` con todos los datos.
+5. **Servicio API:** `AtencionApiService.RegistrarAsync` envía el DTO mediante `POST` al endpoint `api/atenciones`.
+6. **Backend:** El controlador recibe la solicitud, valida, y delega en el servicio de aplicación que persiste la entidad.
+7. **Respuesta:** El backend retorna un `ApiResponse<Guid>` con el ID de la atención creada.
+8. **UI:** El diálogo se cierra, se muestra un `Snackbar` de éxito, y la tabla de atenciones se recarga automáticamente.
+
+Este flujo refleja el **acompañamiento integral** que la clínica ofrece a las pacientes, desde el primer contacto hasta el cierre de la atención, con total trazabilidad y seguridad de la información.
+
+---
+
+## 📝 Notas Adicionales sobre el Frontend
+
+- **PWA (Progressive Web App):** La aplicación está configurada como PWA con soporte para modo offline y service worker (archivos `service-worker.js` y `service-worker.published.js`), garantizando **disponibilidad continua** incluso ante interrupciones de conectividad.
+
+- **SignalR para Chat:** El módulo de chat utiliza SignalR para recibir mensajes en tiempo real, complementando las peticiones HTTP para enviar mensajes. La conexión se establece al cargar la página de chat, lo que permite una **comunicación proactiva** con las pacientes, en línea con el valor de **cercanía y acompañamiento**.
+
+- **Descarga de PDFs:** Los comprobantes se descargan mediante peticiones HTTP que retornan arreglos de bytes, los cuales se convierten a base64 y se descargan usando JavaScript (`saveAsFile`), facilitando la **transparencia administrativa** y el cumplimiento de SUNAT.
+
+- **MudBlazor:** La librería de componentes UI proporciona una amplia gama de controles (tablas, formularios, diálogos, tarjetas, steppers, etc.) que se adaptan al tema personalizado, permitiendo una **experiencia de usuario fluida y profesional**.
+
+- **Estilos Responsivos:** Todas las páginas y componentes están diseñados con adaptabilidad móvil estricta. Las tablas colapsan verticalmente en dispositivos pequeños utilizando `DataLabel`, y los botones se expanden al 100% de ancho, reflejando el **compromiso con la accesibilidad** y la **inclusión digital** de la clínica.
+
+- **Gestión de Errores:** Los servicios API capturan excepciones y las exponen a través de propiedades `ErrorMessage` e `IsLoading`, que los componentes consumen para mostrar estados de carga y error, asegurando que el equipo pueda **resolver incidencias de manera ágil**.
+
+- **Autocompletados Asíncronos:** Los campos de búsqueda de pacientes, doctores y servicios utilizan `MudAutocomplete` con funciones de búsqueda asíncronas que filtran en memoria las listas cargadas, mejorando la **eficiencia operativa** del personal de recepción y médicos.
+
+- **Snackbars y Diálogos:** Las notificaciones de éxito/error se muestran mediante `MudSnackbar`, y las operaciones críticas se realizan a través de diálogos modales (`MudDialog`), garantizando que el usuario reciba **retroalimentación clara** en cada acción.

@@ -30,7 +30,7 @@ public class EvolutionWhatsAppServiceTests
         var options = Options.Create(new WhatsAppOptions
         {
             Enabled = false,
-            InstanceName = "clinica",
+            InstanceName = "clinica-santa-monica",
             ApiKey = "test-key"
         });
 

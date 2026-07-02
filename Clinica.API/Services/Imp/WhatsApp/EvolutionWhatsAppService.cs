@@ -71,7 +71,7 @@ public class EvolutionWhatsAppService : INotificacionWhatsAppService
 
         if (!esCelularValido)
         {
-            _logger.LogError("[Escudo PsicoMedix] Envío bloqueado en C# para proteger el chip. Formato inválido o teléfono fijo detectado: {Telefono}", telefono);
+            _logger.LogError("[Escudo] Envío bloqueado en C# para proteger el chip. Formato inválido o teléfono fijo detectado: {Telefono}", telefono);
             throw new InvalidOperationException("El número de teléfono no tiene un formato válido de celular de WhatsApp (Perú).");
         }
 
@@ -126,7 +126,7 @@ public class EvolutionWhatsAppService : INotificacionWhatsAppService
             if (string.Equals(valorEstado, "open", StringComparison.OrdinalIgnoreCase) || 
                 string.Equals(valorEstado, "connected", StringComparison.OrdinalIgnoreCase))
             {
-                _logger.LogInformation("[PsicoMedix Pro] Conexión validada con éxito. Estado actual de la instancia: {Estado}", valorEstado);
+                _logger.LogInformation("[whatsapp] Conexión validada con éxito. Estado actual de la instancia: {Estado}", valorEstado);
                 return "CONNECTED";
             }
 
@@ -155,7 +155,7 @@ public class EvolutionWhatsAppService : INotificacionWhatsAppService
                 }
             }
 
-            _logger.LogWarning("[PsicoMedix] Respuesta de Evolution recibida, pero estructura desconocida. JSON: {Json}", jsonText);
+            _logger.LogWarning("[whatsapp] Respuesta de Evolution recibida, pero estructura desconocida. JSON: {Json}", jsonText);
             return null;
         }
         catch (Exception ex)
@@ -188,7 +188,7 @@ public class EvolutionWhatsAppService : INotificacionWhatsAppService
 
             if (!string.IsNullOrEmpty(jidReal) && jidReal.Contains("@s.whatsapp.net"))
             {
-                _logger.LogInformation("[PsicoMedix Agenda] ¡Éxito! El LID {Lid} corresponde al número real: {JidReal}", jidLid, jidReal);
+                _logger.LogInformation("[whatsapp Agenda] ¡Éxito! El LID {Lid} corresponde al número real: {JidReal}", jidLid, jidReal);
                 return jidReal;
             }
 

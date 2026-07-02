@@ -19,6 +19,7 @@ public class WebhookKey
 {
     public string Id { get; set; } = string.Empty;
     public string RemoteJid { get; set; } = string.Empty;
+    public string? RemoteJidAlt { get; set; } // ◄── ¡AGREGADO PARA EVITAR LA COLISIÓN!
     public bool FromMe { get; set; }
 }
 

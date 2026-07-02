@@ -1,78 +1,86 @@
-# 🏥 Sistema de Gestión de Clínica - SIGEC
+# 🏥 SYS Clínica Santa Mónica - Portal de Documentación Técnica
 
-Bienvenido a la consola central de documentación técnica de la intranet de la **Clínica Santa Mónica**. Este portal condensa las especificaciones de diseño de software, diagramas de flujo de datos y manuales operativos del sistema de información ginecobstétrico.
+Bienvenido al centro neurálgico de documentación de **SYS Clínica Santa Mónica**[cite: 1]. Este portal condensa las especificaciones de ingeniería de software, decisiones de diseño de sistemas, diagramas de flujo transaccional y manuales operativos de la plataforma informática **SIGEC** (Sistema Integral de Gestión de Clínica)[cite: 1].
 
-!!! info "Paradigma de Diseño Estructural"
-    Toda la solución backend está desarrollada bajo los principios de **Diseño Guiado por el Dominio (DDD)** y acoplada estrictamente mediante una **Arquitectura Hexagonal (Puertos y Adaptadores)** en .NET 9, garantizando el aislamiento total de las reglas de negocio frente a agentes externos.
+El software está concebido como una solución empresarial de uso estrictamente interno para la automatización integral de la institución[cite: 1]. No actúa como un portal de autogestión para pacientes, sino como la herramienta operativa unificada que orquesta las actividades del personal de Recepción, Caja, Finanzas, Farmacia, Obstetras y Médicos Especialistas[cite: 1].
 
----
-
-## 📐 Resumen de la Arquitectura
-
-El sistema se compone de cuatro capas principales, cada una con una responsabilidad clara dentro del hexágono:
-
-| Capa | Responsabilidad | Tecnologías Clave |
-|------|-----------------|-------------------|
-| **Dominio** | Reglas de negocio, entidades y agregados puros | .NET 9, System.ComponentModel.DataAnnotations |
-| **Aplicación** | Orquestación de casos de uso, puertos y DTOs | .NET 9, interfaces de servicios |
-| **Infraestructura** | Adaptadores de persistencia y servicios externos | EF Core 9, PostgreSQL, QuestPDF, BCrypt |
-| **Presentación (API)** | Exposición RESTful, autenticación y autorización | ASP.NET Core 9, JWT, Swagger, SignalR |
-| **Frontend (WASM)** | Interfaz de usuario SPA | Blazor WebAssembly, MudBlazor |
-| **Pruebas** | Unitarias e integración | xUnit, NSubstitute, Testcontainers |
-
-Cada capa está completamente desacoplada, cumpliendo con los principios de la Arquitectura Hexagonal: el dominio no conoce la infraestructura, y la API solo orquesta, no implementa lógica de negocio.
+!!! info "Paradigma de Diseño Estructural y Desacoplamiento"
+    Toda la solución backend está desarrollada bajo los principios de **Diseño Guiado por el Dominio (DDD)** y acoplada de manera estricta mediante una **Arquitectura Hexagonal (Puertos y Adaptadores)** en .NET 9[cite: 1]. Este diseño garantiza el aislamiento absoluto de las reglas de negocio ginecobstétricas y de recaudación financiera frente a agentes externos, automatizando de forma robusta los flujos de trabajo e interrumpiendo la dependencia tradicional hacia registros manuales en papel o planillas de cálculo dispersas[cite: 1].
 
 ---
 
-## 🗺️ Mapa de la Documentación por Capas
+## 🎯 Contexto Estratégico e Institucional
 
-Utiliza los siguientes accesos directos para navegar de manera estructural a través de cada uno de los hexágonos y componentes del ecosistema de software:
+El desarrollo de **SYS Clínica Santa Mónica** responde a un plan estratégico de modernización tecnológica diseñado para afrontar los desafíos operativos e infraestructurales específicos de la ciudad de Juliaca (Región Puno)[cite: 1]. La plataforma unifica los objetivos corporativos de la institución con los requisitos técnicos exigidos por el marco legal peruano[cite: 1].
 
-### 🟣 Núcleo y Arquitectura Base
+=== "Misión del Sistema"
+    Proveer al personal de la Clínica Santa Mónica de una herramienta digital integral, segura y de alta disponibilidad que optimice el acto médico obstétrico y la recaudación de caja[cite: 1]. El sistema erradica la doble digitación de datos, agiliza la atención al paciente y asegura la inmutabilidad de los expedientes médicos en el Altiplano peruano[cite: 1].
 
-* **[Visión General de la Arquitectura](arquitectura/general.md):** Mapa conceptual de la estructura en capas de cebolla, fronteras de aislamiento del sistema y flujo de dependencias de la solución en C#.
+=== "Visión de Futuro"
+    Consolidarse como la base tecnológica de software médico de referencia en la región sur del Perú, con una arquitectura escalable capaz de mutar de manera eficiente desde una especialización ginecobstétrica hacia el soporte de una clínica médica general de gran envergadura[cite: 1].
 
-### 📦 Componentes de la Arquitectura Hexagonal
-
-* **[Capa de Dominio (Core)](arquitectura/dominio.md):** El corazón inmutable de la clínica. Contiene el modelo de entidades atómicas (`Paciente`, `Atencion`, `Pago`), la lógica de filiación de pacientes y las reglas de negocio puras independientes de frameworks.
-
-* **[Capa de Infraestructura (Persistencia)](arquitectura/infraestructura.md):** El adaptador de salida tecnológico. Implementación de repositorios de datos, configuración del mapeador tridimensional (EF Core 9) y la conexión segura a la nube de PostgreSQL.
-
-* **[Capa de API (Presentación)](arquitectura/api.md):** El puerto de entrada del sistema. Documentación de los controladores expuestos, contratos de respuesta JSON, mecanismos de seguridad mediante tokens de autenticación JWT y configuraciones globales.
-
-* **[Capa de Frontend (Blazor WASM)](arquitectura/wasm.md):** La interfaz de usuario SPA construida con Blazor WebAssembly, que consume la API y proporciona una experiencia de usuario rica y receptiva con el diseño "Luxury Medical Style".
-
-* **[Capa de Pruebas](arquitectura/pruebas.md):** Estrategia de testing con pruebas unitarias (xUnit + NSubstitute) y de integración (Testcontainers + PostgreSQL), garantizando la calidad y robustez del sistema.
-
-### 🚀 Despliegue y Mantenimiento DevOps
-
-* **[Despliegue en la Nube (Azure & Neon)](arquitectura/despliegue.md):** Guía paso a paso para la puesta en producción del API en Azure App Service, la reescritura de rutas seguras contra errores 404 en el frontend y el aprovisionamiento de bases de datos serverless en Neon.tech.
+=== "Cumplimiento Regulatorio y Legal"
+    El sistema incorpora en su diseño e infraestructura perimetral los lineamientos de las entidades fiscalizadoras del Perú:
+    
+    * **MINSA y SUSALUD:** Estructuración normalizada del expediente clínico y el partograma digital, resguardando la confidencialidad de la información médica[cite: 1].
+    * **Ley N° 29733 (Protección de Datos Personales):** Cifrado de credenciales mediante algoritmos asimétricos y aislamiento de accesos basado en roles lógicos y permisos atómicos[cite: 1].
+    * **SUNAT:** Persistencia inmutable de snapshots financieros en formato nativo JSONB dentro de la base de datos para la consistencia de auditorías fiscales y micro-emisión de comprobantes electrónicos[cite: 1].
 
 ---
 
-## 🔍 Extractos Clave de las Capas Principales
+## 📐 Matriz Resumen de la Arquitectura Hexagonal
 
-### 🟦 Capa de API (Presentación)
+La solución está segmentada de forma física en proyectos desacoplados que interactúan a través de abstracciones y contratos lógicos bien definidos:
 
-La API RESTful sobre **ASP.NET Core 9** expone más de 15 controladores organizados por módulos: Autenticación, Pacientes, Doctores, Citas, Atenciones, Pagos, Comprobantes, Finanzas, Historial, Auditoría y WhatsApp. Todos los endpoints están protegidos con **JWT** y autorización basada en políticas de permisos. El sistema cuenta con un filtro automático de auditoría que registra cada operación, un middleware de manejo de excepciones y una integración en tiempo real con **SignalR** para el módulo de chat.
-
-### 🟣 Capa de Dominio (Core)
-
-El dominio contiene más de 20 entidades de negocio, incluyendo los agregados clínicos de la atención obstétrica (Anamnesis, Examen Físico, Tacto Vaginal, Ecografía Obstétrica e Impresión Diagnóstica). Las enumeraciones definen máquinas de estado para cada proceso, y los **puertos** (interfaces de repositorios y servicios) aseguran el aislamiento tecnológico. La entidad `Comprobante` almacena un snapshot JSON inmutable, garantizando la trazabilidad fiscal.
-
-### ⚙️ Capa de Infraestructura
-
-El `ApplicationDbContext` mapea todas las entidades a tablas PostgreSQL mediante configuraciones `IEntityTypeConfiguration`. Los repositorios implementan las interfaces del dominio y utilizan **EF Core 9** con estrategias de `Include` y `ThenInclude` para carga eficiente de relaciones. Se generan documentos PDF con **QuestPDF** (boletas, constancias, resúmenes, certificados, reportes financieros y resúmenes de parto). El `DataSeeder` inicializa la base de datos con roles, permisos y datos de prueba.
-
-### 🧪 Capa de Pruebas
-
-Se utilizan **xUnit** y **NSubstitute** para pruebas unitarias de controladores, servicios y entidades. Las pruebas de integración emplean **Testcontainers** para levantar una base de datos PostgreSQL real en un contenedor Docker, validando el pipeline HTTP completo. La cobertura de código se mide con **coverlet** y se integra con **SonarCloud**, manteniendo un umbral mínimo del 80%.
+| Capa Funcional | Responsabilidad Técnica en el Sistema | Tecnologías Clave Implementadas |
+| :--- | :--- | :--- |
+| **🟣 Dominio (Core)** | Corazón inmutable del negocio. Contiene las entidades puras, enumeraciones de estado y la declaración de los puertos de comunicación[cite: 1]. | .NET 9, DataAnnotations, LINQ Expressions[cite: 1] |
+| **🟦 Aplicación** | Orquestador de los casos de uso. Gestiona el flujo de comandos, validaciones perimetrales y transformación de objetos mediante DTOs[cite: 1]. | .NET 9, Interfaces de Servicios, Patrón Mediator[cite: 1] |
+| **⚙️ Infraestructura** | Adaptador de salida técnico. Implementa la persistencia de datos relacionales, el sembrado maestro y los motores de impresión[cite: 1]. | EF Core 9, PostgreSQL (Neon.tech), QuestPDF, BCrypt[cite: 1] |
+| **🚀 API (Presentación)**| Adaptador de entrada perimetral. Expone los endpoints REST, gestiona la seguridad JWT y las conexiones por sockets[cite: 1]. | ASP.NET Core 9, JWT Bearer, Swagger OpenAPI, SignalR[cite: 1] |
+| **🌐 Frontend (WASM)** | Interfaz de usuario SPA rica e interactiva. Renderiza componentes con la línea de diseño *Luxury Medical Style*[cite: 1]. | Blazor WebAssembly, MudBlazor Component Suite[cite: 1] |
+| **🧪 Pruebas (QA)** | Suite de aseguramiento de la calidad. Valida de forma unitaria e integrada la robustez del código y los pipelines HTTP[cite: 1]. | xUnit, NSubstitute, FluentAssertions, Testcontainers[cite: 1] |
 
 ---
 
-## ⚡ Comandos Rápidos del Entorno de Documentación
+## 🗺️ Mapa Completo de la Documentación por Capas
 
-Si necesitas realizar modificaciones o agregar nuevos manuales Markdown a la carpeta `docs/`, recuerda utilizar estas instrucciones nativas desde tu consola de comandos local:
+Utilice los siguientes accesos directos para navegar de manera estructural a través de las especificaciones y manuales técnicos que componen el ecosistema de software:
 
-* `python -m mkdocs serve` — Levanta el servidor local con soporte *Live-Reload* en `http://127.0.0.1:8000/`.
-* `python -m mkdocs build` — Compila y procesa todos los archivos estáticos listos para subirse a GitHub Pages.
+### 🟣 Núcleo del Negocio y Arquitectura Base
+* **[Visión General de la Arquitectura](arquitectura/general.md):** Mapa conceptual detallado sobre la estructura en capas de cebolla, fronteras de aislamiento del sistema, inversión de control (IoC) y flujo de dependencias lógicas de la solución[cite: 1].
+
+### 📦 Componentes del Ecosistema de Software
+* **[Capa de Dominio (Core)](arquitectura/dominio.md):** El corazón inmutable de la clínica. Contiene el diseño técnico de las entidades atómicas (`Paciente`, `Atencion`, `Pago`), la lógica del módulo de filiación obstétrica avanzada y el catálogo maestro de enumeraciones de estado[cite: 1].
+* **[Capa de Infraestructura (Persistencia)](arquitectura/infraestructura.md):** El adaptador de salida tecnológico. Implementación detallada del `ApplicationDbContext`, estrategias de carga explícita (*Eager Loading*) optimizadas para Neon.tech, motores de renderizado PDF en memoria y el motor de datos `DataSeeder`[cite: 1].
+* **[Capa de API (Presentación)](arquitectura/api.md):** El puerto de entrada perimetral del sistema. Documentación técnica de los controladores REST expuestos, middlewares globales para el manejo de excepciones, interceptores de auditoría forense y la pasarela de integración con WhatsApp[cite: 1].
+* **[Capa de Frontend (Blazor WASM)](arquitectura/wasm.md):** Guía de desarrollo de la interfaz de usuario SPA. Explica la arquitectura de los componentes de MudBlazor, el sistema de layouts, el control de vistas basado en permisos (RBAC) y los interceptores de cabeceras HTTP[cite: 1].
+* **[Capa de Pruebas (Unitarias e Integración)](arquitectura/pruebas.md):** La estrategia de Aseguramiento de la Calidad (QA). Detalla el diseño de pruebas unitarias con dobles de prueba y el despliegue automático de contenedores Docker efímeros para pruebas de integración de extremo a extremo[cite: 1].
+
+### 🏢 Modelo de Negocio y Operaciones
+* **[Análisis Estratégico](negocio/estrategia.md):** Documentación de las matrices de ingeniería administrativa que sustentan el software: Propuesta de Valor, PESTEL, 5 Fuerzas de Porter, FODA, Ansoff y las estrategias resultantes para el negocio[cite: 1].
+* **[Estructura y Áreas](negocio/organizacion.md):** Descripción de las 5 áreas funcionales de la clínica (Médica, Administrativa, TI, Recepción, Financiera/Farmacia), los roles de los personajes clave y el organigrama institucional que interactúa con el sistema[cite: 1].
+* **[Estructura Financiera y Sostenibilidad](negocio/costos.md):** Análisis detallado de la composición de costos (Hosting VPS, conectividad), la ventana de oportunidad del primer año (desarrollo sin costo de mano de obra) y la proyección de gastos para la expansión futura hacia una clínica general[cite: 1].
+
+### 📅 Gestión de Proyectos, Control de Calidad y Gobernanza (PMO & QA)
+* **[Plan de Desarrollo del Proyecto](negocio/plan-desarrollo.md):** El marco metodológico híbrido (CMMI + Scrum), organización de los ingenieros por Sprints, cronograma general, hitos de control del ciclo de vida y matriz de mitigación de riesgos operativos[cite: 1].
+* **[Evaluación de Calidad y Métricas](negocio/metricas.md):** Indicadores analíticos de mantenibilidad e inmunidad bajo la norma ISO/IEC 25010 (SonarCloud), reporte de cobertura por Coverlet y los resultados de las pruebas de estrés en alta concurrencia por módulos ejecutadas con k6[cite: 1].
+* **[Auditoría del Ciclo de Vida (SDLC)](negocio/sdlc.md):** Evaluación formal de gobierno de TI sobre las fases de desarrollo según exigencias regulatorias, presupuesto de control, factores críticos de éxito y la lista de verificación de cumplimiento normativo del SDLC[cite: 1].
+
+### 🚀 Despliegue y Operaciones DevOps
+* **[Despliegue en la Nube (Azure & Neon)](arquitectura/despliegue.md):** Manual técnico del pipeline automatizado en GitHub Actions. Configuración del build perimetral, integración continua con análisis estático de código en SonarCloud, escaneo de vulnerabilidades con Snyk y aprovisionamiento en Azure y Neon.tech[cite: 1].
+
+---
+
+## 🔍 Extractos Ejecutivos de los Componentes Principales
+
+### 📅 Gestión Operacional del Proyecto (Capítulo 5)
+El desarrollo del sistema se ejecuta bajo un marco híbrido que combina la adaptabilidad del marco ágil **Scrum** con la rigurosidad y documentación institucional exigida por **CMMI Nivel 3**[cite: 1]. Las iteraciones se organizan en Sprints estructurados de dos semanas con hitos claros de control que gobiernan la migración de las historias clínicas y resguardan la entrega continua frente a los riesgos latentes de conectividad de la zona[cite: 1].
+
+### 📊 Control de Calidad e Ingeniería de Estrés (Capítulo 6)
+El control estático de calidad en SonarCloud certifica una calificación de mantenibilidad **A** bajo el estándar **ISO/IEC 25010**, respaldada por una cobertura de pruebas automatizadas superior al **84%**[cite: 1]. Asimismo, la infraestructura del backend ha sido sometida a pruebas de carga extrema mediante **k6 (Grafana)** por cada módulo funcional, garantizando respuestas óptimas en percentiles críticos (p95 < 45ms) ante picos de concurrencia en salas de control y ventanillas de recaudación[cite: 1].
+
+### ⚖️ Auditoría de Ciclo de Vida y Cumplimiento SDLC (Capítulo 7)
+El proceso de auditoría formal de gobierno de TI examina el apego a las directivas nacionales y de salud (MINSA, SUSALUD, Ley N° 29733)[cite: 1]. A través de una lista de verificación detallada del SDLC, se garantiza que los flujos críticos (como el bloqueo por inmutabilidad post-cierre del acto médico y la encriptación transaccional) operen de forma idónea, alertando preventivamente sobre las necesidades presupuestarias de soporte a partir del segundo año[cite: 1].
+
+---

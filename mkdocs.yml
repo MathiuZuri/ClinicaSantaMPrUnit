@@ -1,59 +1,79 @@
-site_name: Sistema de la Clinica Santa Monica
-site_description: Documentación Técnica de la Arquitectura Hexagonal - Clínica Santa Mónica
+site_name: "SYS Clínica Santa Mónica"
+site_description: "Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica"
+site_author: "EPIS - Universidad Peruana Unión"
 
 theme:
   name: material
   language: es
   features:
-    - navigation.tabs          # Menú de navegación superior premium
-    - navigation.sections      # Organización por bloques en el menú lateral
-    - navigation.top           # Botón flotante para volver arriba automáticamente
-    - search.suggest           # Buscador con sugerencias predictivas en tiempo real
-    - search.highlight         # Resaltado de palabras encontradas en la búsqueda
-    - content.code.copy        # Botón nativo para copiar bloques de código C#
+    - navigation.tabs          # Menú de navegación superior premium (pestañas globales)
+    - navigation.tabs.sticky   # Mantiene fijas las pestañas superiores al hacer scroll
+    - navigation.sections      # Organización estructurada por bloques en el menú lateral
+    - navigation.top           # Botón flotante dinámico para volver al inicio automáticamente
+    - navigation.tracking      # Actualiza la URL del navegador según la sección visible
+    - navigation.indexes       # Permite que las secciones actúen como enlaces directos
+    - search.suggest           # Buscador interactivo con sugerencias predictivas en tiempo real
+    - search.highlight         # Resaltado visual de palabras encontradas en las búsquedas
+    - search.share             # Permite compartir enlaces con filtros de búsqueda aplicados
+    - content.code.copy        # Botón nativo flotante para copiar bloques de código C# y SQL
+    - content.code.annotate    # Soporte para anotaciones explicativas dentro del código
   palette:
-    # ☀️ CONFIGURACIÓN MODO CLARO (Azul Clínico / Detalles en Oro)
+    # ☀️ CONFIGURACIÓN MODO CLARO (Luxury Medical Theme: Azul Clínico / Detalles en Oro)
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: blue
       accent: amber
       toggle:
         icon: material/brightness-7
-        name: Cambiar a modo oscuro
+        name: "Cambiar a modo oscuro"
 
-    # 🌙 CONFIGURACIÓN MODO OSCURO (Slate Profundo / Detalles en Oro)
+    # 🌙 CONFIGURACIÓN MODO OSCURO (Slate Profundo de Ingeniería / Detalles en Oro)
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: blue
       accent: amber
       toggle:
         icon: material/brightness-4
-        name: Cambiar a modo claro
+        name: "Cambiar a modo claro"
 
-# 🗺️ ESTRUCTURA INTEGRAL DE LA INTRANET DE DOCUMENTACIÓN
+# 🗺️ ESTRUCTURA INTEGRAL DE LA INTRANET DE DOCUMENTACIÓN (TECNOLOGÍA & NEGOCIO)
 nav:
   - Inicio: index.md
+  - Modelo de Negocio y Operaciones:
+      - Análisis Estratégico: negocio/estrategia.md
+      - Estructura y Áreas: negocio/organizacion.md
+      - Estructura Financiera y Sostenibilidad: negocio/costos.md
+  - Gestión, Calidad y Gobernanza:
+      - Plan de Desarrollo del Proyecto: negocio/plan-desarrollo.md
+      - Evaluación de Calidad y Métricas: negocio/metricas.md
+      - Auditoría del Ciclo de Vida (SDLC): negocio/sdlc.md
   - Arquitectura Hexagonal:
-    - Visión General: arquitectura/general.md
-    - Capa de Dominio (Core): arquitectura/dominio.md
-    - Capa de Infraestructura (Persistencia): arquitectura/infraestructura.md
-    - Capa de API (Presentación): arquitectura/api.md
-    - Capa de Frontend (Blazor WASM): arquitectura/wasm.md
-    - Capa de Pruebas (Unitarias e Integración): arquitectura/pruebas.md
+      - Visión General: arquitectura/general.md
+      - Capa de Dominio (Core): arquitectura/dominio.md
+      - Capa de Infraestructura (Persistencia): arquitectura/infraestructura.md
+      - Capa de API (Presentación): arquitectura/api.md
+      - Capa de Frontend (Blazor WASM): arquitectura/wasm.md
+      - Capa de Pruebas (Unitarias e Integración): arquitectura/pruebas.md
   - Manuales de Operación:
-    - Despliegue en la Nube (Azure & Neon): arquitectura/despliegue.md
+      - Despliegue en la Nube (Azure & Neon): arquitectura/despliegue.md
 
 # 🛠️ EXTENSIONES DE MARKDOWN DE ALTO NIVEL PARA INGENIERÍA
 markdown_extensions:
-  - admonition                    # Cajas de notas, advertencias y consejos interactivos
+  - admonition                    # Cajas semánticas de notas, advertencias y alertas de control
   - def_list
   - attr_list
-  - pymdownx.highlight:           # Resaltador de sintaxis premium para C# y SQL
+  - tables                        # Soporte avanzado para matrices de datos e indicadores
+  - pymdownx.highlight:           # Resaltador de sintaxis premium para ecosistema .NET y PostgreSQL
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences          # Soporte avanzado para bloques de código anidados
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences          # Soporte de bloques de código anidados
   - pymdownx.tabbed:
-      alternate_style: true       # Pestañas de código fluidas (útil para DTOs/Entidades)
+      alternate_style: true       # Pestañas de código fluidas para análisis de módulos y DTOs
+  - pymdownx.tasklist:
+      custom_checkbox: true       # Checkboxes estilizados para control de hitos de despliegue
