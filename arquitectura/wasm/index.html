@@ -6,8 +6,10 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal - Clínica Santa Mónica">
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica">
       
+      
+        <meta name="author" content="EPIS - Universidad Peruana Unión">
       
       
       
@@ -25,7 +27,7 @@
     
     
       
-        <title>Capa de Frontend (Blazor WASM) - Sistema de la Clinica Santa Monica</title>
+        <title>Capa de Frontend (Blazor WASM) - SYS Clínica Santa Mónica</title>
       
     
     
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capa-de-presentacion-clinicawasm" class="md-skip">
+        <a href="#capa-de-presentacion-clinicawasm-sys-clinica-santa-monica" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -88,9 +90,11 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-header__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-header__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +108,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Sistema de la Clinica Santa Monica
+            SYS Clínica Santa Mónica
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -167,6 +171,11 @@
       </label>
       <nav class="md-search__options" aria-label="Buscar">
         
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
         <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -193,14 +202,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -228,6 +231,50 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../negocio/estrategia/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Modelo de Negocio y Operaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../negocio/plan-desarrollo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gestión, Calidad y Gobernanza
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -237,6 +284,8 @@
         <a href="../general/" class="md-tabs__link">
           
   
+  
+    
   
   Arquitectura Hexagonal
 
@@ -258,6 +307,8 @@
           
   
   
+    
+  
   Manuales de Operación
 
         </a>
@@ -269,7 +320,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -288,13 +345,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-nav__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-nav__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Sistema de la Clinica Santa Monica
+    SYS Clínica Santa Mónica
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -330,11 +387,327 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Negocio y Operaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelo de Negocio y Operaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/estrategia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/organizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura y Áreas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/costos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión, Calidad y Gobernanza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión, Calidad y Gobernanza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/plan-desarrollo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de Desarrollo del Proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/metricas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría del Ciclo de Vida (SDLC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -351,10 +724,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -372,8 +745,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -805,6 +1178,89 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tema-y-estilos-clinicatheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 Tema y Estilos (ClinicaTheme)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎨 Tema y Estilos (ClinicaTheme)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paleta-claro-modo-dia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paleta Claro (Modo Día)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paleta-oscuro-modo-noche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paleta Oscuro (Modo Noche)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipografia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipografía
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sombras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sombras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-ejecucion-tipico-registro-de-una-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Flujo de Ejecución Típico (Registro de una Atención)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-adicionales-sobre-el-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas Adicionales sobre el Frontend
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -857,6 +1313,10 @@
   
     
     
+      
+        
+      
+    
     
     
       
@@ -869,10 +1329,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -890,8 +1350,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1206,6 +1666,89 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tema-y-estilos-clinicatheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 Tema y Estilos (ClinicaTheme)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎨 Tema y Estilos (ClinicaTheme)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paleta-claro-modo-dia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paleta Claro (Modo Día)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paleta-oscuro-modo-noche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paleta Oscuro (Modo Noche)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipografia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipografía
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sombras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sombras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-ejecucion-tipico-registro-de-una-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Flujo de Ejecución Típico (Registro de una Atención)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-adicionales-sobre-el-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas Adicionales sobre el Frontend
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1223,14 +1766,14 @@
 
 
 
-<h1 id="capa-de-presentacion-clinicawasm">🌐 Capa de Presentación (Clinica.WASM)</h1>
-<p>La <strong>Capa de Presentación</strong> representa el <strong>puerto de entrada</strong> del usuario final al sistema SIGEC. Implementada como una <strong>Single Page Application (SPA)</strong> en <strong>Blazor WebAssembly</strong>, esta capa proporciona una interfaz de usuario rica, receptiva y con un diseño de alto contraste que refleja la identidad corporativa "Luxury Medical Style" de la Clínica Santa Mónica. La aplicación se comunica exclusivamente con la API a través de servicios HTTP que manejan la autenticación y autorización basada en JWT.</p>
+<h1 id="capa-de-presentacion-clinicawasm-sys-clinica-santa-monica">🌐 Capa de Presentación (Clinica.WASM) – SYS Clínica Santa Mónica</h1>
+<p>La <strong>Capa de Presentación</strong> representa el <strong>puerto de entrada</strong> del usuario final al sistema <strong>SYS Clínica Santa Mónica</strong>, el sistema de gestión clínica desarrollado a medida para la Clínica Santa Mónica en Juliaca. Implementada como una <strong>Single Page Application (SPA)</strong> en <strong>Blazor WebAssembly</strong>, esta capa proporciona una interfaz de usuario rica, receptiva y con un diseño de alto contraste que refleja la identidad corporativa <strong>"Luxury Medical Style"</strong> de la clínica. La aplicación se comunica exclusivamente con la API a través de servicios HTTP que manejan la autenticación y autorización basada en JWT, materializando la <strong>propuesta de valor</strong> de atención materna digital, segura y cercana que distingue a la institución en el mercado de Juliaca.</p>
 <div class="admonition info">
 <p class="admonition-title">Frontera Arquitectónica</p>
 <ul>
 <li><strong>Dependencias PERMITIDAS:</strong> Blazor WebAssembly, MudBlazor (librería de componentes UI), SignalR (comunicación en tiempo real), Microsoft.JSInterop (para interacción con JavaScript), y servicios HTTP.</li>
 <li><strong>Dependencias PROHIBIDAS:</strong> Acceso directo a bases de datos, Entity Framework, o cualquier capa de persistencia. Toda la comunicación con el backend se realiza exclusivamente a través de la API RESTful definida en la capa de presentación.</li>
-<li><strong>Comunicación con el exterior:</strong> Se realiza mediante peticiones HTTP a los endpoints de la API (con autenticación JWT) y mediante SignalR para la mensajería en tiempo real (WhatsApp).</li>
+<li><strong>Comunicación con el exterior:</strong> Se realiza mediante peticiones HTTP a los endpoints de la API (con autenticación JWT) y mediante SignalR para la mensajería en tiempo real (WhatsApp), en línea con la <strong>filosofía de innovación con propósito</strong> de la clínica.</li>
 </ul>
 </div>
 <hr />
@@ -1282,18 +1825,19 @@
 </tr>
 </tbody>
 </table>
+<p>Esta estructura refleja el <strong>compromiso con la calidad y la organización</strong> que la clínica pregona en sus valores, asegurando que el código sea mantenible y escalable para la expansión planificada hacia una clínica general.</p>
 <hr />
 <h2 id="sistema-de-layout-y-navegacion">📐 Sistema de Layout y Navegación</h2>
 <h3 id="mainlayout-layout-principal">MainLayout (Layout Principal)</h3>
 <p>El <code>MainLayout</code> es el contenedor visual principal de la aplicación. Integra:</p>
 <ul>
-<li><strong>AppBar:</strong> Barra superior con el logo, título de la clínica, nombre del usuario autenticado y botón de cierre de sesión.</li>
-<li><strong>Drawer:</strong> Menú lateral de navegación con enlaces a los módulos principales del sistema (Dashboard, Pacientes, Citas, Atenciones, Doctores, Horarios, Pagos, Comprobantes, Finanzas, Historial Clínico, Auditoría, Usuarios, Roles, Permisos y Chat).</li>
+<li><strong>AppBar:</strong> Barra superior con el logo, título de la clínica, nombre del usuario autenticado y botón de cierre de sesión. Refuerza la <strong>imagen de modernidad y profesionalismo</strong> que la clínica proyecta.</li>
+<li><strong>Drawer:</strong> Menú lateral de navegación con enlaces a los módulos principales del sistema (Dashboard, Pacientes, Citas, Atenciones, Doctores, Horarios, Pagos, Comprobantes, Finanzas, Historial Clínico, Auditoría, Usuarios, Roles, Permisos y Chat). Este menú se adapta a los permisos del usuario, reflejando el <strong>control de acceso basado en roles</strong> que garantiza la seguridad de la información clínica.</li>
 <li><strong>MainContent:</strong> Área dinámica donde se renderizan las páginas según la ruta actual.</li>
 </ul>
-<p>El <code>NavMenu</code> en el drawer utiliza el componente <code>RequirePermission</code> para ocultar/mostrar opciones según los permisos del usuario autenticado.</p>
+<p>El <code>NavMenu</code> en el drawer utiliza el componente <code>RequirePermission</code> para ocultar/mostrar opciones según los permisos del usuario autenticado, alineándose con el <strong>compromiso de la clínica con la protección de datos</strong> (Ley N° 29733).</p>
 <h3 id="emptylayout">EmptyLayout</h3>
-<p>Layout minimalista utilizado exclusivamente para las páginas de autenticación (Login y Cambiar Contraseña). Presenta un diseño de dos columnas con una sección de branding a la izquierda y el formulario a la derecha.</p>
+<p>Layout minimalista utilizado exclusivamente para las páginas de autenticación (Login y Cambiar Contraseña). Presenta un diseño de dos columnas con una sección de branding a la izquierda y el formulario a la derecha, comunicando <strong>confianza y formalidad</strong> desde el primer contacto digital.</p>
 <h3 id="sistema-de-enrutamiento">Sistema de Enrutamiento</h3>
 <p>La aplicación utiliza el enrutamiento integrado de Blazor con el atributo <code>@page</code>. Las rutas principales se definen como constantes en <code>AppRoutes.cs</code> para mantener la consistencia:</p>
 <table>
@@ -1421,7 +1965,7 @@
 </ul>
 <h3 id="modulo-de-atenciones">Módulo de Atenciones</h3>
 <ul>
-<li><code>RegistrarAtencionDialog</code>: Diálogo multi-step (Stepper) para registrar una nueva atención con todos los submódulos clínicos (Anamnesis, Exámenes Físicos, Tactos Vaginales, Ecografías, Impresión Diagnóstica).</li>
+<li><code>RegistrarAtencionDialog</code>: Diálogo multi-step (Stepper) para registrar una nueva atención con todos los submódulos clínicos (Anamnesis, Exámenes Físicos, Tactos Vaginales, Ecografías, Impresión Diagnóstica). Este componente refleja el <strong>acompañamiento integral</strong> que la clínica ofrece a las pacientes en cada etapa reproductiva.</li>
 <li><code>CerrarAtencionDialog</code>: Diálogo para cerrar una atención e ingresar la impresión diagnóstica final.</li>
 <li><code>AnularAtencionDialog</code>: Diálogo para anular una atención (eliminación lógica).</li>
 <li><code>DetalleAtencionDialog</code>: Visualización completa de una atención con todos sus módulos clínicos expandibles.</li>
@@ -1436,7 +1980,7 @@
 </ul>
 <h3 id="modulo-de-comprobantes">Módulo de Comprobantes</h3>
 <ul>
-<li><code>EmitirComprobanteDialog</code>: Diálogo multi-step para emitir comprobantes (boletas, constancias, resúmenes, estados de cuenta) con previsualización.</li>
+<li><code>EmitirComprobanteDialog</code>: Diálogo multi-step para emitir comprobantes (boletas, constancias, resúmenes, estados de cuenta) con previsualización, dando cumplimiento a las obligaciones de <strong>facturación electrónica SUNAT</strong>.</li>
 <li><code>ComprobantesTable</code>: Tabla de comprobantes con descarga de PDF y anulación.</li>
 <li><code>AnularComprobanteDialog</code>: Diálogo para anular un comprobante con motivo.</li>
 </ul>
@@ -1449,7 +1993,7 @@
 </ul>
 <h3 id="modulo-de-chat-whatsapp">Módulo de Chat (WhatsApp)</h3>
 <ul>
-<li><code>ListaContactos</code>: Sidebar con la lista de conversaciones activas y estado de conexión de WhatsApp (QR/Conectado).</li>
+<li><code>ListaContactos</code>: Sidebar con la lista de conversaciones activas y estado de conexión de WhatsApp (QR/Conectado). Este componente es clave porque <strong>WhatsApp es el canal principal de comunicación</strong> con las pacientes, en línea con la estrategia de inclusión digital de la clínica.</li>
 <li><code>VentanaConversacion</code>: Área central con el historial de mensajes y campo de entrada.</li>
 <li><code>VincularWhatsAppDialog</code>: Diálogo que muestra el código QR para vincular un dispositivo.</li>
 </ul>
@@ -1587,13 +2131,143 @@
 </ul>
 <h3 id="proteccion-de-rutas">Protección de Rutas</h3>
 <p>Las páginas principales utilizan <code>RequireAuth</code> y <code>RequirePermission</code> para proteger el acceso:</p>
-<p>```razor
-@page "/panel/pacientes"
-<RequireAuth>
-    <RequirePermission Permission="@Permisos.PacienteVer">
-        <!-- Contenido de la página -->
-    </RequirePermission>
-</RequireAuth></p>
+<h2 id="tema-y-estilos-clinicatheme">🎨 Tema y Estilos (ClinicaTheme)</h2>
+<p>El tema <code>ClinicaTheme</code> extiende <code>MudTheme</code> y define la identidad visual <strong>"Luxury Medical Style"</strong> con paletas para modo claro y oscuro, alineadas con la <strong>imagen de modernidad y confianza</strong> que la clínica proyecta.</p>
+<h3 id="paleta-claro-modo-dia">Paleta Claro (Modo Día)</h3>
+<table>
+<thead>
+<tr>
+<th>Color</th>
+<th>Código</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary</strong></td>
+<td><code>#2B4CDE</code></td>
+<td>Azul Clínico Institucional (botones principales, encabezados)</td>
+</tr>
+<tr>
+<td><strong>Secondary</strong></td>
+<td><code>#D48A9C</code></td>
+<td>Rose Gold (acentos, detalles premium)</td>
+</tr>
+<tr>
+<td><strong>Tertiary</strong></td>
+<td><code>#E5B324</code></td>
+<td>Oro/Ámbar (detalles decorativos, notificaciones)</td>
+</tr>
+<tr>
+<td><strong>Background</strong></td>
+<td><code>#F4F7FB</code></td>
+<td>Fondo general con ligera tonalidad azul</td>
+</tr>
+<tr>
+<td><strong>Surface</strong></td>
+<td><code>#FFFFFF</code></td>
+<td>Tarjetas, paneles, elementos elevados</td>
+</tr>
+<tr>
+<td><strong>Divider</strong></td>
+<td><code>#CBD5E1</code></td>
+<td>Líneas de separación</td>
+</tr>
+</tbody>
+</table>
+<h3 id="paleta-oscuro-modo-noche">Paleta Oscuro (Modo Noche)</h3>
+<table>
+<thead>
+<tr>
+<th>Color</th>
+<th>Código</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary</strong></td>
+<td><code>#849DFF</code></td>
+<td>Azul claro para modo oscuro</td>
+</tr>
+<tr>
+<td><strong>Secondary</strong></td>
+<td><code>#EBB1C3</code></td>
+<td>Rose Gold adaptado para fondos oscuros</td>
+</tr>
+<tr>
+<td><strong>Tertiary</strong></td>
+<td><code>#FCD34D</code></td>
+<td>Oro vibrante para modo noche</td>
+</tr>
+<tr>
+<td><strong>Background</strong></td>
+<td><code>#090E17</code></td>
+<td>Fondo profundo Navy/Slate</td>
+</tr>
+<tr>
+<td><strong>Surface</strong></td>
+<td><code>#161D2F</code></td>
+<td>Tarjetas con elevación sobre fondo oscuro</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tipografia">Tipografía</h3>
+<ul>
+<li><strong>Fuente principal:</strong> Inter (Google Fonts) como sistema tipográfico moderno y legible.</li>
+<li><strong>Tamaños:</strong> Escala tipográfica definida con <code>H1</code> (2.25rem), <code>H2</code> (1.75rem), <code>H3</code> (1.25rem), <code>Body</code> (0.875rem).</li>
+<li><strong>Pesos:</strong> Uso extensivo de <code>fw-700</code>, <code>fw-800</code> para enfatizar información clave.</li>
+</ul>
+<h3 id="sombras">Sombras</h3>
+<p>El sistema de sombras utiliza una escala de 0 a 25 con incrementos visuales precisos, proporcionando profundidad tridimensional a tarjetas, diálogos y elementos interactivos.</p>
+<hr />
+<h2 id="flujo-de-ejecucion-tipico-registro-de-una-atencion">🔄 Flujo de Ejecución Típico (Registro de una Atención)</h2>
+<p>A continuación se describe el flujo completo desde que el usuario inicia el registro de una atención hasta que la información persiste en el backend:</p>
+<ol>
+<li><strong>Usuario:</strong> Hace clic en "Registrar Atención" en la página <code>AtencionesPage</code>.</li>
+<li><strong>UI:</strong> Se abre <code>RegistrarAtencionDialog</code>, un diálogo multi-step que guía al usuario a través de:</li>
+<li><strong>Paso 1:</strong> Datos administrativos (paciente, doctor, servicio, costo).</li>
+<li><strong>Paso 2:</strong> Anamnesis (motivo, fórmula obstétrica, antecedentes).</li>
+<li><strong>Paso 3:</strong> Exámenes físicos (múltiples registros con LOTEP, AU, LCF, etc.).</li>
+<li><strong>Paso 4:</strong> Tactos vaginales (múltiples registros con dilatación, borramiento, etc.).</li>
+<li><strong>Paso 5:</strong> Ecografías (múltiples registros con biometría fetal).</li>
+<li><strong>Paso 6:</strong> Impresión diagnóstica (diagnóstico principal, indicaciones, próxima cita).</li>
+<li><strong>Validación Frontend:</strong> Cada paso valida los campos requeridos usando <code>DataAnnotationsValidator</code>.</li>
+<li><strong>Envío:</strong> Al hacer clic en "Registrar Atención", el diálogo construye un <code>RegistrarAtencionDto</code> con todos los datos.</li>
+<li><strong>Servicio API:</strong> <code>AtencionApiService.RegistrarAsync</code> envía el DTO mediante <code>POST</code> al endpoint <code>api/atenciones</code>.</li>
+<li><strong>Backend:</strong> El controlador recibe la solicitud, valida, y delega en el servicio de aplicación que persiste la entidad.</li>
+<li><strong>Respuesta:</strong> El backend retorna un <code>ApiResponse&lt;Guid&gt;</code> con el ID de la atención creada.</li>
+<li><strong>UI:</strong> El diálogo se cierra, se muestra un <code>Snackbar</code> de éxito, y la tabla de atenciones se recarga automáticamente.</li>
+</ol>
+<p>Este flujo refleja el <strong>acompañamiento integral</strong> que la clínica ofrece a las pacientes, desde el primer contacto hasta el cierre de la atención, con total trazabilidad y seguridad de la información.</p>
+<hr />
+<h2 id="notas-adicionales-sobre-el-frontend">📝 Notas Adicionales sobre el Frontend</h2>
+<ul>
+<li>
+<p><strong>PWA (Progressive Web App):</strong> La aplicación está configurada como PWA con soporte para modo offline y service worker (archivos <code>service-worker.js</code> y <code>service-worker.published.js</code>), garantizando <strong>disponibilidad continua</strong> incluso ante interrupciones de conectividad.</p>
+</li>
+<li>
+<p><strong>SignalR para Chat:</strong> El módulo de chat utiliza SignalR para recibir mensajes en tiempo real, complementando las peticiones HTTP para enviar mensajes. La conexión se establece al cargar la página de chat, lo que permite una <strong>comunicación proactiva</strong> con las pacientes, en línea con el valor de <strong>cercanía y acompañamiento</strong>.</p>
+</li>
+<li>
+<p><strong>Descarga de PDFs:</strong> Los comprobantes se descargan mediante peticiones HTTP que retornan arreglos de bytes, los cuales se convierten a base64 y se descargan usando JavaScript (<code>saveAsFile</code>), facilitando la <strong>transparencia administrativa</strong> y el cumplimiento de SUNAT.</p>
+</li>
+<li>
+<p><strong>MudBlazor:</strong> La librería de componentes UI proporciona una amplia gama de controles (tablas, formularios, diálogos, tarjetas, steppers, etc.) que se adaptan al tema personalizado, permitiendo una <strong>experiencia de usuario fluida y profesional</strong>.</p>
+</li>
+<li>
+<p><strong>Estilos Responsivos:</strong> Todas las páginas y componentes están diseñados con adaptabilidad móvil estricta. Las tablas colapsan verticalmente en dispositivos pequeños utilizando <code>DataLabel</code>, y los botones se expanden al 100% de ancho, reflejando el <strong>compromiso con la accesibilidad</strong> y la <strong>inclusión digital</strong> de la clínica.</p>
+</li>
+<li>
+<p><strong>Gestión de Errores:</strong> Los servicios API capturan excepciones y las exponen a través de propiedades <code>ErrorMessage</code> e <code>IsLoading</code>, que los componentes consumen para mostrar estados de carga y error, asegurando que el equipo pueda <strong>resolver incidencias de manera ágil</strong>.</p>
+</li>
+<li>
+<p><strong>Autocompletados Asíncronos:</strong> Los campos de búsqueda de pacientes, doctores y servicios utilizan <code>MudAutocomplete</code> con funciones de búsqueda asíncronas que filtran en memoria las listas cargadas, mejorando la <strong>eficiencia operativa</strong> del personal de recepción y médicos.</p>
+</li>
+<li>
+<p><strong>Snackbars y Diálogos:</strong> Las notificaciones de éxito/error se muestran mediante <code>MudSnackbar</code>, y las operaciones críticas se realizan a través de diálogos modales (<code>MudDialog</code>), garantizando que el usuario reciba <strong>retroalimentación clara</strong> en cada acción.</p>
+</li>
+</ul>
 
 
 
@@ -1649,7 +2323,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

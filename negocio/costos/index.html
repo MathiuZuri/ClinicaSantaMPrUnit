@@ -1,0 +1,1589 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica">
+      
+      
+        <meta name="author" content="EPIS - Universidad Peruana Unión">
+      
+      
+      
+        <link rel="prev" href="../organizacion/">
+      
+      
+        <link rel="next" href="../plan-desarrollo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Estructura Financiera y Sostenibilidad - SYS Clínica Santa Mónica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estructura-financiera-y-sostenibilidad-sys-clinica-santa-monica" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-header__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SYS Clínica Santa Mónica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estructura Financiera y Sostenibilidad
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../estrategia/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Modelo de Negocio y Operaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../plan-desarrollo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gestión, Calidad y Gobernanza
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../arquitectura/general/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Arquitectura Hexagonal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../arquitectura/despliegue/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Manuales de Operación
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-nav__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SYS Clínica Santa Mónica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Negocio y Operaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelo de Negocio y Operaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../organizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura y Áreas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esta-pagina-documenta-la-estructura-de-costos-del-sistema-la-ventana-de-oportunidad-actual-desarrollo-sin-costo-de-mano-de-obra-durante-el-primer-ano-y-la-proyeccion-de-costos-para-la-sostenibilidad-a-largo-plazo-incluyendo-la-expansion-hacia-una-clinica-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esta página documenta la estructura de costos del sistema, la ventana de oportunidad actual (desarrollo sin costo de mano de obra durante el primer año) y la proyección de costos para la sostenibilidad a largo plazo, incluyendo la expansión hacia una clínica general.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composicion-de-costos-actuales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💵 Composición de Costos Actuales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventana-de-oportunidad-el-desarrollo-gratuito-del-primer-ano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Ventana de Oportunidad: El Desarrollo "Gratuito" del Primer Año
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proyeccion-de-costos-a-partir-del-segundo-ano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Proyección de Costos a Partir del Segundo Año
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expansion-a-clinica-general-implicaciones-tecnologicas-y-financieras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Expansión a Clínica General: Implicaciones Tecnológicas y Financieras
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Expansión a Clínica General: Implicaciones Tecnológicas y Financieras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-requisitos-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos Requisitos del Sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#costos-asociados-a-la-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Costos Asociados a la Expansión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia-de-financiamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategia de Financiamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-sostenibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas sobre Sostenibilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión, Calidad y Gobernanza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión, Calidad y Gobernanza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plan-desarrollo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de Desarrollo del Proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metricas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría del Ciclo de Vida (SDLC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura Hexagonal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura Hexagonal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/dominio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Dominio (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/infraestructura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Infraestructura (Persistencia)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de API (Presentación)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/wasm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Frontend (Blazor WASM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Pruebas (Unitarias e Integración)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuales de Operación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manuales de Operación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue en la Nube (Azure & Neon)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esta-pagina-documenta-la-estructura-de-costos-del-sistema-la-ventana-de-oportunidad-actual-desarrollo-sin-costo-de-mano-de-obra-durante-el-primer-ano-y-la-proyeccion-de-costos-para-la-sostenibilidad-a-largo-plazo-incluyendo-la-expansion-hacia-una-clinica-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esta página documenta la estructura de costos del sistema, la ventana de oportunidad actual (desarrollo sin costo de mano de obra durante el primer año) y la proyección de costos para la sostenibilidad a largo plazo, incluyendo la expansión hacia una clínica general.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composicion-de-costos-actuales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💵 Composición de Costos Actuales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventana-de-oportunidad-el-desarrollo-gratuito-del-primer-ano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Ventana de Oportunidad: El Desarrollo "Gratuito" del Primer Año
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proyeccion-de-costos-a-partir-del-segundo-ano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Proyección de Costos a Partir del Segundo Año
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expansion-a-clinica-general-implicaciones-tecnologicas-y-financieras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Expansión a Clínica General: Implicaciones Tecnológicas y Financieras
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Expansión a Clínica General: Implicaciones Tecnológicas y Financieras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-requisitos-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos Requisitos del Sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#costos-asociados-a-la-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Costos Asociados a la Expansión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia-de-financiamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategia de Financiamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-sostenibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas sobre Sostenibilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="estructura-financiera-y-sostenibilidad-sys-clinica-santa-monica">💰 Estructura Financiera y Sostenibilidad – SYS Clínica Santa Mónica</h1>
+<h2 id="esta-pagina-documenta-la-estructura-de-costos-del-sistema-la-ventana-de-oportunidad-actual-desarrollo-sin-costo-de-mano-de-obra-durante-el-primer-ano-y-la-proyeccion-de-costos-para-la-sostenibilidad-a-largo-plazo-incluyendo-la-expansion-hacia-una-clinica-general">Esta página documenta la estructura de costos del sistema, la ventana de oportunidad actual (desarrollo sin costo de mano de obra durante el primer año) y la proyección de costos para la sostenibilidad a largo plazo, incluyendo la expansión hacia una clínica general.</h2>
+<h2 id="composicion-de-costos-actuales">💵 Composición de Costos Actuales</h2>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Descripción</th>
+<th>Periodicidad</th>
+<th>Impacto en la Operación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hosting VPS</strong></td>
+<td>Servidor virtual privado con Docker, Nginx, PostgreSQL</td>
+<td>Mensual</td>
+<td><strong>Crítico.</strong> Sin VPS, el sistema no funciona.</td>
+</tr>
+<tr>
+<td><strong>Dominio y SSL</strong></td>
+<td>Dominio web y certificados HTTPS</td>
+<td>Anual</td>
+<td>Bajo. Necesario para seguridad e imagen profesional.</td>
+</tr>
+<tr>
+<td><strong>Conectividad a Internet</strong></td>
+<td>Banda ancha para recepción, consultorios y administración</td>
+<td>Mensual</td>
+<td><strong>Alto.</strong> La operación es completamente dependiente de la conexión. Se recomienda un plan de respaldo (móvil o doble proveedor).</td>
+</tr>
+<tr>
+<td><strong>Energía Eléctrica y UPS</strong></td>
+<td>Consumo eléctrico y sistemas de respaldo</td>
+<td>Mensual</td>
+<td>Medio. El UPS es indispensable para apagados seguros.</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento de Equipos Médicos</strong></td>
+<td>Ecógrafos, monitores fetales, camillas, etc.</td>
+<td>Semestral/Anual</td>
+<td><strong>Alto.</strong> La disponibilidad de equipos determina la capacidad de atención.</td>
+</tr>
+<tr>
+<td><strong>Insumos Médicos y de Farmacia</strong></td>
+<td>Material descartable, medicamentos, reactivos</td>
+<td>Mensual</td>
+<td><strong>Alto.</strong> Afecta la calidad de la atención y la rentabilidad de la farmacia.</td>
+</tr>
+<tr>
+<td><strong>Personal Asistencial y Administrativo</strong></td>
+<td>Médicos, obstetras, enfermeras, recepcionistas, administración</td>
+<td>Mensual (planilla)</td>
+<td><strong>Crítico.</strong> Es el costo operativo más significativo y refleja la apuesta por la formalidad.</td>
+</tr>
+<tr>
+<td><strong>Desarrollo de Software</strong></td>
+<td>Construcción del sistema con ASP.NET Core, Blazor, PostgreSQL</td>
+<td><strong>Sin costo de mano de obra durante el primer año</strong> (recursos internos)</td>
+<td><strong>Estratégico.</strong> La gratuidad actual permite construir una base sólida sin presión financiera.</td>
+</tr>
+<tr>
+<td><strong>Migración de Datos Históricos</strong></td>
+<td>Digitalización de 5,000 registros desde Excel y papel</td>
+<td>Concentrado en tiempo del personal y pasantes</td>
+<td>Alto. Consume horas de trabajo pero no es un costo monetario directo elevado.</td>
+</tr>
+<tr>
+<td><strong>Marketing Digital</strong></td>
+<td>Publicaciones en Facebook, TikTok, publicidad paga</td>
+<td>Actualmente casi nulo. Se planifica incorporarlo progresivamente.</td>
+<td>Creciente. La ausencia de inversión limita la captación de nuevas pacientes.</td>
+</tr>
+<tr>
+<td><strong>Licencias y Cumplimiento Normativo</strong></td>
+<td>Autorizaciones MINSA, SUSALUD, SUNAT, colegiaturas</td>
+<td>Anual / Según trámite</td>
+<td>Medio. Obligatorios para la legalidad de la operación.</td>
+</tr>
+<tr>
+<td><strong>Mobiliario y Adecuación Física</strong></td>
+<td>Consultorios, sala de espera, recepción</td>
+<td>Único (con mantenimiento menor)</td>
+<td>Bajo una vez realizada la inversión inicial.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ventana-de-oportunidad-el-desarrollo-gratuito-del-primer-ano">⚠️ Ventana de Oportunidad: El Desarrollo "Gratuito" del Primer Año</h2>
+<p>Durante el <strong>primer año</strong>, el desarrollo y mantenimiento del sistema no representan un desembolso de mano de obra, ya que se realiza con recursos internos (el equipo de desarrollo no recibe remuneración adicional por esta tarea). Esto permite:</p>
+<ul>
+<li><strong>Construir el sistema sin presión financiera:</strong> Se pueden dedicar ciclos de desarrollo a funcionalidades complejas (módulo de auditoría, integración con Evolution API, generación de PDF) sin preocuparse por el costo/hora.</li>
+<li><strong>Iterar rápidamente:</strong> Los cambios y correcciones se implementan sin necesidad de aprobaciones presupuestales.</li>
+<li><strong>Capacitar al personal:</strong> El equipo puede aprender y adaptarse al sistema sin la urgencia de justificar el retorno de inversión.</li>
+</ul>
+<p><strong>Sin embargo, esta ventana es limitada.</strong> A partir del <strong>segundo año</strong>, cada modificación, nueva funcionalidad o ampliación (como las requeridas para la clínica general) tendrá un costo asociado. Esto implica que se debe planificar un <strong>presupuesto anual de evolución tecnológica</strong> basado en las prioridades estratégicas.</p>
+<hr />
+<h2 id="proyeccion-de-costos-a-partir-del-segundo-ano">📈 Proyección de Costos a Partir del Segundo Año</h2>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Situación Actual</th>
+<th>Proyección (Año 2+)</th>
+<th>Recomendación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Desarrollo de Software</strong></td>
+<td>Sin costo (recursos internos)</td>
+<td>Costo por hora o proyecto (dependiendo de la complejidad)</td>
+<td>Priorizar funcionalidades con mayor retorno: automatización de seguimiento, reportes gerenciales, integración con laboratorios.</td>
+</tr>
+<tr>
+<td><strong>Soporte Técnico</strong></td>
+<td>Interno</td>
+<td>Posible necesidad de contratar soporte externo o dedicar más horas internas</td>
+<td>Establecer un contrato de soporte con tiempos de respuesta garantizados.</td>
+</tr>
+<tr>
+<td><strong>Marketing Digital</strong></td>
+<td>Casi nulo</td>
+<td>Presupuesto mensual para contenido y publicidad</td>
+<td>Invertir progresivamente, midiendo el retorno en nuevos pacientes.</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento de Equipos</strong></td>
+<td>Contratos puntuales</td>
+<td>Ampliación de contratos al incorporar nuevos equipos (clínica general)</td>
+<td>Negociar contratos anuales con proveedores locales.</td>
+</tr>
+<tr>
+<td><strong>Capacitación</strong></td>
+<td>Interna</td>
+<td>Posible necesidad de formadores externos para nuevas especialidades</td>
+<td>Documentar y estandarizar los procesos para reducir la dependencia de formadores externos.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="expansion-a-clinica-general-implicaciones-tecnologicas-y-financieras">🚀 Expansión a Clínica General: Implicaciones Tecnológicas y Financieras</h2>
+<p>La clínica planea expandir sus servicios a <strong>clínica general</strong> en los próximos años. Esta expansión impactará tanto en la estructura de costos como en los requisitos del sistema:</p>
+<h3 id="nuevos-requisitos-del-sistema">Nuevos Requisitos del Sistema</h3>
+<table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Requerimiento Nuevo</th>
+<th>Impacto en el Desarrollo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Especialidades</strong></td>
+<td>Medicina general, pediatría, etc.</td>
+<td>Extender el modelo de entidades (ServicioClinico, Atencion) para soportar nuevas especialidades.</td>
+</tr>
+<tr>
+<td><strong>Flujos de Ingresos</strong></td>
+<td>Nuevos servicios y procedimientos</td>
+<td>Adaptar el módulo de facturación y reportes financieros.</td>
+</tr>
+<tr>
+<td><strong>Roles de Usuario</strong></td>
+<td>Nuevos perfiles (pediatra, médico general)</td>
+<td>Ampliar la matriz de permisos y políticas de autorización.</td>
+</tr>
+<tr>
+<td><strong>Integraciones</strong></td>
+<td>Laboratorios externos, seguros de salud</td>
+<td>Desarrollar nuevos adaptadores de entrada/salida (API de terceros).</td>
+</tr>
+<tr>
+<td><strong>Volumen de Datos</strong></td>
+<td>Mayor número de pacientes y atenciones</td>
+<td>Escalar la infraestructura (VPS) y optimizar las consultas SQL.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="costos-asociados-a-la-expansion">Costos Asociados a la Expansión</h3>
+<ul>
+<li><strong>Desarrollo de nuevas funcionalidades:</strong> Se estima que la expansión requerirá entre 3 y 6 meses de desarrollo (dependiendo de la complejidad de las integraciones). Esto tendrá un costo significativo a partir del segundo año.</li>
+<li><strong>Incremento de la infraestructura:</strong> Mayor demanda de recursos (CPU, RAM, almacenamiento) en el VPS, lo que aumentará el costo mensual de hosting.</li>
+<li><strong>Capacitación del personal:</strong> Nuevos médicos y especialistas necesitarán entrenamiento en el sistema.</li>
+<li><strong>Marketing y posicionamiento:</strong> Campañas específicas para dar a conocer los nuevos servicios.</li>
+</ul>
+<h3 id="estrategia-de-financiamiento">Estrategia de Financiamiento</h3>
+<ol>
+<li><strong>Reinversión de utilidades:</strong> La clínica destinará un porcentaje de los ingresos generados por los servicios actuales al desarrollo de la expansión.</li>
+<li><strong>Presupuesto anual de TI:</strong> Establecer una partida presupuestal dedicada a la evolución del sistema, revisada cada año.</li>
+<li><strong>Priorización basada en ROI:</strong> Las funcionalidades que generen mayor retorno (automatización de seguimiento, integración con laboratorios, reportes gerenciales) se desarrollarán primero.</li>
+</ol>
+<hr />
+<h2 id="notas-sobre-sostenibilidad">📝 Notas sobre Sostenibilidad</h2>
+<ul>
+<li><strong>La ventaja competitiva en costos:</strong> El desarrollo del sistema no ha demandado el desembolso que representaría contratar un software comercial o una consultora externa. Esto permite ofrecer un servicio digitalizado, con farmacia integrada y facturación electrónica, a un costo operativo controlado.</li>
+<li><strong>Planificación temprana:</strong> La clave para mantener esta ventaja será planificar con cuidado la transición al modelo de desarrollo con costo, priorizando aquellas funcionalidades que impacten directamente en la experiencia del paciente o en la eficiencia operativa.</li>
+<li><strong>Monitoreo continuo:</strong> Los reportes gerenciales del sistema permitirán evaluar el retorno de inversión de cada nueva funcionalidad, ajustando el presupuesto según los resultados.</li>
+</ul>
+<hr />
+<p>Este documento es la <strong>guía de sostenibilidad financiera</strong> del sistema. Ayuda a los responsables de la toma de decisiones a planificar el presupuesto de TI y a justificar las inversiones en nuevas funcionalidades.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

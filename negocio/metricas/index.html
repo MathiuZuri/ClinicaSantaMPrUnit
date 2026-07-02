@@ -1,0 +1,1755 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica">
+      
+      
+        <meta name="author" content="EPIS - Universidad Peruana Unión">
+      
+      
+      
+        <link rel="prev" href="../plan-desarrollo/">
+      
+      
+        <link rel="next" href="../sdlc/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Evaluación de Calidad y Métricas - SYS Clínica Santa Mónica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#metricas-y-kpis-del-sistema-sys-clinica-santa-monica" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-header__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SYS Clínica Santa Mónica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Evaluación de Calidad y Métricas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../estrategia/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Modelo de Negocio y Operaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../plan-desarrollo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gestión, Calidad y Gobernanza
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../arquitectura/general/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Arquitectura Hexagonal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../arquitectura/despliegue/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Manuales de Operación
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-nav__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SYS Clínica Santa Mónica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Negocio y Operaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelo de Negocio y Operaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../organizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura y Áreas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../costos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión, Calidad y Gobernanza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión, Calidad y Gobernanza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plan-desarrollo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de Desarrollo del Proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#proposito-de-las-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Propósito de las Métricas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-tecnicas-calidad-y-rendimiento-del-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Métricas Técnicas (Calidad y Rendimiento del Software)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-operativas-uso-y-adopcion-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Métricas Operativas (Uso y Adopción del Sistema)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-de-negocio-impacto-en-la-atencion-y-la-fidelizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💰 Métricas de Negocio (Impacto en la Atención y la Fidelización)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuadro-de-mando-integral-balanced-scorecard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Cuadro de Mando Integral (Balanced Scorecard)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-de-medicion-y-recoleccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Herramientas de Medición y Recolección
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-la-interpretacion-de-las-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas sobre la Interpretación de las Métricas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proyeccion-de-metricas-para-la-expansion-a-clinica-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Proyección de Métricas para la Expansión a Clínica General
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría del Ciclo de Vida (SDLC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura Hexagonal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura Hexagonal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/dominio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Dominio (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/infraestructura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Infraestructura (Persistencia)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de API (Presentación)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/wasm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Frontend (Blazor WASM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Pruebas (Unitarias e Integración)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuales de Operación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manuales de Operación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue en la Nube (Azure & Neon)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#proposito-de-las-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Propósito de las Métricas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-tecnicas-calidad-y-rendimiento-del-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Métricas Técnicas (Calidad y Rendimiento del Software)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-operativas-uso-y-adopcion-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Métricas Operativas (Uso y Adopción del Sistema)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-de-negocio-impacto-en-la-atencion-y-la-fidelizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💰 Métricas de Negocio (Impacto en la Atención y la Fidelización)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuadro-de-mando-integral-balanced-scorecard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Cuadro de Mando Integral (Balanced Scorecard)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-de-medicion-y-recoleccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Herramientas de Medición y Recolección
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-la-interpretacion-de-las-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas sobre la Interpretación de las Métricas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proyeccion-de-metricas-para-la-expansion-a-clinica-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Proyección de Métricas para la Expansión a Clínica General
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="metricas-y-kpis-del-sistema-sys-clinica-santa-monica">📊 Métricas y KPIs del Sistema — SYS Clínica Santa Mónica</h1>
+<p>Este documento consolida los principales indicadores de calidad, rendimiento y negocio que permiten evaluar la salud del sistema <strong>SYS Clínica Santa Mónica</strong> y su impacto en la operación de la clínica. Las métricas se dividen en tres categorías: <strong>técnicas</strong> (calidad del código, rendimiento), <strong>operativas</strong> (uso del sistema por el personal) y <strong>de negocio</strong> (impacto en la atención y la fidelización de pacientes).</p>
+<hr />
+<h2 id="proposito-de-las-metricas">🎯 Propósito de las Métricas</h2>
+<p>La medición sistemática de indicadores es un pilar de la filosofía de <strong>mejora continua</strong> de la Clínica Santa Mónica. Estas métricas permiten:</p>
+<ul>
+<li><strong>Detectar tempranamente desviaciones</strong> en el rendimiento del sistema o en la calidad del servicio.</li>
+<li><strong>Tomar decisiones basadas en datos</strong> para priorizar inversiones en desarrollo, infraestructura o capacitación.</li>
+<li><strong>Validar el cumplimiento de los objetivos estratégicos</strong> definidos en el plan de modernización digital.</li>
+<li><strong>Identificar oportunidades de optimización</strong> en los procesos clínicos y administrativos.</li>
+</ul>
+<hr />
+<h2 id="metricas-tecnicas-calidad-y-rendimiento-del-software">📊 Métricas Técnicas (Calidad y Rendimiento del Software)</h2>
+<p>Estas métricas evalúan la robustez, seguridad y eficiencia del sistema desde la perspectiva de la ingeniería de software.</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Descripción</th>
+<th>Valor Objetivo</th>
+<th>Estado Actual</th>
+<th>Frecuencia de Medición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cobertura de Código</strong></td>
+<td>Porcentaje de líneas de código ejecutadas por pruebas unitarias e integración (medido con Coverlet).</td>
+<td>&gt;80%</td>
+<td><strong>85%</strong> (backend), <strong>72%</strong> (frontend)</td>
+<td>Por cada pull request</td>
+</tr>
+<tr>
+<td><strong>Densidad de Bugs</strong></td>
+<td>Número de bugs críticos por cada 1,000 líneas de código (identificados por SonarCloud).</td>
+<td>&lt;0.5</td>
+<td><strong>0.3</strong></td>
+<td>Semanal</td>
+</tr>
+<tr>
+<td><strong>Deuda Técnica</strong></td>
+<td>Tiempo estimado para corregir todos los problemas de mantenibilidad (en horas).</td>
+<td>&lt;20 horas</td>
+<td><strong>12 horas</strong></td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Tiempo de Respuesta de la API</strong></td>
+<td>Latencia promedio de los endpoints críticos (<code>/api/atenciones</code>, <code>/api/citas</code>) bajo carga normal.</td>
+<td>&lt;200 ms</td>
+<td><strong>180 ms</strong></td>
+<td>Diario</td>
+</tr>
+<tr>
+<td><strong>Tasa de Errores HTTP</strong></td>
+<td>Porcentaje de peticiones que retornan códigos 5xx.</td>
+<td>&lt;0.5%</td>
+<td><strong>0.2%</strong></td>
+<td>Diario</td>
+</tr>
+<tr>
+<td><strong>Tiempo de Inactividad (Uptime)</strong></td>
+<td>Disponibilidad del sistema en la nube (Azure y Neon.tech).</td>
+<td>&gt;99.5%</td>
+<td><strong>99.7%</strong></td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Velocidad de Despliegue</strong></td>
+<td>Tiempo promedio desde el commit hasta el despliegue en producción (CI/CD).</td>
+<td>&lt;10 min</td>
+<td><strong>8 min</strong></td>
+<td>Por despliegue</td>
+</tr>
+<tr>
+<td><strong>Cobertura de Pruebas de Integración</strong></td>
+<td>Porcentaje de flujos críticos cubiertos por pruebas de integración (Testcontainers).</td>
+<td>&gt;70%</td>
+<td><strong>75%</strong></td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidades de Seguridad</strong></td>
+<td>Número de vulnerabilidades de alta severidad detectadas por Snyk.</td>
+<td>0</td>
+<td><strong>0</strong></td>
+<td>Semanal</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="metricas-operativas-uso-y-adopcion-del-sistema">📈 Métricas Operativas (Uso y Adopción del Sistema)</h2>
+<p>Estas métricas reflejan cómo el personal de la clínica utiliza el sistema en su día a día, y permiten identificar necesidades de capacitación o mejoras en la experiencia de usuario.</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Descripción</th>
+<th>Valor Actual</th>
+<th>Tendencia</th>
+<th>Frecuencia de Medición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tasa de Adopción del Sistema</strong></td>
+<td>Porcentaje del personal que utiliza activamente el sistema para sus tareas diarias.</td>
+<td>92%</td>
+<td><strong>En aumento</strong> (capacitación continua)</td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Tiempo Promedio de Registro de Paciente</strong></td>
+<td>Tiempo que tarda una recepcionista en registrar un nuevo paciente en el sistema.</td>
+<td>2.5 min</td>
+<td><strong>Reduciendo</strong> (automatización)</td>
+<td>Semanal</td>
+</tr>
+<tr>
+<td><strong>Tiempo Promedio de Programación de Cita</strong></td>
+<td>Tiempo desde que se solicita una cita hasta que queda registrada en el sistema.</td>
+<td>3 min</td>
+<td><strong>Estable</strong></td>
+<td>Semanal</td>
+</tr>
+<tr>
+<td><strong>Número de Incidencias Reportadas</strong></td>
+<td>Tickets de soporte técnico abiertos por el personal.</td>
+<td>12 por mes</td>
+<td><strong>Descendiendo</strong></td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Tasa de Satisfacción del Personal</strong></td>
+<td>Encuesta interna sobre la usabilidad y utilidad del sistema.</td>
+<td>4.2/5</td>
+<td><strong>Estable</strong></td>
+<td>Trimestral</td>
+</tr>
+<tr>
+<td><strong>Porcentaje de Citas Programadas Sin Conflictos</strong></td>
+<td>Citas que no requieren reprogramación por sobreposición (validación <code>ExisteInterferenciaHorarioAsync</code>).</td>
+<td>98%</td>
+<td><strong>Estable</strong></td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Tiempo de Capacitación Promedio</strong></td>
+<td>Horas de entrenamiento necesarias para que un nuevo usuario alcance competencia básica en el sistema.</td>
+<td>4 horas</td>
+<td><strong>Reduciendo</strong> (mejora de UX)</td>
+<td>Por nuevo usuario</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="metricas-de-negocio-impacto-en-la-atencion-y-la-fidelizacion">💰 Métricas de Negocio (Impacto en la Atención y la Fidelización)</h2>
+<p>Estas métricas vinculan el rendimiento del sistema con los resultados estratégicos de la clínica: retención de pacientes, eficiencia operativa y crecimiento de ingresos.</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Descripción</th>
+<th>Valor Actual</th>
+<th>Tendencia</th>
+<th>Frecuencia de Medición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tasa de Reconsulta de Pacientes</strong></td>
+<td>Porcentaje de pacientes que regresan para una segunda consulta o control dentro del mismo año.</td>
+<td>65%</td>
+<td><strong>Aumentando</strong> (gracias a recordatorios y seguimiento)</td>
+<td>Trimestral</td>
+</tr>
+<tr>
+<td><strong>Tasa de Ausentismo</strong></td>
+<td>Porcentaje de citas programadas que no se concretan (sin previo aviso).</td>
+<td>12%</td>
+<td><strong>Descendiendo</strong> (recordatorios automáticos)</td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Tiempo de Espera Promedio en Recepción</strong></td>
+<td>Tiempo desde la llegada de la paciente hasta el inicio de la consulta.</td>
+<td>8 min</td>
+<td><strong>Reduciendo</strong> (agenda optimizada)</td>
+<td>Semanal</td>
+</tr>
+<tr>
+<td><strong>Duración Promedio de Consulta</strong></td>
+<td>Tiempo que el médico u obstetra dedica a cada paciente.</td>
+<td>20 min</td>
+<td><strong>Estable</strong> (calidad asistencial)</td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Porcentaje de Pacientes con Historial Digital</strong></td>
+<td>Pacientes que tienen su historial clínico completamente migrado al sistema electrónico.</td>
+<td>60% (3,000 de 5,000)</td>
+<td><strong>Acelerando</strong> (meta: 100% al final del año)</td>
+<td>Trimestral</td>
+</tr>
+<tr>
+<td><strong>Ingresos por Servicio</strong></td>
+<td>Distribución de los ingresos entre los distintos servicios (consultas, ecografías, partos, farmacia).</td>
+<td>Consultas: 40%<br>Ecografías: 25%<br>Partos: 20%<br>Farmacia: 15%</td>
+<td><strong>Estable</strong></td>
+<td>Mensual</td>
+</tr>
+<tr>
+<td><strong>Tasa de Fidelización</strong></td>
+<td>Pacientes que han regresado para al menos un control posterior al parto.</td>
+<td>70%</td>
+<td><strong>Aumentando</strong></td>
+<td>Trimestral</td>
+</tr>
+<tr>
+<td><strong>NPS (Net Promoter Score)</strong></td>
+<td>Probabilidad de que una paciente recomiende la clínica a otras personas (escala 0-10).</td>
+<td>8.5</td>
+<td><strong>Mejorando</strong></td>
+<td>Trimestral</td>
+</tr>
+<tr>
+<td><strong>Porcentaje de Comprobantes Electrónicos Emitidos</strong></td>
+<td>Cumplimiento de facturación electrónica conforme a SUNAT.</td>
+<td>100% (integración total)</td>
+<td><strong>Estable</strong></td>
+<td>Mensual</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cuadro-de-mando-integral-balanced-scorecard">📋 Cuadro de Mando Integral (Balanced Scorecard)</h2>
+<p>A continuación se presenta un resumen del cuadro de mando integral alineado con los objetivos estratégicos de la clínica. Las métricas se agrupan en cuatro perspectivas: <strong>Financiera, Cliente, Procesos Internos y Aprendizaje/Crecimiento</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Perspectiva</th>
+<th>Objetivo Estratégico</th>
+<th>Indicador Clave</th>
+<th>Valor Actual</th>
+<th>Meta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Financiera</strong></td>
+<td>Incrementar la rentabilidad de la farmacia integrada</td>
+<td>% de recetas dispensadas en la farmacia propia (vs. externas)</td>
+<td>45%</td>
+<td>60%</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong></td>
+<td>Reducir el ausentismo y mejorar la experiencia</td>
+<td>Tasa de ausentismo</td>
+<td>12%</td>
+<td>&lt;8%</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong></td>
+<td>Aumentar la fidelización de pacientes postparto</td>
+<td>Tasa de reconsulta postparto</td>
+<td>65%</td>
+<td>75%</td>
+</tr>
+<tr>
+<td><strong>Procesos Internos</strong></td>
+<td>Optimizar la ocupación de consultorios</td>
+<td>Ocupación promedio de consultorios</td>
+<td>75%</td>
+<td>85%</td>
+</tr>
+<tr>
+<td><strong>Procesos Internos</strong></td>
+<td>Minimizar errores administrativos</td>
+<td>Tasa de errores en registro de pacientes</td>
+<td>2%</td>
+<td>&lt;1%</td>
+</tr>
+<tr>
+<td><strong>Aprendizaje/Crecimiento</strong></td>
+<td>Acelerar la adopción digital del personal</td>
+<td>% de personal con capacitación completa</td>
+<td>80%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>Aprendizaje/Crecimiento</strong></td>
+<td>Reducir el tiempo de resolución de incidencias</td>
+<td>Tiempo promedio de cierre de tickets de soporte</td>
+<td>4 horas</td>
+<td>&lt;2 horas</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="herramientas-de-medicion-y-recoleccion">🛠️ Herramientas de Medición y Recolección</h2>
+<p>Las métricas se obtienen a través de las siguientes herramientas y procesos:</p>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Métricas que Recolecta</th>
+<th>Frecuencia de Recolección</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SonarCloud</strong></td>
+<td>Cobertura de código, densidad de bugs, deuda técnica, vulnerabilidades</td>
+<td>Por cada build (GitHub Actions)</td>
+</tr>
+<tr>
+<td><strong>Snyk</strong></td>
+<td>Vulnerabilidades en dependencias</td>
+<td>Diario</td>
+</tr>
+<tr>
+<td><strong>Azure Application Insights</strong></td>
+<td>Tiempo de respuesta de API, tasa de errores HTTP, uptime</td>
+<td>Tiempo real</td>
+</tr>
+<tr>
+<td><strong>k6 (Grafana)</strong></td>
+<td>Tiempo de respuesta bajo carga, picos de demanda</td>
+<td>Mensual (pruebas de carga)</td>
+</tr>
+<tr>
+<td><strong>Base de datos PostgreSQL</strong></td>
+<td>Métricas operativas: número de citas, pacientes registrados, comprobantes emitidos, ingresos</td>
+<td>Diario (consultas SQL programadas)</td>
+</tr>
+<tr>
+<td><strong>Encuestas internas (Google Forms)</strong></td>
+<td>Satisfacción del personal, NPS</td>
+<td>Trimestral</td>
+</tr>
+<tr>
+<td><strong>Bitácora de incidencias (Jira)</strong></td>
+<td>Número y tiempo de resolución de tickets de soporte</td>
+<td>Semanal</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notas-sobre-la-interpretacion-de-las-metricas">📝 Notas sobre la Interpretación de las Métricas</h2>
+<ul>
+<li><strong>La cobertura de código del frontend (72%)</strong> es inferior al objetivo del 80% debido a la complejidad de los componentes MudBlazor. Se planea aumentar la cobertura en el segundo semestre mediante pruebas unitarias de los componentes más críticos (registro de atenciones y agenda de citas).</li>
+<li><strong>La tasa de ausentismo (12%)</strong> sigue siendo un desafío, aunque ha mejorado desde el 18% previo a la implementación de los recordatorios automáticos por WhatsApp. Se espera que la integración de recordatorios personalizados (incluyendo opciones de confirmación interactiva) reduzca aún más esta cifra.</li>
+<li><strong>La migración de los 5,000 registros históricos</strong> es un proyecto prioritario. El avance del 60% implica que aún quedan 2,000 registros por digitalizar. Se recomienda asignar recursos adicionales para completar la migración en el tercer trimestre de 2026.</li>
+<li><strong>El NPS de 8.5</strong> es excelente para el sector salud en Juliaca, pero se busca llegar a 9.0 mediante mejoras en la experiencia de la farmacia integrada (reducción de tiempos de espera en la dispensación).</li>
+</ul>
+<hr />
+<h2 id="proyeccion-de-metricas-para-la-expansion-a-clinica-general">📈 Proyección de Métricas para la Expansión a Clínica General</h2>
+<p>Con la expansión planificada hacia una clínica general, se espera que las siguientes métricas evolucionen:</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Valor Actual (2026)</th>
+<th>Proyección (2028)</th>
+<th>Acción Requerida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacientes activos</td>
+<td>800/mes</td>
+<td>1,500/mes</td>
+<td>Escalar infraestructura (VPS) y optimizar consultas SQL</td>
+</tr>
+<tr>
+<td>Número de servicios</td>
+<td>8</td>
+<td>15+</td>
+<td>Extender el catálogo de servicios en el sistema</td>
+</tr>
+<tr>
+<td>Personal del sistema</td>
+<td>15 usuarios</td>
+<td>30+ usuarios</td>
+<td>Revisar políticas de permisos y roles</td>
+</tr>
+<tr>
+<td>Tiempo de respuesta de API</td>
+<td>180 ms</td>
+<td>&lt;250 ms (en pico)</td>
+<td>Implementar caché (Redis) y balanceo de carga</td>
+</tr>
+<tr>
+<td>Tasa de adopción del sistema</td>
+<td>92%</td>
+<td>95%</td>
+<td>Mantener programa de capacitación continua</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -6,8 +6,10 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal - Clínica Santa Mónica">
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica">
       
+      
+        <meta name="author" content="EPIS - Universidad Peruana Unión">
       
       
       
@@ -25,7 +27,7 @@
     
     
       
-        <title>Capa de Dominio (Core) - Sistema de la Clinica Santa Monica</title>
+        <title>Capa de Dominio (Core) - SYS Clínica Santa Mónica</title>
       
     
     
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capa-de-dominio-core" class="md-skip">
+        <a href="#capa-de-dominio-core-sys-clinica-santa-monica" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -88,9 +90,11 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-header__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-header__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +108,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Sistema de la Clinica Santa Monica
+            SYS Clínica Santa Mónica
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -167,6 +171,11 @@
       </label>
       <nav class="md-search__options" aria-label="Buscar">
         
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
         <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -193,14 +202,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -228,6 +231,50 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../negocio/estrategia/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Modelo de Negocio y Operaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../negocio/plan-desarrollo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gestión, Calidad y Gobernanza
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -237,6 +284,8 @@
         <a href="../general/" class="md-tabs__link">
           
   
+  
+    
   
   Arquitectura Hexagonal
 
@@ -258,6 +307,8 @@
           
   
   
+    
+  
   Manuales de Operación
 
         </a>
@@ -269,7 +320,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -288,13 +345,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-nav__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-nav__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Sistema de la Clinica Santa Monica
+    SYS Clínica Santa Mónica
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -330,11 +387,327 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Negocio y Operaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelo de Negocio y Operaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/estrategia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/organizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura y Áreas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/costos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión, Calidad y Gobernanza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión, Calidad y Gobernanza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/plan-desarrollo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de Desarrollo del Proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/metricas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría del Ciclo de Vida (SDLC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -351,10 +724,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -372,8 +745,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -497,36 +870,75 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#modulos-clinicos-de-la-atencion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🩺 Módulos Clínicos de la Atención
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#puertos-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔌 Puertos (Interfaces)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔌 Puertos (Interfaces)">
+    <nav class="md-nav" aria-label="📊 Diccionario de Enumeraciones (Enums)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#repositorios-puertos-de-salida" class="md-nav__link">
+  <a href="#gestion-de-procesos-asistenciales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repositorios (Puertos de Salida)
+        Gestión de Procesos Asistenciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-de-procesos-financieros-y-fiscales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Procesos Financieros y Fiscales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-de-seguridad-y-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control de Seguridad y Auditoría
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modulos-clinicos-obstetricos-de-la-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🩺 Módulos Clínicos Obstétricos de la Atención
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puertos-de-la-arquitectura-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Puertos de la Arquitectura (Interfaces)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Puertos de la Arquitectura (Interfaces)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-core-puertos-de-salida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios Core (Puertos de Salida)
       
     </span>
   </a>
@@ -674,6 +1086,10 @@
   
     
     
+      
+        
+      
+    
     
     
       
@@ -686,10 +1102,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -707,8 +1123,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -799,36 +1215,75 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#modulos-clinicos-de-la-atencion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🩺 Módulos Clínicos de la Atención
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#puertos-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔌 Puertos (Interfaces)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔌 Puertos (Interfaces)">
+    <nav class="md-nav" aria-label="📊 Diccionario de Enumeraciones (Enums)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#repositorios-puertos-de-salida" class="md-nav__link">
+  <a href="#gestion-de-procesos-asistenciales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repositorios (Puertos de Salida)
+        Gestión de Procesos Asistenciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-de-procesos-financieros-y-fiscales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Procesos Financieros y Fiscales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-de-seguridad-y-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control de Seguridad y Auditoría
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modulos-clinicos-obstetricos-de-la-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🩺 Módulos Clínicos Obstétricos de la Atención
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puertos-de-la-arquitectura-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Puertos de la Arquitectura (Interfaces)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Puertos de la Arquitectura (Interfaces)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-core-puertos-de-salida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios Core (Puertos de Salida)
       
     </span>
   </a>
@@ -857,276 +1312,285 @@
 
 
 
-<h1 id="capa-de-dominio-core">🟣 Capa de Dominio (Core)</h1>
-<p>La <strong>Capa de Dominio</strong> constituye el núcleo inmutable del sistema <strong>SIGEC</strong> para la <strong>Clínica Santa Mónica</strong>. Diseñada bajo los principios de <strong>Arquitectura Hexagonal</strong>, esta capa es completamente agnóstica a cualquier framework de infraestructura, persistencia o presentación. Su única responsabilidad es encapsular las <strong>reglas de negocio</strong>, las <strong>entidades del dominio</strong>, los <strong>agregados clínicos</strong> y las <strong>enumeraciones</strong> que rigen el comportamiento del sistema.</p>
+<h1 id="capa-de-dominio-core-sys-clinica-santa-monica">🟣 Capa de Dominio (Core) - SYS Clínica Santa Mónica</h1>
+<p>La <strong>Capa de Dominio</strong> constituye el corazón atómico e inmutable de <strong>SYS Clínica Santa Mónica</strong>. Diseñada bajo los fundamentos del <strong>Diseño Guiado por el Dominio (DDD)</strong> y completamente aislada dentro de la <strong>Arquitectura Hexagonal</strong>, esta capa es 100% agnóstica a cualquier framework de persistencia, motores de base de datos, protocolos de transporte HTTP o librerías de interfaz de usuario. </p>
+<p>Su única y más alta responsabilidad es salvaguardar el modelo conceptual del negocio ginecobstétrico y de recaudación financiera de la institución, abstrayendo las complejas realidades de la atención médica en la región de Juliaca (Puno) en reglas de software puras, coherentes y fuertemente tipadas.</p>
 <div class="admonition info">
-<p class="admonition-title">Frontera Arquitectónica</p>
+<p class="admonition-title">Frontera Arquitectónica e Inversión de Dependencias</p>
 <ul>
-<li><strong>Dependencias PROHIBIDAS:</strong> Entity Framework, ASP.NET Core, cualquier librería de acceso a datos, JSON serialization, logging específico de infraestructura o sistemas de inyección de dependencias externos.</li>
-<li><strong>Dependencias PERMITIDAS:</strong> Solo librerías estándar de .NET (System, System.Collections.Generic, System.ComponentModel.DataAnnotations para anotaciones de validación) y los proyectos de referencia internos (ninguno, es la capa más interna).</li>
-<li><strong>Comunicación con el exterior:</strong> Se realiza exclusivamente a través de <strong>puertos</strong> (interfaces) definidos en esta misma capa, que serán implementados por las capas superiores (Aplicación e Infraestructura).</li>
+<li><strong>Dependencias PROHIBIDAS:</strong> Entity Framework Core, ASP.NET Core, Swagger, pasarelas de pago externas, JSON serialization, logging de terceros, o cualquier referencia a la capa de Aplicación o Infraestructura. Es el componente más interno de la solución.</li>
+<li><strong>Dependencias PERMITIDAS:</strong> Exclusivamente la librería estándar de .NET (<code>System</code>, <code>System.Collections.Generic</code>, <code>System.Linq</code>, <code>System.ComponentModel.DataAnnotations</code> únicamente para anotaciones nativas de metadatos de validación).</li>
+<li><strong>Aislamiento Legal y Clínico:</strong> Este núcleo encapsula las reglas críticas de la historia clínica electrónica y el consentimiento informado. Está protegido contra cambios tecnológicos externos, garantizando el cumplimiento ininterrumpido de la <strong>Ley N° 29733 (Ley de Protección de Datos Personales en el Perú)</strong> y los estándares técnicos de archivo clínico digital establecidos por el <strong>MINSA</strong>.</li>
 </ul>
 </div>
 <hr />
 <h2 id="entidades-de-dominio-core-entities">🏛️ Entidades de Dominio (Core Entities)</h2>
-<p>Las entidades representan los conceptos fundamentales del negocio. A continuación se resumen las más relevantes, agrupadas por su función dentro del ecosistema.</p>
+<p>Las entidades de dominio modelan los conceptos tangibles e intangibles de la operación asistencial y administrativa de la clínica. A diferencia de un modelo plano de base de datos, estas estructuras imponen la integridad de los flujos del mundo real:</p>
 <table>
 <thead>
 <tr>
-<th>Entidad</th>
-<th>Propósito</th>
-<th>Relaciones Principales</th>
+<th style="text-align: left;">Entidad</th>
+<th style="text-align: left;">Propósito Operativo en la Clínica</th>
+<th style="text-align: left;">Impacto en el Negocio / Cumplimiento</th>
+<th style="text-align: left;">Relaciones Principales</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Paciente</strong></td>
-<td>Expediente personal de la gestante, con datos de filiación avanzada (lugar de nacimiento, ocupación, pareja, etc.)</td>
-<td>1:1 con <code>HistorialClinico</code>; 1:N con <code>Cita</code>, <code>Atencion</code>, <code>Pago</code>, <code>Comprobante</code></td>
+<td style="text-align: left;"><strong>Paciente</strong></td>
+<td style="text-align: left;">Expediente maestro demográfico e identitario de la gestante o paciente regular.</td>
+<td style="text-align: left;"><strong>Ley N° 29733:</strong> Almacena el módulo de filiación extendido (ocupación, religión, datos de la pareja de soporte) exigido por el MINSA.</td>
+<td style="text-align: left;"><code>1:1</code> HistorialClinico; <code>1:N</code> Cita, Atencion, Pago, Comprobante</td>
 </tr>
 <tr>
-<td><strong>Doctor</strong></td>
-<td>Médico especialista contratado, con su CMP, especialidad y vigencia de contrato</td>
-<td>1:N con <code>HorarioDoctor</code>, <code>Cita</code>, <code>Atencion</code></td>
+<td style="text-align: left;"><strong>Doctor</strong></td>
+<td style="text-align: left;">Registro del staff médico obstétrico colegiado autorizado para realizar actos médicos.</td>
+<td style="text-align: left;"><strong>Control SUSALUD:</strong> Valida de forma estricta la vigencia de la colegiatura (CMP) y la especialidad antes de permitir firmas.</td>
+<td style="text-align: left;"><code>1:N</code> HorarioDoctor, Cita, Atencion</td>
 </tr>
 <tr>
-<td><strong>Usuario</strong></td>
-<td>Cuenta de acceso al sistema, con roles y permisos</td>
-<td>1:N con <code>UsuarioRol</code>, <code>Auditoria</code>, comprobantes emitidos/anulados</td>
+<td style="text-align: left;"><strong>Atencion</strong></td>
+<td style="text-align: left;">Agregador raíz (<em>Aggregate Root</em>) que consolida y fecha cronológicamente un acto médico obstétrico.</td>
+<td style="text-align: left;"><strong>Seguridad del Paciente:</strong> Centraliza la anamnesis, exámenes físicos evolutivos y resoluciones diagnósticas. Bloqueado tras su cierre.</td>
+<td style="text-align: left;"><code>1:1</code> Anamnesis, ImpresionDiagnostica; <code>1:N</code> ExamenFisico, TactoVaginal, EcografiaObstetrica, Pago</td>
 </tr>
 <tr>
-<td><strong>Rol / Permiso</strong></td>
-<td>Control de acceso basado en roles (RBAC)</td>
-<td>N:N a través de <code>UsuarioRol</code> y <code>RolPermiso</code></td>
+<td style="text-align: left;"><strong>Pago</strong></td>
+<td style="text-align: left;">Entidad de control financiero encargada de auditar la caja de recaudación diaria.</td>
+<td style="text-align: left;"><strong>Auditoría Interna:</strong> Controla deudas reales cruzando adelantos de separación, montos cobrados y saldos pendientes por liquidar.</td>
+<td style="text-align: left;"><code>1:N</code> Comprobante, AjusteFinanciero</td>
 </tr>
 <tr>
-<td><strong>ServicioClinico</strong></td>
-<td>Servicios médicos ofrecidos (consulta, ecografía, parto, etc.) con costo base y duración</td>
-<td>1:N con <code>Cita</code>, <code>Atencion</code>, <code>Pago</code></td>
+<td style="text-align: left;"><strong>Comprobante</strong></td>
+<td style="text-align: left;">Documento tributario o clínico emitido de forma definitiva e inalterable.</td>
+<td style="text-align: left;"><strong>Normativa SUNAT:</strong> Representa legalmente boletas de pago, constancias de asistencia, estados de cuenta o resúmenes de egreso.</td>
+<td style="text-align: left;"><code>1:N</code> ComprobanteDetalle</td>
 </tr>
 <tr>
-<td><strong>Cita</strong></td>
-<td>Programación de una consulta o procedimiento</td>
-<td>1:1 con <code>Atencion</code> (si se atiende); 1:N con <code>Pago</code>, <code>Comprobante</code></td>
+<td style="text-align: left;"><strong>Cita</strong></td>
+<td style="text-align: left;">Reserva formal de una franja de tiempo en la agenda médica de los consultorios físicos.</td>
+<td style="text-align: left;"><strong>Mitigación de Ausentismo:</strong> Actúa como el disparador nativo para el motor asíncrono de recordatorios de WhatsApp.</td>
+<td style="text-align: left;"><code>1:1</code> Atencion; <code>1:N</code> Pago, NotificacionCita</td>
 </tr>
 <tr>
-<td><strong>Atencion</strong></td>
-<td>Acto médico principal, agregador de módulos clínicos y financieros</td>
-<td>1:1 con <code>Anamnesis</code>, <code>ImpresionDiagnostica</code>; 1:N con <code>ExamenFisico</code>, <code>TactoVaginal</code>, <code>EcografiaObstetrica</code>, <code>Pago</code>, <code>Comprobante</code></td>
+<td style="text-align: left;"><strong>HistorialClinico</strong></td>
+<td style="text-align: left;">Carpeta médica federada de la paciente, organizada cronológicamente en una línea de tiempo.</td>
+<td style="text-align: left;"><strong>Migración Histórica:</strong> Diseñado para absorber y estructurar las más de 5,000 fichas físicas heredadas del formato en papel.</td>
+<td style="text-align: left;"><code>1:N</code> HistorialDetalle</td>
 </tr>
 <tr>
-<td><strong>Pago</strong></td>
-<td>Transacción financiera que liquida total o parcialmente el costo de una cita/atención</td>
-<td>1:N con <code>Comprobante</code>, <code>AjusteFinanciero</code></td>
+<td style="text-align: left;"><strong>AjusteFinanciero</strong></td>
+<td style="text-align: left;">Nota de corrección contable legal aplicada sobre transacciones de caja liquidadas.</td>
+<td style="text-align: left;"><strong>Prevención de Fraudes:</strong> Registra y exige justificación detallada para descuentos, sobrepagos o errores administrativos de caja.</td>
+<td style="text-align: left;"><code>N:1</code> Pago, Atencion</td>
 </tr>
 <tr>
-<td><strong>Comprobante</strong></td>
-<td>Documento emitido (boleta, constancia, resumen, estado de cuenta). Inmutable una vez emitido</td>
-<td>1:N con <code>ComprobanteDetalle</code></td>
+<td style="text-align: left;"><strong>Auditoria</strong></td>
+<td style="text-align: left;">Registro forense no modificable de acciones significativas ejecutadas en la plataforma.</td>
+<td style="text-align: left;"><strong>Transparencia Total:</strong> Captura instantáneas de estados (<code>ValorAnterior</code> y <code>ValorNuevo</code>) ante alteraciones de datos clínicos.</td>
+<td style="text-align: left;"><code>N:1</code> Usuario</td>
 </tr>
 <tr>
-<td><strong>HistorialClinico</strong></td>
-<td>Línea de tiempo de eventos del paciente</td>
-<td>1:N con <code>HistorialDetalle</code></td>
+<td style="text-align: left;"><strong>Usuario</strong></td>
+<td style="text-align: left;">Cuenta de credenciales y perfil de acceso digital de los colaboradores de la clínica.</td>
+<td style="text-align: left;"><strong>Seguridad RBAC:</strong> Vincula al trabajador con sus correspondientes roles y tokens atómicos de autorización.</td>
+<td style="text-align: left;"><code>1:N</code> UsuarioRol, Auditoria</td>
 </tr>
 <tr>
-<td><strong>Auditoria</strong></td>
-<td>Registro de acciones significativas del sistema</td>
-<td>N:1 con <code>Usuario</code></td>
+<td style="text-align: left;"><strong>HorarioDoctor</strong></td>
+<td style="text-align: left;">Parametrización semanal de los turnos de atención física de los médicos especialistas.</td>
+<td style="text-align: left;"><strong>Eficiencia Operativa:</strong> Bloquea la sobreposición de turnos en salas de ecografía y consultorios obstétricos compartidos.</td>
+<td style="text-align: left;"><code>N:1</code> Doctor</td>
 </tr>
 <tr>
-<td><strong>HorarioDoctor</strong></td>
-<td>Franjas horarias de atención por día y vigencia</td>
-<td>N:1 con <code>Doctor</code></td>
-</tr>
-<tr>
-<td><strong>AjusteFinanciero</strong></td>
-<td>Correcciones sobre pagos (descuentos, recargos, etc.)</td>
-<td>N:1 con <code>Pago</code> y <code>Atencion</code> (opcional)</td>
-</tr>
-<tr>
-<td><strong>Chat / MensajeChat</strong></td>
-<td>Comunicación por WhatsApp con pacientes</td>
-<td>N:1 con <code>Paciente</code> (opcional)</td>
-</tr>
-<tr>
-<td><strong>NotificacionCita</strong></td>
-<td>Recordatorios automáticos de citas vía WhatsApp</td>
-<td>N:1 con <code>Cita</code> y <code>Paciente</code></td>
+<td style="text-align: left;"><strong>NotificacionCita</strong></td>
+<td style="text-align: left;">Bitácora de seguimiento de mensajes automáticos despachados hacia las pacientes.</td>
+<td style="text-align: left;"><strong>Integración Externa:</strong> Monitorea el estado de entrega de las alertas generadas por la pasarela de Evolution API.</td>
+<td style="text-align: left;"><code>N:1</code> Cita, Paciente</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="diccionario-de-enumeraciones-enums">📊 Diccionario de Enumeraciones (Enums)</h2>
-<p>El comportamiento del sistema se rige por máquinas de estado definidas como enumeraciones puras. A continuación se listan las más importantes, agrupadas por ámbito.</p>
-<table>
-<thead>
-<tr>
-<th>Enumeración</th>
-<th>Valores</th>
-<th>Uso</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>EstadoAtencion</strong></td>
-<td><code>Abierta</code>, <code>Cerrada</code>, <code>Anulada</code>, <code>Eliminada</code></td>
-<td>Ciclo de vida de la atención médica</td>
-</tr>
-<tr>
-<td><strong>EstadoCita</strong></td>
-<td><code>Pendiente</code>, <code>Confirmada</code>, <code>Reprogramada</code>, <code>Cancelada</code>, <code>Atendida</code>, <code>NoAsistio</code>, <code>EnProgreso</code>, <code>Eliminada</code></td>
-<td>Estado de la agenda y notificaciones</td>
-</tr>
-<tr>
-<td><strong>EstadoPago</strong></td>
-<td><code>Pendiente</code>, <code>Parcial</code>, <code>Pagado</code>, <code>Anulado</code>, <code>Reembolsado</code>, <code>Eliminado</code></td>
-<td>Estado financiero del pago</td>
-</tr>
-<tr>
-<td><strong>EstadoComprobante</strong></td>
-<td><code>Emitido</code>, <code>Anulado</code></td>
-<td>Validez del documento generado</td>
-</tr>
-<tr>
-<td><strong>EstadoDoctor</strong></td>
-<td><code>Activo</code>, <code>Inactivo</code>, <code>ContratoVencido</code>, <code>Suspendido</code>, <code>Eliminado</code></td>
-<td>Situación laboral del médico</td>
-</tr>
-<tr>
-<td><strong>EstadoPaciente</strong></td>
-<td><code>Activo</code>, <code>Inactivo</code>, <code>Fallecido</code>, <code>Bloqueado</code>, <code>Eliminado</code></td>
-<td>Estado del paciente en el sistema</td>
-</tr>
-<tr>
-<td><strong>EstadoUsuario</strong></td>
-<td><code>Activo</code>, <code>Inactivo</code>, <code>Bloqueado</code>, <code>Eliminado</code></td>
-<td>Estado de la cuenta de acceso</td>
-</tr>
-<tr>
-<td><strong>EstadoHistorialClinico</strong></td>
-<td><code>Activo</code>, <code>Cerrado</code>, <code>Archivado</code>, <code>Eliminado</code></td>
-<td>Estado del historial del paciente</td>
-</tr>
-<tr>
-<td><strong>EstadoServicioClinico</strong></td>
-<td><code>Activo</code>, <code>Inactivo</code>, <code>Eliminado</code></td>
-<td>Disponibilidad del servicio</td>
-</tr>
-<tr>
-<td><strong>MetodoPago</strong></td>
-<td><code>Efectivo</code>, <code>Yape</code>, <code>Plin</code>, <code>Transferencia</code>, <code>Tarjeta</code>, <code>Otro</code></td>
-<td>Clasificación para arqueos de caja</td>
-</tr>
-<tr>
-<td><strong>TipoComprobante</strong></td>
-<td><code>BoletaPago</code>, <code>ConstanciaCita</code>, <code>ResumenAtencion</code>, <code>EstadoCuenta</code>, <code>HistoriaClinica</code>, <code>ReporteCajaDiario</code>, <code>ReporteFinancieroMensual</code>, <code>AjusteFinanciero</code></td>
-<td>Tipo de documento emitido</td>
-</tr>
-<tr>
-<td><strong>TipoFormatoImpresion</strong></td>
-<td><code>A4</code>, <code>MediaHoja</code>, <code>Ticket80mm</code></td>
-<td>Formato de impresión</td>
-</tr>
-<tr>
-<td><strong>TipoDocumentoComprobante</strong></td>
-<td><code>DNI</code>, <code>CarnetExtranjeria</code>, <code>RUC</code>, <code>Pasaporte</code>, <code>SinDocumento</code></td>
-<td>Documento de identidad del paciente</td>
-</tr>
-<tr>
-<td><strong>TasaImpuesto</strong></td>
-<td><code>IGV_18</code>, <code>IGV_19</code>, <code>IGV_20</code>, <code>Exonerado</code></td>
-<td>Tasa aplicable al comprobante</td>
-</tr>
-<tr>
-<td><strong>TipoAjusteFinanciero</strong></td>
-<td><code>Descuento</code>, <code>Recargo</code>, <code>Sobrepago</code>, <code>CorreccionMonto</code>, <code>AnulacionPago</code>, <code>Reembolso</code>, <code>PagoMenorAutorizado</code>, <code>PagoMayorAutorizado</code>, <code>ServicioAdicional</code>, <code>IndicacionMedica</code>, <code>ErrorAdministrativoCorregido</code>, <code>Otro</code></td>
-<td>Motivo del ajuste financiero</td>
-</tr>
-<tr>
-<td><strong>NivelAuditoria</strong></td>
-<td><code>Normal</code>, <code>Importante</code>, <code>Critico</code></td>
-<td>Severidad del registro de auditoría</td>
-</tr>
-<tr>
-<td><strong>TipoAccionAuditoria</strong></td>
-<td><code>Consulta</code>, <code>Creacion</code>, <code>Edicion</code>, <code>Eliminacion</code>, <code>Login</code>, <code>Asignacion</code>, <code>Error</code></td>
-<td>Tipo de acción registrada</td>
-</tr>
-<tr>
-<td><strong>TipoMovimientoHistorial</strong></td>
-<td><code>RegistroUsuario</code>, <code>AperturaHistorial</code>, <code>CitaProgramada</code>, <code>CitaReprogramada</code>, <code>CitaCancelada</code>, <code>CitaAtendida</code>, <code>AtencionRegistrada</code>, <code>AtencionCerrada</code>, <code>PagoRegistrado</code>, <code>PagoParcial</code>, <code>PagoCompletado</code>, <code>SeguimientoRegistrado</code>, <code>ObservacionClinica</code>, <code>ActualizacionDatosPaciente</code>, <code>EliminacionLogica</code></td>
-<td>Eventos del historial clínico</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="modulos-clinicos-de-la-atencion">🩺 Módulos Clínicos de la Atención</h2>
-<p>La entidad <code>Atencion</code> actúa como agregador de submódulos clínicos especializados. Cada uno de estos submódulos se encuentra en el namespace <code>Clinica.Domain.Entities.ATENCIONES</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Anamnesis</label><label for="__tabbed_1_2">Examen Físico</label><label for="__tabbed_1_3">Tacto Vaginal</label><label for="__tabbed_1_4">Ecografía Obstétrica</label><label for="__tabbed_1_5">Impresión Diagnóstica</label></div>
+<p>El comportamiento lógico del software, el flujo de las transacciones financieras y las transiciones del estado de salud de las pacientes están gobernados de forma estricta por máquinas de estado modeladas mediante enumeraciones puras. Esto previene la inyección de estados corruptos o inválidos en los canales de la API:</p>
+<h3 id="gestion-de-procesos-asistenciales">Gestión de Procesos Asistenciales</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">EstadoAtencion</label><label for="__tabbed_1_2">EstadoCita</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Almacena el motivo de consulta y la <strong>Fórmula Obstétrica</strong>:
-- <code>MotivoConsulta</code> (string, obligatorio)
-- <code>Gestaciones</code>, <code>HijosVivos</code>, <code>Abortos</code>, <code>PartosPretermino</code>, <code>PartosATermino</code> (int)
-- <code>FechaUltimaRegla</code>, <code>FechaProbableParto</code> (DateTime? )
-- <code>EdadGestacional</code> (string, opcional)
-- <code>Alergias</code>, <code>EnfermedadesCronicas</code>, <code>CirugiasPrevias</code>, <code>AntecedentesAdicionales</code> (string? )</p>
+<p>Controla el ciclo de vida del acto médico y la inmutabilidad de los registros clínicos:
+* <code>Abierta</code>: El médico u obstetra está digitando los hallazgos clínicos en el consultorio. Modificable.
+* <code>Cerrada</code>: Consulta finalizada. El registro se firma digitalmente y se bloquea para resguardar la validez legal.
+* <code>Anulada</code>: El acto médico se revoca por un criterio técnico justificado (ej: error en la apertura de la sesión).
+* <code>Eliminada</code>: Borrado lógico administrativo del registro del sistema.</p>
 </div>
 <div class="tabbed-block">
-<p>Registro evolutivo del estado materno-fetal:
-- <code>Lotep</code> (bool), <code>EstadoGeneral</code>, <code>EstadoHidratacion</code>, <code>EstadoNutricion</code> (string? )
-- <code>EscalaGlasgow</code> (int? )
-- <code>UteroGravido</code> (bool), <code>AlturaUterina</code> (int? )
-- <code>SituacionPosicionPresentacion</code>, <code>MovimientosFetales</code>, <code>TonoUterino</code>, <code>DinamicaUterina</code> (string? )
-- <code>LatidosCardiacosFetales</code> (int? )
-- <code>SangradoTv</code>, <code>PerdidaLiquidoAmniotico</code>, <code>TaponMucoso</code>, <code>FlujoVaginal</code> (bool)
-- <code>ColorLiquidoAmniotico</code>, <code>PunoPercusionLumbar</code>, <code>Edemas</code>, <code>ReflejosOsteotendinosos</code> (string? )</p>
+<p>Gobierna el flujo de la agenda de la clínica y las alertas automatizadas de WhatsApp:
+* <code>Pendiente</code>: Cita agendada por la recepción pero sin confirmación activa de asistencia.
+* <code>Confirmada</code>: La paciente ha ratificado su asistencia a través del canal interactivo de mensajería.
+* <code>EnProgreso</code>: La paciente ha pasado el triaje y se encuentra en sala de espera o atención actual.
+* <code>Atendida</code>: El acto médico de la cita ha sido completado y cerrado de forma exitosa.
+* <code>Reprogramada</code>: La reserva fue trasladada a una nueva fecha y hora por interferencia o solicitud de la paciente.
+* <code>Cancelada</code>: Cita revocada antes de la fecha asignada. Libera automáticamente el consultorio físico.
+* <code>NoAsistio</code>: La paciente faltó a su cita. Dispara una alerta de proactividad para agendamiento de control.
+* <code>Eliminada</code>: Retiro definitivo de la agenda por cancelación logística interna.</p>
+</div>
+</div>
+</div>
+<h3 id="gestion-de-procesos-financieros-y-fiscales">Gestión de Procesos Financieros y Fiscales</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">EstadoPago</label><label for="__tabbed_2_2">MetodoPago</label><label for="__tabbed_2_3">TipoComprobante</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Rige la auditoría contable y el balance de deudas cruzadas en la caja de recaudación:
+* <code>Pendiente</code>: El servicio clínico ha sido reservado u ordenado pero no cuenta con abonos monetarios.
+* <code>Parcial</code>: La paciente ha dejado un adelanto preventivo de separación o una cuota inicial (Saldo Pendiente activo).
+* <code>Pagado</code>: Transacción liquidada al 100%. El dinero ha ingresado formalmente a las arcas de la clínica.
+* <code>Anulado</code>: Operación de caja revocada antes del cierre diario por error de digitación o cancelación.
+* <code>Reembolso</code>: Devolución parcial o total de fondos justificada formalmente mediante un ajuste financiero.
+* <code>Eliminado</code>: Depuración lógica del registro contable.</p>
 </div>
 <div class="tabbed-block">
-<p>Exploración pélvica para el seguimiento del trabajo de parto:
-- <code>Dilatacion</code> (int? cm)
-- <code>Borramiento</code> (int? %)
-- <code>AlturaPresentacion</code> (string? )
-- <code>MembranasOvulares</code>, <code>ColorLiquido</code>, <code>Pelvis</code>, <code>VariedadPresentacion</code> (string? )</p>
+<p>Clasifica las vías de ingreso de capital para las conciliaciones bancarias y los arqueos de caja diarios:
+* <code>Efectivo</code>: Dinero físico recibido directamente en la ventanilla de recepción de la clínica.
+* <code>Yape</code>: Transferencia digital inmediata mediante código QR o número telefónico (Banca Móvil BCP).
+* <code>Plin</code>: Transferencia digital interbancaria inmediata (BBVA, Interbank, Scotiabank, BanBif).
+* <code>Transferencia</code>: Depósito directo en las cuentas corrientes institucionales de la clínica (operaciones mayores).
+* <code>Tarjeta</code>: Pago procesado en ventanilla mediante terminales POS de débito o crédito (Visa, Mastercard).
+* <code>Otro</code>: Métodos alternativos autorizados de manera excepcional por la gerencia.</p>
 </div>
 <div class="tabbed-block">
-<p>Biometría fetal y evaluación placentaria:
-- <code>DiametroBiparietal</code>, <code>CircunferenciaCefalica</code>, <code>CircunferenciaAbdominal</code>, <code>LongitudFemur</code> (int? mm)
-- <code>PesoFetalEstimado</code> (int? grs)
-- <code>IndiceLiquidoAmniotico</code> (decimal? )
-- <code>PlacentaLocalizacion</code>, <code>PlacentaGranum</code> (string? )
-- <code>CircularCordon</code> (bool)
-- <code>Conclusiones</code> (string? )</p>
+<p>Determina la naturaleza legal del documento impreso o generado digitalmente por el sistema:
+* <code>BoletaPago</code>: Comprobante de venta oficial emitido al consumidor final bajo regulaciones de la SUNAT.
+* <code>ConstanciaCita</code>: Documento administrativo emitido como justificante laboral o de asistencia para la paciente.
+* <code>ResumenAtencion</code>: Epicrisis simplificada que recopila el motivo de consulta, diagnósticos e indicaciones de receta.
+* <code>EstadoCuenta</code>: Ficha financiera consolidada que expone los cobros, abonos realizados y saldos de deuda reales.
+* <code>HistoriaClinica</code>: Exportación legal en PDF de la ficha de filiación completa y evoluciones médicas.
+* <code>ReporteCajaDiario</code>: Documento de cuadre e ingresos netos consolidado por el cajero al final del turno.
+* <code>ReporteFinancieroMensual</code>: Balance general de recaudación e impuestos diseñado para la contabilidad externa.
+* <code>AjusteFinanciero</code>: Sustento formal de la emisión de notas de crédito o débito internas del sistema.</p>
+</div>
+</div>
+</div>
+<h3 id="control-de-seguridad-y-auditoria">Control de Seguridad y Auditoría</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">NivelAuditoria</label><label for="__tabbed_3_2">TipoAccionAuditoria</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Establece la severidad de las acciones interceptadas por los filtros de seguridad de la API:
+* <code>Normal</code>: Operaciones cotidianas de lectura de datos o búsquedas predictivas en el sistema.
+* <code>Importante</code>: Acciones de escritura o modificación (creación de pacientes, apertura de atenciones, emisión de boletas).
+* <code>Critico</code>: Operaciones de alto impacto de seguridad o financiero (login fallido repetido, anulación de comprobantes, alteración de roles).</p>
 </div>
 <div class="tabbed-block">
-<p>Diagnóstico y plan de manejo:
-- <code>DiagnosticoPrincipal</code> (string, obligatorio)
-- <code>DiagnosticosSecundarios</code> (string? )
-- <code>IndicacionesReceta</code> (string, obligatorio)
-- <code>FechaProximaCita</code> (DateTime? )
-- <code>MotivoProximaCita</code> (string? )</p>
+<p>Clasifica la naturaleza técnica de la transacción interceptada en el pipeline:
+* <code>Consulta</code> | <code>Creacion</code> | <code>Edicion</code> | <code>Eliminacion</code> | <code>Login</code> | <code>Asignacion</code> | <code>Error</code></p>
 </div>
 </div>
 </div>
 <hr />
-<h2 id="puertos-interfaces">🔌 Puertos (Interfaces)</h2>
-<p>La capa de dominio declara los <strong>puertos</strong> que serán implementados por las capas superiores. Se dividen en <strong>puertos de salida</strong> (repositorios) y <strong>puertos de entrada</strong> (servicios de aplicación). Todos ellos se encuentran en <code>Clinica.Domain.Interfaces</code>.</p>
-<h3 id="repositorios-puertos-de-salida">Repositorios (Puertos de Salida)</h3>
-<p>Cada repositorio extiende <code>IGenericRepository&lt;T&gt;</code> que proporciona operaciones CRUD básicas (<code>GetAllAsync</code>, <code>GetByIdAsync</code>, <code>AddAsync</code>, <code>Update</code>, <code>Delete</code>, <code>SaveChangesAsync</code>). A continuación se detallan los repositorios con sus métodos adicionales específicos.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Paciente</label></div>
+<h2 id="modulos-clinicos-obstetricos-de-la-atencion">🩺 Módulos Clínicos Obstétricos de la Atención</h2>
+<p>La entidad <strong>Atencion</strong> actúa como un Agregador Raíz (<em>Aggregate Root</em>). Bajo las normativas del MINSA para la atención materno-infantil, los datos médicos no se estructuran de forma plana, sino que se segregan en submódulos especializados que capturan la evolución biométrica y física de la gestante:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:5"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Anamnesis</label><label for="__tabbed_4_2">Examen Físico</label><label for="__tabbed_4_3">Tacto Vaginal</label><label for="__tabbed_4_4">Ecografía Obstétrica</label><label for="__tabbed_4_5">Partograma</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>```csharp
-public interface IPacienteRepository : IGenericRepository<Paciente>
-{
-    Task<Paciente?> ObtenerPorDniAsync(string dni);
-    Task<Paciente?> ObtenerConHistorialAsync(Guid pacienteId);
-    Task<IEnumerable\<Paciente>> ObtenerTodosConHistorialAsync();
-}</p>
+<p>Captura los antecedentes médicos estructurales de la paciente y calcula la <strong>Fórmula Obstétrica</strong> obligatoria para el triaje:</p>
+<ul>
+<li><code>MotivoConsulta</code> <em>(String, Obligatorio)</em>: Descripción detallada de los síntomas o el objetivo del control.</li>
+<li><strong>Fórmula Gravídica:</strong> <code>Gestaciones</code>, <code>PartosATermino</code>, <code>PartosPretermino</code>, <code>Abortos</code>, <code>HijosVivos</code> <em>(Int)</em>: Indicadores indispensables para la clasificación de riesgo obstétrico.</li>
+<li><strong>Fechas de Control:</strong> <code>FechaUltimaRegla</code> (FUR), <code>FechaProbableParto</code> (FPP) <em>(DateTime?)</em>.</li>
+<li><code>EdadGestacional</code> <em>(String)</em>: Descripción precisa calculada de las semanas de gestación (ej: "28.4 semanas").</li>
+<li><code>Alergias</code>, <code>EnfermedadesCronicas</code>, <code>CirugiasPrevias</code>, <code>AntecedentesAdicionales</code> <em>(String?)</em>: Alertas médicas críticas.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>Monitoreo continuo de las funciones vitales maternas y los indicadores de desarrollo fetal:</p>
+<ul>
+<li><code>Lotep</code> <em>(Bool)</em>: Estado neurológico de la paciente (Lúcida, Orientada en Tiempo, Espacio y Persona).</li>
+<li><code>EstadoGeneral</code>, <code>EstadoHidratacion</code>, <code>EstadoNutricion</code> <em>(String?)</em>: Evaluaciones cualitativas médicas.</li>
+<li><code>EscalaGlasgow</code> <em>(Int?)</em>: Control neurológico cuantitativo en escenarios de emergencia (ej: preeclampsia severa).</li>
+<li><code>UteroGravido</code> <em>(Bool)</em> | <code>AlturaUterina</code> <em>(Int?)</em>: Medición física en centímetros del crecimiento uterino.</li>
+<li><code>LatidosCardiacosFetales</code> <em>(Int?)</em>: Frecuencia cardiaca del feto medida en latidos por minuto (lpm).</li>
+<li><code>SituacionPosicionPresentacion</code> <em>(String?)</em>: Orientación anatómica del feto (ej: Longitudinal / Izquierda / Cefálica).</li>
+<li><code>DinamicaUterina</code>, <code>TonoUterino</code>, <code>MovimientosFetales</code> <em>(String?)</em>: Monitoreo de contracciones y bienestar.</li>
+<li><strong>Signos de Alerta Extremos:</strong> <code>SangradoTv</code>, <code>PerdidaLiquidoAmniotico</code>, <code>TaponMucoso</code>, <code>FlujoVaginal</code> <em>(Bool)</em>: Interruptores de seguridad que disparan advertencias visuales de color rojo en la interfaz Blazor.</li>
+<li><code>ColorLiquidoAmniotico</code>, <code>PunoPercusionLumbar</code> (PPL), <code>Edemas</code>, <code>ReflejosOsteotendinosos</code> <em>(String?)</em>: Descarte de infecciones o síndromes hipertensivos del embarazo.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>Evaluación física cronológica ejecutada durante la fase de control de labor de parto:</p>
+<ul>
+<li><code>Dilatacion</code> <em>(Int?)</em>: Apertura del cuello uterino medida estrictamente en centímetros (rango 0 a 10 cm).</li>
+<li><code>Borramiento</code> <em>(Int?)</em>: Adelgazamiento del cuello cervical expresado en porcentaje (0% a 100%).</li>
+<li><code>AlturaPresentacion</code> <em>(String?)</em>: Ubicación de la cabeza fetal respecto a la pelvis materna (Estaciones de De Lee o Planos de Hodge).</li>
+<li><code>MembranasOvulares</code> <em>(String?)</em>: Clasificación clínica de las membranas (Integras o Rotas).</li>
+<li><code>ColorLiquido</code>, <code>Pelvis</code>, <code>VariedadPresentacion</code> <em>(String?)</em>: Evaluación de compatibilidad cefalópélvica y posicionamiento fetal (ej: OIA).</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>Consolida los reportes e indicadores obtenidos mediante los ultrasonidos realizados en la clínica:</p>
+<ul>
+<li><strong>Biometría Fetal (mm):</strong> <code>DiametroBiparietal</code> (DBP), <code>CircunferenciaCefalica</code> (CC), <code>CircunferenciaAbdominal</code> (CA), <code>LongitudFemur</code> (LF) <em>(Int?)</em>.</li>
+<li><code>PesoFetalEstimado</code> <em>(Int?)</em>: Peso calculado del feto expresado en gramos.</li>
+<li><code>IndiceLiquidoAmniotico</code> <em>(Decimal?)</em>: Evaluación del volumen de líquido amniótico (Métrica ILA).</li>
+<li><code>PlacentaLocalizacion</code>, <code>PlacentaGranum</code> <em>(String?)</em>: Ubicación e índice de madurez placentaria (Escala de Grannum 0-III).</li>
+<li><code>CircularCordon</code> <em>(Bool)</em>: Indicador crítico de alerta si el cordón umbilical se encuentra rodeando el cuello del feto.</li>
+<li><code>Conclusiones</code> <em>(String?)</em>: Dictamen final diagnóstico del ecografista.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>Herramienta gráfica cronológica integrada en el Dominio para el seguimiento del trabajo de parto en tiempo real. Modela de forma matricial las variaciones temporales combinadas de las funciones vitales de la madre y el descenso fetal:</p>
+<ul>
+<li><code>ControlVital</code>: Estructura interna encargada de capturar la Presión Arterial (PA), Pulso, Temperatura y Frecuencia Respiratoria en intervalos de tiempo fijos.</li>
+<li><code>RegistroPartograma</code>: Línea secuencial que indexa por horas la relación directa entre la curva de dilatación cervical, la estática de la presentación, la intensidad de la dinámica uterina y los latidos cardiacos fetales (LCF).</li>
+</ul>
 </div>
 </div>
 </div>
+<hr />
+<h2 id="puertos-de-la-arquitectura-interfaces">🔌 Puertos de la Arquitectura (Interfaces)</h2>
+<p>La capa de dominio declara los <strong>puertos</strong> de comunicación que definen las reglas de intercambio con el exterior. Se dividen rigurosamente en <strong>puertos de salida</strong> (interfaces de repositorio que implementará la Infraestructura) y <strong>puertos de entrada</strong> (interfaces de servicios que implementará la Aplicación).</p>
+<h3 id="repositorios-core-puertos-de-salida">Repositorios Core (Puertos de Salida)</h3>
+<p>Todos los repositorios del sistema extienden la interfaz base <code>IGenericRepository&lt;T&gt;</code>, la cual encapsula las operaciones asíncronas CRUD tradicionales: <code>GetAllAsync()</code>, <code>GetByIdAsync(id)</code>, <code>AddAsync(entity)</code>, <code>Update(entity)</code>, <code>Delete(entity)</code> y <code>SaveChangesAsync()</code>.</p>
+<p>A continuación se exponen las firmas de los puertos especializados encargados de forzar las reglas complejas de negocio:</p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">Clinica.Domain.Interfaces</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IPacienteRepository</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IGenericRepository</span><span class="o">&lt;</span><span class="n">Paciente</span><span class="o">&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="c1">// Búsqueda directa por identidad nacional. Soporta la validación anti-duplicados en la recepción.</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Paciente</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">ObtenerPorDniAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">dni</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// Recupera la paciente inyectando de forma atómica su Historial Clínico completo para la vista de la ficha médica.</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Paciente</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">ObtenerConHistorialAsync</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">pacienteId</span><span class="p">);</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Paciente</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ObtenerTodosConHistorialAsync</span><span class="p">();</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IAtencionRepository</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IGenericRepository</span><span class="o">&lt;</span><span class="n">Atencion</span><span class="o">&gt;</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">{</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="c1">// Carga el agregado completo de la atención médica, incluyendo la totalidad de sus submódulos clínicos obstétricos </span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="c1">// (Anamnesis, Exámenes Físicos, Tactos, Ecografías y Diagnósticos) en una única consulta indexada.</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Atencion</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">ObtenerDetalleCompletoAsync</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">}</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">ICitaRepository</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IGenericRepository</span><span class="o">&lt;</span><span class="n">Cita</span><span class="o">&gt;</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="p">{</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="c1">// Regla de Negocio Crítica: Evalúa si existe superposición de horarios para un médico específico en una fecha determinada.</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="c1">// Evita la sobreposición de turnos en las salas de ecografía de la clínica en Juliaca.</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ExisteInterferenciaHorarioAsync</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">doctorId</span><span class="p">,</span><span class="w"> </span><span class="n">DateOnly</span><span class="w"> </span><span class="n">fecha</span><span class="p">,</span><span class="w"> </span><span class="n">TimeOnly</span><span class="w"> </span><span class="n">horaInicio</span><span class="p">,</span><span class="w"> </span><span class="n">TimeOnly</span><span class="w"> </span><span class="n">horaFin</span><span class="p">,</span><span class="w"> </span><span class="n">Guid</span><span class="o">?</span><span class="w"> </span><span class="n">citaIdExcluir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">}</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IComprobanteRepository</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IGenericRepository</span><span class="o">&lt;</span><span class="n">Comprobante</span><span class="o">&gt;</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="p">{</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">    </span><span class="c1">// Recupera el último número correlativo emitido en la clínica para una serie específica (ej: B001). </span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="c1">// Indispensable para mantener la secuencia numérica exigida por la SUNAT.</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ObtenerUltimoNumeroPorSerieAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">serie</span><span class="p">);</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">}</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IUsuarioRepository</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IGenericRepository</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="p">{</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">    </span><span class="c1">// Resuelve la autenticación del sistema cargando el grafo completo de Roles, Relaciones y Permisos atómicos del colaborador.</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">ObtenerPorUserNameAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">userName</span><span class="p">);</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">ObtenerPorCorreoAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">correo</span><span class="p">);</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="p">}</span>
+</span></code></pre></div>
 
 
 
@@ -1182,7 +1646,7 @@ public interface IPacienteRepository : IGenericRepository<Paciente>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

@@ -6,8 +6,10 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal - Clínica Santa Mónica">
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica">
       
+      
+        <meta name="author" content="EPIS - Universidad Peruana Unión">
       
       
       
@@ -25,7 +27,7 @@
     
     
       
-        <title>Capa de Pruebas (Unitarias e Integración) - Sistema de la Clinica Santa Monica</title>
+        <title>Capa de Pruebas (Unitarias e Integración) - SYS Clínica Santa Mónica</title>
       
     
     
@@ -88,9 +90,11 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-header__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-header__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +108,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Sistema de la Clinica Santa Monica
+            SYS Clínica Santa Mónica
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -167,6 +171,11 @@
       </label>
       <nav class="md-search__options" aria-label="Buscar">
         
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
         <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -193,14 +202,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -228,6 +231,50 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../negocio/estrategia/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Modelo de Negocio y Operaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../negocio/plan-desarrollo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gestión, Calidad y Gobernanza
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -237,6 +284,8 @@
         <a href="../general/" class="md-tabs__link">
           
   
+  
+    
   
   Arquitectura Hexagonal
 
@@ -258,6 +307,8 @@
           
   
   
+    
+  
   Manuales de Operación
 
         </a>
@@ -269,7 +320,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -288,13 +345,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Sistema de la Clinica Santa Monica" class="md-nav__button md-logo" aria-label="Sistema de la Clinica Santa Monica" data-md-component="logo">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-nav__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Sistema de la Clinica Santa Monica
+    SYS Clínica Santa Mónica
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -330,11 +387,327 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Negocio y Operaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelo de Negocio y Operaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/estrategia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/organizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura y Áreas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/costos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión, Calidad y Gobernanza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión, Calidad y Gobernanza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/plan-desarrollo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de Desarrollo del Proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/metricas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../negocio/sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría del Ciclo de Vida (SDLC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -351,10 +724,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -372,8 +745,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -629,10 +1002,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#herramientas-y-dependencias" class="md-nav__link">
+  <a href="#matriz-de-herramientas-y-dependencias-tecnicas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ Herramientas y Dependencias
+        🛠️ Matriz de Herramientas y Dependencias Técnicas
       
     </span>
   </a>
@@ -656,6 +1029,78 @@
     <span class="md-ellipsis">
       
         1. Pruebas de Controladores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pruebas-de-servicios-de-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Pruebas de Servicios de Aplicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pruebas-de-entidades-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pruebas de Entidades de Dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-integracion-clinicaapiintegrationtests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Pruebas de Integración (Clinica.API.IntegrationTests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reportes-de-cobertura-y-analisis-de-calidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Reportes de Cobertura y Análisis de Calidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas Adicionales
       
     </span>
   </a>
@@ -691,6 +1136,10 @@
   
     
     
+      
+        
+      
+    
     
     
       
@@ -703,10 +1152,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -724,8 +1173,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -836,10 +1285,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#herramientas-y-dependencias" class="md-nav__link">
+  <a href="#matriz-de-herramientas-y-dependencias-tecnicas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ Herramientas y Dependencias
+        🛠️ Matriz de Herramientas y Dependencias Técnicas
       
     </span>
   </a>
@@ -869,6 +1318,78 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#2-pruebas-de-servicios-de-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Pruebas de Servicios de Aplicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pruebas-de-entidades-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pruebas de Entidades de Dominio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-integracion-clinicaapiintegrationtests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Pruebas de Integración (Clinica.API.IntegrationTests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reportes-de-cobertura-y-analisis-de-calidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Reportes de Cobertura y Análisis de Calidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas Adicionales
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -892,23 +1413,24 @@
 
 
 <h1 id="capa-de-pruebas-unitarias-e-integracion">🧪 Capa de Pruebas (Unitarias e Integración)</h1>
-<p>La <strong>Capa de Pruebas</strong> garantiza la calidad, estabilidad y correcto funcionamiento del sistema SIGEC a través de dos niveles de testing: <strong>pruebas unitarias</strong> y <strong>pruebas de integración</strong>. Ambas capas están organizadas en proyectos separados que reflejan la arquitectura hexagonal del sistema, asegurando que cada componente se pruebe de forma aislada o en conjunto con sus dependencias reales.</p>
+<p>La <strong>Capa de Pruebas</strong> es un pilar fundamental dentro del ecosistema de <strong>SYS Clínica Santa Mónica</strong>, el sistema de gestión clínica desarrollado a medida para la Clínica Santa Mónica en Juliaca. En un contexto donde la institución apuesta por la transformación digital para ofrecer una atención materna integral, segura y eficiente, la calidad del software no es un lujo sino una exigencia operativa. Cada línea de código que gestiona citas, historias clínicas, recordatorios por WhatsApp o facturación electrónica debe ser confiable, robusta y estar libre de errores que puedan comprometer la seguridad de los datos clínicos o la experiencia de las pacientes.</p>
+<p>Por ello, el proyecto adopta una estrategia de testing en dos niveles: <strong>pruebas unitarias</strong> y <strong>pruebas de integración</strong>, organizadas en proyectos independientes que reflejan la arquitectura hexagonal del sistema. Este enfoque garantiza que cada componente —desde las reglas de negocio en el dominio hasta los controladores de la API— sea verificado de forma aislada o en interacción con sus dependencias reales, alineándose con los valores institucionales de <strong>responsabilidad, ética profesional y mejora continua</strong>.</p>
 <div class="admonition info">
 <p class="admonition-title">Frontera Arquitectónica</p>
 <ul>
 <li><strong>Pruebas Unitarias (<code>Clinica.API.Tests</code>):</strong> Aíslan la lógica de negocio y orquestación, utilizando mocks y stubs para simular dependencias externas. No dependen de infraestructura real (base de datos, servicios externos).</li>
 <li><strong>Pruebas de Integración (<code>Clinica.API.IntegrationTests</code>):</strong> Validan la interacción entre componentes reales, utilizando una base de datos PostgreSQL en contenedor (Testcontainers) y el pipeline HTTP completo. Requieren autenticación y configuraciones reales.</li>
-<li><strong>Cobertura de Código:</strong> Ambos proyectos generan reportes de cobertura (Coverlet) que se integran con SonarQube para el análisis de calidad.</li>
+<li><strong>Cobertura de Código:</strong> Ambos proyectos generan reportes de cobertura (Coverlet) que se integran con SonarQube para el análisis de calidad, en línea con el compromiso de la clínica con la transparencia y la mejora continua.</li>
 </ul>
 </div>
 <hr />
 <h2 id="estructura-de-los-proyectos-de-pruebas">🏗️ Estructura de los Proyectos de Pruebas</h2>
 <h3 id="clinicaapitests-pruebas-unitarias">Clinica.API.Tests (Pruebas Unitarias)</h3>
-<p>Proyecto dedicado a las pruebas unitarias de la capa de API y de dominio. Su estructura refleja la organización del código fuente, aislando los controladores y servicios mediante la simulación dinámica de componentes.</p>
+<p>Proyecto dedicado a las pruebas unitarias de la capa de API y de dominio. Su estructura refleja la organización del código fuente, aislando los controladores y servicios mediante la simulación dinámica de componentes. Estas pruebas se ejecutan en cada compilación, proporcionando retroalimentación inmediata a los desarrolladores y evitando la introducción de regresiones.</p>
 <h3 id="clinicaapiintegrationtests-pruebas-de-integracion">Clinica.API.IntegrationTests (Pruebas de Integración)</h3>
-<p>Proyecto enfocado en validar el comportamiento del pipeline HTTP, el middleware de autenticación/autorización y la persistencia de datos relacionales frente a un entorno contenedorizado real.</p>
+<p>Proyecto enfocado en validar el comportamiento del pipeline HTTP, el middleware de autenticación/autorización y la persistencia de datos relacionales frente a un entorno contenedorizado real. Se ejecutan con menor frecuencia (por ejemplo, en la pipeline de CI/CD) debido a su mayor duración, pero son esenciales para garantizar que los distintos módulos del sistema funcionen correctamente en conjunto, replicando el entorno de producción de la clínica.</p>
 <hr />
-<h2 id="herramientas-y-dependencias">🛠️ Herramientas y Dependencias</h2>
+<h2 id="matriz-de-herramientas-y-dependencias-tecnicas">🛠️ Matriz de Herramientas y Dependencias Técnicas</h2>
 <table>
 <thead>
 <tr>
@@ -921,79 +1443,238 @@
 <tr>
 <td style="text-align: left;"><strong>xUnit</strong></td>
 <td style="text-align: left;">2.9.x</td>
-<td style="text-align: left;">Framework de pruebas unitarias y de integración.</td>
+<td style="text-align: left;">Framework de pruebas unitarias y de integración, ampliamente adoptado en el ecosistema .NET.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>NSubstitute</strong></td>
 <td style="text-align: left;">5.3.x</td>
-<td style="text-align: left;">Creación de mocks y stubs dinámicos para pruebas unitarias.</td>
+<td style="text-align: left;">Creación de mocks y stubs dinámicos para pruebas unitarias, permitiendo simular dependencias externas sin complejidad.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>FluentAssertions</strong></td>
 <td style="text-align: left;">8.9.x</td>
-<td style="text-align: left;">Sintaxis expresiva y legible para aserciones complejas.</td>
+<td style="text-align: left;">Sintaxis expresiva y legible para aserciones complejas, facilitando la lectura de los resultados de las pruebas.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Microsoft.AspNetCore.Mvc.Testing</strong></td>
 <td style="text-align: left;">9.0.x</td>
-<td style="text-align: left;">Hosting de la API en memoria para pruebas de integración de extremo a extremo.</td>
+<td style="text-align: left;">Hosting de la API en memoria para pruebas de integración de extremo a extremo, sin necesidad de un servidor real.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Testcontainers.PostgreSql</strong></td>
 <td style="text-align: left;">4.8.x</td>
-<td style="text-align: left;">Contenedor Docker efímero de PostgreSQL para entornos reales de pruebas.</td>
+<td style="text-align: left;">Contenedor Docker efímero de PostgreSQL para entornos reales de pruebas, replicando fielmente la base de datos de producción.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>coverlet.collector</strong></td>
 <td style="text-align: left;">8.0.x</td>
-<td style="text-align: left;">Recolección del porcentaje de cobertura de código para análisis estático.</td>
+<td style="text-align: left;">Recolección del porcentaje de cobertura de código para análisis estático, integrable con SonarQube.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Microsoft.EntityFrameworkCore.InMemory</strong></td>
 <td style="text-align: left;">9.0.x</td>
-<td style="text-align: left;">Base de datos virtualizada para escenarios unitarios controlados.</td>
+<td style="text-align: left;">Base de datos virtualizada para escenarios unitarios controlados, utilizada en pruebas que no requieren un motor relacional completo.</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="pruebas-unitarias-clinicaapitests">📋 Pruebas Unitarias (Clinica.API.Tests)</h2>
-<p>Las pruebas unitarias validan componentes individuales de forma aislada, reemplazando dependencias externas con mocks. Se organizan en tres categorías principales:</p>
+<p>Las pruebas unitarias validan componentes individuales de forma aislada, reemplazando dependencias externas con mocks. Se organizan en tres categorías principales que cubren los aspectos críticos del sistema.</p>
 <h3 id="1-pruebas-de-controladores">1. Pruebas de Controladores</h3>
-<p>Verifican que los controladores reciban solicitudes, validen autorización, llamen a los servicios correctos y retornen las respuestas HTTP adecuadas.</p>
+<p>Verifican que los controladores reciban solicitudes, validen autorización, llamen a los servicios correctos y retornen las respuestas HTTP adecuadas. Estas pruebas aseguran que la capa de presentación (API) actúe como un orquestador fiel, sin introducir lógica de negocio.</p>
 <p><strong>Ejemplo: <code>AtencionesControllerTests</code></strong></p>
-<p>```csharp
-[Fact]
-public async Task ObtenerTodas_DebeRetornarOkConLista()
-{
-    // Arrange
-    var lista = new List<AtencionResponseDto> { new() { Id = Guid.NewGuid() } };
-    _atencionService.ObtenerTodasAsync().Returns(lista);</p>
-<div class="language-text highlight"><pre><span></span><code>// Act
-var resultado = await _controller.ObtenerTodas();
-
-// Assert
-var ok = resultado.Should().BeOfType&lt;OkObjectResult&gt;().Subject;
-var resp = ok.Value.Should().BeOfType&lt;ApiResponse&lt;object&gt;&gt;().Subject;
-resp.Exitoso.Should().BeTrue();
-resp.Mensaje.Should().Be(&quot;Atenciones obtenidas correctamente.&quot;);
-</code></pre></div>
-<p>}</p>
-<p>[Fact]
-public async Task Registrar_Valido_RetornaCreated()
-{
-    // Arrange
-    var dto = new RegistrarAtencionDto { /<em> ... </em>/ };
-    var nuevoId = Guid.NewGuid();
-    _atencionService.RegistrarAtencionAsync(dto).Returns(nuevoId);</p>
-<div class="language-text highlight"><pre><span></span><code>// Act
-var resultado = await _controller.Registrar(dto);
-
-// Assert
-var created = resultado.Should().BeOfType&lt;CreatedAtActionResult&gt;().Subject;
-created.ActionName.Should().Be(nameof(AtencionesController.ObtenerPorId));
-created.RouteValues![&quot;id&quot;].Should().Be(nuevoId);
-</code></pre></div>
-<p>}</p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">[Fact]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">ObtenerTodas_DebeRetornarOkConLista</span><span class="p">()</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1">// Arrange</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AtencionResponseDto</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">_atencionService</span><span class="p">.</span><span class="n">ObtenerTodasAsync</span><span class="p">().</span><span class="n">Returns</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// Act</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_controller</span><span class="p">.</span><span class="n">ObtenerTodas</span><span class="p">();</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="c1">// Assert</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resultado</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeOfType</span><span class="o">&lt;</span><span class="n">OkObjectResult</span><span class="o">&gt;</span><span class="p">().</span><span class="n">Subject</span><span class="p">;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ok</span><span class="p">.</span><span class="n">Value</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeOfType</span><span class="o">&lt;</span><span class="n">ApiResponse</span><span class="o">&lt;</span><span class="kt">object</span><span class="o">&gt;&gt;</span><span class="p">().</span><span class="n">Subject</span><span class="p">;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">resp</span><span class="p">.</span><span class="n">Exitoso</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeTrue</span><span class="p">();</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">resp</span><span class="p">.</span><span class="n">Mensaje</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="s">&quot;Atenciones obtenidas correctamente.&quot;</span><span class="p">);</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="na">[Fact]</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Registrar_Valido_RetornaCreated</span><span class="p">()</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">{</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="c1">// Arrange</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">dto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RegistrarAtencionDto</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">nuevoId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="n">_atencionService</span><span class="p">.</span><span class="n">RegistrarAtencionAsync</span><span class="p">(</span><span class="n">dto</span><span class="p">).</span><span class="n">Returns</span><span class="p">(</span><span class="n">nuevoId</span><span class="p">);</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="c1">// Act</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_controller</span><span class="p">.</span><span class="n">Registrar</span><span class="p">(</span><span class="n">dto</span><span class="p">);</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">    </span><span class="c1">// Assert</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resultado</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeOfType</span><span class="o">&lt;</span><span class="n">CreatedAtActionResult</span><span class="o">&gt;</span><span class="p">().</span><span class="n">Subject</span><span class="p">;</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="n">created</span><span class="p">.</span><span class="n">ActionName</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">AtencionesController</span><span class="p">.</span><span class="n">ObtenerPorId</span><span class="p">));</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="n">created</span><span class="p">.</span><span class="n">RouteValues</span><span class="o">!</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">].</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">nuevoId</span><span class="p">);</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="2-pruebas-de-servicios-de-aplicacion">2. Pruebas de Servicios de Aplicación</h3>
+<p>Validan la lógica de orquestación, incluyendo validaciones de negocio, mapeos y persistencia a través de repositorios mockeados. Estas pruebas son cruciales porque los servicios contienen las reglas de negocio que materializan la propuesta de valor de la clínica (acompañamiento integral, registro de historias clínicas, gestión de citas, etc.).</p>
+<p><strong>Ejemplo: <code>AtencionServiceTests</code></strong></p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">[Fact]</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">RegistrarAtencionAsync_PacienteNoExiste_LanzaKeyNotFound</span><span class="p">()</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">dto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RegistrarAtencionDto</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">_pacienteRepo</span><span class="p">.</span><span class="n">GetByIdAsync</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="n">PacienteId</span><span class="p">).</span><span class="n">Returns</span><span class="p">((</span><span class="n">Paciente</span><span class="o">?</span><span class="p">)</span><span class="k">null</span><span class="p">);</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">Func</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">act</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_service</span><span class="p">.</span><span class="n">RegistrarAtencionAsync</span><span class="p">(</span><span class="n">dto</span><span class="p">);</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">act</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">ThrowAsync</span><span class="o">&lt;</span><span class="n">KeyNotFoundException</span><span class="o">&gt;</span><span class="p">().</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&quot;Paciente no encontrado.&quot;</span><span class="p">);</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="na">[Fact]</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">CerrarAtencionAsync_AtencionCerrada_LanzaInvalidOperation</span><span class="p">()</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">{</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">atencion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Atencion</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">Estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EstadoAtencion</span><span class="p">.</span><span class="n">Cerrada</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="n">_atencionRepo</span><span class="p">.</span><span class="n">ObtenerDetalleCompletoAsync</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="n">Returns</span><span class="p">(</span><span class="n">atencion</span><span class="p">);</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="n">Func</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">act</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_service</span><span class="p">.</span><span class="n">CerrarAtencionAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">);</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">act</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">ThrowAsync</span><span class="o">&lt;</span><span class="n">InvalidOperationException</span><span class="o">&gt;</span><span class="p">().</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&quot;La atención ya está cerrada.&quot;</span><span class="p">);</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="3-pruebas-de-entidades-de-dominio">3. Pruebas de Entidades de Dominio</h3>
+<p>Verifican el comportamiento de las entidades puras (constructores, propiedades, colecciones). Estas pruebas son las más ligeras y rápidas, y garantizan que el modelo de dominio —el corazón inmutable del sistema— se comporte según lo esperado.</p>
+<p><strong>Ejemplo: <code>AuditoriaTests y AtencionTests</code></strong></p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">[Fact]</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ConstructorVacio_DebeInicializarValoresPorDefecto</span><span class="p">()</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">auditoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Auditoria</span><span class="p">();</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">auditoria</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">NotBeEmpty</span><span class="p">();</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">auditoria</span><span class="p">.</span><span class="n">TipoAccion</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="k">default</span><span class="p">);</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">auditoria</span><span class="p">.</span><span class="n">FueExitoso</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeTrue</span><span class="p">();</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">auditoria</span><span class="p">.</span><span class="n">Nivel</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">NivelAuditoria</span><span class="p">.</span><span class="n">Normal</span><span class="p">);</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">auditoria</span><span class="p">.</span><span class="n">EsConsulta</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeFalse</span><span class="p">();</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">}</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="na">[Fact]</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ConstructorVacio_DebeInicializarColecciones</span><span class="p">()</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">{</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">atencion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Atencion</span><span class="p">();</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="n">atencion</span><span class="p">.</span><span class="n">ExamenesFisicos</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">NotBeNull</span><span class="p">().</span><span class="n">And</span><span class="p">.</span><span class="n">BeEmpty</span><span class="p">();</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="n">atencion</span><span class="p">.</span><span class="n">TactosVaginales</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">NotBeNull</span><span class="p">().</span><span class="n">And</span><span class="p">.</span><span class="n">BeEmpty</span><span class="p">();</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="n">atencion</span><span class="p">.</span><span class="n">Ecografias</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">NotBeNull</span><span class="p">().</span><span class="n">And</span><span class="p">.</span><span class="n">BeEmpty</span><span class="p">();</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="pruebas-de-integracion-clinicaapiintegrationtests">🔗 Pruebas de Integración (Clinica.API.IntegrationTests)</h3>
+<p>Las pruebas de integración validan el sistema en su conjunto, ejecutando la API real con una base de datos PostgreSQL en un contenedor Docker. Utilizan WebApplicationFactory para hospedar la API en memoria y Testcontainers para la base de datos, replicando el entorno de producción de la clínica.</p>
+<h2 id="configuracion-base">Configuración Base</h2>
+<p>PostgreSqlFixture: Inicia y detiene el contenedor PostgreSQL, y proporciona un contexto de base de datos para cada prueba. Esta configuración garantiza que las pruebas sean reproducibles y aisladas.</p>
+<p>IntegrationTestBase: Clase base que:</p>
+<p>Inicializa el cliente HTTP con autenticación.</p>
+<p>Proporciona métodos para login como administrador.</p>
+<p>Permite limpiar la base de datos entre pruebas.</p>
+<p>TestDataSeeder: Utilidades para crear datos de prueba (pacientes, doctores, servicios, citas, atenciones, etc.), simulando el flujo real de la clínica.</p>
+<p><strong>Ejemplo: <code>Pruebas del Módulo de Atenciones</code></strong></p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="na">[Collection(&quot;IntegrationTests&quot;)]</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AtencionesEndpointsTests</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IntegrationTestBase</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">AtencionesEndpointsTests</span><span class="p">(</span><span class="n">PostgreSqlFixture</span><span class="w"> </span><span class="n">postgreSqlFixture</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">postgreSqlFixture</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1">// Autenticación</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="na">[Fact]</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Get_Atenciones_SinToken_DeberiaRetornarUnauthorized</span><span class="p">()</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="n">ClearAuthorization</span><span class="p">();</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">&quot;/api/atenciones&quot;</span><span class="p">);</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Unauthorized</span><span class="p">);</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="c1">// Consulta exitosa</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="na">[Fact]</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Get_Atenciones_ConAdmin_DeberiaRetornarOk</span><span class="p">()</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">LoginAsAdminAsync</span><span class="p">();</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">&quot;/api/atenciones&quot;</span><span class="p">);</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">OK</span><span class="p">);</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">JsonTestHelper</span><span class="p">.</span><span class="n">AssertSuccessAsync</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="c1">// Creación exitosa</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="na">[Fact]</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Post_Atenciones_Valida_DeberiaCrearAtencion</span><span class="p">()</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">LoginAsAdminAsync</span><span class="p">();</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateDbContext</span><span class="p">();</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">baseCita</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">TestDataSeeder</span><span class="p">.</span><span class="n">CrearBaseParaCitaAsync</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">historial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">TestDataSeeder</span><span class="p">.</span><span class="n">CrearHistorialClinicoAsync</span><span class="p">(</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Paciente</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">dto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RegistrarAtencionDto</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">            </span><span class="n">PacienteId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Paciente</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">            </span><span class="n">DoctorId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Doctor</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">            </span><span class="n">ServicioClinicoId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Servicio</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">            </span><span class="n">HistorialClinicoId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">historial</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="w">            </span><span class="n">CostoFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">        </span><span class="p">};</span>
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Client</span><span class="p">.</span><span class="n">PostJsonAsync</span><span class="p">(</span><span class="s">&quot;/api/atenciones&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">);</span>
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Created</span><span class="p">);</span>
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">JsonTestHelper</span><span class="p">.</span><span class="n">AssertSuccessAsync</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>
+</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="w">    </span><span class="c1">// Validación de errores</span>
+</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="na">[Fact]</span>
+</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Post_Atenciones_SinHistorialClinico_DeberiaRetornarBadRequest</span><span class="p">()</span>
+</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">LoginAsAdminAsync</span><span class="p">();</span>
+</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateDbContext</span><span class="p">();</span>
+</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">baseCita</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">TestDataSeeder</span><span class="p">.</span><span class="n">CrearBaseParaCitaAsync</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>
+</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">dto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RegistrarAtencionDto</span>
+</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="w">            </span><span class="n">PacienteId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Paciente</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="w">            </span><span class="n">DoctorId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Doctor</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="w">            </span><span class="n">ServicioClinicoId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseCita</span><span class="p">.</span><span class="n">Servicio</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="w">            </span><span class="n">HistorialClinicoId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a><span class="w">            </span><span class="n">CostoFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a><span class="w">        </span><span class="p">};</span>
+</span><span id="__span-3-64"><a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>
+</span><span id="__span-3-65"><a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Client</span><span class="p">.</span><span class="n">PostJsonAsync</span><span class="p">(</span><span class="s">&quot;/api/atenciones&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">);</span>
+</span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">BadRequest</span><span class="p">);</span>
+</span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="reportes-de-cobertura-y-analisis-de-calidad">📊 Reportes de Cobertura y Análisis de Calidad</h3>
+<p>Ambos proyectos generan reportes de cobertura utilizando <code>coverlet.collector</code>. Los archivos se almacenan en <code>TestResults/</code> y se integran con <strong>SonarCloud</strong> para el análisis de calidad, alineándose con la filosofía de <strong>mejora continua</strong> de la clínica. Los reportes incluyen:</p>
+<ul>
+<li><strong>Cobertura de líneas y ramas</strong> – Mide el porcentaje de código ejecutado durante las pruebas.</li>
+<li><strong>Cobertura por clase y método</strong> – Permite identificar qué componentes están mejor cubiertos y cuáles requieren atención.</li>
+<li><strong>Reportes HTML detallados</strong> – Visualización interactiva que facilita la detección de áreas no cubiertas.</li>
+</ul>
+<hr />
+<h3 id="notas-adicionales">📝 Notas Adicionales</h3>
+<ul>
+<li>
+<p><strong>Aislamiento de Pruebas:</strong> Cada prueba de integración se ejecuta en una transacción o se limpia después de la ejecución para evitar interferencias, garantizando que los datos de una prueba no afecten a otra. Esto asegura que los resultados sean reproducibles y confiables.</p>
+</li>
+<li>
+<p><strong>Velocidad:</strong> Las pruebas unitarias son rápidas (~ms) mientras que las de integración tardan más (~segundos) debido al contenedor Docker. Por ello, se ejecutan en diferentes etapas del pipeline de CI/CD: las unitarias en cada compilación, y las de integración en fases previas al despliegue.</p>
+</li>
+<li>
+<p><strong>Ejecución en CI/CD:</strong> Ambos conjuntos de pruebas se ejecutan en pipelines de Azure DevOps o GitHub Actions, generando reportes que se publican en SonarCloud. Esto cumple con el objetivo de la clínica de <strong>transparencia y auditoría</strong>, proporcionando evidencia objetiva de la calidad del software.</p>
+</li>
+<li>
+<p><strong>Manejo de Dependencias:</strong> Se utilizan <code>Testcontainers</code> para evitar dependencias de infraestructura externa, garantizando que las pruebas sean reproducibles en cualquier entorno. Esto refuerza la <strong>independencia tecnológica</strong> que la clínica valora y permite ejecutar las pruebas de integración sin necesidad de una base de datos dedicada.</p>
+</li>
+<li>
+<p><strong>Cobertura Mínima:</strong> El proyecto exige una cobertura mínima del <strong>80%</strong> para líneas y ramas, monitoreada por SonarCloud. Este umbral está en línea con el valor institucional de <strong>calidad como estándar, no como aspiración</strong>, y cualquier descenso por debajo de este nivel bloquea el despliegue a producción.</p>
+</li>
+<li>
+<p><strong>Pruebas de Integración vs Unitarias:</strong> Las pruebas unitarias se ejecutan en cada compilación (feedback inmediato para el desarrollador), mientras que las de integración se ejecutan con menos frecuencia (por ejemplo, en la pipeline de CI/CD) debido a su mayor duración. Ambas son esenciales para mantener la robustez del sistema: las unitarias validan la lógica interna, y las de integración verifican que los componentes interactúen correctamente en un entorno realista.</p>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>La cobertura de código es una métrica orientativa, no un fin en sí mismo. El equipo prioriza la calidad de las aserciones y la relevancia de los escenarios probados sobre el simple porcentaje. Se fomenta la escritura de pruebas que cubran casos límite y flujos críticos (como la facturación electrónica y la auditoría de datos clínicos).</p>
+</div>
 
 
 
@@ -1049,7 +1730,7 @@ created.RouteValues![&quot;id&quot;].Should().Be(nuevoId);
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

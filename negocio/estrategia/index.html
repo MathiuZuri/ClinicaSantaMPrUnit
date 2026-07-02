@@ -1,0 +1,1759 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación Técnica de la Arquitectura Hexagonal y Gestión Estratégica - SYS Clínica Santa Mónica">
+      
+      
+        <meta name="author" content="EPIS - Universidad Peruana Unión">
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../organizacion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Análisis Estratégico - SYS Clínica Santa Mónica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analisis-estrategico-sys-clinica-santa-monica" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-header__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SYS Clínica Santa Mónica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Análisis Estratégico
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Modelo de Negocio y Operaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../plan-desarrollo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Gestión, Calidad y Gobernanza
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../arquitectura/general/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Arquitectura Hexagonal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../arquitectura/despliegue/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Manuales de Operación
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SYS Clínica Santa Mónica" class="md-nav__button md-logo" aria-label="SYS Clínica Santa Mónica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SYS Clínica Santa Mónica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo de Negocio y Operaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelo de Negocio y Operaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Estratégico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#propuesta-de-valor-y-diferenciadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Propuesta de Valor y Diferenciadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-pestel-factores-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌍 Matriz PESTEL (Factores Externos)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fuerzas-de-porter-analisis-competitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚔️ 5 Fuerzas de Porter (Análisis Competitivo)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-foda-swot-y-estrategias-resultantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Análisis FODA (SWOT) y Estrategias Resultantes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Análisis FODA (SWOT) y Estrategias Resultantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factores-internos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factores Internos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factores-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factores Externos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategias-resultantes-del-cruce-foda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategias Resultantes del Cruce FODA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-de-ansoff-opciones-de-crecimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Matriz de Ansoff (Opciones de Crecimiento)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-estrategico-para-el-equipo-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Resumen Estratégico para el Equipo de Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../organizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura y Áreas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../costos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estructura Financiera y Sostenibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión, Calidad y Gobernanza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión, Calidad y Gobernanza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plan-desarrollo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan de Desarrollo del Proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metricas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación de Calidad y Métricas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría del Ciclo de Vida (SDLC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura Hexagonal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura Hexagonal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/dominio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Dominio (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/infraestructura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Infraestructura (Persistencia)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de API (Presentación)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/wasm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Frontend (Blazor WASM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/pruebas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capa de Pruebas (Unitarias e Integración)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuales de Operación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manuales de Operación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue en la Nube (Azure & Neon)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#propuesta-de-valor-y-diferenciadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Propuesta de Valor y Diferenciadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-pestel-factores-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌍 Matriz PESTEL (Factores Externos)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fuerzas-de-porter-analisis-competitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚔️ 5 Fuerzas de Porter (Análisis Competitivo)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-foda-swot-y-estrategias-resultantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Análisis FODA (SWOT) y Estrategias Resultantes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Análisis FODA (SWOT) y Estrategias Resultantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factores-internos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factores Internos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factores-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factores Externos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategias-resultantes-del-cruce-foda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategias Resultantes del Cruce FODA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-de-ansoff-opciones-de-crecimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Matriz de Ansoff (Opciones de Crecimiento)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-estrategico-para-el-equipo-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Resumen Estratégico para el Equipo de Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="analisis-estrategico-sys-clinica-santa-monica">📊 Análisis Estratégico – SYS Clínica Santa Mónica</h1>
+<p>El sistema <strong>SYS Clínica Santa Mónica</strong> no es un desarrollo técnico aislado: es la materialización digital de la estrategia competitiva de la clínica. Esta página documenta los análisis de negocio que justifican la arquitectura, los riesgos tecnológicos y las decisiones de inversión.</p>
+<hr />
+<h2 id="propuesta-de-valor-y-diferenciadores">🎯 Propuesta de Valor y Diferenciadores</h2>
+<p>La Clínica Santa Mónica compite en un mercado de salud materna en Juliaca donde predominan los consultorios informales, la atención sin historial digital y la ausencia de facturación electrónica. Su propuesta de valor se basa en:</p>
+<table>
+<thead>
+<tr>
+<th>Diferenciador</th>
+<th>Descripción</th>
+<th>Impacto en el software</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Acompañamiento integral</strong></td>
+<td>Seguimiento continuo desde planificación familiar hasta posparto</td>
+<td>El sistema debe permitir trazabilidad de todas las etapas y recordatorios automáticos</td>
+</tr>
+<tr>
+<td><strong>Digitalización completa</strong></td>
+<td>Citas, historial clínico, facturación y recordatorios en una sola plataforma</td>
+<td>Arquitectura integrada con módulos interconectados (Blazor + API + PostgreSQL)</td>
+</tr>
+<tr>
+<td><strong>Formalidad y cumplimiento</strong></td>
+<td>Facturación SUNAT, protección de datos (Ley 29733), colegiatura del personal</td>
+<td>Auditoría automática, encriptación, emisión de comprobantes electrónicos</td>
+</tr>
+<tr>
+<td><strong>Farmacia integrada</strong></td>
+<td>Dispensación de medicamentos vinculada a la prescripción</td>
+<td>Módulo de inventario y facturación vinculado al historial clínico</td>
+</tr>
+<tr>
+<td><strong>Comunicación proactiva</strong></td>
+<td>Recordatorios por WhatsApp (Evolution API)</td>
+<td>Integración con el canal de comunicación más usado en la región</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="matriz-pestel-factores-externos">🌍 Matriz PESTEL (Factores Externos)</h2>
+<p>El análisis PESTEL identifica las influencias externas que afectan la operación y el desarrollo del sistema. Se priorizan los factores con mayor impacto y duración.</p>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Código</th>
+<th>Descripción</th>
+<th>Impacto</th>
+<th>Duración</th>
+<th>Total</th>
+<th>O/A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Político</strong></td>
+<td>P2</td>
+<td>Políticas de salud pública y regulación del sector privado</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Político</strong></td>
+<td>P3</td>
+<td>Informalidad en el sector salud (consultorios no regulados)</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong>Económico</strong></td>
+<td>E1</td>
+<td>Crecimiento del poder adquisitivo en Juliaca</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Económico</strong></td>
+<td>E3</td>
+<td>Costo de mano de obra calificada</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong>Social</strong></td>
+<td>S1</td>
+<td>Alta tasa de natalidad en la región Puno</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Social</strong></td>
+<td>S2</td>
+<td>Aumento de hogares con acceso a internet y smartphones</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Social</strong></td>
+<td>S3</td>
+<td>Preferencia por atención privada por calidad y rapidez</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Tecnológico</strong></td>
+<td>T1</td>
+<td>Desarrollo de sistema clínico integrado propio</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Tecnológico</strong></td>
+<td>T2</td>
+<td>Crecimiento de la telemedicina</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Tecnológico</strong></td>
+<td>T3</td>
+<td>Automatización de recordatorios vía WhatsApp</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Tecnológico</strong></td>
+<td>T5</td>
+<td>Riesgos de ciberseguridad y protección de datos</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong>Tecnológico</strong></td>
+<td>T6</td>
+<td>Dependencia de proveedores tecnológicos (VPS, Meta/WhatsApp)</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong>Ecológico</strong></td>
+<td>EC2</td>
+<td>Amenaza de epidemias y pandemias</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong>Legal</strong></td>
+<td>L1</td>
+<td>Ley de Protección de Datos Personales</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>Legal</strong></td>
+<td>L3</td>
+<td>Regulación de delitos informáticos</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusiones PESTEL:</strong>
+- <strong>Oportunidades clave:</strong> Demanda creciente de salud privada, alta natalidad, adopción de tecnología y smartphones, y marco legal que protege los datos (diferenciador frente a informales).
+- <strong>Amenazas críticas:</strong> Dependencia de Meta (WhatsApp), ciberseguridad, costos de personal calificado y riesgos sanitarios. La más urgente es <strong>la dependencia de WhatsApp</strong> como canal principal de comunicación con pacientes.</p>
+<hr />
+<h2 id="5-fuerzas-de-porter-analisis-competitivo">⚔️ 5 Fuerzas de Porter (Análisis Competitivo)</h2>
+<table>
+<thead>
+<tr>
+<th>Fuerza</th>
+<th>Nivel</th>
+<th>Implicaciones para el software</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Amenaza de nuevos competidores</strong></td>
+<td>Media</td>
+<td>Barreras de entrada: inversión en equipos (S/ 80K–150K) y licencias. Sin embargo, el sistema digital integrado es difícil de replicar.</td>
+</tr>
+<tr>
+<td><strong>Poder de negociación de los pacientes</strong></td>
+<td>Alto</td>
+<td>Los pacientes comparan en redes sociales; nuestra baja presencia digital es una debilidad. El sistema debe ayudar a fidelizar mediante recordatorios y seguimiento.</td>
+</tr>
+<tr>
+<td><strong>Poder de negociación de los proveedores</strong></td>
+<td>Medio-Alto</td>
+<td><strong>Dependencia crítica:</strong> Meta (WhatsApp) y VPS. Si Meta cambia tarifas o políticas, afecta la comunicación. Alternativas: SMS, correo, llamadas.</td>
+</tr>
+<tr>
+<td><strong>Amenaza de servicios sustitutos</strong></td>
+<td>Media</td>
+<td>Consultorios informales y telemedicina. Nuestra ventaja: acompañamiento integral y cumplimiento legal que los sustitutos no ofrecen.</td>
+</tr>
+<tr>
+<td><strong>Rivalidad entre competidores</strong></td>
+<td>Alta</td>
+<td>Competidor directo (clínica de maternidad en Jr. Loreto) con equipamiento completo. La diferenciación debe ser digital: historia clínica electrónica, recordatorios y auditoría.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Riesgos críticos priorizados:</strong>
+1. <strong>Dependencia de Meta (WhatsApp)</strong> – Canal principal de comunicación. Si se restringe, se debe activar plan de contingencia (SMS, llamadas).
+2. <strong>Conectividad a Internet</strong> – Sin conexión, el sistema en la nube es inaccesible. Se recomienda un enlace de respaldo.
+3. <strong>Hosting VPS</strong> – Caída del servidor paraliza la operación. Se debe tener un proveedor alternativo preconfigurado.</p>
+<hr />
+<h2 id="analisis-foda-swot-y-estrategias-resultantes">📊 Análisis FODA (SWOT) y Estrategias Resultantes</h2>
+<h3 id="factores-internos">Factores Internos</h3>
+<table>
+<thead>
+<tr>
+<th>Fortalezas</th>
+<th>Debilidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sistema clínico propio e integrado (ASP.NET Core, Blazor, PostgreSQL)</td>
+<td>Escasa presencia en redes sociales (Facebook casi inactivo, TikTok nulo)</td>
+</tr>
+<tr>
+<td>Automatización de recordatorios por WhatsApp (Evolution API)</td>
+<td>Dependencia de Meta (WhatsApp) como canal principal</td>
+</tr>
+<tr>
+<td>Historia clínica electrónica que elimina el papel y reduce errores</td>
+<td>Migración en curso de 5,000 registros históricos desde Excel y papel</td>
+</tr>
+<tr>
+<td>Personal asistencial colegiado y habilitado</td>
+<td>Desarrollo "gratuito" solo el primer año; a partir del segundo año cada modificación tendrá costo</td>
+</tr>
+<tr>
+<td>Farmacia integrada</td>
+<td>Dependencia de conectividad a Internet y VPS</td>
+</tr>
+<tr>
+<td>Cumplimiento normativo riguroso</td>
+<td>Marketing digital casi nulo</td>
+</tr>
+<tr>
+<td>Arquitectura tecnológica escalable (Docker, Nginx, GitHub Actions)</td>
+<td>Curva de aprendizaje del personal en el sistema digital</td>
+</tr>
+<tr>
+<td>Acompañamiento integral en todas las etapas reproductivas</td>
+<td>Ubicación que compite con consultorios más céntricos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="factores-externos">Factores Externos</h3>
+<table>
+<thead>
+<tr>
+<th>Oportunidades</th>
+<th>Amenazas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crecimiento de la demanda de salud privada en Juliaca</td>
+<td>Competidor directo bien equipado (clínica de maternidad en Jr. Loreto)</td>
+</tr>
+<tr>
+<td>Expansión planificada a clínica general</td>
+<td>Consultorios informales que compiten por precio y cercanía</td>
+</tr>
+<tr>
+<td>Crecimiento del acceso a smartphones y WhatsApp</td>
+<td>Campañas gratuitas del Estado o brigadas médicas extranjeras</td>
+</tr>
+<tr>
+<td>Posibilidad de alianzas con laboratorios y seguros de salud</td>
+<td>Cambios en la legislación de protección de datos o normativas MINSA/SUSALUD</td>
+</tr>
+<tr>
+<td>Tendencia nacional hacia la digitalización de servicios médicos</td>
+<td>Riesgos de ciberseguridad (ataques, fugas de datos)</td>
+</tr>
+<tr>
+<td>Disponibilidad de tecnologías cloud económicas</td>
+<td>Incremento de costos en servicios externos (VPS, Evolution API)</td>
+</tr>
+<tr>
+<td>Interés creciente por la salud preventiva y planificación familiar</td>
+<td>Telemedicina como sustituto creciente para consultas de seguimiento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estrategias-resultantes-del-cruce-foda">Estrategias Resultantes del Cruce FODA</h3>
+<ol>
+<li>
+<p><strong>FO (Fortalezas + Oportunidades):</strong> Afianzar la diferenciación digital para captar el crecimiento de la demanda. Utilizar el sistema propio, los recordatorios por WhatsApp y la farmacia integrada como argumentos de venta frente a pacientes que migran del sistema público. Comunicar estos diferenciadores activamente una vez que se fortalezca el marketing digital.</p>
+</li>
+<li>
+<p><strong>DO (Debilidades + Oportunidades):</strong> Lanzar un plan de marketing digital progresivo para revertir la baja visibilidad en redes sociales y aprovechar el interés creciente por la salud privada y la expansión a clínica general. Priorizar Facebook y TikTok con contenido educativo y testimonial.</p>
+</li>
+<li>
+<p><strong>FA (Fortalezas + Amenazas):</strong> Blindar la operación frente al competidor de Jr. Loreto profundizando la ventaja del acompañamiento integral que ese competidor no tiene digitalizado. Migrar los 5,000 registros históricos con precisión para tener una base de pacientes fidelizadas lista para reactivar.</p>
+</li>
+<li>
+<p><strong>DA (Debilidades + Amenazas):</strong> Mitigar la dependencia de WhatsApp y la informalidad del entorno manteniendo operativos los canales alternativos (SMS, llamadas, correo) ante cualquier cambio de Meta. Reforzar el cumplimiento normativo como escudo frente a los consultorios informales que no pueden igualarlo.</p>
+</li>
+</ol>
+<hr />
+<h2 id="matriz-de-ansoff-opciones-de-crecimiento">📈 Matriz de Ansoff (Opciones de Crecimiento)</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Mercados Actuales (Juliaca)</th>
+<th>Nuevos Mercados (Distritos, Puno)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Servicios Actuales (Salud Materna)</strong></td>
+<td><strong>Penetración de mercado:</strong> Incrementar participación mediante marketing digital, fidelización con recordatorios y captación de pacientes que hoy van a consultorios informales.</td>
+<td><strong>Desarrollo de mercado:</strong> Atraer pacientes de comunidades cercanas comunicando el diferenciador digital y el acompañamiento integral.</td>
+</tr>
+<tr>
+<td><strong>Nuevos Servicios (Clínica General)</strong></td>
+<td><strong>Desarrollo de servicios:</strong> Ampliar cartera con medicina general, pediatría y ginecología ampliada, aprovechando la infraestructura y el sistema existentes.</td>
+<td><strong>Diversificación:</strong> Abrir sedes satélite o establecer alianzas con centros de salud de otras localidades para ofrecer servicios integrados de clínica general.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resumen-estrategico-para-el-equipo-de-desarrollo">📝 Resumen Estratégico para el Equipo de Desarrollo</h2>
+<ul>
+<li><strong>Prioridad inmediata:</strong> Finalizar la migración de los 5,000 registros históricos para consolidar la base de pacientes y habilitar la reactivación automatizada.</li>
+<li><strong>Riesgo crítico:</strong> Dependencia de WhatsApp. Tener siempre listo el plan B (SMS, correo, llamadas) y monitorear cambios en la API de Meta.</li>
+<li><strong>Oportunidad:</strong> La expansión a clínica general requiere que el sistema esté preparado para nuevas especialidades, flujos de ingresos y roles de usuario. La arquitectura hexagonal ya lo soporta; solo hay que extender los módulos.</li>
+<li><strong>Comunicación:</strong> Fortalecer la presencia en redes sociales para traducir el diferencial tecnológico en nuevos pacientes. El sistema debe facilitar la generación de contenido (testimonios, estadísticas, recordatorios de campañas).</li>
+<li><strong>Sostenibilidad:</strong> Planificar el presupuesto para el desarrollo a partir del segundo año, priorizando funcionalidades con mayor retorno sobre la inversión (automatización de seguimiento, reportes gerenciales, integración con laboratorios).</li>
+</ul>
+<hr />
+<p>Este análisis estratégico es el <strong>marco de decisión</strong> para el desarrollo del sistema. Cada nueva funcionalidad debe evaluarse a la luz de estas fuerzas y oportunidades.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
