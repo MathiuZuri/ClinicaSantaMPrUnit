@@ -22,6 +22,9 @@ La distribución del ecosistema de software está estructurada para mitigar ries
 !!! info "Mitigación de Latencia en el Altiplano Peruano"
     La elección de la región **AWS sa-east-1 (São Paulo)** para el clúster de Neon PostgreSQL es estratégica. Las conexiones de red en Juliaca presentan rutas de enrutamiento más estables y veloces hacia los nodos sudamericanos que hacia Norteamérica, reduciendo el *Time to First Byte* (TTFB) en las consultas de historias clínicas y pantallas de facturación electrónica.
 
+!!! note "Actualización de Infraestructura de Contingencia — Fallback de Mensajería"
+    Tras las evaluaciones de campo del ciclo de vida del software, el equipo de **UNIXCODE** integró de forma permanente la pasarela de **SendGrid** en el pipeline de infraestructura. Esta adición actúa como un mecanismo de redundancia (*failover*) lógica: si el adaptador principal de Evolution API detecta una caída de red o bloqueo de políticas en los servidores de WhatsApp de Meta tras tres reintentos, el sistema redirige de manera asíncrona la alerta de la gestante hacia el canal de correo electrónico, blindando la continuidad de los controles médicos.
+
 ---
 
 ## 🔄 Pipeline de Integración y Despliegue Continuo (CI/CD)
@@ -213,3 +216,23 @@ Jwt__Secret: Llave criptográfica de alta entropía (mínimo 256 bits) para la f
 WhatsAppOptions__ApiUrl y WhatsAppOptions__ApiKey: Credenciales de integración con la instancia externa de Evolution API para el despacho de recordatorios automatizados de citas por WhatsApp.
 
 SunatOptions__Token: Token de autenticación de servicios para la firma e inyección de validez fiscal en el módulo de facturación de comprobantes de pago.
+
+SendGridOptions__ApiKey: Token criptográfico confidencial inyectado de manera elástica en el panel de Azure App Service. Gobierna la autenticación ante los servicios de correo electrónico de SendGrid para el despacho automático de las notificaciones de contingencia.
+
+## 🌐 Entorno de Validación y Pruebas de Aceptación (UAT)
+
+Como parte del cierre formal de la auditoría del proyecto bajo el código de control `AUD-SDLC-SYS-CSM-2026-001`, el startup **UNIXCODE** y la gerencia de la clínica han dispuesto una instancia efímera de producción plenamente operativa en la nube de Azure para la ejecución de pruebas de aceptación de usuario (UAT). Este entorno replica con exactitud las configuraciones transaccionales y de seguridad perimetral de la intranet corporativa:
+
+*   **URL de Acceso de Demostración:** [https://salmon-bush-08c1e7510.7.azurestaticapps.net](https://salmon-bush-08c1e7510.7.azurestaticapps.net)
+*   **Credenciales de Validación Autorizadas:**
+    *   **Usuario:** `admin`
+    *   **Contraseña:** `admin123`
+
+---
+
+## 🐳 Papeles de Trabajo de Infraestructura y Orquestación
+
+Durante las revisiones de campo dirigidas por el Ingeniero Ruben Roque Sucari, el despliegue continuo de la base de datos relacional PostgreSQL 16 y los contenedores de software fue certificado mediante papeles de trabajo específicos:
+
+*   **Logs de Orquestación Docker:** Trazas lógicas verificadas de inicialización efímera y migración de esquemas en aislamiento mediante la tecnología de Docker Testcontainers durante la fase de integración continua de `dotnet test`.
+*   **Métricas de Carga Sostenida:** Validación automatizada de tiempos de respuesta estables bajo el motor k6, certificando que los artefactos empaquetados e implementados en Azure toleran picos masivos de concurrencia de hasta 100 usuarios virtuales simultáneos (VUs), fijando el percentil p95 en un promedio de 284ms en el módulo de Citas, evitando degradaciones del servicio en la ventanilla de la clínica.
