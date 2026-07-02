@@ -1129,6 +1129,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#entorno-de-validacion-y-pruebas-de-aceptacion-uat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 Entorno de Validación y Pruebas de Aceptación (UAT)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#papeles-de-trabajo-de-infraestructura-y-orquestacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐳 Papeles de Trabajo de Infraestructura y Orquestación
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1249,6 +1271,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#entorno-de-validacion-y-pruebas-de-aceptacion-uat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 Entorno de Validación y Pruebas de Aceptación (UAT)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#papeles-de-trabajo-de-infraestructura-y-orquestacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐳 Papeles de Trabajo de Infraestructura y Orquestación
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1323,6 +1367,10 @@
 <div class="admonition info">
 <p class="admonition-title">Mitigación de Latencia en el Altiplano Peruano</p>
 <p>La elección de la región <strong>AWS sa-east-1 (São Paulo)</strong> para el clúster de Neon PostgreSQL es estratégica. Las conexiones de red en Juliaca presentan rutas de enrutamiento más estables y veloces hacia los nodos sudamericanos que hacia Norteamérica, reduciendo el <em>Time to First Byte</em> (TTFB) en las consultas de historias clínicas y pantallas de facturación electrónica.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Actualización de Infraestructura de Contingencia — Fallback de Mensajería</p>
+<p>Tras las evaluaciones de campo del ciclo de vida del software, el equipo de <strong>UNIXCODE</strong> integró de forma permanente la pasarela de <strong>SendGrid</strong> en el pipeline de infraestructura. Esta adición actúa como un mecanismo de redundancia (<em>failover</em>) lógica: si el adaptador principal de Evolution API detecta una caída de red o bloqueo de políticas en los servidores de WhatsApp de Meta tras tres reintentos, el sistema redirige de manera asíncrona la alerta de la gestante hacia el canal de correo electrónico, blindando la continuidad de los controles médicos.</p>
 </div>
 <hr />
 <h2 id="pipeline-de-integracion-y-despliegue-continuo-cicd">🔄 Pipeline de Integración y Despliegue Continuo (CI/CD)</h2>
@@ -1499,6 +1547,24 @@
 <p>Jwt__Secret: Llave criptográfica de alta entropía (mínimo 256 bits) para la firma y validación de tokens de acceso del personal médico.</p>
 <p>WhatsAppOptions__ApiUrl y WhatsAppOptions__ApiKey: Credenciales de integración con la instancia externa de Evolution API para el despacho de recordatorios automatizados de citas por WhatsApp.</p>
 <p>SunatOptions__Token: Token de autenticación de servicios para la firma e inyección de validez fiscal en el módulo de facturación de comprobantes de pago.</p>
+<p>SendGridOptions__ApiKey: Token criptográfico confidencial inyectado de manera elástica en el panel de Azure App Service. Gobierna la autenticación ante los servicios de correo electrónico de SendGrid para el despacho automático de las notificaciones de contingencia.</p>
+<h2 id="entorno-de-validacion-y-pruebas-de-aceptacion-uat">🌐 Entorno de Validación y Pruebas de Aceptación (UAT)</h2>
+<p>Como parte del cierre formal de la auditoría del proyecto bajo el código de control <code>AUD-SDLC-SYS-CSM-2026-001</code>, el startup <strong>UNIXCODE</strong> y la gerencia de la clínica han dispuesto una instancia efímera de producción plenamente operativa en la nube de Azure para la ejecución de pruebas de aceptación de usuario (UAT). Este entorno replica con exactitud las configuraciones transaccionales y de seguridad perimetral de la intranet corporativa:</p>
+<ul>
+<li><strong>URL de Acceso de Demostración:</strong> <a href="https://salmon-bush-08c1e7510.7.azurestaticapps.net">https://salmon-bush-08c1e7510.7.azurestaticapps.net</a></li>
+<li><strong>Credenciales de Validación Autorizadas:</strong><ul>
+<li><strong>Usuario:</strong> <code>admin</code></li>
+<li><strong>Contraseña:</strong> <code>admin123</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="papeles-de-trabajo-de-infraestructura-y-orquestacion">🐳 Papeles de Trabajo de Infraestructura y Orquestación</h2>
+<p>Durante las revisiones de campo dirigidas por el Ingeniero Ruben Roque Sucari, el despliegue continuo de la base de datos relacional PostgreSQL 16 y los contenedores de software fue certificado mediante papeles de trabajo específicos:</p>
+<ul>
+<li><strong>Logs de Orquestación Docker:</strong> Trazas lógicas verificadas de inicialización efímera y migración de esquemas en aislamiento mediante la tecnología de Docker Testcontainers durante la fase de integración continua de <code>dotnet test</code>.</li>
+<li><strong>Métricas de Carga Sostenida:</strong> Validación automatizada de tiempos de respuesta estables bajo el motor k6, certificando que los artefactos empaquetados e implementados en Azure toleran picos masivos de concurrencia de hasta 100 usuarios virtuales simultáneos (VUs), fijando el percentil p95 en un promedio de 284ms en el módulo de Citas, evitando degradaciones del servicio en la ventanilla de la clínica.</li>
+</ul>
 
 
 

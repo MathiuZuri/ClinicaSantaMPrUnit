@@ -774,7 +774,18 @@
   <a href="#proyeccion-de-metricas-para-la-expansion-a-clinica-general" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📈 Proyección de Métricas para la Expansión a Clínica General
+        🚀 Proyección de Métricas para la Expansión a Clínica General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-del-entorno-de-aceptacion-uat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 Verificación del Entorno de Aceptación (UAT)
       
     </span>
   </a>
@@ -1264,7 +1275,18 @@
   <a href="#proyeccion-de-metricas-para-la-expansion-a-clinica-general" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📈 Proyección de Métricas para la Expansión a Clínica General
+        🚀 Proyección de Métricas para la Expansión a Clínica General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-del-entorno-de-aceptacion-uat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 Verificación del Entorno de Aceptación (UAT)
       
     </span>
   </a>
@@ -1289,7 +1311,8 @@
 
 
 <h1 id="metricas-y-kpis-del-sistema-sys-clinica-santa-monica">📊 Métricas y KPIs del Sistema — SYS Clínica Santa Mónica</h1>
-<p>Este documento consolida los principales indicadores de calidad, rendimiento y negocio que permiten evaluar la salud del sistema <strong>SYS Clínica Santa Mónica</strong> y su impacto en la operación de la clínica. Las métricas se dividen en tres categorías: <strong>técnicas</strong> (calidad del código, rendimiento), <strong>operativas</strong> (uso del sistema por el personal) y <strong>de negocio</strong> (impacto en la atención y la fidelización de pacientes).</p>
+<p>Este documento consolida los principales indicadores de calidad, rendimiento y negocio que permiten evaluar la salud del sistema <strong>SYS Clínica Santa Mónica</strong> y su impacto en la operación de la clínica. Las métricas se dividen en tres categorías: <strong>técnicas</strong> (calidad del código, rendimiento), <strong>operativas</strong> (uso del sistema por el personal) y <strong>de negocio</strong> (impacto en la atención y la fidelización de pacientes). </p>
+<p>Estas métricas reflejan el estado real verificado por el equipo de desarrollo <strong>UNIXCODE</strong> y validadas formalmente en el cierre de auditoría del ciclo de vida del software (SDLC) finalizado con éxito en julio de 2026.</p>
 <hr />
 <h2 id="proposito-de-las-metricas">🎯 Propósito de las Métricas</h2>
 <p>La medición sistemática de indicadores es un pilar de la filosofía de <strong>mejora continua</strong> de la Clínica Santa Mónica. Estas métricas permiten:</p>
@@ -1301,80 +1324,80 @@
 </ul>
 <hr />
 <h2 id="metricas-tecnicas-calidad-y-rendimiento-del-software">📊 Métricas Técnicas (Calidad y Rendimiento del Software)</h2>
-<p>Estas métricas evalúan la robustez, seguridad y eficiencia del sistema desde la perspectiva de la ingeniería de software.</p>
+<p>Estas métricas evalúan la robustez, seguridad y eficiencia del sistema desde la perspectiva de la ingeniería de software, alineadas con los estándares ISO/IEC 25010 y validadas en el entorno real de QA.</p>
 <table>
 <thead>
 <tr>
-<th>Métrica</th>
-<th>Descripción</th>
-<th>Valor Objetivo</th>
-<th>Estado Actual</th>
-<th>Frecuencia de Medición</th>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Valor Objetivo</th>
+<th style="text-align: left;">Estado Actual</th>
+<th style="text-align: left;">Frecuencia de Medición</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Cobertura de Código</strong></td>
-<td>Porcentaje de líneas de código ejecutadas por pruebas unitarias e integración (medido con Coverlet).</td>
-<td>&gt;80%</td>
-<td><strong>85%</strong> (backend), <strong>72%</strong> (frontend)</td>
-<td>Por cada pull request</td>
+<td style="text-align: left;"><strong>Cobertura de Código</strong></td>
+<td style="text-align: left;">Porcentaje de líneas de código ejecutadas por pruebas unitarias e integración (medido con Coverlet).</td>
+<td style="text-align: left;">&gt;80%</td>
+<td style="text-align: left;"><strong>85%</strong> (backend), <strong>72%</strong> (frontend)<br><em>(Módulo Finanzas corregido de 56.8% a &gt;80% con NSubstitute)</em></td>
+<td style="text-align: left;">Por cada pull request</td>
 </tr>
 <tr>
-<td><strong>Densidad de Bugs</strong></td>
-<td>Número de bugs críticos por cada 1,000 líneas de código (identificados por SonarCloud).</td>
-<td>&lt;0.5</td>
-<td><strong>0.3</strong></td>
-<td>Semanal</td>
+<td style="text-align: left;"><strong>Densidad de Bugs</strong></td>
+<td style="text-align: left;">Número de bugs críticos por cada 1,000 líneas de código (identificados por SonarCloud).</td>
+<td style="text-align: left;">&lt;0.5</td>
+<td style="text-align: left;"><strong>0</strong> <em>(Calificación A por SonarCloud)</em></td>
+<td style="text-align: left;">Semanal</td>
 </tr>
 <tr>
-<td><strong>Deuda Técnica</strong></td>
-<td>Tiempo estimado para corregir todos los problemas de mantenibilidad (en horas).</td>
-<td>&lt;20 horas</td>
-<td><strong>12 horas</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Deuda Técnica</strong></td>
+<td style="text-align: left;">Tiempo estimado para corregir todos los problemas de mantenibilidad (en horas).</td>
+<td style="text-align: left;">&lt;20 horas</td>
+<td style="text-align: left;"><strong>12 horas</strong> <em>(Calificación A en mantenibilidad)</em></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Tiempo de Respuesta de la API</strong></td>
-<td>Latencia promedio de los endpoints críticos (<code>/api/atenciones</code>, <code>/api/citas</code>) bajo carga normal.</td>
-<td>&lt;200 ms</td>
-<td><strong>180 ms</strong></td>
-<td>Diario</td>
+<td style="text-align: left;"><strong>Tiempo de Respuesta de la API</strong></td>
+<td style="text-align: left;">Latencia promedio de los endpoints críticos (<code>/api/atenciones</code>, <code>/api/citas</code>) bajo carga normal y estrés.</td>
+<td style="text-align: left;">&lt;200 ms</td>
+<td style="text-align: left;"><strong>180 ms</strong> <em>(Bajo carga normal)</em><br><strong>284 ms</strong> <em>(Bajo estrés extremo de 100 VUs en k6)</em></td>
+<td style="text-align: left;">Diario</td>
 </tr>
 <tr>
-<td><strong>Tasa de Errores HTTP</strong></td>
-<td>Porcentaje de peticiones que retornan códigos 5xx.</td>
-<td>&lt;0.5%</td>
-<td><strong>0.2%</strong></td>
-<td>Diario</td>
+<td style="text-align: left;"><strong>Tasa de Errores HTTP</strong></td>
+<td style="text-align: left;">Porcentaje de peticiones que retornan códigos 5xx.</td>
+<td style="text-align: left;">&lt;0.5%</td>
+<td style="text-align: left;"><strong>0.2%</strong></td>
+<td style="text-align: left;">Diario</td>
 </tr>
 <tr>
-<td><strong>Tiempo de Inactividad (Uptime)</strong></td>
-<td>Disponibilidad del sistema en la nube (Azure y Neon.tech).</td>
-<td>&gt;99.5%</td>
-<td><strong>99.7%</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Tiempo de Inactividad (Uptime)</strong></td>
+<td style="text-align: left;">Disponibilidad del sistema en la nube (Azure y Neon.tech).</td>
+<td style="text-align: left;">&gt;99.5%</td>
+<td style="text-align: left;"><strong>99.7%</strong></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Velocidad de Despliegue</strong></td>
-<td>Tiempo promedio desde el commit hasta el despliegue en producción (CI/CD).</td>
-<td>&lt;10 min</td>
-<td><strong>8 min</strong></td>
-<td>Por despliegue</td>
+<td style="text-align: left;"><strong>Velocidad de Despliegue</strong></td>
+<td style="text-align: left;">Tiempo promedio desde el commit hasta el despliegue en producción (CI/CD).</td>
+<td style="text-align: left;">&lt;10 min</td>
+<td style="text-align: left;"><strong>8 min</strong></td>
+<td style="text-align: left;">Por despliegue</td>
 </tr>
 <tr>
-<td><strong>Cobertura de Pruebas de Integración</strong></td>
-<td>Porcentaje de flujos críticos cubiertos por pruebas de integración (Testcontainers).</td>
-<td>&gt;70%</td>
-<td><strong>75%</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Cobertura de Pruebas de Integración</strong></td>
+<td style="text-align: left;">Porcentaje de flujos críticos cubiertos por pruebas de integración (Testcontainers).</td>
+<td style="text-align: left;">&gt;70%</td>
+<td style="text-align: left;"><strong>75%</strong></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Vulnerabilidades de Seguridad</strong></td>
-<td>Número de vulnerabilidades de alta severidad detectadas por Snyk.</td>
-<td>0</td>
-<td><strong>0</strong></td>
-<td>Semanal</td>
+<td style="text-align: left;"><strong>Vulnerabilidades de Seguridad</strong></td>
+<td style="text-align: left;">Número de vulnerabilidades de alta severidad detectadas por Snyk y SonarCloud.</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;"><strong>0</strong> <em>(2 falsos positivos bloqueantes en blazor.boot.json fueron corregidos y excluidos)</em></td>
+<td style="text-align: left;">Semanal</td>
 </tr>
 </tbody>
 </table>
@@ -1384,62 +1407,62 @@
 <table>
 <thead>
 <tr>
-<th>Métrica</th>
-<th>Descripción</th>
-<th>Valor Actual</th>
-<th>Tendencia</th>
-<th>Frecuencia de Medición</th>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Valor Actual</th>
+<th style="text-align: left;">Tendencia</th>
+<th style="text-align: left;">Frecuencia de Medición</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Tasa de Adopción del Sistema</strong></td>
-<td>Porcentaje del personal que utiliza activamente el sistema para sus tareas diarias.</td>
-<td>92%</td>
-<td><strong>En aumento</strong> (capacitación continua)</td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Tasa de Adopción del Sistema</strong></td>
+<td style="text-align: left;">Porcentaje del personal que utiliza activamente el sistema para sus tareas diarias.</td>
+<td style="text-align: left;">92%</td>
+<td style="text-align: left;"><strong>En aumento</strong> (capacitación continua)</td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Tiempo Promedio de Registro de Paciente</strong></td>
-<td>Tiempo que tarda una recepcionista en registrar un nuevo paciente en el sistema.</td>
-<td>2.5 min</td>
-<td><strong>Reduciendo</strong> (automatización)</td>
-<td>Semanal</td>
+<td style="text-align: left;"><strong>Tiempo Promedio de Registro de Paciente</strong></td>
+<td style="text-align: left;">Tiempo que tarda una recepcionista en registrar un nuevo paciente en el sistema.</td>
+<td style="text-align: left;">2.5 min</td>
+<td style="text-align: left;"><strong>Reduciendo</strong> (automatización)</td>
+<td style="text-align: left;">Semanal</td>
 </tr>
 <tr>
-<td><strong>Tiempo Promedio de Programación de Cita</strong></td>
-<td>Tiempo desde que se solicita una cita hasta que queda registrada en el sistema.</td>
-<td>3 min</td>
-<td><strong>Estable</strong></td>
-<td>Semanal</td>
+<td style="text-align: left;"><strong>Tiempo Promedio de Programación de Cita</strong></td>
+<td style="text-align: left;">Tiempo desde que se solicita una cita hasta que queda registrada en el sistema.</td>
+<td style="text-align: left;">3 min</td>
+<td style="text-align: left;"><strong>Estable</strong></td>
+<td style="text-align: left;">Semanal</td>
 </tr>
 <tr>
-<td><strong>Número de Incidencias Reportadas</strong></td>
-<td>Tickets de soporte técnico abiertos por el personal.</td>
-<td>12 por mes</td>
-<td><strong>Descendiendo</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Número de Incidencias Reportadas</strong></td>
+<td style="text-align: left;">Tickets de soporte técnico abiertos por el personal.</td>
+<td style="text-align: left;">12 por mes</td>
+<td style="text-align: left;"><strong>Descendiendo</strong></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Tasa de Satisfacción del Personal</strong></td>
-<td>Encuesta interna sobre la usabilidad y utilidad del sistema.</td>
-<td>4.2/5</td>
-<td><strong>Estable</strong></td>
-<td>Trimestral</td>
+<td style="text-align: left;"><strong>Tasa de Satisfacción del Personal</strong></td>
+<td style="text-align: left;">Encuesta interna sobre la usabilidad y utilidad del sistema.</td>
+<td style="text-align: left;">4.2/5</td>
+<td style="text-align: left;"><strong>Estable</strong></td>
+<td style="text-align: left;">Trimestral</td>
 </tr>
 <tr>
-<td><strong>Porcentaje de Citas Programadas Sin Conflictos</strong></td>
-<td>Citas que no requieren reprogramación por sobreposición (validación <code>ExisteInterferenciaHorarioAsync</code>).</td>
-<td>98%</td>
-<td><strong>Estable</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Porcentaje de Citas Programadas Sin Conflictos</strong></td>
+<td style="text-align: left;">Citas que no requieren reprogramación por sobreposición (validación <code>ExisteInterferenciaHorarioAsync</code>).</td>
+<td style="text-align: left;">98%</td>
+<td style="text-align: left;"><strong>Estable</strong></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Tiempo de Capacitación Promedio</strong></td>
-<td>Horas de entrenamiento necesarias para que un nuevo usuario alcance competencia básica en el sistema.</td>
-<td>4 horas</td>
-<td><strong>Reduciendo</strong> (mejora de UX)</td>
-<td>Por nuevo usuario</td>
+<td style="text-align: left;"><strong>Tiempo de Capacitación Promedio</strong></td>
+<td style="text-align: left;">Horas de entrenamiento necesarias para que un nuevo usuario alcance competencia básica en el sistema.</td>
+<td style="text-align: left;">4 horas</td>
+<td style="text-align: left;"><strong>Reduciendo</strong> (mejora de UX)</td>
+<td style="text-align: left;">Por nuevo usuario</td>
 </tr>
 </tbody>
 </table>
@@ -1449,76 +1472,76 @@
 <table>
 <thead>
 <tr>
-<th>Métrica</th>
-<th>Descripción</th>
-<th>Valor Actual</th>
-<th>Tendencia</th>
-<th>Frecuencia de Medición</th>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Valor Actual</th>
+<th style="text-align: left;">Tendencia</th>
+<th style="text-align: left;">Frecuencia de Medición</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Tasa de Reconsulta de Pacientes</strong></td>
-<td>Porcentaje de pacientes que regresan para una segunda consulta o control dentro del mismo año.</td>
-<td>65%</td>
-<td><strong>Aumentando</strong> (gracias a recordatorios y seguimiento)</td>
-<td>Trimestral</td>
+<td style="text-align: left;"><strong>Tasa de Reconsulta de Pacientes</strong></td>
+<td style="text-align: left;">Porcentaje de pacientes que regresan para una segunda consulta o control dentro del mismo año.</td>
+<td style="text-align: left;">65%</td>
+<td style="text-align: left;"><strong>Aumentando</strong> (gracias a recordatorios y seguimiento)</td>
+<td style="text-align: left;">Trimestral</td>
 </tr>
 <tr>
-<td><strong>Tasa de Ausentismo</strong></td>
-<td>Porcentaje de citas programadas que no se concretan (sin previo aviso).</td>
-<td>12%</td>
-<td><strong>Descendiendo</strong> (recordatorios automáticos)</td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Tasa de Ausentismo</strong></td>
+<td style="text-align: left;">Porcentaje de citas programadas que no se concretan (sin previo aviso).</td>
+<td style="text-align: left;">12%</td>
+<td style="text-align: left;"><strong>Descendiendo</strong> (recordatorios automáticos de WhatsApp)</td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Tiempo de Espera Promedio en Recepción</strong></td>
-<td>Tiempo desde la llegada de la paciente hasta el inicio de la consulta.</td>
-<td>8 min</td>
-<td><strong>Reduciendo</strong> (agenda optimizada)</td>
-<td>Semanal</td>
+<td style="text-align: left;"><strong>Tiempo de Espera Promedio en Recepción</strong></td>
+<td style="text-align: left;">Tiempo desde la llegada de la paciente hasta el inicio de la consulta.</td>
+<td style="text-align: left;">8 min</td>
+<td style="text-align: left;"><strong>Reduciendo</strong> (agenda optimizada)</td>
+<td style="text-align: left;">Semanal</td>
 </tr>
 <tr>
-<td><strong>Duración Promedio de Consulta</strong></td>
-<td>Tiempo que el médico u obstetra dedica a cada paciente.</td>
-<td>20 min</td>
-<td><strong>Estable</strong> (calidad asistencial)</td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Duración Promedio de Consulta</strong></td>
+<td style="text-align: left;">Tiempo que el médico u obstetra dedica a cada paciente.</td>
+<td style="text-align: left;">20 min</td>
+<td style="text-align: left;"><strong>Estable</strong> (calidad asistencial)</td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Porcentaje de Pacientes con Historial Digital</strong></td>
-<td>Pacientes que tienen su historial clínico completamente migrado al sistema electrónico.</td>
-<td>60% (3,000 de 5,000)</td>
-<td><strong>Acelerando</strong> (meta: 100% al final del año)</td>
-<td>Trimestral</td>
+<td style="text-align: left;"><strong>Porcentaje de Pacientes con Historial Digital</strong></td>
+<td style="text-align: left;">Pacientes que tienen su historial clínico completamente migrado al sistema electrónico.</td>
+<td style="text-align: left;">60% (3,000 de 5,000)</td>
+<td style="text-align: left;"><strong>Acelerando</strong> (meta: 100% al final del año)</td>
+<td style="text-align: left;">Trimestral</td>
 </tr>
 <tr>
-<td><strong>Ingresos por Servicio</strong></td>
-<td>Distribución de los ingresos entre los distintos servicios (consultas, ecografías, partos, farmacia).</td>
-<td>Consultas: 40%<br>Ecografías: 25%<br>Partos: 20%<br>Farmacia: 15%</td>
-<td><strong>Estable</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Ingresos por Servicio</strong></td>
+<td style="text-align: left;">Distribución de los ingresos entre los distintos servicios (consultas, ecografías, partos, farmacia).</td>
+<td style="text-align: left;">Consultas: 40%<br>Ecografías: 25%<br>Partos: 20%<br>Farmacia: 15%</td>
+<td style="text-align: left;"><strong>Estable</strong></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 <tr>
-<td><strong>Tasa de Fidelización</strong></td>
-<td>Pacientes que han regresado para al menos un control posterior al parto.</td>
-<td>70%</td>
-<td><strong>Aumentando</strong></td>
-<td>Trimestral</td>
+<td style="text-align: left;"><strong>Tasa de Fidelización</strong></td>
+<td style="text-align: left;">Pacientes que han regresado para al menos un control posterior al parto.</td>
+<td style="text-align: left;">70%</td>
+<td style="text-align: left;"><strong>Aumentando</strong></td>
+<td style="text-align: left;">Trimestral</td>
 </tr>
 <tr>
-<td><strong>NPS (Net Promoter Score)</strong></td>
-<td>Probabilidad de que una paciente recomiende la clínica a otras personas (escala 0-10).</td>
-<td>8.5</td>
-<td><strong>Mejorando</strong></td>
-<td>Trimestral</td>
+<td style="text-align: left;"><strong>NPS (Net Promoter Score)</strong></td>
+<td style="text-align: left;">Probabilidad de que una paciente recomiende la clínica a otras personas (escala 0-10).</td>
+<td style="text-align: left;">8.5</td>
+<td style="text-align: left;"><strong>Mejorando</strong></td>
+<td style="text-align: left;">Trimestral</td>
 </tr>
 <tr>
-<td><strong>Porcentaje de Comprobantes Electrónicos Emitidos</strong></td>
-<td>Cumplimiento de facturación electrónica conforme a SUNAT.</td>
-<td>100% (integración total)</td>
-<td><strong>Estable</strong></td>
-<td>Mensual</td>
+<td style="text-align: left;"><strong>Porcentaje de Comprobantes Electrónicos Emitidos</strong></td>
+<td style="text-align: left;">Cumplimiento de facturación electrónica conforme a SUNAT.</td>
+<td style="text-align: left;">100% (integración total)</td>
+<td style="text-align: left;"><strong>Estable</strong></td>
+<td style="text-align: left;">Mensual</td>
 </tr>
 </tbody>
 </table>
@@ -1528,62 +1551,62 @@
 <table>
 <thead>
 <tr>
-<th>Perspectiva</th>
-<th>Objetivo Estratégico</th>
-<th>Indicador Clave</th>
-<th>Valor Actual</th>
-<th>Meta</th>
+<th style="text-align: left;">Perspectiva</th>
+<th style="text-align: left;">Objetivo Estratégico</th>
+<th style="text-align: left;">Indicador Clave</th>
+<th style="text-align: left;">Valor Actual</th>
+<th style="text-align: left;">Meta</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Financiera</strong></td>
-<td>Incrementar la rentabilidad de la farmacia integrada</td>
-<td>% de recetas dispensadas en la farmacia propia (vs. externas)</td>
-<td>45%</td>
-<td>60%</td>
+<td style="text-align: left;"><strong>Financiera</strong></td>
+<td style="text-align: left;">Incrementar la rentabilidad de la farmacia integrada</td>
+<td style="text-align: left;">% de recetas dispensadas en la farmacia propia (vs. externas)</td>
+<td style="text-align: left;">45%</td>
+<td style="text-align: left;">60%</td>
 </tr>
 <tr>
-<td><strong>Cliente</strong></td>
-<td>Reducir el ausentismo y mejorar la experiencia</td>
-<td>Tasa de ausentismo</td>
-<td>12%</td>
-<td>&lt;8%</td>
+<td style="text-align: left;"><strong>Cliente</strong></td>
+<td style="text-align: left;">Reducir el ausentismo y mejorar la experiencia</td>
+<td style="text-align: left;">Tasa de ausentismo</td>
+<td style="text-align: left;">12%</td>
+<td style="text-align: left;">&lt;8%</td>
 </tr>
 <tr>
-<td><strong>Cliente</strong></td>
-<td>Aumentar la fidelización de pacientes postparto</td>
-<td>Tasa de reconsulta postparto</td>
-<td>65%</td>
-<td>75%</td>
+<td style="text-align: left;"><strong>Cliente</strong></td>
+<td style="text-align: left;">Aumentar la fidelización de pacientes postparto</td>
+<td style="text-align: left;">Tasa de reconsulta postparto</td>
+<td style="text-align: left;">65%</td>
+<td style="text-align: left;">75%</td>
 </tr>
 <tr>
-<td><strong>Procesos Internos</strong></td>
-<td>Optimizar la ocupación de consultorios</td>
-<td>Ocupación promedio de consultorios</td>
-<td>75%</td>
-<td>85%</td>
+<td style="text-align: left;"><strong>Procesos Internos</strong></td>
+<td style="text-align: left;">Optimizar la ocupación de consultorios</td>
+<td style="text-align: left;">Ocupación promedio de consultorios</td>
+<td style="text-align: left;"><strong>12.5%</strong> <em>(Línea base inicial en auditoría; en incremento)</em></td>
+<td style="text-align: left;">85%</td>
 </tr>
 <tr>
-<td><strong>Procesos Internos</strong></td>
-<td>Minimizar errores administrativos</td>
-<td>Tasa de errores en registro de pacientes</td>
-<td>2%</td>
-<td>&lt;1%</td>
+<td style="text-align: left;"><strong>Procesos Internos</strong></td>
+<td style="text-align: left;">Minimizar errores administrativos</td>
+<td style="text-align: left;">Tasa de errores en registro de pacientes</td>
+<td style="text-align: left;">2%</td>
+<td style="text-align: left;">&lt;1%</td>
 </tr>
 <tr>
-<td><strong>Aprendizaje/Crecimiento</strong></td>
-<td>Acelerar la adopción digital del personal</td>
-<td>% de personal con capacitación completa</td>
-<td>80%</td>
-<td>100%</td>
+<td style="text-align: left;"><strong>Aprendizaje/Crecimiento</strong></td>
+<td style="text-align: left;">Acelerar la adopción digital del personal</td>
+<td style="text-align: left;">% de personal con capacitación completa</td>
+<td style="text-align: left;">80%</td>
+<td style="text-align: left;">100%</td>
 </tr>
 <tr>
-<td><strong>Aprendizaje/Crecimiento</strong></td>
-<td>Reducir el tiempo de resolución de incidencias</td>
-<td>Tiempo promedio de cierre de tickets de soporte</td>
-<td>4 horas</td>
-<td>&lt;2 horas</td>
+<td style="text-align: left;"><strong>Aprendizaje/Crecimiento</strong></td>
+<td style="text-align: left;">Reducir el tiempo de resolución de incidencias</td>
+<td style="text-align: left;">Tiempo promedio de cierre de tickets de soporte</td>
+<td style="text-align: left;">4 horas</td>
+<td style="text-align: left;">&lt;2 horas</td>
 </tr>
 </tbody>
 </table>
@@ -1593,103 +1616,113 @@
 <table>
 <thead>
 <tr>
-<th>Herramienta</th>
-<th>Métricas que Recolecta</th>
-<th>Frecuencia de Recolección</th>
+<th style="text-align: left;">Herramienta</th>
+<th style="text-align: left;">Métricas que Recolecta</th>
+<th style="text-align: left;">Frecuencia de Recolección</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>SonarCloud</strong></td>
-<td>Cobertura de código, densidad de bugs, deuda técnica, vulnerabilidades</td>
-<td>Por cada build (GitHub Actions)</td>
+<td style="text-align: left;"><strong>SonarCloud</strong></td>
+<td style="text-align: left;">Cobertura de código, densidad de bugs, deuda técnica, vulnerabilidades e índices de confiabilidad.</td>
+<td style="text-align: left;">Por cada build (GitHub Actions)</td>
 </tr>
 <tr>
-<td><strong>Snyk</strong></td>
-<td>Vulnerabilidades en dependencias</td>
-<td>Diario</td>
+<td style="text-align: left;"><strong>Snyk</strong></td>
+<td style="text-align: left;">Vulnerabilidades en dependencias de paquetes NuGet</td>
+<td style="text-align: left;">Diario</td>
 </tr>
 <tr>
-<td><strong>Azure Application Insights</strong></td>
-<td>Tiempo de respuesta de API, tasa de errores HTTP, uptime</td>
-<td>Tiempo real</td>
+<td style="text-align: left;"><strong>Azure Application Insights</strong></td>
+<td style="text-align: left;">Tiempo de respuesta de API, tasa de errores HTTP, uptime</td>
+<td style="text-align: left;">Tiempo real</td>
 </tr>
 <tr>
-<td><strong>k6 (Grafana)</strong></td>
-<td>Tiempo de respuesta bajo carga, picos de demanda</td>
-<td>Mensual (pruebas de carga)</td>
+<td style="text-align: left;"><strong>k6 (Grafana)</strong></td>
+<td style="text-align: left;">Tiempo de respuesta bajo carga masiva y simulación de hasta 100 usuarios concurrentes (VUs).</td>
+<td style="text-align: left;">Mensual (pruebas de carga)</td>
 </tr>
 <tr>
-<td><strong>Base de datos PostgreSQL</strong></td>
-<td>Métricas operativas: número de citas, pacientes registrados, comprobantes emitidos, ingresos</td>
-<td>Diario (consultas SQL programadas)</td>
+<td style="text-align: left;"><strong>Base de datos PostgreSQL</strong></td>
+<td style="text-align: left;">Métricas operativas: número de citas, pacientes registrados, comprobantes emitidos, ingresos</td>
+<td style="text-align: left;">Diario (consultas SQL programadas)</td>
 </tr>
 <tr>
-<td><strong>Encuestas internas (Google Forms)</strong></td>
-<td>Satisfacción del personal, NPS</td>
-<td>Trimestral</td>
+<td style="text-align: left;"><strong>Encuestas internas (Google Forms)</strong></td>
+<td style="text-align: left;">Satisfacción del personal, NPS</td>
+<td style="text-align: left;">Trimestral</td>
 </tr>
 <tr>
-<td><strong>Bitácora de incidencias (Jira)</strong></td>
-<td>Número y tiempo de resolución de tickets de soporte</td>
-<td>Semanal</td>
+<td style="text-align: left;"><strong>Bitácora de incidencias (Jira)</strong></td>
+<td style="text-align: left;">Número y tiempo de resolución de tickets de soporte y criterios de aceptación (DoD).</td>
+<td style="text-align: left;">Semanal</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="notas-sobre-la-interpretacion-de-las-metricas">📝 Notas sobre la Interpretación de las Métricas</h2>
 <ul>
-<li><strong>La cobertura de código del frontend (72%)</strong> es inferior al objetivo del 80% debido a la complejidad de los componentes MudBlazor. Se planea aumentar la cobertura en el segundo semestre mediante pruebas unitarias de los componentes más críticos (registro de atenciones y agenda de citas).</li>
-<li><strong>La tasa de ausentismo (12%)</strong> sigue siendo un desafío, aunque ha mejorado desde el 18% previo a la implementación de los recordatorios automáticos por WhatsApp. Se espera que la integración de recordatorios personalizados (incluyendo opciones de confirmación interactiva) reduzca aún más esta cifra.</li>
-<li><strong>La migración de los 5,000 registros históricos</strong> es un proyecto prioritario. El avance del 60% implica que aún quedan 2,000 registros por digitalizar. Se recomienda asignar recursos adicionales para completar la migración en el tercer trimestre de 2026.</li>
-<li><strong>El NPS de 8.5</strong> es excelente para el sector salud en Juliaca, pero se busca llegar a 9.0 mediante mejoras en la experiencia de la farmacia integrada (reducción de tiempos de espera en la dispensación).</li>
+<li><strong>La cobertura de código del módulo de Finanzas:</strong> En las primeras fases de auditoría, se detectó una cobertura insuficiente del 56.8% en las ramas de este módulo (Hallazgo HA-01). En respuesta, UNIXCODE implementó una batería intensiva de pruebas unitarias utilizando NSubstitute para cubrir todos los flujos condicionales de cálculos de deudas y saldos parciales, elevando con éxito el backend general a un sólido 85%.</li>
+<li><strong>Gestión de dependencias de mensajería (Evolution API):</strong> Como acción correctiva para solucionar el riesgo de una caída del canal de WhatsApp, se diseñó e integró un servicio de fallback secundario automático mediante correo electrónico (SendGrid), el cual se activa de inmediato si la API principal falla tras 3 reintentos de comunicación con la paciente.</li>
+<li><strong>La tasa de ocupación operativa de consultorios (12.5%):</strong> Representó un hallazgo comercial crítico en el Balanced Scorecard (HA-04). Como contramedida de negocio inmediata para rentabilizar la infraestructura de TI, el área administrativa lanzó el 01 de julio de 2026 su primera campaña publicitaria formal a través de Facebook Ads, orientada a la captación de nuevas pacientes para servicios prenatales.</li>
+<li><strong>La migración de los 5,000 registros históricos</strong> es un proyecto prioritario. El avance del 60% implica que aún quedan 2,000 registros por digitalizar. El proceso se ejecuta de manera controlada con validaciones cruzadas por lotes y se estima su finalización en el tercer trimestre de 2026.</li>
 </ul>
 <hr />
-<h2 id="proyeccion-de-metricas-para-la-expansion-a-clinica-general">📈 Proyección de Métricas para la Expansión a Clínica General</h2>
+<h2 id="proyeccion-de-metricas-para-la-expansion-a-clinica-general">🚀 Proyección de Métricas para la Expansión a Clínica General</h2>
 <p>Con la expansión planificada hacia una clínica general, se espera que las siguientes métricas evolucionen:</p>
 <table>
 <thead>
 <tr>
-<th>Métrica</th>
-<th>Valor Actual (2026)</th>
-<th>Proyección (2028)</th>
-<th>Acción Requerida</th>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: left;">Valor Actual (2026)</th>
+<th style="text-align: left;">Proyección (2028)</th>
+<th style="text-align: left;">Acción Requerida</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pacientes activos</td>
-<td>800/mes</td>
-<td>1,500/mes</td>
-<td>Escalar infraestructura (VPS) y optimizar consultas SQL</td>
+<td style="text-align: left;">Pacientes activos</td>
+<td style="text-align: left;">800/mes</td>
+<td style="text-align: left;">1,500/mes</td>
+<td style="text-align: left;">Escalar infraestructura (VPS) y optimizar consultas SQL</td>
 </tr>
 <tr>
-<td>Número de servicios</td>
-<td>8</td>
-<td>15+</td>
-<td>Extender el catálogo de servicios en el sistema</td>
+<td style="text-align: left;">Número de servicios</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">15+</td>
+<td style="text-align: left;">Extender el catálogo de servicios en el sistema</td>
 </tr>
 <tr>
-<td>Personal del sistema</td>
-<td>15 usuarios</td>
-<td>30+ usuarios</td>
-<td>Revisar políticas de permisos y roles</td>
+<td style="text-align: left;">Personal del sistema</td>
+<td style="text-align: left;">15 usuarios</td>
+<td style="text-align: left;">30+ usuarios</td>
+<td style="text-align: left;">Revisar políticas de permisos y roles</td>
 </tr>
 <tr>
-<td>Tiempo de respuesta de API</td>
-<td>180 ms</td>
-<td>&lt;250 ms (en pico)</td>
-<td>Implementar caché (Redis) y balanceo de carga</td>
+<td style="text-align: left;">Tiempo de respuesta de API</td>
+<td style="text-align: left;">180 ms</td>
+<td style="text-align: left;">&lt;250 ms (en pico)</td>
+<td style="text-align: left;">Implementar cache (Redis) y balanceo de carga</td>
 </tr>
 <tr>
-<td>Tasa de adopción del sistema</td>
-<td>92%</td>
-<td>95%</td>
-<td>Mantener programa de capacitación continua</td>
+<td style="text-align: left;">Tasa de adopción del sistema</td>
+<td style="text-align: left;">92%</td>
+<td style="text-align: left;">95%</td>
+<td style="text-align: left;">Mantener programa de capacitación continua</td>
 </tr>
 </tbody>
 </table>
 <hr />
+<h2 id="verificacion-del-entorno-de-aceptacion-uat">💻 Verificación del Entorno de Aceptación (UAT)</h2>
+<p>Como parte de la validación final del sistema frente al docente revisor y la gerencia de la clínica, se encuentra desplegado un entorno en la nube para la constatación en vivo de los tiempos de respuesta y las transacciones de facturación automatizadas:</p>
+<ul>
+<li><strong>URL del Entorno de Demostración:</strong> <a href="https://salmon-bush-08c1e7510.7.azurestaticapps.net">https://salmon-bush-08c1e7510.7.azurestaticapps.net</a></li>
+<li><strong>Credenciales de Acceso:</strong> <ul>
+<li><strong>Usuario:</strong> <code>admin</code></li>
+<li><strong>Contraseña:</strong> <code>admin123</code></li>
+</ul>
+</li>
+</ul>
 
 
 
